@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BUNN — Tostador de café de especialidad</title>
+<meta name="description" content="Tostador de café de especialidad. Origen trazable, tueste propio y entrega a los pocos días de tostar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@300;400;500;600&family=Almarai:wght@300;400;700&display=swap">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   BUNN — بُنّ, que es la palabra árabe para el grano de café y la raíz
+   de la que salieron "café", "coffee" y "Kaffee".
+
+   Dirección oscura por defecto: el fondo es el color del grano tostado
+   y el acento es el ocre del tueste; el verde secundario es el color
+   del grano crudo, antes de pasar por el tambor. Nada de eso es
+   decorativo, sale del oficio.
+   ══════════════════════════════════════════════════════════════════ */
+:root{
+  --f:#17130f; --f2:#1f1a15; --sup:#26201a;
+  --t:#ede7dd; --t2:#a89a88; --t3:#786c5e;
+  --ocre:#d08a3f; --verde:#7fa055;
+  --l:rgba(237,231,221,.15); --l2:rgba(237,231,221,.07);
+  --s1:#3f88c4; --s2:#c47f32; --s3:#20a086;
+  --disp:"Instrument Serif",Georgia,serif;
+  --c:"Figtree",system-ui,sans-serif;
+  --marco:min(1240px,100% - 2.75rem);
+}
+:root[data-theme="light"]{
+  --f:#f2efe8; --f2:#e8e3d9; --sup:#fbf9f5;
+  --t:#221c16; --t2:#5f544a; --t3:#8d8175;
+  --ocre:#8a5a1c; --verde:#4e6a34;
+  --l:rgba(34,28,22,.15); --l2:rgba(34,28,22,.07);
+  --s1:#1a6fb0; --s2:#c8641a; --s3:#0f8f7a;
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --f:#f2efe8; --f2:#e8e3d9; --sup:#fbf9f5;
+  --t:#221c16; --t2:#5f544a; --t3:#8d8175;
+  --ocre:#8a5a1c; --verde:#4e6a34;
+  --l:rgba(34,28,22,.15); --l2:rgba(34,28,22,.07);
+  --s1:#1a6fb0; --s2:#c8641a; --s3:#0f8f7a;
+}}
+/* Almarai sustituye a Instrument Serif y a Figtree: es una de las pocas
+   árabes que aguanta bien tanto un titular grande como texto corrido. */
+html[dir="rtl"]{ --disp:"Almarai",sans-serif; --c:"Almarai",sans-serif; }
+
+*,*::before,*::after{box-sizing:border-box;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+body{margin:0;background:var(--f);color:var(--t);font-family:var(--c);font-weight:300;
+  font-size:clamp(15px,1.02vw,16.5px);line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+html[dir="rtl"] body{line-height:2;font-weight:400;}
+h1,h2,h3{font-family:var(--disp);font-weight:400;margin:0;line-height:1.02;text-wrap:balance;}
+html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3{line-height:1.5;font-weight:700;}
+p{margin:0 0 .95em;max-width:62ch;} p:last-child{margin-bottom:0;}
+a{color:inherit;} :focus-visible{outline:2px solid var(--ocre);outline-offset:3px;}
+.marco{width:var(--marco);margin-inline:auto;}
+.bl{padding-block:clamp(2.75rem,6vw,5rem);}
+.raya{border-top:1px solid var(--l);}
+.eti{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ocre);
+  font-weight:600;margin:0 0 1rem;}
+/* Espaciar letras en árabe descose la palabra: aquí se anula. */
+html[dir="rtl"] .eti{letter-spacing:0;text-transform:none;font-size:.92rem;}
+
+header.b{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--f) 93%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--l);}
+.barra{display:flex;align-items:center;gap:1.2rem;padding-block:.85rem;flex-wrap:wrap;}
+.logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;font-family:var(--disp);
+  font-size:1.5rem;letter-spacing:.06em;line-height:1;}
+html[dir="rtl"] .logo{letter-spacing:0;font-size:1.7rem;font-weight:700;}
+.logo svg{width:20px;height:20px;color:var(--ocre);}
+nav.b{display:flex;gap:1.1rem;margin-inline-start:auto;font-size:.82rem;overflow-x:auto;scrollbar-width:none;}
+nav.b::-webkit-scrollbar{display:none;}
+nav.b a{text-decoration:none;color:var(--t2);white-space:nowrap;padding-block:.25rem;border-bottom:1px solid transparent;}
+nav.b a:hover{color:var(--t);}
+nav.b a[aria-current="page"]{color:var(--t);border-bottom-color:var(--ocre);}
+.idi{display:flex;gap:.5rem;font-size:.76rem;flex-shrink:0;}
+.idi button{background:none;border:0;cursor:pointer;font:inherit;font-family:var(--c);color:var(--t3);padding:.2rem 0;}
+.idi button[aria-pressed="true"]{color:var(--ocre);}
+.idi button:hover{color:var(--t);}
+@media(max-width:980px){.barra{gap:.6rem 1rem}.idi{margin-inline-start:auto}nav.b{order:3;width:100%;margin-inline-start:0}}
+
+[data-ruta]{display:none;} [data-ruta].on{display:block;animation:ap .4s ease both;}
+@keyframes ap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.hero{display:grid;gap:2.5rem;align-items:center;padding-block:clamp(2.5rem,6vw,4.5rem);}
+@media(min-width:940px){.hero{grid-template-columns:1.05fr .95fr;gap:3.5rem;}}
+.hero h1{font-size:clamp(2.6rem,6.6vw,5rem);max-width:14ch;}
+html[dir="rtl"] .hero h1{max-width:18ch;font-size:clamp(2.1rem,5vw,3.6rem);}
+.entrada{font-size:clamp(1rem,1.3vw,1.14rem);color:var(--t2);max-width:48ch;margin-top:1.3rem;}
+.grano{width:100%;height:auto;display:block;}
+
+.acc{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem;}
+.btn{display:inline-block;text-decoration:none;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.95rem 2rem;border:1px solid var(--t);background:transparent;color:var(--t);cursor:pointer;
+  font-family:var(--c);font-weight:500;transition:.2s;}
+html[dir="rtl"] .btn{letter-spacing:0;text-transform:none;font-size:.95rem;}
+.btn.sol{background:var(--ocre);border-color:var(--ocre);color:var(--f);}
+.btn.sol:hover{background:transparent;color:var(--ocre);}
+.btn:hover{border-color:var(--ocre);color:var(--ocre);}
+
+.rej{display:grid;gap:1px;background:var(--l);border:1px solid var(--l);}
+.r3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
+.r4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}
+.cel{background:var(--f);padding:1.6rem 1.4rem;}
+.cel h3{font-size:1.5rem;margin-bottom:.5rem;}
+.cel p{color:var(--t2);font-size:.94rem;}
+.cel .sub{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--verde);
+  display:block;margin-bottom:.8rem;font-weight:600;}
+html[dir="rtl"] .cel .sub{letter-spacing:0;text-transform:none;font-size:.88rem;}
+.cel .precio{font-family:var(--disp);font-size:1.7rem;margin-top:1rem;color:var(--ocre);}
+.dato .v{font-family:var(--disp);font-size:clamp(2rem,3.8vw,3rem);line-height:1;}
+.dato .u{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-top:.6rem;}
+html[dir="rtl"] .dato .u{letter-spacing:0;text-transform:none;font-size:.86rem;}
+
+.lista{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.5rem;max-width:60ch;}
+.lista li{display:grid;grid-template-columns:1.2rem 1fr;gap:.6rem;align-items:baseline;color:var(--t2);font-size:.94rem;}
+.lista li::before{content:"·";color:var(--ocre);font-size:1.4rem;line-height:.6;}
+
+.mandos{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.3rem;}
+.mandos button{font-size:.8rem;padding:.5rem 1rem;border:1px solid var(--l);background:transparent;
+  color:var(--t2);cursor:pointer;font-family:var(--c);}
+.mandos button[aria-pressed="true"]{background:var(--t);color:var(--f);border-color:var(--t);}
+.mandos button:hover{border-color:var(--ocre);color:var(--ocre);}
+.mandos button[aria-pressed="true"]:hover{color:var(--f);}
+.leyenda{display:flex;flex-wrap:wrap;gap:.3rem 1.3rem;margin-bottom:1rem;font-size:.82rem;color:var(--t2);}
+.leyenda span{display:flex;align-items:center;gap:.45rem;}
+.leyenda i{width:.8rem;height:.8rem;border-radius:2px;background:var(--cc);flex-shrink:0;}
+.grafica{overflow-x:auto;}
+.grafica svg{display:block;min-width:30rem;width:100%;height:auto;}
+.gr-guia{stroke:var(--l2);stroke-width:1;}
+.gr-eje{stroke:var(--l);stroke-width:1;}
+.gr-tex{fill:var(--t3);font-family:var(--c);font-size:10.5px;}
+html[dir="rtl"] .gr-tex{font-family:"Almarai",sans-serif;font-size:11px;}
+.hallazgo{margin-top:1.5rem;padding:1.1rem 1.3rem;background:var(--f2);
+  border-inline-start:3px solid var(--ocre);font-size:.97rem;}
+.hallazgo b{color:var(--ocre);}
+.metodo{font-size:.78rem;color:var(--t3);margin-top:1.2rem;max-width:70ch;}
+.tabla{width:100%;border-collapse:collapse;font-size:.87rem;margin-top:.8rem;}
+.tabla th,.tabla td{border-bottom:1px solid var(--l2);padding:.5rem;text-align:start;}
+.tabla th{font-weight:600;color:var(--t2);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;}
+html[dir="rtl"] .tabla th{letter-spacing:0;text-transform:none;font-size:.86rem;}
+.tabla td{color:var(--t2);}
+
+/* Calendario de cosecha */
+.pistaf{display:grid;grid-template-columns:var(--col) 1fr;gap:.9rem;align-items:center;margin-bottom:.45rem;}
+.pistaf .nom{font-size:.85rem;color:var(--t2);}
+.pista{position:relative;height:1.5rem;background:var(--f2);border-radius:2px;}
+.pista::before{content:"";position:absolute;inset:0;border-radius:2px;
+  background:repeating-linear-gradient(to right,var(--l2) 0 1px,transparent 1px calc(100%/12));}
+.banda{position:absolute;top:.18rem;bottom:.18rem;background:var(--cc);border-radius:4px;
+  box-shadow:0 0 0 2px var(--f);}
+.ejem{display:grid;grid-template-columns:var(--col) 1fr;gap:.9rem;margin-top:.3rem;}
+.ejem div{display:grid;grid-template-columns:repeat(12,1fr);font-size:.66rem;color:var(--t3);}
+.ejem span{text-align:center;}
+
+.faq{border-top:1px solid var(--l);}
+.faq summary{cursor:pointer;padding-block:1.2rem;font-family:var(--disp);font-size:1.3rem;
+  list-style:none;display:flex;gap:1rem;align-items:baseline;}
+html[dir="rtl"] .faq summary{font-size:1.15rem;font-weight:700;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:"+";margin-inline-start:auto;color:var(--ocre);font-size:1rem;}
+.faq[open] summary::after{content:"–";}
+.faq p{color:var(--t2);padding-bottom:1.2rem;}
+
+form{display:grid;gap:1.3rem;max-width:36rem;}
+.par{display:grid;gap:1.3rem;} @media(min-width:640px){.par{grid-template-columns:1fr 1fr;}}
+label{display:block;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:.4rem;}
+html[dir="rtl"] label{letter-spacing:0;text-transform:none;font-size:.88rem;}
+input,select,textarea{width:100%;font:inherit;font-family:var(--c);color:var(--t);background:transparent;
+  border:0;border-bottom:1px solid var(--l);padding:.55rem 0;border-radius:0;}
+input:focus,select:focus,textarea:focus{outline:none;border-bottom-color:var(--ocre);}
+textarea{resize:vertical;min-height:5rem;}
+select{appearance:none;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,var(--t3) 50%),
+                   linear-gradient(135deg,var(--t3) 50%,transparent 50%);
+  background-size:5px 5px,5px 5px;background-repeat:no-repeat;
+  background-position:right 4px center,right 0 center;}
+/* Sin versión lógica de background-position: se refleja a mano. */
+html[dir="rtl"] select{background-position:left 0 center,left 4px center;}
+select option{background:var(--sup);color:var(--t);}
+.aviso{font-size:.78rem;color:var(--t3);}
+.acuse{font-size:.9rem;color:var(--verde);min-height:1.4em;margin:.6rem 0 0;}
+.acuse.mal{color:var(--ocre);}
+footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem;color:var(--t3);}
+.pie{display:flex;flex-wrap:wrap;gap:.7rem 2rem;align-items:center;}
+.pie nav{display:flex;gap:1.2rem;flex-wrap:wrap;} .pie a{text-decoration:none;}
+.pie a:hover{color:var(--ocre);} .pie .fin{margin-inline-start:auto;}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block;}
+</style>
+</head>
+<body>
+
+<header class="b">
+  <div class="marco barra">
+    <a class="logo" href="#/inicio">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="7" ry="9.5" fill="currentColor"/><path d="M12 3c-2 3-2 15 0 18" stroke="var(--f)" stroke-width="1.6" fill="none"/></svg>
+      <span data-t="marca">BUNN</span>
+    </a>
+    <nav class="b" data-t-attr="aria-label:ariaMenu" aria-label="Secciones">
+      <a href="#/inicio"      data-t="nInicio">Inicio</a>
+      <a href="#/cafes"       data-t="nCafes">Cafés</a>
+      <a href="#/origenes"    data-t="nOrigenes">Orígenes</a>
+      <a href="#/tueste"      data-t="nTueste">Tueste</a>
+      <a href="#/cata"        data-t="nCata">Cata</a>
+      <a href="#/suscripcion" data-t="nSuscripcion">Suscripción</a>
+      <a href="#/hosteleria"  data-t="nHosteleria">Hostelería</a>
+      <a href="#/metodo"      data-t="nMetodo">Preparación</a>
+      <a href="#/preguntas"   data-t="nPreguntas">Preguntas</a>
+      <a href="#/contacto"    data-t="nContacto">Contacto</a>
+    </nav>
+    <div class="idi" role="group" data-t-attr="aria-label:ariaIdioma" aria-label="Idioma">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="ar" aria-pressed="false" lang="ar">ع</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section data-ruta="inicio">
+  <div class="marco hero">
+    <div>
+      <p class="eti" data-t="iEti">Tostador de especialidad · desde 2019</p>
+      <h1 data-t="iH1">El café no se estropea en la cafetera. Se estropea antes.</h1>
+      <p class="entrada" data-t="iEntrada">Compramos grano trazable hasta la finca, lo tostamos en tandas pequeñas y lo mandamos entre tres y siete días después del tueste. Ni antes, porque necesita reposar, ni mucho después.</p>
+      <div class="acc">
+        <a class="btn sol" href="#/cafes" data-t="bVerCafes">Ver los cafés</a>
+        <a class="btn" href="#/tueste" data-t="bVerTueste">Cómo tostamos</a>
+      </div>
+    </div>
+    <svg class="grano" id="grano" viewBox="0 0 480 340" role="img" data-t-attr="aria-label:granoAlt" aria-label="Ilustración del proceso de tueste"></svg>
+  </div>
+  <div class="marco bl raya">
+    <p class="eti" data-t="iCifrasEti">Cómo trabajamos</p>
+    <div class="rej r4" id="iCifras"></div>
+    <p class="metodo" data-t="iCifrasNota">Trazable hasta la finca significa que sabemos el nombre del productor, la altitud y el lote. Si no lo sabemos, no lo compramos.</p>
+  </div>
+  <div class="marco bl raya">
+    <p class="eti" data-t="nCafes">Cafés</p>
+    <div class="rej r3" id="iCafes"></div>
+    <div class="acc"><a class="btn" href="#/cafes" data-t="bVerTodos">Ver la carta entera</a></div>
+  </div>
+</section>
+
+<section data-ruta="cafes">
+  <div class="marco bl">
+    <p class="eti" data-t="nCafes">Cafés</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="caH1">Seis cafés, y ninguno por rellenar la carta.</h1>
+    <p class="entrada" data-t="caEntrada">Cambian con la cosecha. Cuando un lote se acaba, se acaba: no lo sustituimos por otro parecido y con el mismo nombre.</p>
+  </div>
+  <div class="marco"><div class="rej r3" id="caLista"></div>
+    <p class="metodo" data-t="caNota">Precios por bolsa de 250 g de grano entero. Molido bajo pedido, indicando el método.</p>
+  </div>
+</section>
+
+<section data-ruta="origenes">
+  <div class="marco bl">
+    <p class="eti" data-t="nOrigenes">Orígenes</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="orH1">El café fresco no existe todo el año en todas partes.</h1>
+    <p class="entrada" data-t="orEntrada">Cada origen se cosecha en su ventana. Por eso una carta honesta cambia con el calendario y no ofrece lo mismo en enero que en agosto.</p>
+  </div>
+  <div class="marco">
+    <div class="leyenda" id="orLeyenda"></div>
+    <div class="grafica"><div id="orCal" style="min-width:34rem;--col:clamp(6rem,14vw,11rem)"></div></div>
+    <p class="hallazgo" id="orHallazgo"></p>
+    <details class="faq" style="margin-top:1.4rem"><summary data-t="verTabla">Ver los orígenes en tabla</summary><div id="orTabla"></div></details>
+    <p class="metodo" data-t="orNota">Ventanas de cosecha habituales, no fechas exactas: se mueven cada año con la lluvia. Colombia y Kenia aparecen dos veces porque tienen una cosecha principal y una secundaria.</p>
+  </div>
+</section>
+
+<section data-ruta="tueste">
+  <div class="marco bl">
+    <p class="eti" data-t="nTueste">Tueste</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="tuH1">Once minutos que deciden a qué sabe.</h1>
+    <p class="entrada" data-t="tuEntrada">Un tueste no es «claro» o «oscuro»: es una curva de temperatura en el tiempo. Estas son las tres que usamos, y la diferencia entre ellas se nota en la taza.</p>
+  </div>
+  <div class="marco">
+    <div class="mandos" id="tuMandos" role="group" data-t-attr="aria-label:tuAria" aria-label="Perfil de tueste"></div>
+    <div class="leyenda" id="tuLeyenda"></div>
+    <div class="grafica"><svg id="tuGrafica" role="img" data-t-attr="aria-label:tuGrafAlt" aria-label="Curva de temperatura del tueste"></svg></div>
+    <p class="hallazgo" id="tuHallazgo"></p>
+    <p class="metodo" data-t="tuNota">Curvas de referencia de nuestro tambor de 12 kg. El punto de giro es el mínimo tras cargar el grano frío; el primer crack es cuando el grano revienta y empieza a expandirse. La temperatura de salida y los minutos posteriores al crack son lo que más cambia el resultado.</p>
+  </div>
+</section>
+
+<section data-ruta="cata">
+  <div class="marco bl">
+    <p class="eti" data-t="nCata">Cata</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="ctH1">Seis ejes para decir lo que una etiqueta no dice.</h1>
+    <p class="entrada" data-t="ctEntrada">«Notas de chocolate» no le sirve de nada si lo que usted quiere saber es si va a estar ácido. Esto sí.</p>
+  </div>
+  <div class="marco">
+    <div class="mandos" id="ctMandos" role="group" data-t-attr="aria-label:ctAria" aria-label="Café"></div>
+    <div class="grafica" style="max-width:34rem;margin-inline:auto">
+      <svg id="ctGrafica" role="img" data-t-attr="aria-label:ctGrafAlt" aria-label="Perfil sensorial" style="min-width:0"></svg>
+    </div>
+    <p class="hallazgo" id="ctHallazgo"></p>
+    <details class="faq" style="margin-top:1.4rem"><summary data-t="verTabla">Ver los valores en tabla</summary><div id="ctTabla"></div></details>
+    <p class="metodo" data-t="ctNota">Puntuaciones de 0 a 10 de nuestra mesa de cata, con tres catadores y a ciegas. Es una valoración nuestra, no una norma: otro tostador puntuaría distinto el mismo lote.</p>
+  </div>
+</section>
+
+<section data-ruta="suscripcion">
+  <div class="marco bl">
+    <p class="eti" data-t="nSuscripcion">Suscripción</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="suH1">Café recién tostado, sin tener que acordarse.</h1>
+    <p class="entrada" data-t="suEntrada">Elija cada cuánto y cuánto. Se puede pausar, cambiar o cancelar desde un enlace del propio correo, sin llamar a nadie.</p>
+  </div>
+  <div class="marco"><div class="rej r3" id="suPlanes"></div>
+    <div style="margin-top:2rem"><ul class="lista" id="suVentajas"></ul></div>
+    <p class="metodo" data-t="suNota">Precios por envío. El envío peninsular es gratuito a partir de dos bolsas. Sin permanencia y sin penalización por cancelar.</p>
+  </div>
+</section>
+
+<section data-ruta="hosteleria">
+  <div class="marco bl">
+    <p class="eti" data-t="nHosteleria">Hostelería</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="hoH1">Un buen café mal extraído sigue siendo un mal café.</h1>
+    <p class="entrada" data-t="hoEntrada">Por eso con la hostelería no vendemos sólo grano: montamos la máquina, ajustamos el molino y formamos al equipo. Y volvemos.</p>
+  </div>
+  <div class="marco">
+    <div class="rej r3" id="hoServicios"></div>
+    <div style="margin-top:2rem" class="rej r4" id="hoDatos"></div>
+    <div class="acc"><a class="btn sol" href="#/contacto" data-t="bPedirVisita">Pedir una visita</a></div>
+  </div>
+</section>
+
+<section data-ruta="metodo">
+  <div class="marco bl">
+    <p class="eti" data-t="nMetodo">Preparación</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="meH1">Las proporciones que usamos nosotros.</h1>
+    <p class="entrada" data-t="meEntrada">No hay una receta única, pero sí un punto de partida decente para cada método. Ajuste desde aquí, no desde cero.</p>
+  </div>
+  <div class="marco"><div class="rej r3" id="meMetodos"></div>
+    <p class="metodo" data-t="meNota">Con agua entre 92 y 96 °C y molido ajustado al método. Si sale amargo, muela más grueso; si sale ácido y aguado, más fino. Ese es casi todo el secreto.</p>
+  </div>
+</section>
+
+<section data-ruta="preguntas">
+  <div class="marco bl">
+    <p class="eti" data-t="nPreguntas">Preguntas</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="pgH1">Lo que más nos preguntan.</h1>
+  </div>
+  <div class="marco" id="pgLista"></div>
+</section>
+
+<section data-ruta="contacto">
+  <div class="marco bl">
+    <p class="eti" data-t="nContacto">Contacto</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="coH1">Escríbanos y le decimos qué café le pega.</h1>
+    <p class="entrada" data-t="coEntrada">Si nos cuenta cómo lo prepara y qué le gusta beber, le recomendamos uno concreto en vez de mandarle la carta entera.</p>
+  </div>
+  <div class="marco">
+    <form id="f" novalidate>
+      <div class="par">
+        <div><label for="nom" data-t="lNombre">Nombre</label><input id="nom" autocomplete="name"></div>
+        <div><label for="cor" data-t="lCorreo">Correo</label><input id="cor" type="email" autocomplete="email" inputmode="email" dir="ltr"></div>
+      </div>
+      <div class="par">
+        <div><label for="met" data-t="lMetodo">Cómo lo prepara</label>
+          <select id="met">
+            <option value="" data-t="oElegir">Seleccione</option>
+            <option value="esp" data-t="oEspresso">Espresso</option>
+            <option value="fil" data-t="oFiltro">V60 o filtro</option>
+            <option value="pre" data-t="oPrensa">Prensa francesa</option>
+            <option value="mok" data-t="oMoka">Cafetera italiana</option>
+            <option value="otr" data-t="oOtro">Otro</option>
+          </select></div>
+        <div><label for="tip" data-t="lTipo">Tipo de consulta</label>
+          <select id="tip">
+            <option value="" data-t="oElegir">Seleccione</option>
+            <option value="par" data-t="oParticular">Particular</option>
+            <option value="hos" data-t="oHosteleria">Hostelería</option>
+            <option value="may" data-t="oMayorista">Mayorista</option>
+          </select></div>
+      </div>
+      <div><label for="msg" data-t="lMensaje">Qué le gusta beber</label><textarea id="msg" rows="3"></textarea></div>
+      <div>
+        <button class="btn sol" type="submit" data-t="bEnviar">Enviar</button>
+        <p class="acuse" id="acuse" role="status" aria-live="polite"></p>
+      </div>
+      <p class="aviso" data-t="coAviso">Sus datos se usan sólo para responderle. No se ceden a nadie.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="b">
+  <div class="marco pie">
+    <span data-t="marca">BUNN</span>
+    <nav>
+      <a href="#/cafes" data-t="nCafes">Cafés</a>
+      <a href="#/origenes" data-t="nOrigenes">Orígenes</a>
+      <a href="#/suscripcion" data-t="nSuscripcion">Suscripción</a>
+      <a href="#/contacto" data-t="nContacto">Contacto</a>
+    </nav>
+    <span class="fin"><span data-t="pieAviso">Maqueta de demostración</span> · <span class="ltr">© 2026</span></span>
+  </div>
+</footer>
+
+<script>
+var T = {
+es:{
+ _dir:"ltr", _lang:"es", _loc:"es-ES",
+ orHalCero:"Ahora mismo no hay ningún origen de nuestra carta en plena cosecha. Es el punto bajo del año, y se nota: en estas semanas la carta se sostiene con los lotes recogidos en invierno.",
+ marca:"BUNN", ariaMenu:"Secciones", ariaIdioma:"Idioma",
+ nInicio:"Inicio", nCafes:"Cafés", nOrigenes:"Orígenes", nTueste:"Tueste", nCata:"Cata",
+ nSuscripcion:"Suscripción", nHosteleria:"Hostelería", nMetodo:"Preparación",
+ nPreguntas:"Preguntas", nContacto:"Contacto",
+ bVerCafes:"Ver los cafés", bVerTueste:"Cómo tostamos", bVerTodos:"Ver la carta entera",
+ bPedirVisita:"Pedir una visita", bEnviar:"Enviar", verTabla:"Ver los valores en tabla",
+ pieAviso:"Maqueta de demostración", granoAlt:"Ilustración del grano y la curva del tueste",
+
+ tInicio:"BUNN — Tostador de café de especialidad",
+ iEti:"Tostador de especialidad · desde 2019",
+ iH1:"El café no se estropea en la cafetera. Se estropea antes.",
+ iEntrada:"Compramos grano trazable hasta la finca, lo tostamos en tandas pequeñas y lo mandamos entre tres y siete días después del tueste. Ni antes, porque necesita reposar, ni mucho después.",
+ iCifrasEti:"Cómo trabajamos",
+ iCifrasNota:"Trazable hasta la finca significa que sabemos el nombre del productor, la altitud y el lote. Si no lo sabemos, no lo compramos.",
+ cifras:[
+  {v:"12 kg", u:"Tandas de tueste, nunca más grandes"},
+  {v:"3–7", u:"Días entre el tueste y su casa"},
+  {v:"100 %", u:"Lotes trazables hasta la finca"},
+  {v:"0", u:"Café de la cosecha anterior en la carta"}
+ ],
+
+ tCafes:"Cafés — BUNN",
+ caH1:"Seis cafés, y ninguno por rellenar la carta.",
+ caEntrada:"Cambian con la cosecha. Cuando un lote se acaba, se acaba: no lo sustituimos por otro parecido y con el mismo nombre.",
+ caNota:"Precios por bolsa de 250 g de grano entero. Molido bajo pedido, indicando el método.",
+ cafes:[
+  {n:"Yirgacheffe", o:"Etiopía · 1.950 m", d:"Lavado. Floral y de acidez alta y limpia, con final a té negro. El más divisorio de la carta.", p:"12,50 €"},
+  {n:"Huila", o:"Colombia · 1.700 m", d:"Lavado. Dulce, equilibrado y sin aristas. Si duda entre dos, este.", p:"10,90 €"},
+  {n:"Nyeri", o:"Kenia · 1.800 m", d:"Lavado. Acidez de grosella, cuerpo denso. Enorme en filtro y exigente en espresso.", p:"13,80 €"},
+  {n:"Antigua", o:"Guatemala · 1.550 m", d:"Lavado. Cacao, nuez y un punto de especia. El que mejor aguanta con leche.", p:"11,40 €"},
+  {n:"Haraz", o:"Yemen · 2.100 m", d:"Natural. Fruta pasa, especia y vino sin alcohol. Poca cantidad y no se repone.", p:"18,00 €"},
+  {n:"Gayo", o:"Indonesia · 1.400 m", d:"Semilavado. Cuerpo muy denso, herbáceo, poca acidez. Para quien odia el café ácido.", p:"11,90 €"}
+ ],
+
+ tOrigenes:"Orígenes — BUNN",
+ orH1:"El café fresco no existe todo el año en todas partes.",
+ orEntrada:"Cada origen se cosecha en su ventana. Por eso una carta honesta cambia con el calendario y no ofrece lo mismo en enero que en agosto.",
+ orNota:"Ventanas de cosecha habituales, no fechas exactas: se mueven cada año con la lluvia. Colombia y Kenia aparecen dos veces porque tienen una cosecha principal y una secundaria.",
+ orPrincipal:"Cosecha principal", orSecundaria:"Cosecha secundaria",
+ orHal:"En este momento del año hay <b>{n}</b> en plena cosecha. El café tarda entre dos y cuatro meses en llegar tostado a su taza desde que se recoge, así que lo que hoy se cosecha se bebe en primavera.",
+ meses:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+ thOrigen:"Origen", thAltitud:"Altitud", thCosecha:"Cosecha",
+ origenes:[
+  {n:"Etiopía",    a:"1.800–2.200 m", b:[[11,2]]},
+  {n:"Colombia",   a:"1.500–1.900 m", b:[[10,2],[4,6]]},
+  {n:"Kenia",      a:"1.600–2.000 m", b:[[10,12],[6,8]]},
+  {n:"Guatemala",  a:"1.400–1.800 m", b:[[12,4]]},
+  {n:"Yemen",      a:"1.800–2.400 m", b:[[10,12]]},
+  {n:"Indonesia",  a:"1.100–1.600 m", b:[[9,12]]}
+ ],
+
+ tTueste:"Tueste — BUNN",
+ tuH1:"Once minutos que deciden a qué sabe.",
+ tuEntrada:"Un tueste no es «claro» o «oscuro»: es una curva de temperatura en el tiempo. Estas son las tres que usamos, y la diferencia entre ellas se nota en la taza.",
+ tuAria:"Perfil de tueste", tuGrafAlt:"Curva de temperatura del tueste en el tiempo",
+ tuNota:"Curvas de referencia de nuestro tambor de 12 kg. El punto de giro es el mínimo tras cargar el grano frío; el primer crack es cuando el grano revienta y empieza a expandirse. La temperatura de salida y los minutos posteriores al crack son lo que más cambia el resultado.",
+ tuEjeX:"Minutos", tuEjeY:"°C",
+ tuGiro:"Punto de giro", tuCrack:"Primer crack", tuSalida:"Salida",
+ perfiles:[
+  {n:"Filtro", c:"var(--s1)", tau:3.6, fin:205, dur:11.0,
+   d:"Curva rápida y salida temprana. Conserva la acidez y el aroma del origen; en espresso saldría demasiado ácido."},
+  {n:"Espresso", c:"var(--s2)", tau:4.4, fin:213, dur:12.8,
+   d:"Más tiempo tras el primer crack. Se pierde algo de acidez y se gana cuerpo y dulzor, que es lo que aguanta la presión y la leche."},
+  {n:"Omni", c:"var(--s3)", tau:4.0, fin:209, dur:12.0,
+   d:"El compromiso. No es el mejor filtro ni el mejor espresso, pero es el único que funciona razonablemente en los dos."}
+ ],
+ tuHal:"<b>{n}</b>: salida a {t} °C en {m} minutos, con {p} minutos de desarrollo después del primer crack. {d}",
+
+ tCata:"Cata — BUNN",
+ ctH1:"Seis ejes para decir lo que una etiqueta no dice.",
+ ctEntrada:"«Notas de chocolate» no le sirve de nada si lo que usted quiere saber es si va a estar ácido. Esto sí.",
+ ctAria:"Café", ctGrafAlt:"Perfil sensorial en seis ejes",
+ ctNota:"Puntuaciones de 0 a 10 de nuestra mesa de cata, con tres catadores y a ciegas. Es una valoración nuestra, no una norma: otro tostador puntuaría distinto el mismo lote.",
+ ejes:["Acidez","Cuerpo","Dulzor","Aroma","Amargor","Retrogusto"],
+ catas:[
+  {n:"Yirgacheffe", v:[9,4,7,9,2,8], d:"Acidez alta y aroma enorme, cuerpo ligero. Es un café para beber solo y despacio; con leche se pierde entero."},
+  {n:"Huila",       v:[6,6,8,6,3,6], d:"Sin picos. Por eso es el que recomendamos a quien empieza: no hay nada en él que pueda chocar."},
+  {n:"Gayo",        v:[3,9,5,5,6,7], d:"Justo lo contrario del Yirgacheffe: cuerpo denso, poca acidez y amargor presente. El favorito de quien dice que no le gusta el café de especialidad."}
+ ],
+ ctHal:"<b>{n}</b> — {d}",
+ thEje:"Eje",
+
+ tSuscripcion:"Suscripción — BUNN",
+ suH1:"Café recién tostado, sin tener que acordarse.",
+ suEntrada:"Elija cada cuánto y cuánto. Se puede pausar, cambiar o cancelar desde un enlace del propio correo, sin llamar a nadie.",
+ suNota:"Precios por envío. El envío peninsular es gratuito a partir de dos bolsas. Sin permanencia y sin penalización por cancelar.",
+ planes:[
+  {n:"Una bolsa", f:"Cada 2 o 4 semanas", d:"250 g del café que elija, o del que nos parezca mejor esa semana si prefiere sorprenderse.", p:"desde 10,90 €"},
+  {n:"Dos bolsas", f:"Cada 2 o 4 semanas", d:"Dos cafés distintos en cada envío, para poder compararlos el mismo día. Envío incluido.", p:"desde 21,00 €"},
+  {n:"Descubrir", f:"Cada mes", d:"Tres bolsas de 125 g de tres orígenes que no se repiten nunca. Con ficha de cata de cada uno.", p:"24,00 €"}
+ ],
+ suVentajas:[
+  "Se pausa, se cambia o se cancela desde el propio correo, sin llamar a nadie",
+  "Se tuesta el día antes de salir, no se saca de un almacén",
+  "El molido se ajusta a su método si nos lo dice",
+  "Si un envío llega mal, se repone sin discutir"
+ ],
+
+ tHosteleria:"Hostelería — BUNN",
+ hoH1:"Un buen café mal extraído sigue siendo un mal café.",
+ hoEntrada:"Por eso con la hostelería no vendemos sólo grano: montamos la máquina, ajustamos el molino y formamos al equipo. Y volvemos.",
+ hoServicios:[
+  {t:"Instalación y ajuste", p:"Montamos la máquina y el molino, y dejamos la receta calibrada con su agua, que no es la misma que la nuestra."},
+  {t:"Formación", p:"Dos sesiones con el equipo de barra: extracción, leche y limpieza. Y una tercera a los dos meses, que es cuando aparecen los vicios."},
+  {t:"Revisión trimestral", p:"Volvemos a calibrar. El molino se desajusta solo, y nadie en una barra con cola se da cuenta."}
+ ],
+ hoDatos:[
+  {v:"48 h", u:"Plazo de entrega en pedido de hostelería"},
+  {v:"3", u:"Visitas de formación el primer año"},
+  {v:"0 €", u:"Coste del ajuste inicial del molino"},
+  {v:"1 kg", u:"Formato para barra, en grano"}
+ ],
+
+ tMetodo:"Preparación — BUNN",
+ meH1:"Las proporciones que usamos nosotros.",
+ meEntrada:"No hay una receta única, pero sí un punto de partida decente para cada método. Ajuste desde aquí, no desde cero.",
+ meNota:"Con agua entre 92 y 96 °C y molido ajustado al método. Si sale amargo, muela más grueso; si sale ácido y aguado, más fino. Ese es casi todo el secreto.",
+ metodos:[
+  {n:"V60 · filtro", r:"15 g / 250 ml", t:"2 min 45 s", d:"Molido medio. Prehumedecer con 40 ml y esperar 30 segundos antes de seguir."},
+  {n:"Espresso", r:"18 g / 38 g en taza", t:"27 s", d:"Molido fino. Si baja en menos de 22 segundos, muela más fino."},
+  {n:"Prensa francesa", r:"30 g / 500 ml", t:"4 min", d:"Molido grueso. Retirar la costra de la superficie antes de bajar el émbolo."},
+  {n:"Cafetera italiana", r:"18 g / hasta la válvula", t:"—", d:"Molido medio-fino. Agua ya caliente en el depósito y fuego suave."},
+  {n:"Aeropress", r:"16 g / 220 ml", t:"1 min 30 s", d:"Molido medio-fino. Invertida y con una prensada lenta de 30 segundos."},
+  {n:"Café de olla", r:"60 g / litro", t:"4 min", d:"Molido grueso. Retirar del fuego justo antes de que rompa a hervir."}
+ ],
+
+ tPreguntas:"Preguntas — BUNN",
+ pgH1:"Lo que más nos preguntan.",
+ preguntas:[
+  {q:"¿Por qué no lo mandáis recién tostado?", a:"Porque no se bebe bien. El grano suelta gas durante los primeros días y eso estropea la extracción, sobre todo en espresso. Entre tres y siete días después del tueste está en su punto."},
+  {q:"¿Cuánto dura una bolsa abierta?", a:"Unas tres semanas en buenas condiciones. Cerrada y en un sitio fresco, dos meses. En la nevera no: coge humedad y olores."},
+  {q:"¿Lo mandáis molido?", a:"Sí, si nos dice el método. Pero pierde aroma en días en vez de semanas. Si puede, muela en casa justo antes."},
+  {q:"¿Por qué el de Yemen cuesta tanto?", a:"Producción pequeña, terrazas de montaña, recolección a mano y una cadena logística complicada. Es caro de verdad, no caro de posicionamiento."},
+  {q:"¿Hacéis descafeinado?", a:"Sí, uno, descafeinado con agua y sin disolventes. No lo tenemos siempre porque depende del lote."},
+  {q:"¿Servís fuera de España?", a:"A la Unión Europea sí. Fuera, consúltenos: el envío suele salir caro y a veces no compensa que se lo mandemos nosotros."}
+ ],
+
+ tContacto:"Contacto — BUNN",
+ coH1:"Escríbanos y le decimos qué café le pega.",
+ coEntrada:"Si nos cuenta cómo lo prepara y qué le gusta beber, le recomendamos uno concreto en vez de mandarle la carta entera.",
+ lNombre:"Nombre", lCorreo:"Correo", lMetodo:"Cómo lo prepara", lTipo:"Tipo de consulta",
+ lMensaje:"Qué le gusta beber",
+ oElegir:"Seleccione", oEspresso:"Espresso", oFiltro:"V60 o filtro", oPrensa:"Prensa francesa",
+ oMoka:"Cafetera italiana", oOtro:"Otro",
+ oParticular:"Particular", oHosteleria:"Hostelería", oMayorista:"Mayorista",
+ coAviso:"Sus datos se usan sólo para responderle. No se ceden a nadie.",
+ okMsg:"Recibido. Le contestamos en menos de 24 horas.",
+ errNombre:"Falta su nombre.",
+ errCorreo:"El correo está incompleto."
+},
+
+en:{
+ _dir:"ltr", _lang:"en", _loc:"en-GB",
+ orHalCero:"Right now none of the origins on our list is in full harvest. This is the low point of the year, and it shows: for these weeks the list runs on lots picked in winter.",
+ marca:"BUNN", ariaMenu:"Sections", ariaIdioma:"Language",
+ nInicio:"Home", nCafes:"Coffees", nOrigenes:"Origins", nTueste:"Roasting", nCata:"Tasting",
+ nSuscripcion:"Subscription", nHosteleria:"Trade", nMetodo:"Brewing",
+ nPreguntas:"Questions", nContacto:"Contact",
+ bVerCafes:"See the coffees", bVerTueste:"How we roast", bVerTodos:"See the full list",
+ bPedirVisita:"Request a visit", bEnviar:"Send", verTabla:"See the values as a table",
+ pieAviso:"Demonstration mock-up", granoAlt:"Illustration of the bean and the roast curve",
+
+ tInicio:"BUNN — Specialty coffee roasters",
+ iEti:"Specialty roasters · since 2019",
+ iH1:"Coffee does not go wrong in the machine. It goes wrong before.",
+ iEntrada:"We buy beans traceable to the farm, roast in small batches and ship between three and seven days after roasting. Not sooner, because it needs to rest, and not much later.",
+ iCifrasEti:"How we work",
+ iCifrasNota:"Traceable to the farm means we know the grower's name, the altitude and the lot. If we do not know them, we do not buy it.",
+ cifras:[
+  {v:"12 kg", u:"Roast batches, never larger"},
+  {v:"3–7", u:"Days between roasting and your door"},
+  {v:"100 %", u:"Lots traceable to the farm"},
+  {v:"0", u:"Coffees from last year's harvest on the list"}
+ ],
+
+ tCafes:"Coffees — BUNN",
+ caH1:"Six coffees, and not one of them there to fill the list.",
+ caEntrada:"They change with the harvest. When a lot runs out, it runs out: we do not replace it with something similar under the same name.",
+ caNota:"Prices per 250 g bag of whole beans. Ground to order if you say which method.",
+ cafes:[
+  {n:"Yirgacheffe", o:"Ethiopia · 1,950 m", d:"Washed. Floral, with high clean acidity and a black-tea finish. The most divisive one on the list.", p:"€12.50"},
+  {n:"Huila", o:"Colombia · 1,700 m", d:"Washed. Sweet, balanced and without edges. If you are torn between two, take this one.", p:"€10.90"},
+  {n:"Nyeri", o:"Kenya · 1,800 m", d:"Washed. Blackcurrant acidity, dense body. Enormous as filter, demanding as espresso.", p:"€13.80"},
+  {n:"Antigua", o:"Guatemala · 1,550 m", d:"Washed. Cocoa, walnut and a hint of spice. The one that holds up best with milk.", p:"€11.40"},
+  {n:"Haraz", o:"Yemen · 2,100 m", d:"Natural. Dried fruit and spice, deep and winey. Small quantity, not restocked.", p:"€18.00"},
+  {n:"Gayo", o:"Indonesia · 1,400 m", d:"Semi-washed. Very dense body, herbal, low acidity. For anyone who hates sour coffee.", p:"€11.90"}
+ ],
+
+ tOrigenes:"Origins — BUNN",
+ orH1:"Fresh coffee does not exist all year everywhere.",
+ orEntrada:"Every origin is harvested in its own window. That is why an honest list changes with the calendar and does not offer the same in January as in August.",
+ orNota:"Usual harvest windows, not exact dates: they move each year with the rain. Colombia and Kenya appear twice because they have a main and a secondary crop.",
+ orPrincipal:"Main harvest", orSecundaria:"Secondary harvest",
+ orHal:"At this point in the year we have <b>{n}</b> in full harvest. Coffee takes two to four months to reach your cup roasted from the moment it is picked, so what is harvested today is drunk in spring.",
+ meses:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+ thOrigen:"Origin", thAltitud:"Altitude", thCosecha:"Harvest",
+ origenes:[
+  {n:"Ethiopia",   a:"1,800–2,200 m", b:[[11,2]]},
+  {n:"Colombia",   a:"1,500–1,900 m", b:[[10,2],[4,6]]},
+  {n:"Kenya",      a:"1,600–2,000 m", b:[[10,12],[6,8]]},
+  {n:"Guatemala",  a:"1,400–1,800 m", b:[[12,4]]},
+  {n:"Yemen",      a:"1,800–2,400 m", b:[[10,12]]},
+  {n:"Indonesia",  a:"1,100–1,600 m", b:[[9,12]]}
+ ],
+
+ tTueste:"Roasting — BUNN",
+ tuH1:"Eleven minutes that decide what it tastes like.",
+ tuEntrada:"A roast is not “light” or “dark”: it is a temperature curve over time. These are the three we use, and the difference between them shows in the cup.",
+ tuAria:"Roast profile", tuGrafAlt:"Roast temperature curve over time",
+ tuNota:"Reference curves from our 12 kg drum. The turning point is the low after the cold beans go in; first crack is when the bean bursts and starts expanding. Drop temperature and the minutes after the crack are what change the result most.",
+ tuEjeX:"Minutes", tuEjeY:"°C",
+ tuGiro:"Turning point", tuCrack:"First crack", tuSalida:"Drop",
+ perfiles:[
+  {n:"Filter", c:"var(--s1)", tau:3.6, fin:205, dur:11.0,
+   d:"A fast curve with an early drop. It keeps the acidity and aroma of the origin; as espresso it would come out too sour."},
+  {n:"Espresso", c:"var(--s2)", tau:4.4, fin:213, dur:12.8,
+   d:"More time after first crack. Some acidity is lost and body and sweetness are gained, which is what stands up to pressure and to milk."},
+  {n:"Omni", c:"var(--s3)", tau:4.0, fin:209, dur:12.0,
+   d:"The compromise. Neither the best filter nor the best espresso, but the only one that works reasonably as both."}
+ ],
+ tuHal:"<b>{n}</b>: dropped at {t} °C after {m} minutes, with {p} minutes of development after first crack. {d}",
+
+ tCata:"Tasting — BUNN",
+ ctH1:"Six axes to say what a label does not.",
+ ctEntrada:"“Notes of chocolate” is no use to you if what you want to know is whether it will taste sour. This is.",
+ ctAria:"Coffee", ctGrafAlt:"Sensory profile across six axes",
+ ctNota:"Scores from 0 to 10 from our cupping table, three tasters, blind. It is our assessment, not a standard: another roaster would score the same lot differently.",
+ ejes:["Acidity","Body","Sweetness","Aroma","Bitterness","Aftertaste"],
+ catas:[
+  {n:"Yirgacheffe", v:[9,4,7,9,2,8], d:"High acidity and enormous aroma, light body. A coffee to drink black and slowly; with milk it disappears entirely."},
+  {n:"Huila",       v:[6,6,8,6,3,6], d:"No spikes. That is why we recommend it to anyone starting out: there is nothing in it that can jar."},
+  {n:"Gayo",        v:[3,9,5,5,6,7], d:"The exact opposite of the Yirgacheffe: dense body, low acidity and present bitterness. The favourite of people who say they dislike specialty coffee."}
+ ],
+ ctHal:"<b>{n}</b> — {d}",
+ thEje:"Axis",
+
+ tSuscripcion:"Subscription — BUNN",
+ suH1:"Freshly roasted coffee, without having to remember.",
+ suEntrada:"Choose how often and how much. It can be paused, changed or cancelled from a link in the email itself, without phoning anyone.",
+ suNota:"Prices per shipment. Mainland shipping is free from two bags. No minimum term and no cancellation penalty.",
+ planes:[
+  {n:"One bag", f:"Every 2 or 4 weeks", d:"250 g of the coffee you choose, or of whichever we think is best that week if you would rather be surprised.", p:"from €10.90"},
+  {n:"Two bags", f:"Every 2 or 4 weeks", d:"Two different coffees in each shipment, so you can compare them on the same day. Shipping included.", p:"from €21.00"},
+  {n:"Discovery", f:"Monthly", d:"Three 125 g bags from three origins that never repeat. With a tasting sheet for each.", p:"€24.00"}
+ ],
+ suVentajas:[
+  "Paused, changed or cancelled from the email itself, without phoning anyone",
+  "Roasted the day before it ships, not pulled from a warehouse",
+  "Grind adjusted to your method if you tell us",
+  "If a shipment arrives damaged, it is replaced without argument"
+ ],
+
+ tHosteleria:"Trade — BUNN",
+ hoH1:"A good coffee badly extracted is still a bad coffee.",
+ hoEntrada:"That is why with the trade we do not just sell beans: we set up the machine, dial in the grinder and train the team. And we come back.",
+ hoServicios:[
+  {t:"Installation and dial-in", p:"We set up the machine and the grinder, and leave the recipe calibrated to your water, which is not the same as ours."},
+  {t:"Training", p:"Two sessions with the bar team: extraction, milk and cleaning. And a third after two months, which is when the bad habits appear."},
+  {t:"Quarterly review", p:"We recalibrate. A grinder drifts on its own, and nobody behind a busy bar notices."}
+ ],
+ hoDatos:[
+  {v:"48 h", u:"Delivery time on trade orders"},
+  {v:"3", u:"Training visits in the first year"},
+  {v:"€0", u:"Cost of the initial grinder dial-in"},
+  {v:"1 kg", u:"Bar format, whole bean"}
+ ],
+
+ tMetodo:"Brewing — BUNN",
+ meH1:"The ratios we use ourselves.",
+ meEntrada:"There is no single recipe, but there is a decent starting point for each method. Adjust from here, not from nothing.",
+ meNota:"With water between 92 and 96 °C and the grind matched to the method. If it tastes bitter, grind coarser; if it tastes sour and thin, finer. That is nearly the whole secret.",
+ metodos:[
+  {n:"V60 · pour-over", r:"15 g / 250 ml", t:"2 min 45 s", d:"Medium grind. Bloom with 40 ml and wait 30 seconds before continuing."},
+  {n:"Espresso", r:"18 g in / 38 g out", t:"27 s", d:"Fine grind. If it runs in under 22 seconds, grind finer."},
+  {n:"French press", r:"30 g / 500 ml", t:"4 min", d:"Coarse grind. Skim the crust off the surface before pressing the plunger."},
+  {n:"Moka pot", r:"18 g / up to the valve", t:"—", d:"Medium-fine grind. Hot water in the base and a gentle flame."},
+  {n:"Aeropress", r:"16 g / 220 ml", t:"1 min 30 s", d:"Medium-fine grind. Inverted, with a slow 30-second press."},
+  {n:"Pot-brewed", r:"60 g / litre", t:"4 min", d:"Coarse grind. Take it off the heat just before it comes to the boil."}
+ ],
+
+ tPreguntas:"Questions — BUNN",
+ pgH1:"What we get asked most.",
+ preguntas:[
+  {q:"Why don't you ship it straight after roasting?", a:"Because it does not drink well. The bean releases gas over the first days and that ruins extraction, especially in espresso. Three to seven days after roasting it is at its best."},
+  {q:"How long does an open bag last?", a:"About three weeks in good condition. Sealed and somewhere cool, two months. Not in the fridge: it takes up moisture and smells."},
+  {q:"Do you ship it ground?", a:"Yes, if you tell us the method. But it loses aroma in days rather than weeks. If you can, grind at home just before brewing."},
+  {q:"Why does the Yemeni one cost so much?", a:"Small production, mountain terraces, hand picking and a complicated supply chain. It is genuinely expensive, not expensive for positioning."},
+  {q:"Do you do decaf?", a:"Yes, one, decaffeinated with water and no solvents. We do not always have it because it depends on the lot."},
+  {q:"Do you ship outside Spain?", a:"Within the European Union, yes. Beyond that, ask us: shipping usually works out expensive and sometimes it makes no sense for us to be the ones sending it."}
+ ],
+
+ tContacto:"Contact — BUNN",
+ coH1:"Write to us and we will tell you which coffee suits you.",
+ coEntrada:"If you tell us how you brew and what you like drinking, we will recommend one specific coffee instead of sending you the whole list.",
+ lNombre:"Name", lCorreo:"Email", lMetodo:"How you brew", lTipo:"Type of enquiry",
+ lMensaje:"What you like drinking",
+ oElegir:"Select", oEspresso:"Espresso", oFiltro:"V60 or pour-over", oPrensa:"French press",
+ oMoka:"Moka pot", oOtro:"Other",
+ oParticular:"Personal", oHosteleria:"Trade", oMayorista:"Wholesale",
+ coAviso:"Your details are used only to reply to you. They are given to nobody.",
+ okMsg:"Received. We will answer within 24 hours.",
+ errNombre:"Your name is missing.",
+ errCorreo:"The email is incomplete."
+},
+
+ar:{
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
+ orHalCero:"لا يوجد الآن أي منشأ من قائمتنا في ذروة الحصاد. إنها نقطة العام الأخفض، وأثرها ظاهر: في هذه الأسابيع تقوم القائمة على دفعات قُطفت في الشتاء.",
+ marca:"بُنّ", ariaMenu:"الأقسام", ariaIdioma:"اللغة",
+ nInicio:"الرئيسية", nCafes:"أنواع البنّ", nOrigenes:"المناشئ", nTueste:"التحميص", nCata:"التذوّق",
+ nSuscripcion:"الاشتراك", nHosteleria:"للمقاهي", nMetodo:"التحضير",
+ nPreguntas:"أسئلة", nContacto:"تواصل",
+ bVerCafes:"استعرض الأنواع", bVerTueste:"كيف نحمّص", bVerTodos:"القائمة كاملة",
+ bPedirVisita:"اطلب زيارة", bEnviar:"إرسال", verTabla:"عرض القيم في جدول",
+ pieAviso:"نموذج عرض توضيحي", granoAlt:"رسم للحبّة ولمنحنى التحميص",
+
+ tInicio:"بُنّ — محمصة قهوة مختصة",
+ iEti:"محمصة مختصة · منذ ٢٠١٩",
+ iH1:"القهوة لا تفسد في الآلة. تفسد قبل ذلك.",
+ iEntrada:"نشتري حبًّا يمكن تتبّعه حتى المزرعة، ونحمّصه على دفعات صغيرة، ونشحنه بعد التحميص بثلاثة إلى سبعة أيام. لا قبلها، لأنه يحتاج أن يرتاح، ولا بعدها بكثير.",
+ iCifrasEti:"كيف نعمل",
+ iCifrasNota:"«يمكن تتبّعه حتى المزرعة» يعني أننا نعرف اسم المزارع والارتفاع ورقم الدفعة. وإن لم نعرفها، لم نشترِ.",
+ cifras:[
+  {v:"١٢ كغ", u:"دفعات التحميص، ولا أكبر"},
+  {v:"٣–٧", u:"أيام بين التحميص وبابك"},
+  {v:"١٠٠٪", u:"دفعات يمكن تتبّعها حتى المزرعة"},
+  {v:"٠", u:"قهوة من موسم العام الماضي في القائمة"}
+ ],
+
+ tCafes:"أنواع البنّ — بُنّ",
+ caH1:"ستة أنواع، وما فيها واحد لملء القائمة.",
+ caEntrada:"تتبدّل مع الموسم. وحين تنفد دفعة، تنفد: لا نستبدلها بشبيهة لها تحمل الاسم نفسه.",
+ caNota:"الأسعار لكيس ٢٥٠ غرامًا من الحبّ الكامل. ويُطحن عند الطلب مع ذكر طريقة التحضير.",
+ cafes:[
+  {n:"يرغاتشيف", o:"إثيوبيا · ١٩٥٠ م", d:"مغسول. زهريّ، بحموضة عالية نقية ونهاية تشبه الشاي الأسود. وهو أكثر ما في القائمة إثارةً للاختلاف.", p:"١٢٫٥٠ يورو"},
+  {n:"ويلا", o:"كولومبيا · ١٧٠٠ م", d:"مغسول. حلو ومتّزن وبلا حواف حادّة. وإن ترددت بين اثنين، فخذ هذا.", p:"١٠٫٩٠ يورو"},
+  {n:"نييري", o:"كينيا · ١٨٠٠ م", d:"مغسول. حموضة الكشمش وجسم كثيف. هائل في الترشيح، وصعب في الإسبريسو.", p:"١٣٫٨٠ يورو"},
+  {n:"أنتيغوا", o:"غواتيمالا · ١٥٥٠ م", d:"مغسول. كاكاو وجوز ولمسة من التوابل. وهو الأصمد مع الحليب.", p:"١١٫٤٠ يورو"},
+  {n:"حراز", o:"اليمن · ٢١٠٠ م", d:"طبيعي. فاكهة مجففة وتوابل، عميق وكثيف. كميته قليلة ولا يُعاد توفيره.", p:"١٨٫٠٠ يورو"},
+  {n:"غايو", o:"إندونيسيا · ١٤٠٠ م", d:"نصف مغسول. جسم شديد الكثافة، عشبيّ، قليل الحموضة. لمن يكره القهوة الحامضة.", p:"١١٫٩٠ يورو"}
+ ],
+
+ tOrigenes:"المناشئ — بُنّ",
+ orH1:"القهوة الطازجة لا توجد طوال السنة في كل مكان.",
+ orEntrada:"لكل منشأ نافذة حصاده. ولهذا فالقائمة الأمينة تتبدّل مع التقويم، ولا تعرض في يناير ما تعرضه في أغسطس.",
+ orNota:"نوافذ حصاد معتادة، لا تواريخ دقيقة: تتزحزح كل سنة مع المطر. وتظهر كولومبيا وكينيا مرتين لأن لهما حصادًا رئيسيًا وآخر ثانويًا.",
+ orPrincipal:"الحصاد الرئيسي", orSecundaria:"الحصاد الثانوي",
+ orHal:"في هذا الوقت من السنة هناك <b>{n}</b> في ذروة الحصاد. وتستغرق القهوة شهرين إلى أربعة لتصل إلى فنجانك محمَّصة منذ لحظة قطفها، فما يُحصد اليوم يُشرب في الربيع.",
+ meses:["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"],
+ thOrigen:"المنشأ", thAltitud:"الارتفاع", thCosecha:"الحصاد",
+ origenes:[
+  {n:"إثيوبيا",   a:"١٨٠٠–٢٢٠٠ م", b:[[11,2]]},
+  {n:"كولومبيا",  a:"١٥٠٠–١٩٠٠ م", b:[[10,2],[4,6]]},
+  {n:"كينيا",     a:"١٦٠٠–٢٠٠٠ م", b:[[10,12],[6,8]]},
+  {n:"غواتيمالا", a:"١٤٠٠–١٨٠٠ م", b:[[12,4]]},
+  {n:"اليمن",     a:"١٨٠٠–٢٤٠٠ م", b:[[10,12]]},
+  {n:"إندونيسيا", a:"١١٠٠–١٦٠٠ م", b:[[9,12]]}
+ ],
+
+ tTueste:"التحميص — بُنّ",
+ tuH1:"إحدى عشرة دقيقة تقرّر مذاقها.",
+ tuEntrada:"التحميص ليس «فاتحًا» أو «غامقًا»: إنه منحنى حرارة عبر الزمن. وهذه المنحنيات الثلاثة التي نستعملها، والفرق بينها يُذاق في الفنجان.",
+ tuAria:"نمط التحميص", tuGrafAlt:"منحنى حرارة التحميص عبر الزمن",
+ tuNota:"منحنيات مرجعية من أسطوانتنا سعة ١٢ كغ. نقطة الانعطاف هي أدنى حرارة بعد إدخال الحبّ البارد؛ والفرقعة الأولى حين تنفجر الحبّة وتبدأ بالتمدّد. وحرارة الإخراج والدقائق التي تلي الفرقعة هما أكثر ما يغيّر النتيجة.",
+ tuEjeX:"دقائق", tuEjeY:"°م",
+ tuGiro:"نقطة الانعطاف", tuCrack:"الفرقعة الأولى", tuSalida:"الإخراج",
+ perfiles:[
+  {n:"ترشيح", c:"var(--s1)", tau:3.6, fin:205, dur:11.0,
+   d:"منحنى سريع وإخراج مبكر. يحفظ حموضة المنشأ ورائحته؛ وفي الإسبريسو سيخرج حامضًا أكثر من اللازم."},
+  {n:"إسبريسو", c:"var(--s2)", tau:4.4, fin:213, dur:12.8,
+   d:"زمن أطول بعد الفرقعة الأولى. يُفقد شيء من الحموضة ويُكتسب جسم وحلاوة، وهما ما يصمد أمام الضغط وأمام الحليب."},
+  {n:"شامل", c:"var(--s3)", tau:4.0, fin:209, dur:12.0,
+   d:"الحلّ الوسط. ليس أفضل ترشيح ولا أفضل إسبريسو، لكنه الوحيد الذي يعمل بشكل معقول في الاثنين."}
+ ],
+ tuHal:"<b>{n}</b>: إخراج عند {t} درجة بعد {m} دقيقة، مع {p} دقيقة من التطوير بعد الفرقعة الأولى. {d}",
+
+ tCata:"التذوّق — بُنّ",
+ ctH1:"ستة محاور تقول ما لا تقوله الملصقة.",
+ ctEntrada:"عبارة «نفحات شوكولاتة» لا تنفعك إن كان ما تريد معرفته هو: هل سيكون حامضًا؟ أما هذا فينفع.",
+ ctAria:"النوع", ctGrafAlt:"الملمح الحسّي على ستة محاور",
+ ctNota:"درجات من ٠ إلى ١٠ من طاولة التذوّق عندنا، بثلاثة متذوّقين وبالتعمية. وهو تقييمنا نحن لا معيارًا: محمصة أخرى ستمنح الدفعة نفسها درجات مختلفة.",
+ ejes:["الحموضة","الجسم","الحلاوة","الرائحة","المرارة","الأثر"],
+ catas:[
+  {n:"يرغاتشيف", v:[9,4,7,9,2,8], d:"حموضة عالية ورائحة هائلة وجسم خفيف. قهوة تُشرب سادة وعلى مهل؛ ومع الحليب تختفي تمامًا."},
+  {n:"ويلا",     v:[6,6,8,6,3,6], d:"بلا قمم حادّة. ولهذا نرشّحها لمن يبدأ: ليس فيها ما قد يصدم."},
+  {n:"غايو",     v:[3,9,5,5,6,7], d:"نقيض يرغاتشيف تمامًا: جسم كثيف وحموضة قليلة ومرارة حاضرة. وهي المفضّلة لمن يقول إنه لا يحبّ القهوة المختصة."}
+ ],
+ ctHal:"<b>{n}</b> — {d}",
+ thEje:"المحور",
+
+ tSuscripcion:"الاشتراك — بُنّ",
+ suH1:"قهوة طازجة التحميص، دون أن تضطر إلى التذكّر.",
+ suEntrada:"اختر كل كم، وكم. ويمكن الإيقاف أو التغيير أو الإلغاء من رابط في البريد نفسه، دون الاتصال بأحد.",
+ suNota:"الأسعار لكل شحنة. والشحن داخل شبه الجزيرة مجاني ابتداءً من كيسين. بلا مدة إلزام وبلا غرامة إلغاء.",
+ planes:[
+  {n:"كيس واحد", f:"كل أسبوعين أو أربعة", d:"٢٥٠ غرامًا من النوع الذي تختاره، أو مما نراه الأفضل ذلك الأسبوع إن فضّلت المفاجأة.", p:"من ١٠٫٩٠ يورو"},
+  {n:"كيسان", f:"كل أسبوعين أو أربعة", d:"نوعان مختلفان في كل شحنة، لتقارن بينهما في اليوم نفسه. والشحن مشمول.", p:"من ٢١٫٠٠ يورو"},
+  {n:"اكتشاف", f:"شهريًا", d:"ثلاثة أكياس من ١٢٥ غرامًا لثلاثة مناشئ لا تتكرر أبدًا. مع بطاقة تذوّق لكل منها.", p:"٢٤٫٠٠ يورو"}
+ ],
+ suVentajas:[
+  "يُوقَف أو يُغيَّر أو يُلغى من البريد نفسه، دون الاتصال بأحد",
+  "يُحمَّص في اليوم السابق للشحن، ولا يُسحب من مستودع",
+  "يُضبَط الطحن على طريقتك إن أخبرتنا بها",
+  "وإن وصلت شحنة تالفة، استُبدلت دون جدال"
+ ],
+
+ tHosteleria:"للمقاهي — بُنّ",
+ hoH1:"القهوة الجيدة إن أُسيء استخلاصها بقيت قهوة رديئة.",
+ hoEntrada:"لذلك لا نبيع للمقاهي حبًّا فحسب: نركّب الآلة، ونضبط المطحنة، وندرّب الفريق. ثم نعود.",
+ hoServicios:[
+  {t:"التركيب والضبط", p:"نركّب الآلة والمطحنة، ونترك الوصفة معايَرة على ماءك أنت، وهو ليس ماءنا."},
+  {t:"التدريب", p:"جلستان مع فريق البار: الاستخلاص والحليب والتنظيف. وثالثة بعد شهرين، وهي حين تظهر العادات السيئة."},
+  {t:"مراجعة فصلية", p:"نُعيد المعايرة. فالمطحنة تنحرف من تلقاء نفسها، ولا ينتبه أحد خلف بارٍ مزدحم."}
+ ],
+ hoDatos:[
+  {v:"٤٨ ساعة", u:"مهلة التسليم لطلبات المقاهي"},
+  {v:"٣", u:"زيارات تدريب في السنة الأولى"},
+  {v:"٠ يورو", u:"كلفة الضبط الأول للمطحنة"},
+  {v:"١ كغ", u:"عبوة البار، حبًّا كاملًا"}
+ ],
+
+ tMetodo:"التحضير — بُنّ",
+ meH1:"النِّسب التي نستعملها نحن.",
+ meEntrada:"لا وصفة واحدة، لكن ثمة نقطة انطلاق محترمة لكل طريقة. اضبط انطلاقًا من هنا، لا من الصفر.",
+ meNota:"بماء بين ٩٢ و٩٦ درجة وبطحن يناسب الطريقة. فإن خرجت مرّة، اطحن أخشن؛ وإن خرجت حامضة ومائية، فأنعم. وهذا هو السرّ كله تقريبًا.",
+ metodos:[
+  {n:"V60 · ترشيح", r:"١٥ غ / ٢٥٠ مل", t:"٢ د ٤٥ ث", d:"طحن متوسط. بلّل بـ٤٠ مل وانتظر ٣٠ ثانية قبل المتابعة."},
+  {n:"إسبريسو", r:"١٨ غ / ٣٨ غ في الفنجان", t:"٢٧ ث", d:"طحن ناعم. وإن نزل في أقل من ٢٢ ثانية، فاطحن أنعم."},
+  {n:"مكبس فرنسي", r:"٣٠ غ / ٥٠٠ مل", t:"٤ د", d:"طحن خشن. أزل القشرة عن السطح قبل إنزال المكبس."},
+  {n:"الركوة الإيطالية", r:"١٨ غ / حتى الصمّام", t:"—", d:"طحن متوسط النعومة. ماء ساخن في الخزان ونار هادئة."},
+  {n:"أيروبريس", r:"١٦ غ / ٢٢٠ مل", t:"١ د ٣٠ ث", d:"طحن متوسط النعومة. معكوسة وبكبسة بطيئة من ٣٠ ثانية."},
+  {n:"قهوة الدلّة", r:"٦٠ غ / لتر", t:"٤ د", d:"طحن خشن. ارفعها عن النار قبيل أن تغلي."}
+ ],
+
+ tPreguntas:"أسئلة — بُنّ",
+ pgH1:"أكثر ما نُسأل عنه.",
+ preguntas:[
+  {q:"لماذا لا تشحنونها فور التحميص؟", a:"لأنها لا تُشرب جيدة حينها. تُطلق الحبّة غازًا في الأيام الأولى، وذلك يُفسد الاستخلاص، خاصة في الإسبريسو. وبعد التحميص بثلاثة إلى سبعة أيام تكون في أفضل حالاتها."},
+  {q:"كم يدوم الكيس بعد فتحه؟", a:"نحو ثلاثة أسابيع بحال جيدة. ومغلقًا في مكان بارد، شهران. أما في الثلاجة فلا: يمتصّ الرطوبة والروائح."},
+  {q:"هل تشحنونها مطحونة؟", a:"نعم، إن أخبرتنا بالطريقة. لكنها تفقد رائحتها في أيام بدل أسابيع. فإن استطعت، اطحنها في البيت قبيل التحضير."},
+  {q:"لماذا اليمنيّ غالٍ إلى هذا الحدّ؟", a:"إنتاج قليل، ومدرّجات جبلية، وقطف يدوي، وسلسلة إمداد معقّدة. هو غالٍ حقًّا، لا غالٍ لأجل الصورة."},
+  {q:"هل لديكم منزوعة الكافيين؟", a:"نعم، واحدة، منزوعة بالماء ودون مذيبات. ولا تتوفر دائمًا لأنها تعتمد على الدفعة."},
+  {q:"هل تشحنون خارج إسبانيا؟", a:"إلى الاتحاد الأوروبي نعم. وما عداه فاسألنا: الشحن عادةً مكلف، وأحيانًا لا معنى لأن نكون نحن من يرسلها."}
+ ],
+
+ tContacto:"تواصل — بُنّ",
+ coH1:"اكتب إلينا ونخبرك أي قهوة تناسبك.",
+ coEntrada:"إن أخبرتنا كيف تُحضّرها وما تحبّ أن تشرب، رشّحنا لك نوعًا بعينه بدل أن نرسل إليك القائمة كلها.",
+ lNombre:"الاسم", lCorreo:"البريد", lMetodo:"كيف تُحضّرها", lTipo:"نوع الاستفسار",
+ lMensaje:"ما تحبّ أن تشرب",
+ oElegir:"اختر", oEspresso:"إسبريسو", oFiltro:"V60 أو ترشيح", oPrensa:"مكبس فرنسي",
+ oMoka:"الركوة الإيطالية", oOtro:"غير ذلك",
+ oParticular:"استخدام شخصي", oHosteleria:"مقهى أو مطعم", oMayorista:"بالجملة",
+ coAviso:"لا تُستخدم بياناتك إلا للردّ عليك، ولا تُعطى لأحد.",
+ okMsg:"وصلتنا رسالتك. سنردّ خلال أقل من ٢٤ ساعة.",
+ errNombre:"الاسم ناقص.",
+ errCorreo:"البريد الإلكتروني غير مكتمل."
+}
+};
+
+var RUTAS = ["inicio","cafes","origenes","tueste","cata","suscripcion","hosteleria","metodo","preguntas","contacto"];
+var TITULOS = {inicio:"tInicio",cafes:"tCafes",origenes:"tOrigenes",tueste:"tTueste",cata:"tCata",
+  suscripcion:"tSuscripcion",hosteleria:"tHosteleria",metodo:"tMetodo",preguntas:"tPreguntas",contacto:"tContacto"};
+var idioma = "es", tuSel = 0, ctSel = 0;
+
+function loc(){ return T[idioma]._loc; }
+function num(n,d){ try{ return new Intl.NumberFormat(loc(),{minimumFractionDigits:d||0,maximumFractionDigits:d||0}).format(n); }catch(e){ return String(n); } }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
+
+/* ── Ilustración: grano y curva ──────────────────────────────────── */
+function grano(){
+  var el = document.getElementById("grano"); if (!el) return;
+  var g = "";
+  /* Grano de café: dos elipses y la hendidura sinuosa del centro. */
+  g += '<ellipse cx="150" cy="170" rx="86" ry="118" fill="var(--f2)" stroke="var(--l)"/>';
+  g += '<path d="M150 56 C124 100 124 240 150 284" fill="none" stroke="var(--ocre)" stroke-width="3.4"/>';
+  g += '<path d="M150 56 C176 100 176 240 150 284" fill="none" stroke="var(--l)" stroke-width="1.4"/>';
+  /* La curva de tueste, dibujada como si fuera un trazo de cuaderno */
+  var x0 = 258, y0 = 268, W = 190, H = 190;
+  var pts = "";
+  for (var i = 0; i <= 40; i++){
+    var t = i/40*13, T0 = 200, giro = 88;
+    var temp = (t < 1.4) ? T0 - (T0-giro)*(t/1.4) : giro + (209-giro)*(1-Math.exp(-(t-1.4)/4.0));
+    var x = x0 + t/13*W, y = y0 - (temp-70)/150*H;
+    pts += (i?" L":"M") + x.toFixed(1) + "," + y.toFixed(1);
+  }
+  g += '<path d="'+pts+'" fill="none" stroke="var(--verde)" stroke-width="2.6" stroke-linecap="round"/>';
+  g += '<line x1="'+x0+'" y1="'+y0+'" x2="'+(x0+W)+'" y2="'+y0+'" stroke="var(--l)"/>';
+  g += '<line x1="'+x0+'" y1="'+(y0-H)+'" x2="'+x0+'" y2="'+y0+'" stroke="var(--l)"/>';
+  g += '<circle cx="'+(x0+W*0.72).toFixed(1)+'" cy="'+(y0-(196-70)/150*H).toFixed(1)+'" r="5" fill="var(--ocre)"/>';
+  el.innerHTML = g;
+}
+
+/* ── Curva de tueste ─────────────────────────────────────────────── */
+function tempEn(p, t){
+  var T0 = 200, giro = 88;
+  if (t < 1.4) return T0 - (T0-giro)*(t/1.4);
+  return giro + (p.fin - giro) * (1 - Math.exp(-(t-1.4)/p.tau));
+}
+function pintarTueste(){
+  var svg = document.getElementById("tuGrafica"); if (!svg) return;
+  var t = T[idioma], P = t.perfiles;
+
+  var m = document.getElementById("tuMandos"); m.innerHTML = "";
+  P.forEach(function(p,i){
+    var b = document.createElement("button"); b.type="button"; b.textContent = p.n;
+    b.setAttribute("aria-pressed", String(i===tuSel)); b.dataset.i = i;
+    b.addEventListener("click", function(){ tuSel = +this.dataset.i; pintarTueste(); });
+    m.appendChild(b);
+  });
+  document.getElementById("tuLeyenda").innerHTML = P.map(function(p,i){
+    return '<span style="opacity:'+(i===tuSel?1:.42)+'"><i style="--cc:'+p.c+'"></i>'+p.n+'</span>';
+  }).join("");
+
+  var W=900,H=340,ml=48,mr=18,mt=18,mb=38,iw=W-ml-mr,ih=H-mt-mb;
+  var tMax=14, yMin=70, yMax=225;
+  function X(v){ return ml + v/tMax*iw; }
+  function Y(v){ return mt + ih - (v-yMin)/(yMax-yMin)*ih; }
+  var g = "";
+  for (var y=75; y<=225; y+=25){
+    g += '<line class="gr-guia" x1="'+ml+'" y1="'+Y(y).toFixed(1)+'" x2="'+(W-mr)+'" y2="'+Y(y).toFixed(1)+'"/>';
+    g += '<text class="gr-tex" x="'+(ml-7)+'" y="'+(Y(y)+3.5).toFixed(1)+'" text-anchor="end">'+num(y)+'</text>';
+  }
+  for (var x=0; x<=14; x+=2){
+    g += '<text class="gr-tex" x="'+X(x).toFixed(1)+'" y="'+(mt+ih+16)+'" text-anchor="middle">'+num(x)+'</text>';
+  }
+  g += '<line class="gr-eje" x1="'+ml+'" y1="'+(mt+ih)+'" x2="'+(W-mr)+'" y2="'+(mt+ih)+'"/>';
+
+  P.forEach(function(p,i){
+    var d = "", n = 90;
+    for (var k=0; k<=n; k++){
+      var tt = k/n*p.dur;
+      d += (k?" L":"M") + X(tt).toFixed(1) + "," + Y(tempEn(p,tt)).toFixed(1);
+    }
+    g += '<path d="'+d+'" fill="none" stroke="'+p.c+'" stroke-width="'+(i===tuSel?2.6:1.4)
+       + '" stroke-linecap="round" opacity="'+(i===tuSel?1:.32)+'"/>';
+  });
+
+  /* Marcas del perfil elegido: giro, primer crack y salida. */
+  var p = P[tuSel];
+  var tCrack = 1.4 - p.tau*Math.log(1-(196-88)/(p.fin-88));
+  [[1.4, tempEn(p,1.4), t.tuGiro],[tCrack, 196, t.tuCrack],[p.dur, p.fin, t.tuSalida]].forEach(function(mk,i){
+    g += '<circle cx="'+X(mk[0]).toFixed(1)+'" cy="'+Y(mk[1]).toFixed(1)+'" r="5" fill="'+p.c+'" stroke="var(--f)" stroke-width="2"/>';
+    g += '<text class="gr-tex" x="'+X(mk[0]).toFixed(1)+'" y="'+(Y(mk[1])-12).toFixed(1)
+       + '" text-anchor="'+(i===2?"end":"middle")+'">'+esc(mk[2])+'</text>';
+  });
+  svg.setAttribute("viewBox","0 0 "+W+" "+H);
+  svg.innerHTML = g;
+
+  document.getElementById("tuHallazgo").innerHTML = t.tuHal
+    .replace("{n}", esc(p.n)).replace("{t}", num(p.fin))
+    .replace("{m}", num(p.dur,1)).replace("{p}", num(p.dur-tCrack,1)).replace("{d}", esc(p.d));
+}
+
+/* ── Perfil de cata (radar de seis ejes) ─────────────────────────── */
+function pintarCata(){
+  var svg = document.getElementById("ctGrafica"); if (!svg) return;
+  var t = T[idioma], C = t.catas, ejes = t.ejes, N = ejes.length;
+
+  var m = document.getElementById("ctMandos"); m.innerHTML = "";
+  C.forEach(function(c,i){
+    var b = document.createElement("button"); b.type="button"; b.textContent = c.n;
+    b.setAttribute("aria-pressed", String(i===ctSel)); b.dataset.i = i;
+    b.addEventListener("click", function(){ ctSel = +this.dataset.i; pintarCata(); });
+    m.appendChild(b);
+  });
+
+  var S=440, cx=S/2, cy=S/2, R=S*0.33;
+  function P(i, v){
+    var a = -Math.PI/2 + i*2*Math.PI/N;
+    return [cx + Math.cos(a)*R*v/10, cy + Math.sin(a)*R*v/10];
+  }
+  var g = "";
+  for (var anillo=2; anillo<=10; anillo+=2){
+    var d = "";
+    for (var i=0; i<N; i++){ var p = P(i,anillo); d += (i?" L":"M")+p[0].toFixed(1)+","+p[1].toFixed(1); }
+    g += '<path d="'+d+' Z" fill="none" class="gr-guia"/>';
+  }
+  for (var j=0; j<N; j++){
+    var e = P(j,10);
+    g += '<line class="gr-guia" x1="'+cx+'" y1="'+cy+'" x2="'+e[0].toFixed(1)+'" y2="'+e[1].toFixed(1)+'"/>';
+    var lx = cx + (e[0]-cx)*1.19, ly = cy + (e[1]-cy)*1.19;
+    g += '<text class="gr-tex" x="'+lx.toFixed(1)+'" y="'+(ly+3.5).toFixed(1)+'" text-anchor="middle">'+esc(ejes[j])+'</text>';
+  }
+  var c = C[ctSel], dd = "";
+  for (var k=0; k<N; k++){ var q = P(k, c.v[k]); dd += (k?" L":"M")+q[0].toFixed(1)+","+q[1].toFixed(1); }
+  g += '<path d="'+dd+' Z" fill="var(--ocre)" fill-opacity=".2" stroke="var(--ocre)" stroke-width="2" stroke-linejoin="round"/>';
+  for (var z=0; z<N; z++){
+    var w = P(z, c.v[z]);
+    g += '<circle cx="'+w[0].toFixed(1)+'" cy="'+w[1].toFixed(1)+'" r="4" fill="var(--ocre)" stroke="var(--f)" stroke-width="1.6"><title>'
+       + esc(ejes[z]+": "+c.v[z]+"/10")+'</title></circle>';
+  }
+  svg.setAttribute("viewBox","0 0 "+S+" "+S);
+  svg.innerHTML = g;
+
+  document.getElementById("ctHallazgo").innerHTML = t.ctHal.replace("{n}", esc(c.n)).replace("{d}", esc(c.d));
+  document.getElementById("ctTabla").innerHTML =
+    '<table class="tabla"><thead><tr><th>'+t.thEje+'</th>'
+    + C.map(function(x){ return "<th>"+esc(x.n)+"</th>"; }).join("") + '</tr></thead><tbody>'
+    + ejes.map(function(e,i){ return "<tr><td>"+esc(e)+"</td>"
+        + C.map(function(x){ return "<td>"+num(x.v[i])+"</td>"; }).join("") + "</tr>"; }).join("")
+    + '</tbody></table>';
+}
+
+
+/* Concordancia de número. En español e inglés basta singular/plural; en
+   árabe cambia el sustantivo según la cifra: 1 singular, 2 dual, de 3 a
+   10 plural (مناشئ) y de 11 en adelante singular acusativo (منشأً). */
+function origenes(n){
+  var f = num(n);
+  if (idioma === "ar"){
+    if (n === 1) return "منشأ واحد";
+    if (n === 2) return "منشأين";
+    return n <= 10 ? f + " مناشئ" : f + " منشأً";
+  }
+  if (idioma === "en") return f + (n === 1 ? " origin" : " origins");
+  return (n === 1 ? "un origen" : f + " orígenes");
+}
+
+/* ── Calendario de cosecha ───────────────────────────────────────── */
+function pintarOrigenes(){
+  var cont = document.getElementById("orCal"); if (!cont) return;
+  var t = T[idioma];
+  document.getElementById("orLeyenda").innerHTML =
+    '<span><i style="--cc:var(--s2)"></i>'+t.orPrincipal+'</span>'
+  + '<span><i style="--cc:var(--s3)"></i>'+t.orSecundaria+'</span>';
+
+  var html = "", mesHoy = new Date().getMonth()+1, enCosecha = 0;
+  t.origenes.forEach(function(o){
+    html += '<div class="pistaf"><div class="nom">'+esc(o.n)+'</div><div class="pista">';
+    o.b.forEach(function(b,i){
+      /* Una ventana que cruza el fin de año se parte en dos bandas. */
+      var tramos = b[0] <= b[1] ? [[b[0],b[1]]] : [[b[0],12],[1,b[1]]];
+      tramos.forEach(function(tr){
+        var ini = (tr[0]-1)/12*100, an = (tr[1]-tr[0]+1)/12*100;
+        html += '<div class="banda" style="--cc:var(--s'+(i===0?2:3)+');inset-inline-start:'
+             + ini.toFixed(2)+'%;width:'+an.toFixed(2)+'%"></div>';
+        if (mesHoy >= tr[0] && mesHoy <= tr[1]) enCosecha++;
+      });
+    });
+    html += '</div></div>';
+  });
+  html += '<div class="ejem"><div></div><div>'
+       + t.meses.map(function(m){ return "<span>"+m+"</span>"; }).join("") + '</div></div>';
+  cont.innerHTML = html;
+
+  document.getElementById("orHallazgo").innerHTML = enCosecha
+    ? t.orHal.replace("{n}", origenes(enCosecha))
+    : t.orHalCero;
+  document.getElementById("orTabla").innerHTML =
+    '<table class="tabla"><thead><tr><th>'+t.thOrigen+'</th><th>'+t.thAltitud+'</th><th>'+t.thCosecha+'</th></tr></thead><tbody>'
+    + t.origenes.map(function(o){
+        var v = o.b.map(function(b){ return t.meses[b[0]-1]+" – "+t.meses[b[1]-1]; }).join(" · ");
+        return "<tr><td>"+esc(o.n)+"</td><td>"+esc(o.a)+"</td><td>"+esc(v)+"</td></tr>";
+      }).join("") + '</tbody></table>';
+}
+
+/* ── Listas ──────────────────────────────────────────────────────── */
+function pintarListas(){
+  var t = T[idioma];
+  function celdas(id, arr, fn){ var e = document.getElementById(id); if (e) e.innerHTML = arr.map(fn).join(""); }
+
+  celdas("iCifras", t.cifras, function(c){
+    return '<div class="cel dato"><div class="v">'+esc(c.v)+'</div><div class="u">'+esc(c.u)+'</div></div>'; });
+  celdas("iCafes", t.cafes.slice(0,3), function(c){
+    return '<div class="cel"><span class="sub">'+esc(c.o)+'</span><h3>'+esc(c.n)+'</h3><p>'+esc(c.d)+'</p><div class="precio">'+esc(c.p)+'</div></div>'; });
+  celdas("caLista", t.cafes, function(c){
+    return '<div class="cel"><span class="sub">'+esc(c.o)+'</span><h3>'+esc(c.n)+'</h3><p>'+esc(c.d)+'</p><div class="precio">'+esc(c.p)+'</div></div>'; });
+  celdas("suPlanes", t.planes, function(p){
+    return '<div class="cel"><span class="sub">'+esc(p.f)+'</span><h3>'+esc(p.n)+'</h3><p>'+esc(p.d)+'</p><div class="precio">'+esc(p.p)+'</div></div>'; });
+  var sv = document.getElementById("suVentajas");
+  if (sv) sv.innerHTML = t.suVentajas.map(function(v){ return "<li>"+esc(v)+"</li>"; }).join("");
+  celdas("hoServicios", t.hoServicios, function(s){
+    return '<div class="cel"><h3>'+esc(s.t)+'</h3><p>'+esc(s.p)+'</p></div>'; });
+  celdas("hoDatos", t.hoDatos, function(d){
+    return '<div class="cel dato"><div class="v">'+esc(d.v)+'</div><div class="u">'+esc(d.u)+'</div></div>'; });
+  celdas("meMetodos", t.metodos, function(m){
+    return '<div class="cel"><span class="sub">'+esc(m.r)+' · '+esc(m.t)+'</span><h3>'+esc(m.n)+'</h3><p>'+esc(m.d)+'</p></div>'; });
+  celdas("pgLista", t.preguntas, function(p){
+    return '<details class="faq"><summary>'+esc(p.q)+'</summary><p>'+esc(p.a)+'</p></details>'; });
+}
+
+function ruta(){ var r=(location.hash||"").replace(/^#\/?/,""); return RUTAS.indexOf(r)>=0?r:"inicio"; }
+
+function aplicar(codigo){
+  if (!T[codigo]) codigo = "es";
+  idioma = codigo;
+  var t = T[codigo], i;
+  document.documentElement.lang = t._lang;
+  document.documentElement.dir  = t._dir;
+  var n = document.querySelectorAll("[data-t]");
+  for (i=0;i<n.length;i++){ var k=n[i].getAttribute("data-t"); if (t[k]!==undefined) n[i].textContent = t[k]; }
+  var a = document.querySelectorAll("[data-t-attr]");
+  for (i=0;i<a.length;i++){
+    a[i].getAttribute("data-t-attr").split(",").forEach(function(par){
+      var q=par.split(":"); if (t[q[1].trim()]!==undefined) a[i].setAttribute(q[0].trim(), t[q[1].trim()]);
+    });
+  }
+  var b = document.querySelectorAll(".idi button");
+  for (i=0;i<b.length;i++) b[i].setAttribute("aria-pressed", String(b[i].dataset.lang===codigo));
+  document.title = t[TITULOS[ruta()]] || t.tInicio;
+  var ac = document.getElementById("acuse"); if (ac){ ac.textContent=""; ac.classList.remove("mal"); }
+  pintarListas(); pintarTueste(); pintarCata(); pintarOrigenes(); grano();
+  try{ localStorage.setItem("bunn_lang", codigo); }catch(e){}
+}
+
+function enrutar(){
+  var r = ruta(), s = document.querySelectorAll("[data-ruta]"), i;
+  for (i=0;i<s.length;i++) s[i].classList.toggle("on", s[i].getAttribute("data-ruta")===r);
+  var en = document.querySelectorAll("nav.b a");
+  for (i=0;i<en.length;i++){
+    if (en[i].getAttribute("href")==="#/"+r) en[i].setAttribute("aria-current","page");
+    else en[i].removeAttribute("aria-current");
+  }
+  document.title = T[idioma][TITULOS[r]] || T[idioma].tInicio;
+  window.scrollTo(0,0);
+}
+
+var bs = document.querySelectorAll(".idi button");
+for (var z=0; z<bs.length; z++) bs[z].addEventListener("click", function(){ aplicar(this.dataset.lang); });
+window.addEventListener("hashchange", enrutar);
+
+document.getElementById("f").addEventListener("submit", function(e){
+  e.preventDefault();
+  var t = T[idioma], ac = document.getElementById("acuse");
+  var nom = document.getElementById("nom").value.trim();
+  var cor = document.getElementById("cor").value.trim();
+  if (nom.length < 2){ ac.textContent = t.errNombre; ac.classList.add("mal"); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cor)){ ac.textContent = t.errCorreo; ac.classList.add("mal"); return; }
+  ac.classList.remove("mal"); ac.textContent = t.okMsg; e.target.reset();
+});
+
+(function(){
+  var g=null; try{ g=localStorage.getItem("bunn_lang"); }catch(e){}
+  if (!g||!T[g]){ var l=(navigator.language||"es").slice(0,2).toLowerCase(); g=T[l]?l:"es"; }
+  aplicar(g); enrutar();
+})();
+</script>
+</body>
+</html>
