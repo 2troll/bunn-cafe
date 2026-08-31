@@ -1,6 +1,6 @@
 # BUNN — Tostador de café de especialidad
 
-Sitio de **diez páginas** en español, inglés y árabe con RTL real, para una
+Sitio de **dieciséis páginas** en español, inglés y árabe con RTL real, para una
 tostadora de café de especialidad.
 
 **Ver online:** https://2troll.github.io/bunn-cafe/
@@ -10,10 +10,24 @@ tostadora de café de especialidad.
 el color del grano tostado, el acento es el ocre del tueste y el verde
 secundario es el color del grano crudo, antes de pasar por el tambor.
 
-## Las diez páginas
+## Las dieciséis páginas
 
-`Inicio` · `Cafés` · `Orígenes` · `Tueste` · `Cata` · `Suscripción` ·
-`Hostelería` · `Preparación` · `Preguntas` · `Contacto`
+`Inicio` · `Cafés` · `Orígenes` · **`Elige tu café`** · **`Receta`** ·
+**`Qué va con qué`** · **`Comparar`** · `Tueste` · `Cata` ·
+**`Trazabilidad`** · **`Cronómetro`** · `Suscripción` · `Hostelería` ·
+`Preparación` · `Preguntas` · `Contacto`
+
+Las seis en negrita son nuevas, y ninguna repite el formato de otra ni el de
+los otros sitios:
+
+| Página | Formato | Qué hace |
+|---|---|---|
+| **Elige tu café** | Asistente por pasos | Cuatro preguntas sobre cómo bebe usted el café —ninguna sobre notas de cata— y sale un café concreto y un formato. Se puede ir atrás |
+| **Receta** | Calculadora bidireccional | Escriba gramos o mililitros y el otro campo se recalcula manteniendo la proporción del método. Con botones de ½, ×2 y ×4 |
+| **Qué va con qué** | Mapa de calor | Seis cafés × seis métodos, de 0 a 5. Señala solo el más versátil y el más exigente |
+| **Comparar** | Barras divergentes A/B | Dos cafés enfrentados en los seis ejes de cata, y dice en cuál se separan más |
+| **Trazabilidad** | Línea de tiempo vertical | Un lote de Huila de la finca a la taza: ocho pasos y siete meses |
+| **Cronómetro** | Temporizador por pasos | Cuenta, avanza solo, marca el paso activo y dice cuánta agua lleva echada. Con pausa y reinicio |
 
 ## Las tres piezas que no son adorno
 
@@ -27,6 +41,14 @@ secundario es el color del grano crudo, antes de pasar por el tambor.
 - **Calendario de cosecha.** Ventanas reales por origen. Colombia y Kenia
   aparecen dos veces porque tienen cosecha principal y secundaria, y las
   ventanas que cruzan el fin de año se parten en dos bandas.
+
+## Cómo están hechas las cifras
+
+Las matrices numéricas —recetas, matriz café × método, perfiles sensoriales,
+puntuación del asistente y pasos del cronómetro— viven **fuera** de los
+diccionarios de idioma, en constantes compartidas. Así los tres idiomas leen
+exactamente los mismos números y no pueden divergir, que es el fallo clásico
+de traducir tablas a mano.
 
 ## Detalles de traducción
 
@@ -58,8 +80,11 @@ publica aunque sea legal.
 ## Comprobado
 
 ```
-112 claves × 3 idiomas    paridad ✔ · 0 sin traducir
-10 rutas × 3 idiomas      0 fugas de idioma
+181 claves × 3 idiomas    paridad ✔ · 0 sin traducir
+16 rutas × 3 idiomas      0 fugas de idioma
+16 enlaces del menú       los 16 navegan
+desborde horizontal       0 px en las 16 rutas
+cronómetro                corre, pausa y reinicia
 3 perfiles de tueste      curva + 3 marcas cada uno
 3 cafés en el radar       6 ejes · tabla 6×4
 calendario                11 bandas · 6 pistas · alineadas en LTR y RTL

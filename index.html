@@ -144,6 +144,83 @@ html[dir="rtl"] .tabla th{letter-spacing:0;text-transform:none;font-size:.86rem;
 .tabla td{color:var(--t2);}
 
 
+
+/* ── Asistente por pasos ─────────────────────────────────────────── */
+.pasos-barra{display:flex;gap:.4rem;margin-bottom:1.8rem;}
+.pasos-barra i{flex:1;height:3px;background:var(--l);border-radius:99px;}
+.pasos-barra i.on{background:var(--ocre);}
+.wz{max-width:44rem;}
+.wz h3{font-size:clamp(1.5rem,3.2vw,2.2rem);margin-bottom:1.4rem;}
+.wz-ops{display:grid;gap:.7rem;}
+@media(min-width:640px){.wz-ops{grid-template-columns:1fr 1fr;}}
+.wz-op{text-align:start;padding:1.1rem 1.2rem;border:1px solid var(--l);background:transparent;
+  color:var(--t);cursor:pointer;font:inherit;font-family:var(--c);border-radius:4px;transition:.15s;}
+.wz-op:hover{border-color:var(--ocre);color:var(--ocre);}
+.wz-op[aria-pressed="true"]{background:var(--ocre);border-color:var(--ocre);color:var(--f);}
+.wz-nav{display:flex;gap:.7rem;margin-top:1.8rem;align-items:center;}
+.wz-cuenta{font-size:.82rem;color:var(--t3);margin-inline-start:auto;}
+.wz-res{border-top:1px solid var(--l);padding-top:2rem;}
+.wz-res .marca-res{font-family:var(--disp);font-size:clamp(2.2rem,5vw,3.4rem);line-height:1;color:var(--ocre);}
+
+/* ── Calculadora bidireccional ───────────────────────────────────── */
+.calc{display:grid;gap:1.6rem;} @media(min-width:820px){.calc{grid-template-columns:1fr 1fr;gap:2.5rem;}}
+.calc-par{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:end;}
+.calc-par .eq{font-family:var(--disp);font-size:1.6rem;color:var(--t3);padding-bottom:.4rem;}
+.calc-res{background:var(--f2);border:1px solid var(--l);border-radius:4px;padding:1.5rem;}
+.calc-ratio{font-family:var(--disp);font-size:clamp(2.4rem,5vw,3.6rem);line-height:1;}
+.calc-lin{display:flex;justify-content:space-between;padding-block:.55rem;border-bottom:1px solid var(--l2);font-size:.92rem;}
+.calc-lin span:first-child{color:var(--t2);} .calc-lin b{font-weight:600;font-variant-numeric:tabular-nums;}
+.escalas{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem;}
+
+/* ── Matriz de calor ─────────────────────────────────────────────── */
+.matriz{overflow-x:auto;}
+.matriz table{border-collapse:separate;border-spacing:3px;min-width:34rem;}
+.matriz th{font-size:.76rem;color:var(--t2);font-weight:400;padding:.4rem;text-align:start;white-space:nowrap;}
+.matriz thead th{writing-mode:vertical-rl;transform:rotate(180deg);height:6.5rem;text-align:end;padding:.3rem;}
+html[dir="rtl"] .matriz thead th{transform:rotate(180deg);}
+.matriz td{width:2.6rem;height:2.6rem;text-align:center;border-radius:4px;font-size:.82rem;
+  font-variant-numeric:tabular-nums;cursor:default;}
+.escala{display:flex;align-items:center;gap:.5rem;margin-top:1.2rem;font-size:.8rem;color:var(--t2);}
+.escala i{width:1.6rem;height:.9rem;border-radius:2px;display:block;}
+
+/* ── Comparador de barras divergentes ────────────────────────────── */
+.cmp-sel{display:grid;gap:1rem;margin-bottom:1.8rem;}
+@media(min-width:640px){.cmp-sel{grid-template-columns:1fr 1fr;}}
+.cmp-fila{display:grid;grid-template-columns:1fr 7rem 1fr;gap:.6rem;align-items:center;margin-bottom:.55rem;}
+.cmp-eje{text-align:center;font-size:.82rem;color:var(--t2);}
+.cmp-b{height:1.5rem;display:flex;align-items:center;}
+.cmp-b.izq{justify-content:flex-end;} 
+.cmp-b i{display:block;height:100%;border-radius:3px;background:var(--cc);}
+.cmp-b b{font-size:.74rem;padding-inline:.4rem;color:var(--t2);font-weight:500;}
+
+/* ── Línea de tiempo vertical ────────────────────────────────────── */
+.linea{list-style:none;margin:0;padding:0;position:relative;}
+.linea::before{content:"";position:absolute;inset-block:.6rem;inset-inline-start:.42rem;
+  width:1px;background:var(--l);}
+.linea li{position:relative;padding-inline-start:2.2rem;padding-bottom:1.9rem;}
+.linea li::before{content:"";position:absolute;inset-inline-start:0;top:.42rem;width:.85rem;height:.85rem;
+  border-radius:50%;background:var(--f);border:2px solid var(--ocre);}
+.linea li:last-child::before{background:var(--ocre);}
+.linea .cuando{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ocre);font-weight:600;}
+html[dir="rtl"] .linea .cuando{letter-spacing:0;text-transform:none;font-size:.86rem;}
+.linea h3{font-size:1.15rem;margin:.3rem 0 .3rem;}
+.linea p{color:var(--t2);font-size:.93rem;}
+.linea .quien{display:block;font-size:.82rem;color:var(--t3);margin-top:.3rem;}
+
+/* ── Cronómetro ──────────────────────────────────────────────────── */
+.crono{display:grid;gap:2rem;} @media(min-width:820px){.crono{grid-template-columns:1fr 1.1fr;gap:3rem;align-items:start;}}
+.crono-reloj{background:var(--f2);border:1px solid var(--l);border-radius:6px;padding:2rem;text-align:center;}
+.crono-t{font-family:var(--disp);font-size:clamp(3.4rem,10vw,5.5rem);line-height:1;font-variant-numeric:tabular-nums;}
+.crono-fase{font-size:1.05rem;color:var(--ocre);margin-top:.6rem;min-height:1.5em;}
+.crono-agua{font-size:.85rem;color:var(--t3);margin-top:.3rem;}
+.crono-bot{display:flex;gap:.6rem;justify-content:center;margin-top:1.6rem;flex-wrap:wrap;}
+.crono-pasos{list-style:none;margin:0;padding:0;}
+.crono-pasos li{display:grid;grid-template-columns:3.6rem 1fr;gap:1rem;padding-block:.75rem;
+  border-bottom:1px solid var(--l2);color:var(--t2);font-size:.93rem;}
+.crono-pasos li .s{font-variant-numeric:tabular-nums;color:var(--t3);}
+.crono-pasos li.activo{color:var(--t);} .crono-pasos li.activo .s{color:var(--ocre);font-weight:600;}
+.crono-pasos li.pasado{opacity:.45;}
+
 /* ── Fotografía ──────────────────────────────────────────────────── */
 .foto{width:100%;height:auto;display:block;border:1px solid var(--l);border-radius:4px;}
 .banda-foto{width:100%;aspect-ratio:21/8;object-fit:cover;display:block;
@@ -221,6 +298,12 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
       <a href="#/cata"        data-t="nCata">Cata</a>
       <a href="#/suscripcion" data-t="nSuscripcion">Suscripción</a>
       <a href="#/hosteleria"  data-t="nHosteleria">Hostelería</a>
+      <a href="#/elige"        data-t="nElige">Elige tu café</a>
+      <a href="#/receta"       data-t="nReceta">Receta</a>
+      <a href="#/matriz"       data-t="nMatriz">Qué va con qué</a>
+      <a href="#/comparar"     data-t="nComparar">Comparar</a>
+      <a href="#/trazabilidad" data-t="nTraza">Trazabilidad</a>
+      <a href="#/cronometro"   data-t="nCrono">Cronómetro</a>
       <a href="#/metodo"      data-t="nMetodo">Preparación</a>
       <a href="#/preguntas"   data-t="nPreguntas">Preguntas</a>
       <a href="#/contacto"    data-t="nContacto">Contacto</a>
@@ -417,6 +500,115 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
   </div>
 </section>
 
+
+<section data-ruta="elige">
+  <div class="marco bl">
+    <p class="eti" data-t="nElige">Elige tu café</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="elH1">Cuatro preguntas y le decimos cuál.</h1>
+    <p class="entrada" data-t="elEntrada">Ninguna de ellas es sobre notas de cata. Son sobre cómo bebe usted el café, que es lo que de verdad decide.</p>
+  </div>
+  <div class="marco">
+    <div class="pasos-barra" id="elBarra" aria-hidden="true"></div>
+    <div class="wz" id="elWz"></div>
+  </div>
+</section>
+
+<section data-ruta="receta">
+  <div class="marco bl">
+    <p class="eti" data-t="nReceta">Receta</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="reH1">Cambie el agua y el café se ajusta solo.</h1>
+    <p class="entrada" data-t="reEntrada">Escriba en cualquiera de los dos campos: el otro se recalcula manteniendo la proporción del método.</p>
+  </div>
+  <div class="marco calc">
+    <div>
+      <div style="margin-bottom:1.4rem"><label for="rcMet" data-t="rcLMet">Método</label><select id="rcMet"></select></div>
+      <div class="calc-par">
+        <div><label for="rcCafe" data-t="rcLCafe">Café (g)</label><input id="rcCafe" type="number" min="5" max="500" step="1"></div>
+        <div class="eq">:</div>
+        <div><label for="rcAgua" data-t="rcLAgua">Agua (ml)</label><input id="rcAgua" type="number" min="30" max="5000" step="5"></div>
+      </div>
+      <div class="escalas" id="rcEscalas"></div>
+      <p class="metodo" data-t="rcNota">Las proporciones son las que usamos en la barra. Si le sale amargo, muela más grueso antes de tocar la receta; si le sale ácido y aguado, más fino. El molido cambia más el resultado que un gramo arriba o abajo.</p>
+    </div>
+    <div class="calc-res">
+      <div class="calc-ratio" id="rcRatio"></div>
+      <p style="font-size:.85rem;color:var(--t3);margin:.4rem 0 1.3rem" data-t="rcRatioTxt">Proporción café : agua</p>
+      <div id="rcLineas"></div>
+      <p class="hallazgo" id="rcHallazgo" style="margin-top:1.3rem"></p>
+    </div>
+  </div>
+</section>
+
+<section data-ruta="matriz">
+  <div class="marco bl">
+    <p class="eti" data-t="nMatriz">Qué va con qué</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="maH1">No todo café vale para todo método.</h1>
+    <p class="entrada" data-t="maEntrada">Cuanto más oscura la celda, mejor funciona esa combinación. Es nuestra valoración, no una verdad revelada.</p>
+  </div>
+  <div class="marco">
+    <div class="matriz"><table id="maTabla"></table></div>
+    <div class="escala" id="maEscala"></div>
+    <p class="hallazgo" id="maHallazgo"></p>
+    <p class="metodo" data-t="maNota">Puntuación de 0 a 5 de nuestra barra, probando cada café en cada método con la receta de la página anterior. Un 2 no significa que esté malo: significa que ese café da más de sí en otro sitio.</p>
+  </div>
+</section>
+
+<section data-ruta="comparar">
+  <div class="marco bl">
+    <p class="eti" data-t="nComparar">Comparar</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="cmH1">Dos cafés, uno enfrente del otro.</h1>
+    <p class="entrada" data-t="cmEntrada">La barra crece hacia el lado del café que más tiene de cada cosa. Sirve para decidir entre dos, que es la duda de verdad.</p>
+  </div>
+  <div class="marco">
+    <div class="cmp-sel">
+      <div><label for="cmA" data-t="cmLA">Café A</label><select id="cmA"></select></div>
+      <div><label for="cmB" data-t="cmLB">Café B</label><select id="cmB"></select></div>
+    </div>
+    <div id="cmFilas"></div>
+    <p class="hallazgo" id="cmHallazgo"></p>
+    <p class="metodo" data-t="cmNota">Mismos seis ejes que la mesa de cata, de 0 a 10. Dos cafés pueden tener la misma puntuación total y no parecerse en nada: por eso se compara eje por eje y no con una nota global.</p>
+  </div>
+</section>
+
+<section data-ruta="trazabilidad">
+  <div class="marco bl">
+    <p class="eti" data-t="nTraza">Trazabilidad</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="trH1">Un lote, desde la finca hasta su taza.</h1>
+    <p class="entrada" data-t="trEntrada">Este es el recorrido completo del lote de Huila que hay ahora en la carta. Ocho pasos y siete meses.</p>
+  </div>
+  <div class="marco">
+    <ol class="linea" id="trLinea"></ol>
+    <p class="hallazgo" id="trHallazgo"></p>
+    <p class="metodo" data-t="trNota">Fechas de un lote de ejemplo con la estructura real de nuestra trazabilidad. En la bolsa que le llega figuran el productor, la altitud y el número de lote, y con ellos se puede reconstruir esta misma línea.</p>
+  </div>
+</section>
+
+<section data-ruta="cronometro">
+  <div class="marco bl">
+    <p class="eti" data-t="nCrono">Cronómetro</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="crH1">Le vamos diciendo qué toca.</h1>
+    <p class="entrada" data-t="crEntrada">Elija el método, dele a empezar y deje el móvil apoyado. Va avanzando solo y le dice cuánta agua lleva echada.</p>
+  </div>
+  <div class="marco crono">
+    <div>
+      <div style="margin-bottom:1.4rem"><label for="crMet" data-t="rcLMet">Método</label><select id="crMet"></select></div>
+      <div class="crono-reloj">
+        <div class="crono-t" id="crT">0:00</div>
+        <div class="crono-fase" id="crFase"></div>
+        <div class="crono-agua" id="crAgua"></div>
+        <div class="crono-bot">
+          <button class="btn sol" id="crPlay" type="button" data-t="crEmpezar">Empezar</button>
+          <button class="btn" id="crReset" type="button" data-t="crReiniciar">Reiniciar</button>
+        </div>
+      </div>
+      <p class="metodo" data-t="crNota">Los tiempos son los de nuestra receta. Si su molino muele distinto al nuestro, ajuste el molido antes que el cronómetro.</p>
+    </div>
+    <div>
+      <ol class="crono-pasos" id="crPasos"></ol>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer class="b">
@@ -436,6 +628,73 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 var T = {
 es:{
  _dir:"ltr", _lang:"es", _loc:"es-ES",
+ uMl:"ml",
+ nElige:"Elige tu café", nReceta:"Receta", nMatriz:"Qué va con qué",
+ nComparar:"Comparar", nTraza:"Trazabilidad", nCrono:"Cronómetro",
+ tElige:"Elige tu café — BUNN", tReceta:"Receta — BUNN", tMatriz:"Qué va con qué — BUNN",
+ tComparar:"Comparar — BUNN", tTraza:"Trazabilidad — BUNN", tCrono:"Cronómetro — BUNN",
+
+ elH1:"Cuatro preguntas y le decimos cuál.",
+ elEntrada:"Ninguna de ellas es sobre notas de cata. Son sobre cómo bebe usted el café, que es lo que de verdad decide.",
+ elAtras:"Atrás", elOtra:"Empezar de nuevo", elPaso:"Pregunta {n} de {t}",
+ elResEti:"Le pega este", elResPlan:"Y este formato",
+ elRes:"Con lo que nos ha dicho, el que mejor le encaja es el <b>{c}</b>. {d}",
+ elPreguntas:[
+  {q:"¿Cómo lo prepara casi siempre?", ops:["Espresso","V60 o filtro","Prensa francesa","Cafetera italiana"]},
+  {q:"¿Lo bebe solo o con leche?", ops:["Solo","Con leche","Depende del día"]},
+  {q:"¿Le gusta el café ácido?", ops:["Sí, cuanto más vivo mejor","No, prefiero suave y dulce","Ni me lo había planteado"]},
+  {q:"¿Cuánto café bebe a la semana?", ops:["Una taza al día o menos","Dos o tres al día","Más de tres al día"]}
+ ],
+
+ reH1:"Cambie el agua y el café se ajusta solo.",
+ reEntrada:"Escriba en cualquiera de los dos campos: el otro se recalcula manteniendo la proporción del método.",
+ rcLMet:"Método", rcLCafe:"Café (g)", rcLAgua:"Agua (ml)",
+ rcRatioTxt:"Proporción café : agua",
+ rcNota:"Las proporciones son las que usamos en la barra. Si le sale amargo, muela más grueso antes de tocar la receta; si le sale ácido y aguado, más fino. El molido cambia más el resultado que un gramo arriba o abajo.",
+ rcLTazas:"Tazas de 200 ml", rcLMolido:"Molido", rcLTiempo:"Tiempo total",
+ rcHal:"Para <b>{m}</b> la proporción es {r}. Con {g} g de café salen {a} ml de bebida, que son <b>{t}</b>.",
+ rcEscalar:["½","×1","×2","×4"],
+
+ maH1:"No todo café vale para todo método.",
+ maEntrada:"Cuanto más oscura la celda, mejor funciona esa combinación. Es nuestra valoración, no una verdad revelada.",
+ maNota:"Puntuación de 0 a 5 de nuestra barra, probando cada café en cada método con la receta de la página anterior. Un 2 no significa que esté malo: significa que ese café da más de sí en otro sitio.",
+ maEscBaja:"Flojo", maEscAlta:"Excelente",
+ maHal:"El más versátil de la carta es el <b>{v}</b>: funciona razonablemente en los seis métodos. El más exigente es el <b>{e}</b>, que sólo brilla en unos pocos y en el resto se desaprovecha.",
+
+ cmH1:"Dos cafés, uno enfrente del otro.",
+ cmEntrada:"La barra crece hacia el lado del café que más tiene de cada cosa. Sirve para decidir entre dos, que es la duda de verdad.",
+ cmLA:"Café A", cmLB:"Café B",
+ cmNota:"Mismos seis ejes que la mesa de cata, de 0 a 10. Dos cafés pueden tener la misma puntuación total y no parecerse en nada: por eso se compara eje por eje y no con una nota global.",
+ cmHal:"Donde más se separan es en <b>{e}</b>: {d} puntos de diferencia. Si eso le importa, ya tiene la decisión tomada.",
+ cmIgual:"Ha elegido el mismo café en los dos lados. Cambie uno para ver la comparación.",
+
+ trH1:"Un lote, desde la finca hasta su taza.",
+ trEntrada:"Este es el recorrido completo del lote de Huila que hay ahora en la carta. Ocho pasos y siete meses.",
+ trNota:"Fechas de un lote de ejemplo con la estructura real de nuestra trazabilidad. En la bolsa que le llega figuran el productor, la altitud y el número de lote, y con ellos se puede reconstruir esta misma línea.",
+ trHal:"Del árbol a su molinillo pasan <b>siete meses</b>, y sólo cuatro días de ellos son nuestros. Todo lo demás depende de gente a la que casi nadie nombra en la etiqueta.",
+ traza:[
+  {c:"Noviembre", t:"Recolección", q:"Finca El Mirador · Acevedo, Huila", d:"Recogida a mano, sólo la cereza madura. Se pasa por la finca tres veces en seis semanas."},
+  {c:"Noviembre", t:"Despulpado y fermentación", q:"Beneficio de la finca", d:"Treinta y seis horas de fermentación en tanque, controlando temperatura dos veces al día."},
+  {c:"Diciembre", t:"Secado", q:"Marquesina de la finca", d:"Dieciocho días en secadero cubierto, removiendo cada pocas horas para que seque parejo."},
+  {c:"Enero", t:"Trilla y selección", q:"Trilladora de Pitalito", d:"Se quita el pergamino y se separa por tamaño y densidad. Aquí se descarta cerca de un 12 % del lote."},
+  {c:"Febrero", t:"Cata de aprobación", q:"Importador y nosotros, por separado", d:"Se cata a ciegas. Si no llega a la puntuación acordada, el lote no se compra."},
+  {c:"Marzo", t:"Embarque", q:"Puerto de Buenaventura", d:"Sacos de yute con bolsa de barrera dentro, que es lo que evita que el grano se apague en el viaje."},
+  {c:"Mayo", t:"Llegada y reposo", q:"Nuestro almacén", d:"Dos semanas de reposo antes de tocarlo. El grano verde recién llegado tuesta distinto."},
+  {c:"Junio", t:"Tueste y envío", q:"Nuestro tambor de 12 kg", d:"Se tuesta el día antes de salir. De aquí a su casa, entre tres y siete días."}
+ ],
+
+ crH1:"Le vamos diciendo qué toca.",
+ crEntrada:"Elija el método, dele a empezar y deje el móvil apoyado. Va avanzando solo y le dice cuánta agua lleva echada.",
+ crNota:"Los tiempos son los de nuestra receta. Si su molino muele distinto al nuestro, ajuste el molido antes que el cronómetro.",
+ crEmpezar:"Empezar", crPausar:"Pausa", crSeguir:"Seguir", crReiniciar:"Reiniciar",
+ crListo:"Listo. Ya puede servir.", crAguaTxt:"{a} ml de agua en total",
+ crPasos:{
+  cargar:"Cargar el café molido", prehumedecer:"Prehumedecer y esperar",
+  verter:"Verter agua en espiral", esperar:"Dejar reposar",
+  remover:"Remover la superficie", prensar:"Prensar despacio",
+  extraer:"Extraer", fuego:"Al fuego, suave", retirar:"Retirar del fuego", servir:"Servir"
+ },
+
  altPortada:"Tambor de tueste en funcionamiento en una tostadora",
  altOrigenes:"Grano de café verde saliendo de un saco de yute",
  altHosteleria:"Barista prensando el café en el portafiltros",
@@ -602,6 +861,73 @@ es:{
 
 en:{
  _dir:"ltr", _lang:"en", _loc:"en-GB",
+ uMl:"ml",
+ nElige:"Find your coffee", nReceta:"Recipe", nMatriz:"What suits what",
+ nComparar:"Compare", nTraza:"Traceability", nCrono:"Timer",
+ tElige:"Find your coffee — BUNN", tReceta:"Recipe — BUNN", tMatriz:"What suits what — BUNN",
+ tComparar:"Compare — BUNN", tTraza:"Traceability — BUNN", tCrono:"Timer — BUNN",
+
+ elH1:"Four questions and we will tell you which.",
+ elEntrada:"None of them is about tasting notes. They are about how you drink coffee, which is what actually decides it.",
+ elAtras:"Back", elOtra:"Start again", elPaso:"Question {n} of {t}",
+ elResEti:"This one suits you", elResPlan:"And this format",
+ elRes:"From what you have told us, the one that fits you best is the <b>{c}</b>. {d}",
+ elPreguntas:[
+  {q:"How do you usually brew it?", ops:["Espresso","V60 or pour-over","French press","Moka pot"]},
+  {q:"Do you drink it black or with milk?", ops:["Black","With milk","Depends on the day"]},
+  {q:"Do you like sour, bright coffee?", ops:["Yes, the livelier the better","No, I prefer smooth and sweet","I had never thought about it"]},
+  {q:"How much coffee do you drink a week?", ops:["One cup a day or less","Two or three a day","More than three a day"]}
+ ],
+
+ reH1:"Change the water and the coffee adjusts itself.",
+ reEntrada:"Type in either field: the other recalculates, keeping the method's ratio.",
+ rcLMet:"Method", rcLCafe:"Coffee (g)", rcLAgua:"Water (ml)",
+ rcRatioTxt:"Coffee-to-water ratio",
+ rcNota:"These are the ratios we use behind the bar. If it tastes bitter, grind coarser before touching the recipe; if it tastes sour and thin, finer. The grind changes the result more than a gram either way.",
+ rcLTazas:"200 ml cups", rcLMolido:"Grind", rcLTiempo:"Total time",
+ rcHal:"For <b>{m}</b> the ratio is {r}. With {g} g of coffee you get {a} ml of drink, which is <b>{t}</b>.",
+ rcEscalar:["½","×1","×2","×4"],
+
+ maH1:"Not every coffee works in every method.",
+ maEntrada:"The darker the cell, the better that combination works. It is our assessment, not a revealed truth.",
+ maNota:"Scores from 0 to 5 from our bar, brewing each coffee in each method with the recipe from the previous page. A 2 does not mean it is bad: it means that coffee gives more of itself elsewhere.",
+ maEscBaja:"Poor", maEscAlta:"Excellent",
+ maHal:"The most versatile on the list is the <b>{v}</b>: it works reasonably in all six methods. The most demanding is the <b>{e}</b>, which shines in only a few and is wasted in the rest.",
+
+ cmH1:"Two coffees, face to face.",
+ cmEntrada:"The bar grows towards whichever coffee has more of each quality. It is for choosing between two, which is the real dilemma.",
+ cmLA:"Coffee A", cmLB:"Coffee B",
+ cmNota:"The same six axes as the cupping table, 0 to 10. Two coffees can score the same overall and be nothing alike: that is why we compare axis by axis rather than with a single mark.",
+ cmHal:"Where they diverge most is <b>{e}</b>: {d} points apart. If that matters to you, the decision is already made.",
+ cmIgual:"You have picked the same coffee on both sides. Change one to see the comparison.",
+
+ trH1:"One lot, from the farm to your cup.",
+ trEntrada:"This is the full journey of the Huila lot currently on the list. Eight steps and seven months.",
+ trNota:"Dates from an example lot with the real structure of our traceability. The bag you receive states the grower, the altitude and the lot number, and with those this same line can be rebuilt.",
+ trHal:"From tree to grinder takes <b>seven months</b>, and only four days of that are ours. Everything else depends on people the label almost never names.",
+ traza:[
+  {c:"November", t:"Picking", q:"El Mirador farm · Acevedo, Huila", d:"Picked by hand, ripe cherry only. The farm is gone over three times across six weeks."},
+  {c:"November", t:"Pulping and fermentation", q:"The farm's wet mill", d:"Thirty-six hours fermenting in tank, with temperature checked twice a day."},
+  {c:"December", t:"Drying", q:"The farm's covered patio", d:"Eighteen days under cover, turned every few hours so it dries evenly."},
+  {c:"January", t:"Milling and grading", q:"Dry mill at Pitalito", d:"The parchment comes off and it is graded by size and density. About 12 % of the lot is rejected here."},
+  {c:"February", t:"Approval cupping", q:"The importer and us, separately", d:"Cupped blind. If it does not reach the agreed score, the lot is not bought."},
+  {c:"March", t:"Shipping", q:"Port of Buenaventura", d:"Jute sacks with a barrier liner inside, which is what stops the bean going flat on the voyage."},
+  {c:"May", t:"Arrival and rest", q:"Our warehouse", d:"Two weeks resting before anyone touches it. Freshly landed green coffee roasts differently."},
+  {c:"June", t:"Roasting and dispatch", q:"Our 12 kg drum", d:"Roasted the day before it leaves. From here to your door, three to seven days."}
+ ],
+
+ crH1:"We tell you what comes next.",
+ crEntrada:"Pick the method, press start and prop the phone up. It moves on by itself and tells you how much water you have poured.",
+ crNota:"The times are from our recipe. If your grinder grinds differently from ours, adjust the grind before the timer.",
+ crEmpezar:"Start", crPausar:"Pause", crSeguir:"Resume", crReiniciar:"Reset",
+ crListo:"Done. You can pour.", crAguaTxt:"{a} ml of water in total",
+ crPasos:{
+  cargar:"Load the ground coffee", prehumedecer:"Bloom and wait",
+  verter:"Pour in a spiral", esperar:"Let it stand",
+  remover:"Stir the surface", prensar:"Press slowly",
+  extraer:"Extract", fuego:"On a gentle flame", retirar:"Take off the heat", servir:"Serve"
+ },
+
  altPortada:"A roasting drum running in a coffee roastery",
  altOrigenes:"Green coffee beans spilling from a jute sack",
  altHosteleria:"A barista tamping coffee into the portafilter",
@@ -768,6 +1094,73 @@ en:{
 
 ar:{
  _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
+ uMl:"مل",
+ nElige:"اختر قهوتك", nReceta:"الوصفة", nMatriz:"ما يناسب ماذا",
+ nComparar:"مقارنة", nTraza:"التتبّع", nCrono:"المؤقّت",
+ tElige:"اختر قهوتك — بُنّ", tReceta:"الوصفة — بُنّ", tMatriz:"ما يناسب ماذا — بُنّ",
+ tComparar:"مقارنة — بُنّ", tTraza:"التتبّع — بُنّ", tCrono:"المؤقّت — بُنّ",
+
+ elH1:"أربعة أسئلة ونخبرك بأيّها.",
+ elEntrada:"وليس فيها سؤال واحد عن نفحات التذوّق. كلها عن كيف تشرب أنت القهوة، وهو ما يحسم فعلًا.",
+ elAtras:"رجوع", elOtra:"ابدأ من جديد", elPaso:"السؤال {n} من {t}",
+ elResEti:"هذه تناسبك", elResPlan:"وهذا الشكل",
+ elRes:"بحسب ما أخبرتنا، الأنسب لك هو <b>{c}</b>. {d}",
+ elPreguntas:[
+  {q:"كيف تُحضّرها في الغالب؟", ops:["إسبريسو","V60 أو ترشيح","مكبس فرنسي","الركوة الإيطالية"]},
+  {q:"أتشربها سادة أم بالحليب؟", ops:["سادة","بالحليب","بحسب اليوم"]},
+  {q:"أتحبّ القهوة الحامضة؟", ops:["نعم، وكلما كانت أنبض كان أفضل","لا، أفضّلها ناعمة وحلوة","لم أفكّر في الأمر قط"]},
+  {q:"كم تشرب من القهوة أسبوعيًا؟", ops:["فنجان في اليوم أو أقل","فنجانان أو ثلاثة يوميًا","أكثر من ثلاثة يوميًا"]}
+ ],
+
+ reH1:"غيّر الماء وتتعدّل القهوة وحدها.",
+ reEntrada:"اكتب في أي من الحقلين: يُعاد حساب الآخر مع الحفاظ على نسبة الطريقة.",
+ rcLMet:"الطريقة", rcLCafe:"القهوة (غ)", rcLAgua:"الماء (مل)",
+ rcRatioTxt:"نسبة القهوة إلى الماء",
+ rcNota:"هذه هي النسب التي نستعملها خلف البار. فإن خرجت مرّة، اطحن أخشن قبل أن تمسّ الوصفة؛ وإن خرجت حامضة ومائية، فأنعم. فالطحن يغيّر النتيجة أكثر من غرام زيادةً أو نقصًا.",
+ rcLTazas:"أكواب ٢٠٠ مل", rcLMolido:"الطحن", rcLTiempo:"الزمن الكلي",
+ rcHal:"لـ<b>{m}</b> النسبة هي {r}. وبـ{g} غرامًا من القهوة تحصل على {a} مل من المشروب، أي <b>{t}</b>.",
+ rcEscalar:["½","×١","×٢","×٤"],
+
+ maH1:"ليست كل قهوة تصلح لكل طريقة.",
+ maEntrada:"كلما أغمقت الخانة كان ذلك التوافق أفضل. وهو تقييمنا نحن، لا حقيقة مُنزَلة.",
+ maNota:"درجات من ٠ إلى ٥ من البار عندنا، بتحضير كل نوع بكل طريقة وبوصفة الصفحة السابقة. والدرجة ٢ لا تعني أنها رديئة: تعني أن تلك القهوة تعطي أكثر في موضع آخر.",
+ maEscBaja:"ضعيف", maEscAlta:"ممتاز",
+ maHal:"أكثر أنواع القائمة مرونةً هو <b>{v}</b>: يعمل بشكل معقول في الطرق الست جميعها. وأكثرها تطلّبًا هو <b>{e}</b>، فلا يتألق إلا في القليل منها ويضيع في البقية.",
+
+ cmH1:"نوعان، وجهًا لوجه.",
+ cmEntrada:"يمتدّ الشريط نحو النوع الذي يملك أكثر من كل صفة. وهو للاختيار بين اثنين، وتلك هي الحيرة الحقيقية.",
+ cmLA:"النوع أ", cmLB:"النوع ب",
+ cmNota:"المحاور الستة نفسها التي في طاولة التذوّق، من ٠ إلى ١٠. وقد يتساوى نوعان في المجموع ولا يتشابهان في شيء: ولهذا نقارن محورًا بمحور لا بدرجة إجمالية.",
+ cmHal:"أكثر ما يفترقان فيه هو <b>{e}</b>: بفارق {d} نقاط. فإن كان ذلك يهمّك، فقد اتُّخذ القرار.",
+ cmIgual:"اخترت النوع نفسه في الجهتين. غيّر أحدهما لترى المقارنة.",
+
+ trH1:"دفعة واحدة، من المزرعة إلى فنجانك.",
+ trEntrada:"هذا هو المسار الكامل لدفعة ويلا الموجودة الآن في القائمة. ثماني خطوات وسبعة أشهر.",
+ trNota:"تواريخ دفعة مثال ببنية التتبّع الحقيقية عندنا. وفي الكيس الذي يصلك يُذكر المزارع والارتفاع ورقم الدفعة، وبها يمكن إعادة بناء هذا الخط نفسه.",
+ trHal:"من الشجرة إلى مطحنتك تمرّ <b>سبعة أشهر</b>، أربعة أيام منها فقط لنا. وكل ما عداها يتوقّف على أناس لا تكاد الملصقة تذكر أحدًا منهم.",
+ traza:[
+  {c:"نوفمبر", t:"القطف", q:"مزرعة إل ميرادور · أثيبيدو، ويلا", d:"قطف يدوي، للثمرة الناضجة وحدها. ويُمرّ على المزرعة ثلاث مرات في ستة أسابيع."},
+  {c:"نوفمبر", t:"نزع اللبّ والتخمير", q:"معمل المزرعة", d:"ست وثلاثون ساعة تخمير في الخزان، مع مراقبة الحرارة مرتين يوميًا."},
+  {c:"ديسمبر", t:"التجفيف", q:"مظلّة التجفيف في المزرعة", d:"ثمانية عشر يومًا تحت المظلّة، مع التقليب كل بضع ساعات ليجفّ بانتظام."},
+  {c:"يناير", t:"التقشير والفرز", q:"مقشرة بيتاليتو", d:"يُزال الغلاف ويُفرز بالحجم والكثافة. وهنا يُستبعد نحو ١٢٪ من الدفعة."},
+  {c:"فبراير", t:"تذوّق الاعتماد", q:"المستورد ونحن، كلٌّ على حدة", d:"يُتذوَّق بالتعمية. فإن لم يبلغ الدرجة المتّفق عليها، لم تُشترَ الدفعة."},
+  {c:"مارس", t:"الشحن", q:"ميناء بوينافينتورا", d:"أكياس خيش بداخلها بطانة عازلة، وهي ما يمنع الحبّ من أن يخبو في الرحلة."},
+  {c:"مايو", t:"الوصول والراحة", q:"مستودعنا", d:"أسبوعان من الراحة قبل أن يمسّه أحد. فالحبّ الأخضر الحديث الوصول يُحمَّص على نحو مختلف."},
+  {c:"يونيو", t:"التحميص والإرسال", q:"أسطوانتنا سعة ١٢ كغ", d:"يُحمَّص في اليوم السابق للمغادرة. ومن هنا إلى بابك، من ثلاثة إلى سبعة أيام."}
+ ],
+
+ crH1:"نخبرك بما يأتي تِباعًا.",
+ crEntrada:"اختر الطريقة، واضغط ابدأ، وأسنِد الهاتف. يتقدّم وحده ويخبرك بكمية الماء التي صببتها.",
+ crNota:"الأزمنة من وصفتنا. وإن كانت مطحنتك تطحن على نحو مختلف عن مطحنتنا، فاضبط الطحن قبل المؤقّت.",
+ crEmpezar:"ابدأ", crPausar:"إيقاف مؤقت", crSeguir:"متابعة", crReiniciar:"إعادة",
+ crListo:"تمّ. يمكنك الصبّ.", crAguaTxt:"{a} مل من الماء إجمالًا",
+ crPasos:{
+  cargar:"ضع القهوة المطحونة", prehumedecer:"بلِّل وانتظر",
+  verter:"صُبّ الماء بحركة حلزونية", esperar:"اتركها ترتاح",
+  remover:"حرّك السطح", prensar:"اكبس ببطء",
+  extraer:"الاستخلاص", fuego:"على نار هادئة", retirar:"ارفعها عن النار", servir:"قدّمها"
+ },
+
  altPortada:"أسطوانة تحميص تعمل داخل محمصة قهوة",
  altOrigenes:"حبّ بنّ أخضر ينسكب من كيس من الخيش",
  altHosteleria:"باريستا يكبس القهوة في حامل الفلتر",
@@ -933,9 +1326,292 @@ ar:{
 }
 };
 
-var RUTAS = ["inicio","cafes","origenes","tueste","cata","suscripcion","hosteleria","metodo","preguntas","contacto"];
+
+/* ══════════════════════════════════════════════════════════════════
+   Datos numéricos compartidos por los tres idiomas. Aquí no hay texto:
+   así las cifras no pueden divergir entre versiones, que es el fallo
+   clásico de traducir tablas a mano.
+   ══════════════════════════════════════════════════════════════════ */
+/* Recetas por método, en el mismo orden que t.metodos */
+var RECETAS = [
+  {g:15, ml:250}, {g:18, ml:38}, {g:30, ml:500},
+  {g:18, ml:200}, {g:16, ml:220}, {g:60, ml:1000}
+];
+/* Café × método, de 0 a 5 */
+var MATRIZ = [
+  [5,2,3,1,5,2],
+  [4,4,4,4,4,3],
+  [5,3,4,2,5,2],
+  [3,5,4,5,3,4],
+  [4,3,5,3,4,5],
+  [2,5,5,5,3,5]
+];
+/* Café × eje sensorial, de 0 a 10 */
+var SENSORIAL = [
+  [9,4,7,9,2,8], [6,6,8,6,3,6], [9,7,6,8,3,8],
+  [5,7,7,6,4,6], [7,8,6,9,4,9], [3,9,5,5,6,7]
+];
+/* Puntos que reparte cada respuesta del asistente entre los seis cafés */
+var WZ = [
+  [[0,2,0,3,1,3],[3,2,3,1,3,0],[1,2,1,2,2,3],[0,2,0,3,1,3]],
+  [[3,2,3,1,3,1],[0,2,0,3,0,3],[1,3,1,2,1,2]],
+  [[3,1,3,0,2,0],[0,2,0,3,1,3],[1,3,1,2,1,2]],
+  [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
+];
+/* Pasos del cronómetro: segundos y agua acumulada; el texto va en T */
+var CRONO = [
+  [{k:"prehumedecer",s:30,ml:40},{k:"verter",s:45,ml:150},{k:"verter",s:45,ml:250},{k:"esperar",s:45,ml:250},{k:"servir",s:0,ml:250}],
+  [{k:"cargar",s:0,ml:0},{k:"extraer",s:27,ml:38},{k:"servir",s:0,ml:38}],
+  [{k:"cargar",s:0,ml:0},{k:"verter",s:30,ml:500},{k:"esperar",s:180,ml:500},{k:"remover",s:15,ml:500},{k:"prensar",s:15,ml:500},{k:"servir",s:0,ml:500}],
+  [{k:"cargar",s:0,ml:0},{k:"fuego",s:180,ml:0},{k:"retirar",s:0,ml:0}],
+  [{k:"prehumedecer",s:30,ml:50},{k:"verter",s:10,ml:220},{k:"esperar",s:20,ml:220},{k:"prensar",s:30,ml:220},{k:"servir",s:0,ml:220}],
+  [{k:"cargar",s:0,ml:0},{k:"fuego",s:200,ml:1000},{k:"retirar",s:40,ml:1000},{k:"servir",s:0,ml:1000}]
+];
+
+
+/* ══════════════════════════════════════════════════════════════════
+   Las seis piezas nuevas. Ninguna repite el formato de otra, y todas
+   leen los números de los arrays compartidos de arriba y los textos
+   del idioma activo.
+   ══════════════════════════════════════════════════════════════════ */
+var elPaso = 0, elResp = [null,null,null,null];
+var rcMet = 0, rcG = 15;
+var cmA = 0, cmB = 5;
+var crMet = 0, crIni = 0, crAcum = 0, crCorre = false, crTimer = null;
+
+/* ── 1. Asistente por pasos ──────────────────────────────────────── */
+function pintarElige(){
+  var cont = document.getElementById("elWz");
+  if (!cont) return;
+  var t = T[idioma], P = t.elPreguntas, N = P.length;
+
+  document.getElementById("elBarra").innerHTML =
+    P.map(function(_,i){ return '<i class="'+(i <= elPaso ? "on" : "")+'"></i>'; }).join("");
+
+  if (elPaso >= N){
+    /* Suma de puntos: las tres primeras preguntas eligen café, la
+       cuarta elige formato. */
+    var pts = [0,0,0,0,0,0];
+    for (var q = 0; q < 3; q++){
+      var v = WZ[q][elResp[q]];
+      for (var c = 0; c < 6; c++) pts[c] += v[c];
+    }
+    var mejor = 0;
+    for (var c2 = 1; c2 < 6; c2++) if (pts[c2] > pts[mejor]) mejor = c2;
+    var cafe = t.cafes[mejor], plan = t.planes[elResp[3]];
+    cont.innerHTML =
+      '<div class="wz-res"><p class="eti">'+esc(t.elResEti)+'</p>'
+      + '<div class="marca-res">'+esc(cafe.n)+'</div>'
+      + '<p style="color:var(--t3);font-size:.86rem;margin:.4rem 0 1rem">'+esc(cafe.o)+'</p>'
+      + '<p>'+t.elRes.replace("{c}", esc(cafe.n)).replace("{d}", esc(cafe.d))+'</p>'
+      + '<p class="eti" style="margin-top:2rem">'+esc(t.elResPlan)+'</p>'
+      + '<h3 style="font-size:1.5rem">'+esc(plan.n)+'</h3>'
+      + '<p style="color:var(--t2)">'+esc(plan.d)+'</p>'
+      + '<div class="precio">'+esc(plan.p)+'</div>'
+      + '<div class="wz-nav"><a class="btn sol" href="#/cafes">'+esc(t.bVerTodos)+'</a>'
+      + '<button class="btn" type="button" id="elOtra">'+esc(t.elOtra)+'</button></div></div>';
+    document.getElementById("elOtra").addEventListener("click", function(){
+      elPaso = 0; elResp = [null,null,null,null]; pintarElige();
+    });
+    return;
+  }
+
+  var pr = P[elPaso];
+  cont.innerHTML = '<h3>'+esc(pr.q)+'</h3><div class="wz-ops">'
+    + pr.ops.map(function(o,i){
+        return '<button class="wz-op" type="button" data-i="'+i+'" aria-pressed="'
+          + (elResp[elPaso] === i) + '">'+esc(o)+'</button>'; }).join("")
+    + '</div><div class="wz-nav">'
+    + (elPaso > 0 ? '<button class="btn" type="button" id="elAtras">'+esc(t.elAtras)+'</button>' : '')
+    + '<span class="wz-cuenta">'+t.elPaso.replace("{n}", num(elPaso+1)).replace("{t}", num(N))+'</span></div>';
+
+  cont.querySelectorAll(".wz-op").forEach(function(b){
+    b.addEventListener("click", function(){
+      elResp[elPaso] = +this.dataset.i;
+      elPaso++;
+      pintarElige();
+    });
+  });
+  var at = document.getElementById("elAtras");
+  if (at) at.addEventListener("click", function(){ elPaso--; pintarElige(); });
+}
+
+/* ── 2. Calculadora bidireccional ────────────────────────────────── */
+function pintarReceta(){
+  var sel = document.getElementById("rcMet");
+  if (!sel) return;
+  var t = T[idioma];
+  sel.innerHTML = t.metodos.map(function(m,i){ return '<option value="'+i+'">'+esc(m.n)+'</option>'; }).join("");
+  sel.value = rcMet;
+
+  var R = RECETAS[rcMet], ratio = R.ml / R.g;
+  var ml = Math.round(rcG * ratio);
+  document.getElementById("rcCafe").value = Math.round(rcG);
+  document.getElementById("rcAgua").value = ml;
+  document.getElementById("rcRatio").textContent = "1 : " + num(ratio, 1);
+
+  var tazas = ml / 200;
+  document.getElementById("rcLineas").innerHTML =
+    [[t.rcLCafe, num(Math.round(rcG)) + " g"],
+     [t.rcLAgua, num(ml) + " ml"],
+     [t.rcLTazas, num(tazas, 1)],
+     [t.rcLTiempo, t.metodos[rcMet].t]]
+    .map(function(l){ return '<div class="calc-lin"><span>'+esc(l[0])+'</span><b>'+esc(l[1])+'</b></div>'; }).join("");
+
+  document.getElementById("rcHallazgo").innerHTML = t.rcHal
+    .replace("{m}", esc(t.metodos[rcMet].n)).replace("{r}", "1 : " + num(ratio,1))
+    .replace("{g}", num(Math.round(rcG))).replace("{a}", num(ml))
+    .replace("{t}", num(tazas,1) + " " + t.rcLTazas.toLowerCase());
+
+  var esc2 = document.getElementById("rcEscalas");
+  esc2.innerHTML = "";
+  [0.5,1,2,4].forEach(function(f,i){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "btn"; b.style.padding = ".55rem 1.1rem"; b.style.fontSize = ".78rem";
+    b.textContent = t.rcEscalar[i];
+    b.addEventListener("click", function(){ rcG = RECETAS[rcMet].g * f; pintarReceta(); });
+    esc2.appendChild(b);
+  });
+}
+
+/* ── 3. Matriz de calor ──────────────────────────────────────────── */
+function pintarMatriz(){
+  var tab = document.getElementById("maTabla");
+  if (!tab) return;
+  var t = T[idioma];
+  function celda(v){
+    var op = 0.10 + v / 5 * 0.80;
+    return 'background:color-mix(in srgb, var(--ocre) ' + Math.round(op*100) + '%, transparent);'
+         + 'color:' + (v >= 4 ? "var(--f)" : "var(--t)");
+  }
+  tab.innerHTML = "<thead><tr><th></th>"
+    + t.metodos.map(function(m){ return "<th>"+esc(m.n)+"</th>"; }).join("") + "</tr></thead><tbody>"
+    + t.cafes.map(function(c,i){
+        return "<tr><th>"+esc(c.n)+"</th>"
+          + MATRIZ[i].map(function(v,j){
+              return '<td style="'+celda(v)+'" title="'+esc(c.n+" · "+t.metodos[j].n+": "+v+"/5")+'">'+num(v)+"</td>";
+            }).join("") + "</tr>";
+      }).join("") + "</tbody>";
+
+  document.getElementById("maEscala").innerHTML =
+    "<span>"+esc(t.maEscBaja)+"</span>"
+    + [0,1,2,3,4,5].map(function(v){
+        return '<i style="background:color-mix(in srgb, var(--ocre) '
+          + Math.round((0.10 + v/5*0.80)*100) + '%, transparent)"></i>'; }).join("")
+    + "<span>"+esc(t.maEscAlta)+"</span>";
+
+  /* El más versátil es el que menos flojea; el más exigente, el que
+     tiene el peor mínimo. */
+  var mejorMin = -1, iv = 0, peorMin = 99, ie = 0;
+  MATRIZ.forEach(function(fila,i){
+    var mn = Math.min.apply(null, fila);
+    if (mn > mejorMin){ mejorMin = mn; iv = i; }
+    if (mn < peorMin){ peorMin = mn; ie = i; }
+  });
+  document.getElementById("maHallazgo").innerHTML =
+    t.maHal.replace("{v}", esc(t.cafes[iv].n)).replace("{e}", esc(t.cafes[ie].n));
+}
+
+/* ── 4. Comparador de barras divergentes ─────────────────────────── */
+function pintarComparar(){
+  var cont = document.getElementById("cmFilas");
+  if (!cont) return;
+  var t = T[idioma];
+  [["cmA", cmA], ["cmB", cmB]].forEach(function(par){
+    var el = document.getElementById(par[0]);
+    el.innerHTML = t.cafes.map(function(c,i){ return '<option value="'+i+'">'+esc(c.n)+'</option>'; }).join("");
+    el.value = par[1];
+  });
+
+  if (cmA === cmB){
+    cont.innerHTML = "";
+    document.getElementById("cmHallazgo").innerHTML = esc(t.cmIgual);
+    return;
+  }
+  var A = SENSORIAL[cmA], B = SENSORIAL[cmB], maxD = -1, ejeD = 0;
+  cont.innerHTML =
+    '<div class="cmp-fila" style="margin-bottom:1rem"><b style="text-align:end">'+esc(t.cafes[cmA].n)
+    + '</b><span></span><b>'+esc(t.cafes[cmB].n)+'</b></div>'
+    + t.ejes.map(function(e,i){
+        var a = A[i], b = B[i];
+        if (Math.abs(a-b) > maxD){ maxD = Math.abs(a-b); ejeD = i; }
+        return '<div class="cmp-fila">'
+          + '<div class="cmp-b izq"><b>'+num(a)+'</b><i style="--cc:var(--s1);width:'+(a/10*100)+'%"></i></div>'
+          + '<div class="cmp-eje">'+esc(e)+'</div>'
+          + '<div class="cmp-b"><i style="--cc:var(--s2);width:'+(b/10*100)+'%"></i><b>'+num(b)+'</b></div>'
+          + '</div>';
+      }).join("");
+  document.getElementById("cmHallazgo").innerHTML =
+    t.cmHal.replace("{e}", esc(t.ejes[ejeD])).replace("{d}", num(maxD));
+}
+
+/* ── 5. Línea de tiempo ──────────────────────────────────────────── */
+function pintarTraza(){
+  var l = document.getElementById("trLinea");
+  if (!l) return;
+  var t = T[idioma];
+  l.innerHTML = t.traza.map(function(x){
+    return "<li><span class='cuando'>"+esc(x.c)+"</span><h3>"+esc(x.t)+"</h3>"
+      + "<p>"+esc(x.d)+"<span class='quien'>"+esc(x.q)+"</span></p></li>"; }).join("");
+  document.getElementById("trHallazgo").innerHTML = t.trHal;
+}
+
+/* ── 6. Cronómetro ───────────────────────────────────────────────── */
+function crDur(P, i){ return P[i].s || (i === P.length - 1 ? 0 : 5); }
+function crTotal(P){ var s = 0; for (var i = 0; i < P.length; i++) s += crDur(P, i); return s; }
+function mmss(seg){
+  var m = Math.floor(seg / 60), r = Math.floor(seg % 60);
+  return num(m) + ":" + (r < 10 ? num(0) + num(r) : num(r));
+}
+function crAhora(){ return crAcum + (crCorre ? (Date.now() - crIni) / 1000 : 0); }
+
+function pintarCrono(){
+  var sel = document.getElementById("crMet");
+  if (!sel) return;
+  var t = T[idioma], P = CRONO[crMet];
+  sel.innerHTML = t.metodos.map(function(m,i){ return '<option value="'+i+'">'+esc(m.n)+'</option>'; }).join("");
+  sel.value = crMet;
+
+  var e = crAhora(), tot = crTotal(P), acc = 0, idx = -1;
+  for (var i = 0; i < P.length; i++){
+    var d = crDur(P, i);
+    if (e < acc + d || d === 0 && e >= acc && i === P.length - 1){ idx = i; break; }
+    acc += d;
+  }
+  var fin = e >= tot;
+  if (idx < 0) idx = P.length - 1;
+
+  document.getElementById("crT").textContent = mmss(Math.min(e, tot));
+  document.getElementById("crFase").textContent = fin ? t.crListo : t.crPasos[P[idx].k];
+  document.getElementById("crAgua").textContent =
+    t.crAguaTxt.replace("{a}", num(P[fin ? P.length-1 : idx].ml));
+  document.getElementById("crPlay").textContent = crCorre ? t.crPausar : (crAcum > 0 ? t.crSeguir : t.crEmpezar);
+  document.getElementById("crReiniciar") ;
+  var rb = document.getElementById("crReset"); if (rb) rb.textContent = t.crReiniciar;
+
+  var acc2 = 0;
+  document.getElementById("crPasos").innerHTML = P.map(function(x,i){
+    var d = crDur(P, i), ini = acc2; acc2 += d;
+    var cls = fin ? "pasado" : (i === idx ? "activo" : (i < idx ? "pasado" : ""));
+    return '<li class="'+cls+'"><span class="s">'+mmss(ini)+'</span><span>'+esc(t.crPasos[x.k])
+      + (x.ml ? ' <span style="color:var(--t3)">· '+num(x.ml)+' '+t.uMl+'</span>' : '') + '</span></li>';
+  }).join("");
+
+  if (fin && crCorre){ crCorre = false; crAcum = tot; clearInterval(crTimer); crTimer = null; }
+}
+
+function crTick(){ pintarCrono(); }
+
+function pintarNuevas(){
+  pintarElige(); pintarReceta(); pintarMatriz(); pintarComparar(); pintarTraza(); pintarCrono();
+}
+
+var RUTAS = ["inicio","cafes","origenes","elige","receta","matriz","comparar",
+             "tueste","cata","trazabilidad","cronometro","suscripcion","hosteleria","metodo","preguntas","contacto"];
 var TITULOS = {inicio:"tInicio",cafes:"tCafes",origenes:"tOrigenes",tueste:"tTueste",cata:"tCata",
-  suscripcion:"tSuscripcion",hosteleria:"tHosteleria",metodo:"tMetodo",preguntas:"tPreguntas",contacto:"tContacto"};
+  suscripcion:"tSuscripcion",hosteleria:"tHosteleria",metodo:"tMetodo",preguntas:"tPreguntas",contacto:"tContacto",
+  elige:"tElige",receta:"tReceta",matriz:"tMatriz",comparar:"tComparar",
+  trazabilidad:"tTraza",cronometro:"tCrono"};
 var idioma = "es", tuSel = 0, ctSel = 0;
 
 function loc(){ return T[idioma]._loc; }
@@ -1179,7 +1855,7 @@ function aplicar(codigo){
   for (i=0;i<b.length;i++) b[i].setAttribute("aria-pressed", String(b[i].dataset.lang===codigo));
   document.title = t[TITULOS[ruta()]] || t.tInicio;
   var ac = document.getElementById("acuse"); if (ac){ ac.textContent=""; ac.classList.remove("mal"); }
-  pintarListas(); pintarTueste(); pintarCata(); pintarOrigenes(); grano();
+  pintarListas(); pintarTueste(); pintarCata(); pintarOrigenes(); grano(); pintarNuevas();
   try{ localStorage.setItem("bunn_lang", codigo); }catch(e){}
 }
 
@@ -1208,6 +1884,32 @@ document.getElementById("f").addEventListener("submit", function(e){
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cor)){ ac.textContent = t.errCorreo; ac.classList.add("mal"); return; }
   ac.classList.remove("mal"); ac.textContent = t.okMsg; e.target.reset();
 });
+
+
+/* Eventos de las seis piezas nuevas */
+(function(){
+  function on(id, ev, fn){ var el = document.getElementById(id); if (el) el.addEventListener(ev, fn); }
+  on("rcMet", "change", function(){ rcMet = +this.value; rcG = RECETAS[rcMet].g; pintarReceta(); });
+  on("rcCafe", "input", function(){ var v = +this.value; if (v > 0){ rcG = v; pintarReceta(); } });
+  on("rcAgua", "input", function(){
+    var v = +this.value, R = RECETAS[rcMet];
+    if (v > 0){ rcG = v / (R.ml / R.g); pintarReceta(); }
+  });
+  on("cmA", "change", function(){ cmA = +this.value; pintarComparar(); });
+  on("cmB", "change", function(){ cmB = +this.value; pintarComparar(); });
+  on("crMet", "change", function(){
+    crMet = +this.value; crCorre = false; crAcum = 0;
+    clearInterval(crTimer); crTimer = null; pintarCrono();
+  });
+  on("crPlay", "click", function(){
+    if (crCorre){ crAcum = crAhora(); crCorre = false; clearInterval(crTimer); crTimer = null; }
+    else { crIni = Date.now(); crCorre = true; crTimer = setInterval(crTick, 200); }
+    pintarCrono();
+  });
+  on("crReset", "click", function(){
+    crCorre = false; crAcum = 0; clearInterval(crTimer); crTimer = null; pintarCrono();
+  });
+})();
 
 (function(){
   var g=null; try{ g=localStorage.getItem("bunn_lang"); }catch(e){}
