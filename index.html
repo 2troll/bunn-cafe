@@ -143,6 +143,21 @@ html[dir="rtl"] .gr-tex{font-family:"Almarai",sans-serif;font-size:11px;}
 html[dir="rtl"] .tabla th{letter-spacing:0;text-transform:none;font-size:.86rem;}
 .tabla td{color:var(--t2);}
 
+
+/* ── Fotografía ──────────────────────────────────────────────────── */
+.foto{width:100%;height:auto;display:block;border:1px solid var(--l);border-radius:4px;}
+.banda-foto{width:100%;aspect-ratio:21/8;object-fit:cover;display:block;
+  border:1px solid var(--l);border-radius:4px;margin-bottom:2rem;}
+.creditos{font-size:.78rem;color:var(--t3);line-height:1.75;}
+.creditos li{margin-bottom:.35rem;} .creditos a{color:var(--t2);}
+
+
+/* Los items de una rejilla tienen min-width:auto, que para una imagen es su
+   ancho intrínseco: sin esto, una foto de 1400 px desborda la columna. */
+.hero > *{min-width:0;}
+img{max-width:100%;}
+.foto{aspect-ratio:4/3;object-fit:cover;}
+
 /* Calendario de cosecha */
 .pistaf{display:grid;grid-template-columns:var(--col) 1fr;gap:.9rem;align-items:center;margin-bottom:.45rem;}
 .pistaf .nom{font-size:.85rem;color:var(--t2);}
@@ -231,7 +246,8 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
         <a class="btn" href="#/tueste" data-t="bVerTueste">Cómo tostamos</a>
       </div>
     </div>
-    <svg class="grano" id="grano" viewBox="0 0 480 340" role="img" data-t-attr="aria-label:granoAlt" aria-label="Ilustración del proceso de tueste"></svg>
+    <img class="foto" src="img/tambor-tueste.jpg" width="1400" height="933"
+         data-t-attr="alt:altPortada" alt="Tambor de tueste en funcionamiento en una tostadora">
   </div>
   <div class="marco bl raya">
     <p class="eti" data-t="iCifrasEti">Cómo trabajamos</p>
@@ -251,7 +267,10 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="caH1">Seis cafés, y ninguno por rellenar la carta.</h1>
     <p class="entrada" data-t="caEntrada">Cambian con la cosecha. Cuando un lote se acaba, se acaba: no lo sustituimos por otro parecido y con el mismo nombre.</p>
   </div>
-  <div class="marco"><div class="rej r3" id="caLista"></div>
+  <div class="marco">
+    <img class="banda-foto" src="img/grano-tostado.jpg" width="1400" height="533"
+         data-t-attr="alt:altCafes" alt="Primer plano de grano de café recién tostado">
+    <div class="rej r3" id="caLista"></div>
     <p class="metodo" data-t="caNota">Precios por bolsa de 250 g de grano entero. Molido bajo pedido, indicando el método.</p>
   </div>
 </section>
@@ -263,6 +282,8 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <p class="entrada" data-t="orEntrada">Cada origen se cosecha en su ventana. Por eso una carta honesta cambia con el calendario y no ofrece lo mismo en enero que en agosto.</p>
   </div>
   <div class="marco">
+    <img class="banda-foto" src="img/grano-verde.jpg" width="1400" height="533"
+         data-t-attr="alt:altOrigenes" alt="Grano de café verde saliendo de un saco de yute">
     <div class="leyenda" id="orLeyenda"></div>
     <div class="grafica"><div id="orCal" style="min-width:34rem;--col:clamp(6rem,14vw,11rem)"></div></div>
     <p class="hallazgo" id="orHallazgo"></p>
@@ -278,6 +299,8 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <p class="entrada" data-t="tuEntrada">Un tueste no es «claro» o «oscuro»: es una curva de temperatura en el tiempo. Estas son las tres que usamos, y la diferencia entre ellas se nota en la taza.</p>
   </div>
   <div class="marco">
+    <svg class="grano" id="grano" viewBox="0 0 480 340" role="img" style="max-width:26rem;margin-bottom:2rem"
+         data-t-attr="aria-label:granoAlt" aria-label="Ilustración del proceso de tueste"></svg>
     <div class="mandos" id="tuMandos" role="group" data-t-attr="aria-label:tuAria" aria-label="Perfil de tueste"></div>
     <div class="leyenda" id="tuLeyenda"></div>
     <div class="grafica"><svg id="tuGrafica" role="img" data-t-attr="aria-label:tuGrafAlt" aria-label="Curva de temperatura del tueste"></svg></div>
@@ -322,6 +345,8 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <p class="entrada" data-t="hoEntrada">Por eso con la hostelería no vendemos sólo grano: montamos la máquina, ajustamos el molino y formamos al equipo. Y volvemos.</p>
   </div>
   <div class="marco">
+    <img class="banda-foto" src="img/barista.jpg" width="1400" height="533"
+         data-t-attr="alt:altHosteleria" alt="Barista prensando el café en el portafiltros">
     <div class="rej r3" id="hoServicios"></div>
     <div style="margin-top:2rem" class="rej r4" id="hoDatos"></div>
     <div class="acc"><a class="btn sol" href="#/contacto" data-t="bPedirVisita">Pedir una visita</a></div>
@@ -335,6 +360,11 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <p class="entrada" data-t="meEntrada">No hay una receta única, pero sí un punto de partida decente para cada método. Ajuste desde aquí, no desde cero.</p>
   </div>
   <div class="marco"><div class="rej r3" id="meMetodos"></div>
+    <div style="margin-top:2.5rem">
+      <p class="eti" data-t="credEti">Créditos de las imágenes</p>
+      <p class="metodo" data-t="credNota">Fotografías de Wikimedia Commons con licencia libre, atribuidas a su autor.</p>
+      <ul class="creditos" id="credLista"></ul>
+    </div>
     <p class="metodo" data-t="meNota">Con agua entre 92 y 96 °C y molido ajustado al método. Si sale amargo, muela más grueso; si sale ácido y aguado, más fino. Ese es casi todo el secreto.</p>
   </div>
 </section>
@@ -406,6 +436,18 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 var T = {
 es:{
  _dir:"ltr", _lang:"es", _loc:"es-ES",
+ altPortada:"Tambor de tueste en funcionamiento en una tostadora",
+ altOrigenes:"Grano de café verde saliendo de un saco de yute",
+ altHosteleria:"Barista prensando el café en el portafiltros",
+ altCafes:"Primer plano de grano de café recién tostado",
+ credEti:"Créditos de las imágenes",
+ credNota:"Fotografías de Wikimedia Commons con licencia libre, atribuidas a su autor.",
+ creditos:[
+  {t:"Coffee roasting machine, The Roastery", a:"Vouliagmeni", l:"CC BY-SA 4.0", u:"https://creativecommons.org/licenses/by-sa/4.0/"},
+  {t:"Green Bean Coffee", a:"DeaPeaJay", l:"CC BY-SA 2.0", u:"https://creativecommons.org/licenses/by-sa/2.0/"},
+  {t:"Barista prepares espresso at coffee shop", a:"Shixart1985", l:"CC BY 2.0", u:"https://creativecommons.org/licenses/by/2.0/"},
+  {t:"Espresso Beans", a:"Patrick Mallahan III", l:"CC BY-SA 4.0", u:"https://creativecommons.org/licenses/by-sa/4.0/"}
+ ],
  orHalCero:"Ahora mismo no hay ningún origen de nuestra carta en plena cosecha. Es el punto bajo del año, y se nota: en estas semanas la carta se sostiene con los lotes recogidos en invierno.",
  marca:"BUNN", ariaMenu:"Secciones", ariaIdioma:"Idioma",
  nInicio:"Inicio", nCafes:"Cafés", nOrigenes:"Orígenes", nTueste:"Tueste", nCata:"Cata",
@@ -560,6 +602,18 @@ es:{
 
 en:{
  _dir:"ltr", _lang:"en", _loc:"en-GB",
+ altPortada:"A roasting drum running in a coffee roastery",
+ altOrigenes:"Green coffee beans spilling from a jute sack",
+ altHosteleria:"A barista tamping coffee into the portafilter",
+ altCafes:"Close-up of freshly roasted coffee beans",
+ credEti:"Image credits",
+ credNota:"Photographs from Wikimedia Commons under free licences, credited to their authors.",
+ creditos:[
+  {t:"Coffee roasting machine, The Roastery", a:"Vouliagmeni", l:"CC BY-SA 4.0", u:"https://creativecommons.org/licenses/by-sa/4.0/"},
+  {t:"Green Bean Coffee", a:"DeaPeaJay", l:"CC BY-SA 2.0", u:"https://creativecommons.org/licenses/by-sa/2.0/"},
+  {t:"Barista prepares espresso at coffee shop", a:"Shixart1985", l:"CC BY 2.0", u:"https://creativecommons.org/licenses/by/2.0/"},
+  {t:"Espresso Beans", a:"Patrick Mallahan III", l:"CC BY-SA 4.0", u:"https://creativecommons.org/licenses/by-sa/4.0/"}
+ ],
  orHalCero:"Right now none of the origins on our list is in full harvest. This is the low point of the year, and it shows: for these weeks the list runs on lots picked in winter.",
  marca:"BUNN", ariaMenu:"Sections", ariaIdioma:"Language",
  nInicio:"Home", nCafes:"Coffees", nOrigenes:"Origins", nTueste:"Roasting", nCata:"Tasting",
@@ -714,6 +768,18 @@ en:{
 
 ar:{
  _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
+ altPortada:"أسطوانة تحميص تعمل داخل محمصة قهوة",
+ altOrigenes:"حبّ بنّ أخضر ينسكب من كيس من الخيش",
+ altHosteleria:"باريستا يكبس القهوة في حامل الفلتر",
+ altCafes:"لقطة قريبة لحبّ بنّ طازج التحميص",
+ credEti:"حقوق الصور",
+ credNota:"صور من ويكيميديا كومنز برخص حرة، منسوبة إلى أصحابها.",
+ creditos:[
+  {t:"Coffee roasting machine, The Roastery", a:"Vouliagmeni", l:"CC BY-SA 4.0", u:"https://creativecommons.org/licenses/by-sa/4.0/"},
+  {t:"Green Bean Coffee", a:"DeaPeaJay", l:"CC BY-SA 2.0", u:"https://creativecommons.org/licenses/by-sa/2.0/"},
+  {t:"Barista prepares espresso at coffee shop", a:"Shixart1985", l:"CC BY 2.0", u:"https://creativecommons.org/licenses/by/2.0/"},
+  {t:"Espresso Beans", a:"Patrick Mallahan III", l:"CC BY-SA 4.0", u:"https://creativecommons.org/licenses/by-sa/4.0/"}
+ ],
  orHalCero:"لا يوجد الآن أي منشأ من قائمتنا في ذروة الحصاد. إنها نقطة العام الأخفض، وأثرها ظاهر: في هذه الأسابيع تقوم القائمة على دفعات قُطفت في الشتاء.",
  marca:"بُنّ", ariaMenu:"الأقسام", ariaIdioma:"اللغة",
  nInicio:"الرئيسية", nCafes:"أنواع البنّ", nOrigenes:"المناشئ", nTueste:"التحميص", nCata:"التذوّق",
@@ -1085,6 +1151,10 @@ function pintarListas(){
     return '<div class="cel dato"><div class="v">'+esc(d.v)+'</div><div class="u">'+esc(d.u)+'</div></div>'; });
   celdas("meMetodos", t.metodos, function(m){
     return '<div class="cel"><span class="sub">'+esc(m.r)+' · '+esc(m.t)+'</span><h3>'+esc(m.n)+'</h3><p>'+esc(m.d)+'</p></div>'; });
+  var cr = document.getElementById("credLista");
+  if (cr) cr.innerHTML = t.creditos.map(function(c){
+    return '<li>' + esc(c.t) + ' — ' + esc(c.a) + ', <a href="' + c.u
+      + '" target="_blank" rel="noopener">' + esc(c.l) + '</a></li>'; }).join("");
   celdas("pgLista", t.preguntas, function(p){
     return '<details class="faq"><summary>'+esc(p.q)+'</summary><p>'+esc(p.a)+'</p></details>'; });
 }
