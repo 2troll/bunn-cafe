@@ -47,6 +47,10 @@
 html[dir="rtl"]{ --disp:"Almarai",sans-serif; --c:"Almarai",sans-serif; }
 
 *,*::before,*::after{box-sizing:border-box;}
+/* Un display explícito gana al [hidden] de la hoja del navegador: hay que
+   decirlo a mano o los paneles ocultos se siguen viendo. */
+[hidden]{display:none !important;}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 body{margin:0;background:var(--f);color:var(--t);font-family:var(--c);font-weight:300;
   font-size:clamp(15px,1.02vw,16.5px);line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
@@ -293,6 +297,81 @@ html[dir="rtl"] .indice-pag{letter-spacing:0;font-size:.95rem;}
 .indice-pag a{color:var(--t2);text-decoration:none;}
 .indice-pag a:hover{color:var(--ocre);}
 
+/* ── Tienda: la carta se navega como una tienda, no como un folleto ──
+   Ficha con precio, existencias reales y añadir sin salir de la página. */
+.fil{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.6rem;}
+.fil button{background:none;border:1px solid var(--l);color:var(--t2);cursor:pointer;
+  font:inherit;font-size:.8rem;padding:.45rem 1rem;border-radius:999px;}
+.fil button:hover{border-color:var(--ocre);color:var(--t);}
+.fil button[aria-pressed="true"]{background:var(--ocre);border-color:var(--ocre);color:#17130f;}
+
+.tienda{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));}
+.prod{display:flex;flex-direction:column;border:1px solid var(--l);background:var(--f2);overflow:hidden;}
+.prod-img{aspect-ratio:4/3;position:relative;overflow:hidden;background:var(--sup);}
+.prod-img img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .5s ease;}
+.prod:hover .prod-img img{transform:scale(1.04);}
+.prod-marca{position:absolute;inset-block-start:.7rem;inset-inline-start:.7rem;
+  background:rgba(23,19,15,.85);color:var(--t);font-size:.66rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:.3rem .6rem;}
+html[dir="rtl"] .prod-marca{letter-spacing:0;text-transform:none;font-size:.8rem;}
+.prod-marca.poco{background:var(--ocre);color:#17130f;}
+.prod-cuerpo{padding:1.2rem 1.2rem 0;flex:1;}
+.prod-cuerpo h3{font-family:var(--disp);font-size:1.45rem;font-weight:400;margin-bottom:.2rem;}
+html[dir="rtl"] .prod-cuerpo h3{font-weight:700;font-size:1.25rem;}
+.prod-o{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--verde);margin-bottom:.7rem;}
+html[dir="rtl"] .prod-o{letter-spacing:0;text-transform:none;font-size:.9rem;}
+.prod-d{font-size:.88rem;color:var(--t2);margin-bottom:1rem;}
+.prod-ejes{display:flex;gap:1.2rem;font-size:.7rem;color:var(--t3);margin-bottom:1rem;}
+.prod-ejes i{display:inline-flex;gap:2px;margin-inline-start:.35rem;vertical-align:-1px;}
+.prod-ejes i s{width:4px;height:9px;background:var(--l);display:block;text-decoration:none;}
+.prod-ejes i s.on{background:var(--ocre);}
+.prod-pie{display:flex;align-items:center;gap:.8rem;padding:1rem 1.2rem;border-top:1px solid var(--l);}
+.prod-precio{font-family:var(--disp);font-size:1.4rem;color:var(--ocre);margin-inline-end:auto;}
+.prod-add{background:var(--ocre);border:0;color:#17130f;cursor:pointer;font:inherit;
+  font-size:.8rem;font-weight:600;padding:.55rem 1.1rem;white-space:nowrap;}
+.prod-add:hover{background:var(--t);}
+.prod-add[disabled]{background:var(--sup);color:var(--t3);cursor:not-allowed;}
+.cant{display:flex;align-items:center;border:1px solid var(--l);}
+.cant button{background:none;border:0;color:var(--t);cursor:pointer;font:inherit;
+  width:2rem;height:2.1rem;font-size:1.1rem;line-height:1;}
+.cant button:hover{color:var(--ocre);}
+.cant b{min-width:1.6rem;text-align:center;font-size:.9rem;font-weight:600;}
+
+/* ── Botón y panel de cesta ──────────────────────────────────────── */
+.cesta-btn{display:inline-flex;align-items:center;gap:.45rem;background:none;border:1px solid var(--l);
+  color:var(--t2);cursor:pointer;font:inherit;font-size:.78rem;padding:.4rem .8rem;flex-shrink:0;}
+.cesta-btn:hover{border-color:var(--ocre);color:var(--t);}
+.cesta-btn b{background:var(--ocre);color:#17130f;font-size:.68rem;min-width:1.15rem;
+  height:1.15rem;display:inline-grid;place-items:center;border-radius:999px;font-weight:700;}
+.cesta-btn b:empty,.cesta-btn b.cero{background:var(--sup);color:var(--t3);}
+.cesta-velo{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;}
+.cesta-panel{position:fixed;inset-block:0;inset-inline-end:0;width:min(400px,100%);z-index:90;
+  background:var(--f2);border-inline-start:1px solid var(--l);display:flex;flex-direction:column;}
+.cp-cab{display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 1.4rem;border-bottom:1px solid var(--l);}
+.cp-cab h2{font-family:var(--disp);font-size:1.6rem;font-weight:400;}
+html[dir="rtl"] .cp-cab h2{font-weight:700;font-size:1.35rem;}
+.cp-x{background:none;border:0;color:var(--t2);cursor:pointer;font-size:1.7rem;line-height:1;padding:0 .2rem;}
+.cp-x:hover{color:var(--ocre);}
+.cp-cuerpo{flex:1;overflow-y:auto;padding:.4rem 1.4rem;}
+.cp-vacia{color:var(--t3);font-size:.9rem;padding-block:2.5rem;text-align:center;}
+.cp-lin{display:grid;grid-template-columns:1fr auto;gap:.6rem 1rem;padding-block:1.1rem;
+  border-bottom:1px solid var(--l2);align-items:center;}
+.cp-lin b{font-family:var(--disp);font-size:1.2rem;font-weight:400;display:block;}
+html[dir="rtl"] .cp-lin b{font-weight:700;font-size:1.05rem;}
+.cp-lin span{font-size:.78rem;color:var(--t3);}
+.cp-lin .cp-imp{font-size:.95rem;color:var(--ocre);text-align:end;}
+.cp-pie{border-top:1px solid var(--l);padding:1.2rem 1.4rem 1.4rem;}
+.cp-envio p{font-size:.76rem;color:var(--t3);margin:.5rem 0 1rem;}
+.cp-envio-b{height:3px;background:var(--sup);overflow:hidden;}
+.cp-envio-b i{display:block;height:100%;background:var(--verde);width:0;transition:width .3s ease;}
+.cp-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem;}
+.cp-total b{font-family:var(--disp);font-size:1.7rem;}
+html[dir="rtl"] .cp-total b{font-weight:700;font-size:1.4rem;}
+.cp-pie .btn{width:100%;text-align:center;}
+.cp-aviso{font-size:.72rem;color:var(--t3);margin-top:.9rem;text-align:center;}
+
 .faq{border-top:1px solid var(--l);}
 .faq summary{cursor:pointer;padding-block:1.2rem;font-family:var(--disp);font-size:1.3rem;
   list-style:none;display:flex;gap:1rem;align-items:baseline;}
@@ -344,6 +423,11 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
       <a href="#/comprar"  data-t="nComprar">Comprar</a>
       <a href="#/contacto" data-t="nContacto">Contacto</a>
     </nav>
+    <button type="button" class="cesta-btn" id="cestaBtn" aria-expanded="false" aria-controls="cestaPanel">
+      <svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M4 7h16l-1.3 11.2a2 2 0 0 1-2 1.8H7.3a2 2 0 0 1-2-1.8L4 7Z"/><path d="M8.5 7V5.5a3.5 3.5 0 0 1 7 0V7"/></svg>
+      <span data-t="cestaEti">Cesta</span><b id="cestaN">0</b>
+    </button>
     <div class="idi" role="group" data-t-attr="aria-label:ariaIdioma" aria-label="Idioma">
       <button type="button" data-lang="es" aria-pressed="true">ES</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -408,7 +492,8 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
   <div class="marco">
     <img class="banda-foto" src="img/grano-tostado.jpg" width="1400" height="533"
          data-t-attr="alt:altCafes" alt="Primer plano de grano de café recién tostado">
-    <div class="rej r3" id="caLista"></div>
+    <div class="fil" id="caFiltros" role="group" data-t-attr="aria-label:caFiltroAria" aria-label="Filtrar por proceso"></div>
+    <div class="tienda" id="caLista"></div>
     <p class="metodo" data-t="caNota">Precios por bolsa de 250 g de grano entero. Molido bajo pedido, indicando el método.</p>
   </div>
 </section>
@@ -741,6 +826,22 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 
 </main>
 
+<div class="cesta-velo" id="cestaVelo" hidden></div>
+<aside class="cesta-panel" id="cestaPanel" hidden aria-modal="true" role="dialog"
+       data-t-attr="aria-label:cestaTitulo">
+  <div class="cp-cab">
+    <h2 data-t="cestaTitulo">Su cesta</h2>
+    <button type="button" id="cestaCerrar" class="cp-x" data-t-attr="aria-label:cerrar" aria-label="Cerrar">&times;</button>
+  </div>
+  <div class="cp-cuerpo" id="cestaLineas"></div>
+  <div class="cp-pie">
+    <div class="cp-envio"><div class="cp-envio-b"><i id="cestaEnvioBarra"></i></div><p id="cestaEnvio"></p></div>
+    <div class="cp-total"><span data-t="cestaSubtotal">Subtotal</span><b id="cestaTotal">0,00 €</b></div>
+    <button class="btn sol" id="cestaIr" type="button" data-t="cestaIr">Tramitar pedido</button>
+    <p class="cp-aviso" data-t="cestaAviso">Sitio de demostración: no se cobra nada y el pedido no llega a ninguna parte.</p>
+  </div>
+</aside>
+
 <footer class="b">
   <div class="marco pie">
     <span data-t="marca">BUNN</span>
@@ -759,7 +860,15 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES", iPorQueEti:"Tres decisiones que nos cuestan dinero", iNoEti:"Lo que no vamos a hacer",
+ _dir:"ltr", _lang:"es", _loc:"es-ES", cestaEti:"Cesta", cestaTitulo:"Su cesta", cestaVacia:"Todavía no ha añadido nada.",
+ cestaSubtotal:"Subtotal", cestaIr:"Tramitar pedido", cestaHecho:"Pedido de prueba enviado",
+ cestaAviso:"Sitio de demostración: no se cobra nada y el pedido no llega a ninguna parte.",
+ envioFalta:"Le faltan {x} para el envío gratuito.", envioYa:"Envío gratuito incluido.",
+ bAnadir:"Añadir", agotado:"Agotado", ultimas:"Quedan {n}", filTodos:"Todos",
+ procesos:["Lavado","Natural","Semilavado"], caFiltroAria:"Filtrar por proceso",
+ sinResultados:"Ningún café con ese proceso ahora mismo.",
+ ejeCuerpo:"Cuerpo", ejeAcidez:"Acidez", cerrar:"Cerrar",
+ iPorQueEti:"Tres decisiones que nos cuestan dinero", iNoEti:"Lo que no vamos a hacer",
  iNoNota:"Ninguna de estas cosas es ilegal ni infrecuente: casi todo el sector las hace. Simplemente hemos decidido que no, y preferimos decirlo antes de que lo pregunte.",
  ctaIniH:"¿No sabe cuál pedir? Cuéntenos cómo lo prepara.",
  ctaIniP:"Le recomendamos uno concreto y una receta de partida. Y si duda, le mandamos cien gramos con portes pagados.",
@@ -968,7 +1077,7 @@ es:{
   {n:"Huila", o:"Colombia · 1.700 m", d:"Lavado. Dulce, equilibrado y sin aristas. Si duda entre dos, este.", p:"10,90 €"},
   {n:"Nyeri", o:"Kenia · 1.800 m", d:"Lavado. Acidez de grosella, cuerpo denso. Enorme en filtro y exigente en espresso.", p:"13,80 €"},
   {n:"Antigua", o:"Guatemala · 1.550 m", d:"Lavado. Cacao, nuez y un punto de especia. El que mejor aguanta con leche.", p:"11,40 €"},
-  {n:"Haraz", o:"Yemen · 2.100 m", d:"Natural. Fruta pasa, especia y vino sin alcohol. Poca cantidad y no se repone.", p:"18,00 €"},
+  {n:"Haraz", o:"Yemen · 2.100 m", d:"Natural. Fruta pasa, especia y un dulzor denso de fruta seca. Poca cantidad y no se repone.", p:"18,00 €"},
   {n:"Gayo", o:"Indonesia · 1.400 m", d:"Semilavado. Cuerpo muy denso, herbáceo, poca acidez. Para quien odia el café ácido.", p:"11,90 €"}
  ],
 
@@ -1090,7 +1199,15 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB", iPorQueEti:"Three decisions that cost us money", iNoEti:"What we will not do",
+ _dir:"ltr", _lang:"en", _loc:"en-GB", cestaEti:"Basket", cestaTitulo:"Your basket", cestaVacia:"You have not added anything yet.",
+ cestaSubtotal:"Subtotal", cestaIr:"Place order", cestaHecho:"Test order sent",
+ cestaAviso:"Demonstration site: nothing is charged and the order goes nowhere.",
+ envioFalta:"{x} to go for free shipping.", envioYa:"Free shipping included.",
+ bAnadir:"Add", agotado:"Sold out", ultimas:"{n} left", filTodos:"All",
+ procesos:["Washed","Natural","Semi-washed"], caFiltroAria:"Filter by process",
+ sinResultados:"No coffee with that process right now.",
+ ejeCuerpo:"Body", ejeAcidez:"Acidity", cerrar:"Close",
+ iPorQueEti:"Three decisions that cost us money", iNoEti:"What we will not do",
  iNoNota:"None of these things is illegal or unusual: most of the trade does them. We have simply decided not to, and we would rather say so before you ask.",
  ctaIniH:"Not sure which to order? Tell us how you brew it.",
  ctaIniP:"We will recommend one specific coffee and a starting recipe. And if you are unsure, we send a hundred grams postage paid.",
@@ -1299,7 +1416,7 @@ en:{
   {n:"Huila", o:"Colombia · 1,700 m", d:"Washed. Sweet, balanced and without edges. If you are torn between two, take this one.", p:"€10.90"},
   {n:"Nyeri", o:"Kenya · 1,800 m", d:"Washed. Blackcurrant acidity, dense body. Enormous as filter, demanding as espresso.", p:"€13.80"},
   {n:"Antigua", o:"Guatemala · 1,550 m", d:"Washed. Cocoa, walnut and a hint of spice. The one that holds up best with milk.", p:"€11.40"},
-  {n:"Haraz", o:"Yemen · 2,100 m", d:"Natural. Dried fruit and spice, deep and winey. Small quantity, not restocked.", p:"€18.00"},
+  {n:"Haraz", o:"Yemen · 2,100 m", d:"Natural. Dried fruit and spice, deep and syrupy. Small quantity, not restocked.", p:"€18.00"},
   {n:"Gayo", o:"Indonesia · 1,400 m", d:"Semi-washed. Very dense body, herbal, low acidity. For anyone who hates sour coffee.", p:"€11.90"}
  ],
 
@@ -1421,7 +1538,15 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", iPorQueEti:"ثلاثة قرارات تكلّفنا مالًا", iNoEti:"ما لن نفعله",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", cestaEti:"السلة", cestaTitulo:"سلّتك", cestaVacia:"لم تُضِف شيئًا بعد.",
+ cestaSubtotal:"المجموع الفرعي", cestaIr:"إتمام الطلب", cestaHecho:"أُرسل طلب تجريبي",
+ cestaAviso:"موقع للعرض: لا يُحصَّل شيء ولا يصل الطلب إلى أي جهة.",
+ envioFalta:"يتبقّى {x} للشحن المجاني.", envioYa:"الشحن المجاني مشمول.",
+ bAnadir:"أضِف", agotado:"نفد", ultimas:"بقي {n}", filTodos:"الكل",
+ procesos:["مغسول","طبيعي","نصف مغسول"], caFiltroAria:"التصفية حسب المعالجة",
+ sinResultados:"لا يوجد بنّ بهذه المعالجة الآن.",
+ ejeCuerpo:"القوام", ejeAcidez:"الحموضة", cerrar:"إغلاق",
+ iPorQueEti:"ثلاثة قرارات تكلّفنا مالًا", iNoEti:"ما لن نفعله",
  iNoNota:"لا شيء من هذا مخالفًا للقانون ولا نادرًا: فأغلب القطاع يفعله. لكننا قررنا ألّا نفعله، ونفضّل قول ذلك قبل أن تسأل.",
  ctaIniH:"لا تدري أيَّها تطلب؟ أخبرنا كيف تُحضّره.",
  ctaIniP:"نوصي لك ببنٍّ بعينه ووصفة بداية. وإن ترددت أرسلنا مئة غرام بأجرة بريد مدفوعة.",
@@ -2032,6 +2157,21 @@ function pintarNuevas(){
   pintarElige(); pintarReceta(); pintarMatriz(); pintarComparar(); pintarTraza(); pintarCrono();
 }
 
+/* El catálogo va aparte de los diccionarios de idioma: el precio y las
+   existencias son los mismos en español, inglés y árabe por construcción. */
+var CATALOGO = [
+  {id:"yir", precio:12.50, proc:0, cuerpo:2, acidez:5, stock:14},
+  {id:"hui", precio:10.90, proc:0, cuerpo:3, acidez:3, stock:38},
+  {id:"nye", precio:13.80, proc:0, cuerpo:4, acidez:5, stock:9},
+  {id:"ant", precio:11.40, proc:0, cuerpo:4, acidez:2, stock:26},
+  {id:"har", precio:18.00, proc:1, cuerpo:4, acidez:3, stock:3},
+  {id:"gay", precio:11.90, proc:2, cuerpo:5, acidez:1, stock:21}
+];
+var ENVIO_GRATIS = 35;
+var cesta = {};
+try { cesta = JSON.parse(localStorage.getItem("bunn_cesta") || "{}"); } catch(e){ cesta = {}; }
+var filtroProc = -1;
+
 var INDICE = {
   cafes:[["ap-cafes","nCafes"],["ap-origenes","nOrigenes"],["ap-trazabilidad","nTraza"],
          ["ap-cata","nCata"],["ap-comparar","nComparar"]],
@@ -2275,8 +2415,7 @@ function pintarListas(){
     return '<div class="cel dato"><div class="v">'+esc(c.v)+'</div><div class="u">'+esc(c.u)+'</div></div>'; });
   celdas("iCafes", t.cafes.slice(0,3), function(c){
     return '<div class="cel"><span class="sub">'+esc(c.o)+'</span><h3>'+esc(c.n)+'</h3><p>'+esc(c.d)+'</p><div class="precio">'+esc(c.p)+'</div></div>'; });
-  celdas("caLista", t.cafes, function(c){
-    return '<div class="cel"><span class="sub">'+esc(c.o)+'</span><h3>'+esc(c.n)+'</h3><p>'+esc(c.d)+'</p><div class="precio">'+esc(c.p)+'</div></div>'; });
+  pintarTienda(); pintarCesta();
   celdas("suPlanes", t.planes, function(p){
     return '<div class="cel"><span class="sub">'+esc(p.f)+'</span><h3>'+esc(p.n)+'</h3><p>'+esc(p.d)+'</p><div class="precio">'+esc(p.p)+'</div></div>'; });
   var sv = document.getElementById("suVentajas");
@@ -2296,6 +2435,131 @@ function pintarListas(){
 }
 
 function ruta(){ var r=(location.hash||"").replace(/^#\/?/,""); return RUTAS.indexOf(r)>=0?r:"inicio"; }
+
+/* ── Tienda ────────────────────────────────────────────────────────
+   El tono del recuadro va con el cuerpo del café, de más claro a más
+   oscuro: es información, no adorno. */
+var TONOS = ["#9aa85e","#c9a24a","#c47f32","#a05f2c","#7a4423"];
+
+function precio(n){
+  return new Intl.NumberFormat(T[idioma]._loc,
+    {style:"currency", currency:"EUR", minimumFractionDigits:2}).format(n);
+}
+function unidades(){
+  var n = 0; for (var k in cesta) n += cesta[k]; return n;
+}
+function importe(){
+  var tot = 0;
+  CATALOGO.forEach(function(c){ if (cesta[c.id]) tot += cesta[c.id] * c.precio; });
+  return tot;
+}
+function guardarCesta(){
+  try { localStorage.setItem("bunn_cesta", JSON.stringify(cesta)); } catch(e){}
+}
+function anadir(id, delta){
+  var art = CATALOGO.filter(function(c){ return c.id === id; })[0];
+  if (!art) return;
+  var n = (cesta[id] || 0) + delta;
+  if (n <= 0) delete cesta[id];
+  else cesta[id] = Math.min(n, art.stock);
+  guardarCesta(); pintarTienda(); pintarCesta();
+}
+
+function pintarTienda(){
+  var caja = document.getElementById("caLista");
+  if (!caja) return;
+  var t = T[idioma];
+
+  var fil = document.getElementById("caFiltros");
+  if (fil) {
+    fil.innerHTML = ['<button type="button" data-p="-1">'+esc(t.filTodos)+'</button>']
+      .concat(t.procesos.map(function(n,i){
+        return '<button type="button" data-p="'+i+'">'+esc(n)+'</button>'; })).join("");
+    Array.prototype.forEach.call(fil.querySelectorAll("button"), function(b){
+      b.setAttribute("aria-pressed", String(+b.dataset.p === filtroProc));
+      b.addEventListener("click", function(){ filtroProc = +this.dataset.p; pintarTienda(); });
+    });
+  }
+
+  var visibles = 0;
+  caja.innerHTML = CATALOGO.map(function(c, i){
+    if (filtroProc >= 0 && c.proc !== filtroProc) return "";
+    visibles++;
+    var d = t.cafes[i], hay = c.stock, enCesta = cesta[c.id] || 0;
+    var marca = hay === 0 ? {c:"", x:t.agotado}
+              : hay <= 5  ? {c:" poco", x:t.ultimas.replace("{n}", num(hay))}
+              : {c:"", x:t.procesos[c.proc]};
+    function ejes(nom, v){
+      var b = ""; for (var k = 1; k <= 5; k++) b += '<s class="'+(k <= v ? "on" : "")+'"></s>';
+      return '<span>'+esc(nom)+'<i>'+b+'</i></span>';
+    }
+    return '<article class="prod">'
+      + '<div class="prod-img" style="background:'+TONOS[c.cuerpo-1]+'">'
+      +   '<span class="prod-marca'+marca.c+'">'+esc(marca.x)+'</span>'
+      +   '<svg viewBox="0 0 200 150" width="100%" height="100%" aria-hidden="true">'
+      +     '<text x="100" y="112" text-anchor="middle" font-family="Instrument Serif,Georgia,serif" '
+      +     'font-size="118" fill="rgba(23,19,15,.28)">'+esc(d.n.charAt(0))+'</text></svg>'
+      + '</div>'
+      + '<div class="prod-cuerpo"><h3>'+esc(d.n)+'</h3><p class="prod-o">'+esc(d.o)+'</p>'
+      +   '<p class="prod-d">'+esc(d.d)+'</p>'
+      +   '<div class="prod-ejes">'+ejes(t.ejeCuerpo, c.cuerpo)+ejes(t.ejeAcidez, c.acidez)+'</div>'
+      + '</div>'
+      + '<div class="prod-pie"><span class="prod-precio">'+precio(c.precio)+'</span>'
+      +   (enCesta
+          ? '<span class="cant"><button type="button" data-add="'+c.id+'" data-d="-1" aria-label="−">−</button>'
+            + '<b>'+num(enCesta)+'</b>'
+            + '<button type="button" data-add="'+c.id+'" data-d="1" aria-label="+">+</button></span>'
+          : '<button class="prod-add" type="button" data-add="'+c.id+'" data-d="1"'
+            + (hay ? "" : " disabled") + '>'+esc(hay ? t.bAnadir : t.agotado)+'</button>')
+      + '</div></article>';
+  }).join("");
+  if (!visibles) caja.innerHTML = '<p class="cp-vacia">'+esc(t.sinResultados)+'</p>';
+
+  Array.prototype.forEach.call(caja.querySelectorAll("[data-add]"), function(b){
+    b.addEventListener("click", function(){ anadir(this.dataset.add, +this.dataset.d); });
+  });
+}
+
+function pintarCesta(){
+  var caja = document.getElementById("cestaLineas");
+  if (!caja) return;
+  var t = T[idioma], n = unidades(), tot = importe();
+
+  var cn = document.getElementById("cestaN");
+  cn.textContent = num(n);
+  cn.classList.toggle("cero", n === 0);
+
+  var lineas = CATALOGO.filter(function(c){ return cesta[c.id]; });
+  caja.innerHTML = lineas.length ? lineas.map(function(c){
+    var d = t.cafes[CATALOGO.indexOf(c)];
+    return '<div class="cp-lin"><div><b>'+esc(d.n)+'</b><span>'+esc(d.o)+'</span></div>'
+      + '<span class="cant"><button type="button" data-add="'+c.id+'" data-d="-1" aria-label="−">−</button>'
+      + '<b>'+num(cesta[c.id])+'</b>'
+      + '<button type="button" data-add="'+c.id+'" data-d="1" aria-label="+">+</button></span>'
+      + '<span class="cp-imp" style="grid-column:1/-1">'+precio(cesta[c.id]*c.precio)+'</span></div>';
+  }).join("") : '<p class="cp-vacia">'+esc(t.cestaVacia)+'</p>';
+
+  Array.prototype.forEach.call(caja.querySelectorAll("[data-add]"), function(b){
+    b.addEventListener("click", function(){ anadir(this.dataset.add, +this.dataset.d); });
+  });
+
+  document.getElementById("cestaTotal").textContent = precio(tot);
+  var falta = Math.max(0, ENVIO_GRATIS - tot);
+  document.getElementById("cestaEnvioBarra").style.width =
+    Math.min(100, tot / ENVIO_GRATIS * 100).toFixed(1) + "%";
+  document.getElementById("cestaEnvio").textContent = falta > 0
+    ? t.envioFalta.replace("{x}", precio(falta))
+    : t.envioYa;
+  document.getElementById("cestaIr").disabled = n === 0;
+}
+
+function verCesta(abrir){
+  var pn = document.getElementById("cestaPanel"), vl = document.getElementById("cestaVelo"),
+      bt = document.getElementById("cestaBtn");
+  pn.hidden = !abrir; vl.hidden = !abrir;
+  bt.setAttribute("aria-expanded", String(abrir));
+  if (abrir) document.getElementById("cestaCerrar").focus(); else bt.focus();
+}
 
 function aplicar(codigo){
   if (!T[codigo]) codigo = "es";
@@ -2351,6 +2615,16 @@ document.addEventListener("click", function(ev){
     var alto = cab ? cab.getBoundingClientRect().height : 0;
     window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - alto - 12);
   }, 60);
+});
+document.getElementById("cestaBtn").addEventListener("click", function(){ verCesta(true); });
+document.getElementById("cestaCerrar").addEventListener("click", function(){ verCesta(false); });
+document.getElementById("cestaVelo").addEventListener("click", function(){ verCesta(false); });
+document.addEventListener("keydown", function(e){ if (e.key === "Escape") verCesta(false); });
+document.getElementById("cestaIr").addEventListener("click", function(){
+  var t = T[idioma];
+  this.textContent = t.cestaHecho;
+  this.disabled = true;
+  cesta = {}; guardarCesta(); pintarTienda(); pintarCesta();
 });
 window.addEventListener("hashchange", enrutar);
 
