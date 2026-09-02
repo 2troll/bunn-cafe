@@ -404,6 +404,15 @@ html[dir="rtl"] .cfg-total b{font-weight:700;font-size:1.5rem;}
 .cfg-tick .btn{width:100%;text-align:center;}
 .cfg-aviso{font-size:.72rem;color:var(--t3);margin-top:.9rem;}
 
+.moltura{display:grid;gap:1px;background:var(--l);border:1px solid var(--l);margin-top:1rem;}
+.mol{background:var(--f2);display:grid;gap:.6rem 1.4rem;padding:1.1rem 1.3rem;align-items:center;}
+@media(min-width:760px){.mol{grid-template-columns:8rem 7rem 1fr;}}
+.mol b{font-size:.95rem;font-weight:600;}
+.mol .gran{display:flex;gap:3px;align-items:center;}
+.mol .gran s{background:var(--ocre);border-radius:50%;text-decoration:none;display:block;}
+.mol p{font-size:.88rem;color:var(--t2);margin:0;max-width:none;}
+.mol .tacto{font-size:.78rem;color:var(--t3);}
+
 .faq{border-top:1px solid var(--l);}
 .faq summary{cursor:pointer;padding-block:1.2rem;font-family:var(--disp);font-size:1.3rem;
   list-style:none;display:flex;gap:1rem;align-items:baseline;}
@@ -490,8 +499,8 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <p class="metodo" data-t="iCifrasNota">Trazable hasta la finca significa que sabemos el nombre del productor, la altitud y el lote. Si no lo sabemos, no lo compramos.</p>
   </div>
   <div class="marco bl raya">
-    <p class="eti" data-t="nCafes">Cafés</p>
-    <div class="rej r3" id="iCafes"></div>
+    <p class="eti" data-t="iEstanteEti">Lo que menos queda</p>
+    <div class="tienda" id="iCafes"></div>
     <div class="acc"><a class="btn" href="#/cafes" data-t="bVerTodos">Ver la carta entera</a></div>
   </div>
   <div class="marco bl raya">
@@ -665,6 +674,19 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
       <ul class="creditos" id="credLista"></ul>
     </div>
     <p class="metodo" data-t="meNota">Con agua entre 92 y 96 °C y molido ajustado al método. Si sale amargo, muela más grueso; si sale ácido y aguado, más fino. Ese es casi todo el secreto.</p>
+  </div>
+  <div class="marco bl">
+    <p class="eti" data-t="meMolturaEti">La molienda, de fina a gruesa</p>
+    <div class="moltura" id="meMoltura"></div>
+    <p class="metodo" data-t="meMolturaNota">Referencia orientativa: cada molino tiene su propia numeración y no se corresponde con la de otro. Lo que sí se puede comparar es el tacto entre los dedos.</p>
+  </div>
+  <div class="marco bl" style="padding-top:0">
+    <p class="eti" data-t="meAguaEti">El agua es el 98 % de la taza</p>
+    <div id="meAgua" style="max-width:64ch;margin-top:1rem"></div>
+  </div>
+  <div class="marco bl" style="padding-top:0">
+    <p class="eti" data-t="meFallosEti">Los cinco fallos de casa</p>
+    <div class="filas" id="meFallos"></div>
   </div>
 </section>
 
@@ -912,7 +934,31 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES", cfgCuanto:"Cuántas bolsas por envío", cfgCada:"Cada cuánto", cfgComo:"Cómo lo quiere", cfgQue:"Qué café",
+ _dir:"ltr", _lang:"es", _loc:"es-ES",
+ meMolturaEti:"La molienda, de fina a gruesa",
+ meMolturaNota:"Referencia orientativa: cada molino tiene su propia numeración y no se corresponde con la de otro. Lo que sí se puede comparar es el tacto entre los dedos.",
+ meAguaEti:"El agua es el 98 % de la taza", meFallosEti:"Los cinco fallos de casa",
+ meMoltura:[
+  {n:"Espresso", g:1, t:"Como harina con algo de cuerpo", d:"Si la molienda es correcta, treinta y seis gramos de líquido tardan entre veinticinco y treinta segundos en salir. Si sale en quince, muela más fino; si pasa de cuarenta, más grueso."},
+  {n:"Cafetera italiana", g:2, t:"Como azúcar glas", d:"Un poco más gruesa que el espresso. Y no apriete el café en el filtro: la moka no lleva presión de prensado y compactarlo sólo hace que suba amargo."},
+  {n:"V60 y filtro", g:3, t:"Como arena de playa", d:"Es la molienda con la que más se juega, porque el mismo café admite dos o tres puntos según lo fresco que esté. Si el agua atraviesa en menos de dos minutos, muela más fino."},
+  {n:"Cafetera de goteo", g:4, t:"Como sal gruesa", d:"Algo más gruesa que el filtro manual porque el contacto dura más. Es el método que más perdona un error de molienda, y por eso es buen sitio para empezar."},
+  {n:"Prensa francesa", g:5, t:"Como pan rallado", d:"Lo más gruesa de todas. Si sale barro en el fondo de la taza es que está molida demasiado fina, no que la prensa sea mala."}
+ ],
+ meAgua:[
+  "Un café de filtro es agua en un noventa y ocho por ciento, y un espresso en un noventa. Da igual el grano que compre: si el agua es mala, la taza es mala. Es el cambio más barato y más ignorado de todos los que puede hacer en casa.",
+  "Lo que importa no es que el agua esté \u201climpia\u201d, sino cuánto mineral lleva. Con muy poco mineral —agua destilada o de ósmosis pura— el café sale plano y hueco, porque no hay nada que arrastre el sabor. Con demasiado, sale seco y con un fondo calizo, y además le llena la máquina de cal. El punto razonable está entre setenta y ciento cincuenta miligramos por litro de residuo seco, que viene impreso en la etiqueta de cualquier botella.",
+  "En la práctica: mire la etiqueta de la marca de agua embotellada más barata de su supermercado y elija una de mineralización débil que esté en ese rango. Le va a costar veinte céntimos el litro y va a notar más diferencia que cambiando de café. Si tiene ósmosis en casa, remineralice; si tiene agua muy dura, un filtro de jarra normal ya baja bastante."
+ ],
+ meFallos:[
+  {i:"Molienda", t:"Moler el lunes para toda la semana", d:"El café molido pierde la mitad de sus aromas volátiles en los primeros quince minutos. Si tiene molinillo, muela justo antes; y si no lo tiene, compre bolsas pequeñas y molidas para su método, no un kilo molido \u201cpara todo\u201d. Un molinillo de muelas cónicas cuesta menos de cincuenta euros y es la mejor compra posible antes de subir de gama de café."},
+  {i:"Temperatura", t:"Echar el agua nada más hervir", d:"A cien grados el agua extrae de más y saca amargor y astringencia. El punto está entre noventa y dos y noventa y seis. No hace falta termómetro: apague, espere entre treinta segundos y un minuto según el frío que haga, y sirva. Con tueste muy claro se puede ir a lo alto del rango; con tueste oscuro, a lo bajo."},
+  {i:"Proporción", t:"Ir a ojo con la cuchara", d:"Una cuchara sopera de café molido puede pesar entre cuatro y siete gramos según cómo la llene. Sobre trescientos mililitros eso es la diferencia entre un café flojo y uno fuerte. Con una báscula de cocina de diez euros y la proporción de sesenta gramos por litro se acaba el problema para siempre."},
+  {i:"Frescura", t:"Guardar el café en la nevera", d:"La nevera tiene humedad y olores, y el café absorbe los dos. El grano se guarda en su bolsa con válvula, cerrada, a temperatura ambiente y lejos de la luz. Y si compra más de lo que va a beber en tres semanas, congele lo que sobre en porciones cerradas y no lo descongele hasta el día que lo vaya a moler."},
+  {i:"Limpieza", t:"No lavar nunca la cafetera por dentro", d:"Los aceites del café se oxidan y se vuelven rancios pegados al filtro, a la ducha y a la jarra. Ese sabor a viejo que muchos achacan al grano es de la máquina. Agua caliente y un cepillo una vez por semana, y descalcificar cada dos o tres meses si su agua es dura."}
+ ],
+ iEstanteEti:"Lo que menos queda",
+ cfgCuanto:"Cuántas bolsas por envío", cfgCada:"Cada cuánto", cfgComo:"Cómo lo quiere", cfgQue:"Qué café",
  cfgResumenEti:"Su suscripción", cfgPorEnvio:"Por envío", cfgAlta:"Empezar la suscripción",
  cfgHecho:"Alta de prueba hecha", cfgGratis:"Gratis",
  cfgAviso:"Sin permanencia. Se pausa o se cancela desde un enlace del propio correo.",
@@ -1261,7 +1307,31 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB", cfgCuanto:"How many bags per delivery", cfgCada:"How often", cfgComo:"How you want it", cfgQue:"Which coffee",
+ _dir:"ltr", _lang:"en", _loc:"en-GB",
+ meMolturaEti:"Grind size, fine to coarse",
+ meMolturaNota:"A rough reference: every grinder has its own numbering and it does not match anyone else's. What can be compared is the feel between your fingers.",
+ meAguaEti:"Water is 98 % of the cup", meFallosEti:"The five mistakes at home",
+ meMoltura:[
+  {n:"Espresso", g:1, t:"Like flour with some body", d:"If the grind is right, thirty-six grams of liquid take between twenty-five and thirty seconds to come out. If it runs in fifteen, grind finer; if it goes past forty, coarser."},
+  {n:"Moka pot", g:2, t:"Like icing sugar", d:"A little coarser than espresso. And do not tamp the coffee in the basket: a moka pot has no tamping pressure, and compacting it only makes it come up bitter."},
+  {n:"V60 and pour-over", g:3, t:"Like beach sand", d:"The grind you adjust most, because the same coffee takes two or three settings depending on how fresh it is. If the water passes through in under two minutes, grind finer."},
+  {n:"Drip machine", g:4, t:"Like coarse salt", d:"Slightly coarser than a hand pour-over because contact lasts longer. It is the method most forgiving of a grind error, which makes it a good place to start."},
+  {n:"French press", g:5, t:"Like breadcrumbs", d:"The coarsest of all. If you get sludge at the bottom of the cup, it is ground too fine, not that the press is bad."}
+ ],
+ meAgua:[
+  "Filter coffee is ninety-eight per cent water, and espresso ninety. It does not matter what beans you buy: if the water is bad, the cup is bad. It is the cheapest and most ignored change you can make at home.",
+  "What matters is not that the water is \u201cclean\u201d, but how much mineral it carries. With very little — distilled or pure reverse-osmosis water — coffee comes out flat and hollow, because there is nothing to carry the flavour. With too much it comes out dry with a chalky base, and it fills your machine with scale. The sensible range is seventy to a hundred and fifty milligrams per litre of dry residue, printed on the label of any bottle.",
+  "In practice: look at the label of the cheapest bottled water in your supermarket and pick a weakly mineralised one in that range. It will cost twenty cents a litre and you will notice more difference than from changing coffee. If you have reverse osmosis at home, remineralise; if your water is very hard, an ordinary jug filter already brings it down a long way."
+ ],
+ meFallos:[
+  {i:"Grinding", t:"Grinding on Monday for the whole week", d:"Ground coffee loses half its volatile aromas in the first fifteen minutes. If you have a grinder, grind right before brewing; if you do not, buy small bags ground for your method, not a kilo ground \u201cfor everything\u201d. A conical burr grinder costs under fifty euros and is the best purchase you can make before moving up in coffee."},
+  {i:"Temperature", t:"Pouring the water straight off the boil", d:"At a hundred degrees water over-extracts and pulls out bitterness and astringency. The sweet spot is ninety-two to ninety-six. You do not need a thermometer: turn it off, wait between thirty seconds and a minute depending on how cold it is, and pour. With a very light roast go to the top of the range; with a dark roast, the bottom."},
+  {i:"Ratio", t:"Eyeballing it with a spoon", d:"A tablespoon of ground coffee can weigh anywhere between four and seven grams depending on how you fill it. Over three hundred millilitres that is the difference between a weak coffee and a strong one. A ten-euro kitchen scale and a ratio of sixty grams per litre ends the problem for good."},
+  {i:"Freshness", t:"Keeping the coffee in the fridge", d:"A fridge has humidity and smells, and coffee absorbs both. Beans keep in their valved bag, closed, at room temperature and away from light. And if you buy more than you will drink in three weeks, freeze the rest in sealed portions and do not thaw it until the day you grind it."},
+  {i:"Cleaning", t:"Never washing the machine on the inside", d:"Coffee oils oxidise and turn rancid stuck to the filter, the shower screen and the jug. That stale taste many people blame on the beans comes from the machine. Hot water and a brush once a week, and descale every two or three months if your water is hard."}
+ ],
+ iEstanteEti:"Lowest stock right now",
+ cfgCuanto:"How many bags per delivery", cfgCada:"How often", cfgComo:"How you want it", cfgQue:"Which coffee",
  cfgResumenEti:"Your subscription", cfgPorEnvio:"Per delivery", cfgAlta:"Start the subscription",
  cfgHecho:"Test sign-up done", cfgGratis:"Free",
  cfgAviso:"No lock-in. Pause or cancel from a link in the email itself.",
@@ -1610,7 +1680,31 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", cfgCuanto:"كم كيسًا في الإرسالية", cfgCada:"كل متى", cfgComo:"كيف تريده", cfgQue:"أي بنّ",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
+ meMolturaEti:"الطحن، من الناعم إلى الخشن",
+ meMolturaNota:"مرجع تقريبي: فلكل مطحنة ترقيمها الخاص ولا يوافق ترقيم غيرها. أما ما يمكن مقارنته فهو الملمس بين الأصابع.",
+ meAguaEti:"الماء ٩٨٪ من الفنجان", meFallosEti:"أخطاء البيت الخمسة",
+ meMoltura:[
+  {n:"إسبريسو", g:1, t:"كالطحين مع شيء من الخشونة", d:"إن كان الطحن صحيحًا استغرق خروج ستة وثلاثين غرامًا من السائل بين خمس وعشرين وثلاثين ثانية. فإن خرج في خمس عشرة فاطحن أنعم؛ وإن تجاوز الأربعين فأخشن."},
+  {n:"الركوة الإيطالية", g:2, t:"كالسكر البودرة", d:"أخشن قليلًا من الإسبريسو. ولا تكبس البنّ في الفلتر: فالموكا لا تعمل بضغط كبس، وضغطه لا يفعل سوى إخراجه مرًّا."},
+  {n:"في ٦٠ والترشيح", g:3, t:"كرمل الشاطئ", d:"وهو الطحن الأكثر تعديلًا، لأن البنّ نفسه يقبل درجتين أو ثلاثًا بحسب طزاجته. فإن عبر الماء في أقل من دقيقتين فاطحن أنعم."},
+  {n:"آلة التقطير", g:4, t:"كالملح الخشن", d:"أخشن قليلًا من الترشيح اليدوي لأن التلامس أطول. وهي أكثر الطرق تسامحًا مع خطأ الطحن، ولذلك هي مكان جيد للبداية."},
+  {n:"المكبس الفرنسي", g:5, t:"كفتات الخبز", d:"أخشن الجميع. فإن وجدت طينًا في قاع الفنجان فالطحن ناعم أكثر مما ينبغي، لا أن المكبس رديء."}
+ ],
+ meAgua:[
+  "قهوة الترشيح ماء بنسبة ثمانية وتسعين بالمئة، والإسبريسو تسعين. ولا يهمّ أي حبٍّ تشتري: فإن ساء الماء ساء الفنجان. وهو أرخص تغيير وأكثره إهمالًا مما يمكنك فعله في البيت.",
+  "والمهمّ ليس أن يكون الماء «نظيفًا»، بل كم يحمل من معادن. فبقليلٍ جدًّا منها — كالماء المقطّر أو ماء التناضح النقي — تخرج القهوة مسطّحة جوفاء، إذ لا شيء يحمل الطعم. وبكثيرٍ منها تخرج جافّة بقاعدة كلسية، وتملأ آلتك كلسًا. والمدى المعقول بين سبعين ومئة وخمسين ملّيغرامًا في اللتر من البقايا الجافة، وهو مطبوع على ملصق أي قارورة.",
+  "وعمليًّا: انظر إلى ملصق أرخص ماء معبّأ في متجرك واختر واحدًا ضعيف التمعدن ضمن ذلك المدى. سيكلّفك عشرين سنتًا للتر وستلاحظ فرقًا أكبر مما لو غيّرت البنّ. وإن كان لديك تناضح في البيت فأعِد التمعدن؛ وإن كان ماؤك عسرًا جدًّا فمرشّح الإبريق العادي يخفّضه كثيرًا."
+ ],
+ meFallos:[
+  {i:"الطحن", t:"الطحن يوم الاثنين للأسبوع كله", d:"البنّ المطحون يفقد نصف روائحه المتطايرة في الدقائق الخمس عشرة الأولى. فإن كانت لديك مطحنة فاطحن قبل التحضير مباشرةً؛ وإن لم تكن فاشترِ أكياسًا صغيرة مطحونة لطريقتك، لا كيلوغرامًا مطحونًا «لكل شيء». ومطحنة بأقراص مخروطية تكلّف دون خمسين يورو وهي أفضل شراء ممكن قبل الارتقاء في مستوى البنّ."},
+  {i:"الحرارة", t:"صبّ الماء فور غليانه", d:"عند مئة درجة يستخلص الماء أكثر من اللازم فيُخرج المرارة والقبض. والنقطة المثلى بين اثنتين وتسعين وستٍّ وتسعين. ولا يلزمك مقياس حرارة: أطفئ، وانتظر بين ثلاثين ثانية ودقيقة بحسب برودة الجو، ثم اصبب. ومع التحميص الفاتح جدًّا اذهب إلى أعلى المدى؛ ومع الغامق إلى أسفله."},
+  {i:"النسبة", t:"التقدير بالملعقة", d:"ملعقة الطعام من البنّ المطحون قد تزن بين أربعة وسبعة غرامات بحسب طريقة ملئها. وعلى ثلاثمئة مليلتر يكون ذلك الفرق بين قهوة ضعيفة وأخرى قوية. وميزان مطبخ بعشرة يورو ونسبة ستين غرامًا للتر يُنهيان المشكلة إلى الأبد."},
+  {i:"الطزاجة", t:"حفظ البنّ في الثلاجة", d:"الثلاجة فيها رطوبة وروائح، والبنّ يمتصّ الاثنتين. فالحبّ يُحفَظ في كيسه ذي الصمّام، مغلقًا، بحرارة الغرفة وبعيدًا عن الضوء. وإن اشتريت أكثر مما ستشربه في ثلاثة أسابيع فجمّد الباقي بحصص مغلقة ولا تُذِبه حتى يوم طحنه."},
+  {i:"النظافة", t:"عدم غسل الآلة من الداخل أبدًا", d:"زيوت البنّ تتأكسد وتتزنّخ ملتصقةً بالفلتر والرشّاش والإبريق. وذلك الطعم القديم الذي يلومون عليه الحبّ إنما هو من الآلة. ماء ساخن وفرشاة مرةً في الأسبوع، وإزالة الكلس كل شهرين أو ثلاثة إن كان ماؤك عسرًا."}
+ ],
+ iEstanteEti:"الأقلّ توفّرًا الآن",
+ cfgCuanto:"كم كيسًا في الإرسالية", cfgCada:"كل متى", cfgComo:"كيف تريده", cfgQue:"أي بنّ",
  cfgResumenEti:"اشتراكك", cfgPorEnvio:"لكل إرسالية", cfgAlta:"ابدأ الاشتراك",
  cfgHecho:"تمّ اشتراك تجريبي", cfgGratis:"مجانًا",
  cfgAviso:"بلا مدة إلزامية. ويُوقَف أو يُلغى من رابط في الرسالة نفسها.",
@@ -2497,6 +2591,19 @@ function pintarListas(){
 
   filas("iPorQue", t.iPorQue);
   celdas("iNo", t.iNo, function(x){ return '<li>'+esc(x)+'</li>'; });
+  celdas("meMoltura", t.meMoltura, function(m){
+    var pts = "";
+    /* El grano se dibuja del tamaño que tiene: la escala se ve, no se lee */
+    for (var k = 0; k < 7 - m.g; k++){
+      var d = 2 + m.g * 1.6;
+      pts += '<s style="width:'+d+'px;height:'+d+'px"></s>';
+    }
+    return '<div class="mol"><b>'+esc(m.n)+'</b>'
+      + '<span class="gran">'+pts+'</span>'
+      + '<div><p>'+esc(m.d)+'</p><p class="tacto">'+esc(m.t)+'</p></div></div>';
+  });
+  parrafos("meAgua", t.meAgua);
+  filas("meFallos", t.meFallos);
   filas("hoErrores", t.hoErrores);
   parrafos("hoCuentas", t.hoCuentas);
   parrafos("orComprar", t.orComprar);
@@ -2510,9 +2617,8 @@ function pintarListas(){
 
   celdas("iCifras", t.cifras, function(c){
     return '<div class="cel dato"><div class="v">'+esc(c.v)+'</div><div class="u">'+esc(c.u)+'</div></div>'; });
-  celdas("iCafes", t.cafes.slice(0,3), function(c){
-    return '<div class="cel"><span class="sub">'+esc(c.o)+'</span><h3>'+esc(c.n)+'</h3><p>'+esc(c.d)+'</p><div class="precio">'+esc(c.p)+'</div></div>'; });
-  pintarTienda(); pintarCesta(); pintarConfig();
+
+  pintarTienda(); pintarEstante(); pintarCesta(); pintarConfig();
   celdas("suPlanes", t.planes, function(p){
     return '<div class="cel"><span class="sub">'+esc(p.f)+'</span><h3>'+esc(p.n)+'</h3><p>'+esc(p.d)+'</p><div class="precio">'+esc(p.p)+'</div></div>'; });
   var sv = document.getElementById("suVentajas");
@@ -2559,7 +2665,7 @@ function anadir(id, delta){
   var n = (cesta[id] || 0) + delta;
   if (n <= 0) delete cesta[id];
   else cesta[id] = Math.min(n, art.stock);
-  guardarCesta(); pintarTienda(); pintarCesta();
+  guardarCesta(); pintarTienda(); pintarEstante(); pintarCesta();
 }
 
 function pintarConfig(){
@@ -2604,6 +2710,53 @@ function pintarConfig(){
   bt.disabled = cfg.alta;
 }
 
+/* Una sola ficha de producto para la carta y para la estantería de portada:
+   si el precio o las existencias cambian, cambian en los dos sitios. */
+function fichaProducto(c, i){
+  var t = T[idioma], d = t.cafes[i], hay = c.stock, enCesta = cesta[c.id] || 0;
+  var marca = hay === 0 ? {c:"", x:t.agotado}
+            : hay <= 5  ? {c:" poco", x:t.ultimas.replace("{n}", num(hay))}
+            : {c:"", x:t.procesos[c.proc]};
+  function ejes(nom, v){
+    var b = ""; for (var k = 1; k <= 5; k++) b += '<s class="'+(k <= v ? "on" : "")+'"></s>';
+    return '<span>'+esc(nom)+'<i>'+b+'</i></span>';
+  }
+  return '<article class="prod">'
+    + '<div class="prod-img" style="background:'+TONOS[c.cuerpo-1]+'">'
+    +   '<span class="prod-marca'+marca.c+'">'+esc(marca.x)+'</span>'
+    +   '<svg viewBox="0 0 200 150" width="100%" height="100%" aria-hidden="true">'
+    +     '<text x="100" y="112" text-anchor="middle" font-family="Instrument Serif,Georgia,serif" '
+    +     'font-size="118" fill="rgba(23,19,15,.28)">'+esc(d.n.charAt(0))+'</text></svg>'
+    + '</div>'
+    + '<div class="prod-cuerpo"><h3>'+esc(d.n)+'</h3><p class="prod-o">'+esc(d.o)+'</p>'
+    +   '<p class="prod-d">'+esc(d.d)+'</p>'
+    +   '<div class="prod-ejes">'+ejes(t.ejeCuerpo, c.cuerpo)+ejes(t.ejeAcidez, c.acidez)+'</div>'
+    + '</div>'
+    + '<div class="prod-pie"><span class="prod-precio">'+precio(c.precio)+'</span>'
+    +   (enCesta
+        ? '<span class="cant"><button type="button" data-add="'+c.id+'" data-d="-1" aria-label="−">−</button>'
+          + '<b>'+num(enCesta)+'</b>'
+          + '<button type="button" data-add="'+c.id+'" data-d="1" aria-label="+">+</button></span>'
+        : '<button class="prod-add" type="button" data-add="'+c.id+'" data-d="1"'
+          + (hay ? "" : " disabled") + '>'+esc(hay ? t.bAnadir : t.agotado)+'</button>')
+    + '</div></article>';
+}
+
+/* La estantería de portada enseña lo que menos queda: es lo que hace que
+   alguien entre a mirar hoy y no la semana que viene. */
+function pintarEstante(){
+  var caja = document.getElementById("iCafes");
+  if (!caja) return;
+  var orden = CATALOGO.map(function(c,i){ return {c:c, i:i}; })
+    .filter(function(x){ return x.c.stock > 0; })
+    .sort(function(a,b){ return a.c.stock - b.c.stock; })
+    .slice(0, 3);
+  caja.innerHTML = orden.map(function(x){ return fichaProducto(x.c, x.i); }).join("");
+  Array.prototype.forEach.call(caja.querySelectorAll("[data-add]"), function(b){
+    b.addEventListener("click", function(){ anadir(this.dataset.add, +this.dataset.d); });
+  });
+}
+
 function pintarTienda(){
   var caja = document.getElementById("caLista");
   if (!caja) return;
@@ -2624,33 +2777,7 @@ function pintarTienda(){
   caja.innerHTML = CATALOGO.map(function(c, i){
     if (filtroProc >= 0 && c.proc !== filtroProc) return "";
     visibles++;
-    var d = t.cafes[i], hay = c.stock, enCesta = cesta[c.id] || 0;
-    var marca = hay === 0 ? {c:"", x:t.agotado}
-              : hay <= 5  ? {c:" poco", x:t.ultimas.replace("{n}", num(hay))}
-              : {c:"", x:t.procesos[c.proc]};
-    function ejes(nom, v){
-      var b = ""; for (var k = 1; k <= 5; k++) b += '<s class="'+(k <= v ? "on" : "")+'"></s>';
-      return '<span>'+esc(nom)+'<i>'+b+'</i></span>';
-    }
-    return '<article class="prod">'
-      + '<div class="prod-img" style="background:'+TONOS[c.cuerpo-1]+'">'
-      +   '<span class="prod-marca'+marca.c+'">'+esc(marca.x)+'</span>'
-      +   '<svg viewBox="0 0 200 150" width="100%" height="100%" aria-hidden="true">'
-      +     '<text x="100" y="112" text-anchor="middle" font-family="Instrument Serif,Georgia,serif" '
-      +     'font-size="118" fill="rgba(23,19,15,.28)">'+esc(d.n.charAt(0))+'</text></svg>'
-      + '</div>'
-      + '<div class="prod-cuerpo"><h3>'+esc(d.n)+'</h3><p class="prod-o">'+esc(d.o)+'</p>'
-      +   '<p class="prod-d">'+esc(d.d)+'</p>'
-      +   '<div class="prod-ejes">'+ejes(t.ejeCuerpo, c.cuerpo)+ejes(t.ejeAcidez, c.acidez)+'</div>'
-      + '</div>'
-      + '<div class="prod-pie"><span class="prod-precio">'+precio(c.precio)+'</span>'
-      +   (enCesta
-          ? '<span class="cant"><button type="button" data-add="'+c.id+'" data-d="-1" aria-label="−">−</button>'
-            + '<b>'+num(enCesta)+'</b>'
-            + '<button type="button" data-add="'+c.id+'" data-d="1" aria-label="+">+</button></span>'
-          : '<button class="prod-add" type="button" data-add="'+c.id+'" data-d="1"'
-            + (hay ? "" : " disabled") + '>'+esc(hay ? t.bAnadir : t.agotado)+'</button>')
-      + '</div></article>';
+    return fichaProducto(c, i);
   }).join("");
   if (!visibles) caja.innerHTML = '<p class="cp-vacia">'+esc(t.sinResultados)+'</p>';
 
