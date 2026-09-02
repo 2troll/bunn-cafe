@@ -372,6 +372,38 @@ html[dir="rtl"] .cp-total b{font-weight:700;font-size:1.4rem;}
 .cp-pie .btn{width:100%;text-align:center;}
 .cp-aviso{font-size:.72rem;color:var(--t3);margin-top:.9rem;text-align:center;}
 
+/* ── Configurador de suscripción ─────────────────────────────────── */
+.config{display:grid;gap:2rem;border:1px solid var(--l);background:var(--f2);padding:clamp(1.4rem,3vw,2.4rem);}
+@media(min-width:900px){.config{grid-template-columns:1.35fr .8fr;gap:3rem;}}
+.cfg-g{margin-bottom:1.8rem;}
+.cfg-g:last-child{margin-bottom:0;}
+.cfg-t{display:flex;align-items:center;gap:.7rem;margin:0 0 .8rem;font-size:.88rem;color:var(--t2);}
+.cfg-t b{width:1.45rem;height:1.45rem;border-radius:999px;background:var(--ocre);color:#17130f;
+  display:grid;place-items:center;font-size:.72rem;flex-shrink:0;}
+.cfg-op{display:flex;flex-wrap:wrap;gap:.5rem;}
+.cfg-op button{background:none;border:1px solid var(--l);color:var(--t2);cursor:pointer;font:inherit;
+  font-size:.84rem;padding:.5rem 1rem;text-align:start;line-height:1.35;}
+.cfg-op button small{display:block;font-size:.72rem;color:var(--t3);}
+.cfg-op button:hover{border-color:var(--ocre);color:var(--t);}
+.cfg-op button[aria-pressed="true"]{border-color:var(--ocre);background:rgba(208,138,63,.12);color:var(--t);}
+.cfg-op button[aria-pressed="true"] small{color:var(--ocre);}
+.cfg-tick{border:1px solid var(--l);background:var(--sup);padding:1.5rem;align-self:start;
+  position:sticky;top:5rem;}
+.cfg-eti{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ocre);margin:0 0 1.1rem;}
+html[dir="rtl"] .cfg-eti{letter-spacing:0;text-transform:none;font-size:.88rem;}
+.cfg-lin{display:flex;justify-content:space-between;gap:1rem;padding-block:.55rem;
+  border-bottom:1px solid var(--l2);font-size:.86rem;}
+.cfg-lin span{color:var(--t3);}
+.cfg-lin b{font-weight:500;text-align:end;}
+.cfg-lin.desc b{color:var(--verde);}
+.cfg-total{display:flex;justify-content:space-between;align-items:baseline;
+  margin:1.1rem 0 .3rem;padding-top:.9rem;border-top:1px solid var(--l);}
+.cfg-total b{font-family:var(--disp);font-size:1.9rem;color:var(--ocre);}
+html[dir="rtl"] .cfg-total b{font-weight:700;font-size:1.5rem;}
+.cfg-mes{font-size:.78rem;color:var(--t3);margin:0 0 1.2rem;}
+.cfg-tick .btn{width:100%;text-align:center;}
+.cfg-aviso{font-size:.72rem;color:var(--t3);margin-top:.9rem;}
+
 .faq{border-top:1px solid var(--l);}
 .faq summary{cursor:pointer;padding-block:1.2rem;font-family:var(--disp);font-size:1.3rem;
   list-style:none;display:flex;gap:1rem;align-items:baseline;}
@@ -707,8 +739,28 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <p class="entrada" data-t="suEntrada">Elija cada cuánto y cuánto. Se puede pausar, cambiar o cancelar desde un enlace del propio correo, sin llamar a nadie.</p>
   </div>
   <div class="marco"><nav class="indice-pag" id="ix-comprar" data-t-attr="aria-label:ariaEnPagina" aria-label="En esta página"></nav></div>
-  <div class="marco"><div class="rej r3" id="suPlanes"></div>
-    <div style="margin-top:2rem"><ul class="lista" id="suVentajas"></ul></div>
+  <div class="marco">
+    <div class="config">
+      <div class="cfg-campos">
+        <div class="cfg-g"><p class="cfg-t"><b>1</b><span data-t="cfgCuanto">Cuántas bolsas por envío</span></p>
+          <div class="cfg-op" id="cfgBolsas" role="group" data-t-attr="aria-label:cfgCuanto"></div></div>
+        <div class="cfg-g"><p class="cfg-t"><b>2</b><span data-t="cfgCada">Cada cuánto</span></p>
+          <div class="cfg-op" id="cfgFrec" role="group" data-t-attr="aria-label:cfgCada"></div></div>
+        <div class="cfg-g"><p class="cfg-t"><b>3</b><span data-t="cfgComo">Cómo lo quiere</span></p>
+          <div class="cfg-op" id="cfgMolido" role="group" data-t-attr="aria-label:cfgComo"></div></div>
+        <div class="cfg-g"><p class="cfg-t"><b>4</b><span data-t="cfgQue">Qué café</span></p>
+          <div class="cfg-op" id="cfgTipo" role="group" data-t-attr="aria-label:cfgQue"></div></div>
+      </div>
+      <aside class="cfg-tick">
+        <p class="cfg-eti" data-t="cfgResumenEti">Su suscripción</p>
+        <div id="cfgLineas"></div>
+        <div class="cfg-total"><span data-t="cfgPorEnvio">Por envío</span><b id="cfgEnvio">—</b></div>
+        <p class="cfg-mes" id="cfgMes"></p>
+        <button class="btn sol" type="button" id="cfgAlta" data-t="cfgAlta">Empezar la suscripción</button>
+        <p class="cfg-aviso" data-t="cfgAviso">Sin permanencia. Se pausa o se cancela desde un enlace del propio correo.</p>
+      </aside>
+    </div>
+    <div style="margin-top:2.5rem"><ul class="lista" id="suVentajas"></ul></div>
     <p class="metodo" data-t="suNota">Precios por envío. El envío peninsular es gratuito a partir de dos bolsas. Sin permanencia y sin penalización por cancelar.</p>
   </div>
 </section>
@@ -860,7 +912,17 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES", cestaEti:"Cesta", cestaTitulo:"Su cesta", cestaVacia:"Todavía no ha añadido nada.",
+ _dir:"ltr", _lang:"es", _loc:"es-ES", cfgCuanto:"Cuántas bolsas por envío", cfgCada:"Cada cuánto", cfgComo:"Cómo lo quiere", cfgQue:"Qué café",
+ cfgResumenEti:"Su suscripción", cfgPorEnvio:"Por envío", cfgAlta:"Empezar la suscripción",
+ cfgHecho:"Alta de prueba hecha", cfgGratis:"Gratis",
+ cfgAviso:"Sin permanencia. Se pausa o se cancela desde un enlace del propio correo.",
+ cfgLinBolsas:["1 bolsa de 250 g","2 bolsas de 250 g","{n} bolsas de 250 g"], cfgLinDesc:"Descuento de suscripción ({p} %)", cfgLinPorte:"Envío",
+ cfgAlAnio:"{e} envíos al año · {t} en total.",
+ cfgBolsas:[{n:"1 bolsa",s:"250 g"},{n:"2 bolsas",s:"500 g · −5 %"},{n:"3 bolsas",s:"750 g · −8 %"},{n:"4 bolsas",s:"1 kg · −12 %"}],
+ cfgFrec:[{n:"Cada 2 semanas",s:"12 envíos al año"},{n:"Cada 3 semanas",s:"8 envíos al año"},{n:"Cada 4 semanas",s:"6 envíos al año"}],
+ cfgMolido:[{n:"En grano",s:"Se conserva mucho más"},{n:"Molido",s:"Diga el método al pedirlo"}],
+ cfgTipo:[{n:"El de siempre",s:"Repetimos su café"},{n:"Sorpresa del mes",s:"+1,20 € · lo que mejor esté"},{n:"El de precio contenido",s:"−0,80 € · orígenes de temporada"}],
+ cestaEti:"Cesta", cestaTitulo:"Su cesta", cestaVacia:"Todavía no ha añadido nada.",
  cestaSubtotal:"Subtotal", cestaIr:"Tramitar pedido", cestaHecho:"Pedido de prueba enviado",
  cestaAviso:"Sitio de demostración: no se cobra nada y el pedido no llega a ninguna parte.",
  envioFalta:"Le faltan {x} para el envío gratuito.", envioYa:"Envío gratuito incluido.",
@@ -1199,7 +1261,17 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB", cestaEti:"Basket", cestaTitulo:"Your basket", cestaVacia:"You have not added anything yet.",
+ _dir:"ltr", _lang:"en", _loc:"en-GB", cfgCuanto:"How many bags per delivery", cfgCada:"How often", cfgComo:"How you want it", cfgQue:"Which coffee",
+ cfgResumenEti:"Your subscription", cfgPorEnvio:"Per delivery", cfgAlta:"Start the subscription",
+ cfgHecho:"Test sign-up done", cfgGratis:"Free",
+ cfgAviso:"No lock-in. Pause or cancel from a link in the email itself.",
+ cfgLinBolsas:["1 bag of 250 g","2 bags of 250 g","{n} bags of 250 g"], cfgLinDesc:"Subscription discount ({p} %)", cfgLinPorte:"Shipping",
+ cfgAlAnio:"{e} deliveries a year · {t} in total.",
+ cfgBolsas:[{n:"1 bag",s:"250 g"},{n:"2 bags",s:"500 g · −5 %"},{n:"3 bags",s:"750 g · −8 %"},{n:"4 bags",s:"1 kg · −12 %"}],
+ cfgFrec:[{n:"Every 2 weeks",s:"12 deliveries a year"},{n:"Every 3 weeks",s:"8 deliveries a year"},{n:"Every 4 weeks",s:"6 deliveries a year"}],
+ cfgMolido:[{n:"Whole bean",s:"Keeps far longer"},{n:"Ground",s:"Tell us the method when ordering"}],
+ cfgTipo:[{n:"The usual",s:"We repeat your coffee"},{n:"Pick of the month",s:"+€1.20 · whatever is best"},{n:"The keenly priced one",s:"−€0.80 · seasonal origins"}],
+ cestaEti:"Basket", cestaTitulo:"Your basket", cestaVacia:"You have not added anything yet.",
  cestaSubtotal:"Subtotal", cestaIr:"Place order", cestaHecho:"Test order sent",
  cestaAviso:"Demonstration site: nothing is charged and the order goes nowhere.",
  envioFalta:"{x} to go for free shipping.", envioYa:"Free shipping included.",
@@ -1538,7 +1610,17 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", cestaEti:"السلة", cestaTitulo:"سلّتك", cestaVacia:"لم تُضِف شيئًا بعد.",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", cfgCuanto:"كم كيسًا في الإرسالية", cfgCada:"كل متى", cfgComo:"كيف تريده", cfgQue:"أي بنّ",
+ cfgResumenEti:"اشتراكك", cfgPorEnvio:"لكل إرسالية", cfgAlta:"ابدأ الاشتراك",
+ cfgHecho:"تمّ اشتراك تجريبي", cfgGratis:"مجانًا",
+ cfgAviso:"بلا مدة إلزامية. ويُوقَف أو يُلغى من رابط في الرسالة نفسها.",
+ cfgLinBolsas:["كيس واحد ٢٥٠ غرامًا","كيسان ٢٥٠ غرامًا","{n} أكياس ٢٥٠ غرامًا"], cfgLinDesc:"خصم الاشتراك ({p}٪)", cfgLinPorte:"الشحن",
+ cfgAlAnio:"{e} إرساليات في السنة · {t} إجمالًا.",
+ cfgBolsas:[{n:"كيس واحد",s:"٢٥٠ غرامًا"},{n:"كيسان",s:"٥٠٠ غرام · −٥٪"},{n:"ثلاثة أكياس",s:"٧٥٠ غرامًا · −٨٪"},{n:"أربعة أكياس",s:"كيلوغرام · −١٢٪"}],
+ cfgFrec:[{n:"كل أسبوعين",s:"١٢ إرسالية سنويًا"},{n:"كل ثلاثة أسابيع",s:"٨ إرساليات سنويًا"},{n:"كل أربعة أسابيع",s:"٦ إرساليات سنويًا"}],
+ cfgMolido:[{n:"حبًّا كاملًا",s:"يُحفَظ مدةً أطول بكثير"},{n:"مطحونًا",s:"أخبرنا بطريقة التحضير عند الطلب"}],
+ cfgTipo:[{n:"المعتاد",s:"نكرّر بنّك نفسه"},{n:"مختار الشهر",s:"+١٫٢٠ € · أفضل ما لدينا"},{n:"الأقلّ سعرًا",s:"−٠٫٨٠ € · أصول موسمية"}],
+ cestaEti:"السلة", cestaTitulo:"سلّتك", cestaVacia:"لم تُضِف شيئًا بعد.",
  cestaSubtotal:"المجموع الفرعي", cestaIr:"إتمام الطلب", cestaHecho:"أُرسل طلب تجريبي",
  cestaAviso:"موقع للعرض: لا يُحصَّل شيء ولا يصل الطلب إلى أي جهة.",
  envioFalta:"يتبقّى {x} للشحن المجاني.", envioYa:"الشحن المجاني مشمول.",
@@ -2167,6 +2249,21 @@ var CATALOGO = [
   {id:"har", precio:18.00, proc:1, cuerpo:4, acidez:3, stock:3},
   {id:"gay", precio:11.90, proc:2, cuerpo:5, acidez:1, stock:21}
 ];
+/* Suscripción: el descuento sube con las bolsas, no con la permanencia.
+   Precio base = media del catálogo, redondeada. */
+var SUS_BOLSAS = [1, 2, 3, 4];
+var SUS_DESC   = [0, .05, .08, .12];      /* descuento por número de bolsas */
+var SUS_FREC   = [{sem:2, env:12}, {sem:3, env:8}, {sem:4, env:6}];  /* envíos al año */
+var SUS_MOLIDO = [0, 0];                  /* moler no se cobra */
+var SUS_TIPO   = [0, 1.20, -0.80];        /* recargo del tipo por bolsa */
+var PRECIO_BASE = 12.40;
+var ENVIO_PORTE = 3.90;
+/* El árabe tiene dual: 1 → singular, 2 → dual, 3-10 → plural. Español e
+   inglés no lo usan, así que su forma dual es la misma que el plural. */
+function formaPlural(n){ return n === 1 ? 0 : n === 2 ? 1 : 2; }
+
+var cfg = {bolsas:1, frec:1, molido:0, tipo:0, alta:false};
+
 var ENVIO_GRATIS = 35;
 var cesta = {};
 try { cesta = JSON.parse(localStorage.getItem("bunn_cesta") || "{}"); } catch(e){ cesta = {}; }
@@ -2415,7 +2512,7 @@ function pintarListas(){
     return '<div class="cel dato"><div class="v">'+esc(c.v)+'</div><div class="u">'+esc(c.u)+'</div></div>'; });
   celdas("iCafes", t.cafes.slice(0,3), function(c){
     return '<div class="cel"><span class="sub">'+esc(c.o)+'</span><h3>'+esc(c.n)+'</h3><p>'+esc(c.d)+'</p><div class="precio">'+esc(c.p)+'</div></div>'; });
-  pintarTienda(); pintarCesta();
+  pintarTienda(); pintarCesta(); pintarConfig();
   celdas("suPlanes", t.planes, function(p){
     return '<div class="cel"><span class="sub">'+esc(p.f)+'</span><h3>'+esc(p.n)+'</h3><p>'+esc(p.d)+'</p><div class="precio">'+esc(p.p)+'</div></div>'; });
   var sv = document.getElementById("suVentajas");
@@ -2463,6 +2560,48 @@ function anadir(id, delta){
   if (n <= 0) delete cesta[id];
   else cesta[id] = Math.min(n, art.stock);
   guardarCesta(); pintarTienda(); pintarCesta();
+}
+
+function pintarConfig(){
+  var caja = document.getElementById("cfgBolsas");
+  if (!caja) return;
+  var t = T[idioma];
+
+  function grupo(id, clave, ops){
+    var e = document.getElementById(id);
+    e.innerHTML = ops.map(function(o,i){
+      return '<button type="button" data-i="'+i+'" aria-pressed="'+(i===cfg[clave])+'">'
+        + esc(o.n) + (o.s ? '<small>'+esc(o.s)+'</small>' : '') + '</button>';
+    }).join("");
+    Array.prototype.forEach.call(e.querySelectorAll("button"), function(b){
+      b.addEventListener("click", function(){ cfg[clave] = +this.dataset.i; cfg.alta = false; pintarConfig(); });
+    });
+  }
+  grupo("cfgBolsas", "bolsas", t.cfgBolsas);
+  grupo("cfgFrec",   "frec",   t.cfgFrec);
+  grupo("cfgMolido", "molido", t.cfgMolido);
+  grupo("cfgTipo",   "tipo",   t.cfgTipo);
+
+  var n     = SUS_BOLSAS[cfg.bolsas];
+  var base  = (PRECIO_BASE + SUS_TIPO[cfg.tipo]) * n;
+  var desc  = base * SUS_DESC[cfg.bolsas];
+  var porte = n >= 2 ? 0 : ENVIO_PORTE;
+  var total = base - desc + porte;
+  var alAnio = total * SUS_FREC[cfg.frec].env;
+
+  var lineas = [[t.cfgLinBolsas[formaPlural(n)].replace("{n}", num(n)), precio(base)]];
+  if (desc > 0) lineas.push([t.cfgLinDesc.replace("{p}", num(SUS_DESC[cfg.bolsas]*100)), "−" + precio(desc), "desc"]);
+  lineas.push([t.cfgLinPorte, porte ? precio(porte) : t.cfgGratis, porte ? "" : "desc"]);
+  document.getElementById("cfgLineas").innerHTML = lineas.map(function(l){
+    return '<div class="cfg-lin '+(l[2]||"")+'"><span>'+esc(l[0])+'</span><b>'+esc(l[1])+'</b></div>';
+  }).join("");
+
+  document.getElementById("cfgEnvio").textContent = precio(total);
+  document.getElementById("cfgMes").textContent = t.cfgAlAnio
+    .replace("{e}", num(SUS_FREC[cfg.frec].env)).replace("{t}", precio(alAnio));
+  var bt = document.getElementById("cfgAlta");
+  bt.textContent = cfg.alta ? t.cfgHecho : t.cfgAlta;
+  bt.disabled = cfg.alta;
 }
 
 function pintarTienda(){
@@ -2615,6 +2754,9 @@ document.addEventListener("click", function(ev){
     var alto = cab ? cab.getBoundingClientRect().height : 0;
     window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - alto - 12);
   }, 60);
+});
+document.getElementById("cfgAlta").addEventListener("click", function(){
+  cfg.alta = true; pintarConfig();
 });
 document.getElementById("cestaBtn").addEventListener("click", function(){ verCesta(true); });
 document.getElementById("cestaCerrar").addEventListener("click", function(){ verCesta(false); });
