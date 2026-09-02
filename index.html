@@ -297,6 +297,49 @@ html[dir="rtl"] .indice-pag{letter-spacing:0;font-size:.95rem;}
 .indice-pag a{color:var(--t2);text-decoration:none;}
 .indice-pag a:hover{color:var(--ocre);}
 
+/* ── Barra de aviso: en una tienda lo primero que se lee es cuánto
+   falta para el envío gratis, y cambia según lo que lleve en la cesta. */
+.aviso-top{background:var(--ocre);color:#17130f;text-align:center;
+  font-size:.78rem;font-weight:600;padding-block:.5rem;}
+html[dir="rtl"] .aviso-top{font-size:.9rem;}
+
+/* ── Buscador ─────────────────────────────────────────────────────── */
+.busca{display:flex;align-items:center;gap:.5rem;border:1px solid var(--l);
+  padding:.35rem .7rem;color:var(--t3);flex-shrink:1;min-width:0;}
+.busca:focus-within{border-color:var(--ocre);color:var(--ocre);}
+.busca input{background:none;border:0;color:var(--t);font:inherit;font-size:.82rem;
+  width:9rem;min-width:0;padding:.1rem 0;}
+.busca input::-webkit-search-cancel-button{filter:invert(1);opacity:.5;}
+.busca input:focus{outline:none;}
+@media(max-width:880px){.busca{display:none}}
+
+/* ── Pie de comercio: boletín, columnas y formas de pago ───────────── */
+.pie-bol{display:grid;gap:1.5rem;padding-block:clamp(2rem,4vw,3rem);
+  border-bottom:1px solid var(--l);}
+@media(min-width:820px){.pie-bol{grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}}
+.pie-bol-t{font-family:var(--disp);font-size:clamp(1.3rem,2.6vw,1.9rem);margin:0 0 .4rem;}
+html[dir="rtl"] .pie-bol-t{font-weight:700;font-size:1.4rem;}
+.pie-bol-p{font-size:.88rem;color:var(--t3);margin:0;}
+.bol-f{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-start;}
+.bol-f input{flex:1;min-width:11rem;background:var(--f2);border:1px solid var(--l);
+  color:var(--t);font:inherit;font-size:.9rem;padding:.7rem .9rem;}
+.bol-f input:focus{outline:none;border-color:var(--ocre);}
+.bol-ok{width:100%;font-size:.8rem;color:var(--verde);margin:0;min-height:1.1em;}
+.pie-rej{display:grid;gap:2rem;padding-block:clamp(2rem,4vw,3rem);}
+@media(min-width:760px){.pie-rej{grid-template-columns:repeat(4,1fr);gap:2.5rem;}}
+.pie-t{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin:0 0 1rem;}
+html[dir="rtl"] .pie-t{letter-spacing:0;text-transform:none;font-size:.85rem;}
+.pie-col nav{display:grid;gap:.55rem;}
+.pie-col a{color:var(--t2);text-decoration:none;font-size:.88rem;}
+.pie-col a:hover{color:var(--ocre);}
+.pagos{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;}
+.pagos span{border:1px solid var(--l);border-radius:4px;padding:.28rem .5rem;
+  font-size:.6rem;letter-spacing:.06em;color:var(--t3);background:var(--f2);}
+html[dir="rtl"] .pagos span{letter-spacing:0;font-size:.72rem;}
+.pie-envio{font-size:.78rem;color:var(--t3);margin:0;}
+.pie-fin{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;
+  padding-block:1.2rem;border-top:1px solid var(--l);font-size:.76rem;color:var(--t3);}
+
 /* ── Tienda: la carta se navega como una tienda, no como un folleto ──
    Ficha con precio, existencias reales y añadir sin salir de la página. */
 .fil{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.6rem;}
@@ -450,6 +493,8 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 </head>
 <body>
 
+<div class="aviso-top" id="avisoTop" role="status"></div>
+
 <header class="b">
   <div class="marco barra">
     <a class="logo" href="#/inicio">
@@ -464,6 +509,12 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
       <a href="#/comprar"  data-t="nComprar">Comprar</a>
       <a href="#/contacto" data-t="nContacto">Contacto</a>
     </nav>
+    <form class="busca" id="buscaF" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <input id="busca" type="search" autocomplete="off"
+             data-t-attr="placeholder:buscaPh,aria-label:buscaPh" placeholder="Buscar un café">
+    </form>
     <button type="button" class="cesta-btn" id="cestaBtn" aria-expanded="false" aria-controls="cestaPanel">
       <svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6">
         <path d="M4 7h16l-1.3 11.2a2 2 0 0 1-2 1.8H7.3a2 2 0 0 1-2-1.8L4 7Z"/><path d="M8.5 7V5.5a3.5 3.5 0 0 1 7 0V7"/></svg>
@@ -917,24 +968,46 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 </aside>
 
 <footer class="b">
-  <div class="marco pie">
-    <span data-t="marca">BUNN</span>
-    <nav data-t-attr="aria-label:ariaMenu" aria-label="Secciones">
-      <a href="#/inicio"   data-t="nInicio">Inicio</a>
-      <a href="#/cafes"    data-t="nCafes">Los cafés</a>
-      <a href="#/tueste"   data-t="nTueste">El tueste</a>
-      <a href="#/preparar" data-t="nPreparar">Preparar</a>
-      <a href="#/comprar"  data-t="nComprar">Comprar</a>
-      <a href="#/contacto" data-t="nContacto">Contacto</a>
-    </nav>
-    <span class="fin"><span data-t="pieAviso">Maqueta de demostración</span> · <span class="ltr">© 2026</span></span>
+  <div class="marco pie-bol">
+    <div>
+      <p class="pie-bol-t" data-t="bolTitulo">Le avisamos cuando llega un lote nuevo</p>
+      <p class="pie-bol-p" data-t="bolTexto">Un correo cada tres o cuatro semanas, sólo cuando entra café. Ni ofertas ni cuenta atrás.</p>
+    </div>
+    <form class="bol-f" id="bolF" novalidate>
+      <input id="bolMail" type="email" autocomplete="email" dir="ltr"
+             data-t-attr="placeholder:bolPh,aria-label:bolPh" placeholder="Su correo">
+      <button class="btn sol" type="submit" data-t="bolBtn">Apuntarme</button>
+      <p class="bol-ok" id="bolOk" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+  <div class="marco pie-rej">
+    <div class="pie-col"><p class="pie-t" data-t="pieTienda">Tienda</p><nav id="pieTienda"></nav></div>
+    <div class="pie-col"><p class="pie-t" data-t="pieAprender">Aprender</p><nav id="pieAprender"></nav></div>
+    <div class="pie-col"><p class="pie-t" data-t="pieAyuda">Ayuda</p><nav id="pieAyuda"></nav></div>
+    <div class="pie-col">
+      <p class="pie-t" data-t="piePago">Formas de pago</p>
+      <div class="pagos" id="pagos"></div>
+      <p class="pie-envio" data-t="pieEnvio">Envío gratuito a partir de 35 €. Salidas los martes y los viernes.</p>
+    </div>
+  </div>
+  <div class="marco pie-fin">
+    <span data-t="pieAviso">Maqueta de demostración</span>
+    <span class="ltr">© 2026 BUNN</span>
   </div>
 </footer>
 
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES",
+ _dir:"ltr", _lang:"es", _loc:"es-ES", buscaPh:"Buscar un café", avisoBase:"Envío gratuito a partir de 35 € · Tostamos lunes y jueves",
+ avisoFalta:"Le faltan {x} para el envío gratuito", avisoYa:"Envío gratuito conseguido",
+ bolTitulo:"Le avisamos cuando llega un lote nuevo",
+ bolTexto:"Un correo cada tres o cuatro semanas, sólo cuando entra café. Ni ofertas ni cuenta atrás.",
+ bolPh:"Su correo", bolBtn:"Apuntarme", bolHecho:"Apuntado. (Demostración: no se guarda nada.)",
+ bolMal:"Ese correo no parece válido.",
+ pieTienda:"Tienda", pieAprender:"Aprender", pieAyuda:"Ayuda", piePago:"Formas de pago",
+ pieEnvio:"Envío gratuito a partir de 35 €. Salidas los martes y los viernes.",
+
  meMolturaEti:"La molienda, de fina a gruesa",
  meMolturaNota:"Referencia orientativa: cada molino tiene su propia numeración y no se corresponde con la de otro. Lo que sí se puede comparar es el tacto entre los dedos.",
  meAguaEti:"El agua es el 98 % de la taza", meFallosEti:"Los cinco fallos de casa",
@@ -1307,7 +1380,15 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB",
+ _dir:"ltr", _lang:"en", _loc:"en-GB", buscaPh:"Search a coffee", avisoBase:"Free shipping over €35 · We roast Mondays and Thursdays",
+ avisoFalta:"{x} to go for free shipping", avisoYa:"Free shipping unlocked",
+ bolTitulo:"We tell you when a new lot lands",
+ bolTexto:"One email every three or four weeks, only when coffee arrives. No offers, no countdowns.",
+ bolPh:"Your email", bolBtn:"Sign me up", bolHecho:"Signed up. (Demo: nothing is stored.)",
+ bolMal:"That email does not look valid.",
+ pieTienda:"Shop", pieAprender:"Learn", pieAyuda:"Help", piePago:"Payment methods",
+ pieEnvio:"Free shipping over €35. Dispatch on Tuesdays and Fridays.",
+
  meMolturaEti:"Grind size, fine to coarse",
  meMolturaNota:"A rough reference: every grinder has its own numbering and it does not match anyone else's. What can be compared is the feel between your fingers.",
  meAguaEti:"Water is 98 % of the cup", meFallosEti:"The five mistakes at home",
@@ -1680,7 +1761,15 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", buscaPh:"ابحث عن بنّ", avisoBase:"شحن مجاني فوق ٣٥ € · نحمّص الاثنين والخميس",
+ avisoFalta:"يتبقّى {x} للشحن المجاني", avisoYa:"حصلت على الشحن المجاني",
+ bolTitulo:"نُخبرك حين تصل دفعة جديدة",
+ bolTexto:"رسالة كل ثلاثة أو أربعة أسابيع، وفقط حين يصل البنّ. لا عروض ولا عدّ تنازلي.",
+ bolPh:"بريدك", bolBtn:"سجّلني", bolHecho:"تمّ التسجيل. (عرض: لا يُحفظ شيء.)",
+ bolMal:"هذا البريد لا يبدو صالحًا.",
+ pieTienda:"المتجر", pieAprender:"تعلَّم", pieAyuda:"مساعدة", piePago:"طرق الدفع",
+ pieEnvio:"شحن مجاني فوق ٣٥ €. والإرسال أيام الثلاثاء والجمعة.",
+
  meMolturaEti:"الطحن، من الناعم إلى الخشن",
  meMolturaNota:"مرجع تقريبي: فلكل مطحنة ترقيمها الخاص ولا يوافق ترقيم غيرها. أما ما يمكن مقارنته فهو الملمس بين الأصابع.",
  meAguaEti:"الماء ٩٨٪ من الفنجان", meFallosEti:"أخطاء البيت الخمسة",
@@ -2619,6 +2708,7 @@ function pintarListas(){
     return '<div class="cel dato"><div class="v">'+esc(c.v)+'</div><div class="u">'+esc(c.u)+'</div></div>'; });
 
   pintarTienda(); pintarEstante(); pintarCesta(); pintarConfig();
+  pintarAviso(); pintarPieTienda();
   celdas("suPlanes", t.planes, function(p){
     return '<div class="cel"><span class="sub">'+esc(p.f)+'</span><h3>'+esc(p.n)+'</h3><p>'+esc(p.d)+'</p><div class="precio">'+esc(p.p)+'</div></div>'; });
   var sv = document.getElementById("suVentajas");
@@ -2665,7 +2755,7 @@ function anadir(id, delta){
   var n = (cesta[id] || 0) + delta;
   if (n <= 0) delete cesta[id];
   else cesta[id] = Math.min(n, art.stock);
-  guardarCesta(); pintarTienda(); pintarEstante(); pintarCesta();
+  guardarCesta(); pintarTienda(); pintarEstante(); pintarCesta(); pintarAviso();
 }
 
 function pintarConfig(){
@@ -2757,6 +2847,34 @@ function pintarEstante(){
   });
 }
 
+var PAGOS = ["Visa","Mastercard","Bizum","PayPal","Apple Pay","Transferencia"];
+var busqueda = "";
+
+/* El aviso de arriba no es un cartel fijo: dice cuánto falta de verdad. */
+function pintarAviso(){
+  var e = document.getElementById("avisoTop");
+  if (!e) return;
+  var t = T[idioma], tot = importe();
+  e.textContent = tot === 0 ? t.avisoBase
+    : tot >= ENVIO_GRATIS ? t.avisoYa
+    : t.avisoFalta.replace("{x}", precio(ENVIO_GRATIS - tot));
+}
+
+function pintarPieTienda(){
+  var t = T[idioma];
+  [["pieTienda",[["#/cafes","nCafes"],["#/comprar","nComprar"],["#/comprar","nSuscripcion"],["#/comprar","nHosteleria"]]],
+   ["pieAprender",[["#/tueste","nTueste"],["#/preparar","nMetodo"],["#/cafes","nOrigenes"],["#/cafes","nTraza"]]],
+   ["pieAyuda",[["#/contacto","nPreguntas"],["#/contacto","nContacto"],["#/preparar","nElige"],["#/preparar","nCrono"]]]
+  ].forEach(function(par){
+    var e = document.getElementById(par[0]);
+    if (!e) return;
+    e.innerHTML = par[1].map(function(x){
+      return '<a href="'+x[0]+'">'+esc(t[x[1]])+'</a>'; }).join("");
+  });
+  var pg = document.getElementById("pagos");
+  if (pg) pg.innerHTML = PAGOS.map(function(x){ return '<span>'+esc(x)+'</span>'; }).join("");
+}
+
 function pintarTienda(){
   var caja = document.getElementById("caLista");
   if (!caja) return;
@@ -2776,6 +2894,11 @@ function pintarTienda(){
   var visibles = 0;
   caja.innerHTML = CATALOGO.map(function(c, i){
     if (filtroProc >= 0 && c.proc !== filtroProc) return "";
+    if (busqueda){
+      var d = T[idioma].cafes[i];
+      var texto = (d.n + " " + d.o + " " + d.d).toLowerCase();
+      if (texto.indexOf(busqueda) === -1) return "";
+    }
     visibles++;
     return fichaProducto(c, i);
   }).join("");
@@ -2881,6 +3004,18 @@ document.addEventListener("click", function(ev){
     var alto = cab ? cab.getBoundingClientRect().height : 0;
     window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - alto - 12);
   }, 60);
+});
+document.getElementById("busca").addEventListener("input", function(){
+  busqueda = this.value.trim().toLowerCase();
+  /* Buscar lleva a la carta: no tiene sentido filtrar algo que no se ve */
+  if (ruta() !== "cafes" && busqueda) location.hash = "#/cafes";
+  pintarTienda();
+});
+document.getElementById("buscaF").addEventListener("submit", function(e){ e.preventDefault(); });
+document.getElementById("bolF").addEventListener("submit", function(e){
+  e.preventDefault();
+  var t = T[idioma], v = document.getElementById("bolMail").value.trim();
+  document.getElementById("bolOk").textContent = /.+@.+\..+/.test(v) ? t.bolHecho : t.bolMal;
 });
 document.getElementById("cfgAlta").addEventListener("click", function(){
   cfg.alta = true; pintarConfig();
