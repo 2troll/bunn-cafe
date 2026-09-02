@@ -456,6 +456,38 @@ html[dir="rtl"] .cfg-total b{font-weight:700;font-size:1.5rem;}
 .mol p{font-size:.88rem;color:var(--t2);margin:0;max-width:none;}
 .mol .tacto{font-size:.78rem;color:var(--t3);}
 
+/* ── Cookies y legal ──────────────────────────────────────────────── */
+.ck{position:fixed;inset-inline:0;bottom:0;z-index:100;background:var(--f2);
+  border-top:2px solid var(--ocre);box-shadow:0 -18px 40px -25px #000;}
+.ck-caja{width:var(--marco);margin-inline:auto;display:grid;gap:1.2rem;padding-block:1.3rem;}
+@media(min-width:900px){.ck-caja{grid-template-columns:1fr auto;gap:2.5rem;align-items:center;}}
+.ck-t{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ocre);margin:0 0 .4rem;}
+html[dir="rtl"] .ck-t{letter-spacing:0;text-transform:none;font-size:.88rem;}
+.ck-p{font-size:.86rem;color:var(--t2);margin:0;max-width:74ch;}
+.ck-acc{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;}
+.ck-mas{background:none;border:0;color:var(--t3);cursor:pointer;font:inherit;font-size:.8rem;
+  text-decoration:underline;text-underline-offset:3px;padding:.4rem;}
+.ck-mas:hover{color:var(--ocre);}
+.ck-pref{width:var(--marco);margin-inline:auto;padding-bottom:1.4rem;border-top:1px solid var(--l);}
+.ck-fila{display:grid;grid-template-columns:auto 1fr;gap:.9rem;padding-block:.9rem;
+  border-bottom:1px solid var(--l2);align-items:start;}
+.ck-fila b{display:block;font-weight:600;font-size:.92rem;}
+.ck-fila span{display:block;font-size:.82rem;color:var(--t3);}
+.ck-fila input{width:1.05rem;height:1.05rem;margin-top:.25rem;accent-color:var(--ocre);}
+.ck-pref .btn{margin-top:1.1rem;}
+.maqueta{border-inline-start:3px solid var(--ocre);background:var(--sup);
+  padding:.9rem 1.1rem;font-size:.84rem;color:var(--t2);margin-top:1.6rem;max-width:70ch;}
+.legal-b{border-top:1px solid var(--l);padding-block:2rem;}
+.legal-b h2{font-family:var(--disp);font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:400;margin-bottom:1rem;}
+html[dir="rtl"] .legal-b h2{font-weight:700;font-size:1.3rem;}
+.legal-b p{color:var(--t2);font-size:.94rem;}
+.legal-b .fecha{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:.6rem;}
+html[dir="rtl"] .legal-b .fecha{letter-spacing:0;text-transform:none;font-size:.85rem;}
+.pie-legal{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;}
+.pie-legal a,.pie-legal button{color:var(--t3);text-decoration:none;font-size:.76rem;
+  background:none;border:0;cursor:pointer;font-family:inherit;padding:0;}
+.pie-legal a:hover,.pie-legal button:hover{color:var(--ocre);text-decoration:underline;}
+
 .faq{border-top:1px solid var(--l);}
 .faq summary{cursor:pointer;padding-block:1.2rem;font-family:var(--disp);font-size:1.3rem;
   list-style:none;display:flex;gap:1rem;align-items:baseline;}
@@ -949,7 +981,38 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 
 
 
+<section data-ruta="legal" id="ap-legal">
+  <div class="marco bl">
+    <p class="eti" data-t="nLegal">Legal</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="leH1">Condiciones de venta, datos y cookies.</h1>
+    <p class="entrada" data-t="leEntrada">Lo que pasa cuando compra: qué precio paga, cuándo sale, qué puede devolver y qué hacemos con sus datos.</p>
+    <p class="maqueta" data-t="leMaqueta">Aviso: esto es una maqueta de demostración. Los textos siguen la estructura de unas condiciones de venta reales, pero la sociedad es inventada y no se tramita ningún pedido.</p>
+  </div>
+  <div class="marco"><nav class="indice-pag" id="ix-legal" data-t-attr="aria-label:ariaEnPagina" aria-label="En esta página"></nav></div>
+  <div class="marco" style="padding-bottom:clamp(2.75rem,6vw,5rem)">
+    <div id="leBloques"></div>
+  </div>
+</section>
+
 </main>
+
+<div class="ck" id="ck" hidden role="dialog" aria-modal="false" data-t-attr="aria-label:ckTitulo">
+  <div class="ck-caja">
+    <div class="ck-txt">
+      <p class="ck-t" data-t="ckTitulo">Cookies</p>
+      <p class="ck-p" data-t="ckTexto">Sólo usamos cookies propias. Las imprescindibles guardan su idioma y su cesta en su navegador. Las de medición son opcionales y están apagadas hasta que usted diga lo contrario.</p>
+    </div>
+    <div class="ck-acc">
+      <button type="button" class="btn sol" id="ckMin" data-t="ckMin">Sólo las imprescindibles</button>
+      <button type="button" class="btn" id="ckTodo" data-t="ckTodo">Aceptar todas</button>
+      <button type="button" class="ck-mas" id="ckMas" data-t="ckMas">Preferencias</button>
+    </div>
+  </div>
+  <div class="ck-pref" id="ckPref" hidden>
+    <div id="ckLista"></div>
+    <button type="button" class="btn sol" id="ckGuardar" data-t="ckGuardar">Guardar mi elección</button>
+  </div>
+</div>
 
 <div class="cesta-velo" id="cestaVelo" hidden></div>
 <aside class="cesta-panel" id="cestaPanel" hidden aria-modal="true" role="dialog"
@@ -992,6 +1055,7 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
   </div>
   <div class="marco pie-fin">
     <span data-t="pieAviso">Maqueta de demostración</span>
+    <nav class="pie-legal" id="pieLegal"></nav>
     <span class="ltr">© 2026 BUNN</span>
   </div>
 </footer>
@@ -999,7 +1063,55 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES", buscaPh:"Buscar un café", avisoBase:"Envío gratuito a partir de 35 € · Tostamos lunes y jueves",
+ _dir:"ltr", _lang:"es", _loc:"es-ES",
+ nLegal:"Legal", tLegal:"Legal — BUNN", leH1:"Condiciones de venta, datos y cookies.",
+ leEntrada:"Lo que pasa cuando compra: qué precio paga, cuándo sale, qué puede devolver y qué hacemos con sus datos.",
+ leMaqueta:"Aviso: esto es una maqueta de demostración. Los textos siguen la estructura de unas condiciones de venta reales, pero la sociedad es inventada y no se tramita ningún pedido.",
+ leActualizado:"Actualizado en septiembre de 2026",
+ ckTitulo:"Cookies", ckMin:"Sólo las imprescindibles", ckTodo:"Aceptar todas",
+ ckMas:"Preferencias", ckGuardar:"Guardar mi elección", ckPrefs:"Preferencias de cookies",
+ ckTexto:"Sólo usamos cookies propias. Las imprescindibles guardan su idioma y su cesta en su navegador. Las de medición son opcionales y están apagadas hasta que usted diga lo contrario.",
+ ckCats:[
+  {n:"Imprescindibles", d:"Guardan el idioma y lo que lleva en la cesta. Sin ellas la cesta se vacía al cambiar de página. Viven en su navegador y no se envían a ningún sitio."},
+  {n:"Medición", d:"Cuentan visitas de forma agregada para saber qué cafés se miran y cuáles no. No perfilan a nadie. Apagadas por defecto."},
+  {n:"Preferencias", d:"Recuerdan el filtro de proceso que dejó puesto y la configuración del calculador de suscripción."}
+ ],
+ legal:[
+  {t:"1. Quiénes somos", p:[
+   "<b>BUNN Tostadores, S.L.</b>, Carrer de la Indústria 42, nave 3, 08025 Barcelona (España). Correo: hola@bunn.example. Teléfono: +34 931 000 000. Inscrita en el Registro Mercantil de Barcelona.",
+   "Vendemos café tostado por nosotros. No revendemos café tostado por terceros ni hacemos marca blanca para nadie. Todo lo que sale de aquí se ha tostado en nuestro tambor y lleva impresa la fecha en que se hizo."]},
+  {t:"2. Precios y pedidos", p:[
+   "Todos los precios se muestran <b>con el IVA incluido</b> y en euros. El tipo aplicable al café tostado en España es el reducido. Los gastos de envío, si los hay, aparecen antes de confirmar y nunca se añaden después.",
+   "Un pedido no queda cerrado hasta que le llega el correo de confirmación con el número de pedido. Si un café se agota entre que usted lo pone en la cesta y confirma, se lo decimos y elige: esperar al siguiente tueste, cambiarlo o anularlo sin coste.",
+   "<b>Errores de precio.</b> Si por un fallo aparece un precio manifiestamente equivocado —un saco de doce kilos a nueve euros—, no estamos obligados a servirlo a ese precio. Le avisamos, le explicamos qué ha pasado y usted decide si compra al precio correcto o anula. No cobramos primero y discutimos después."]},
+  {t:"3. Envíos y plazos", p:[
+   "Tostamos <b>lunes y jueves</b> y los pedidos salen al día siguiente del tueste. Un pedido hecho el martes sale el viernes; uno hecho el viernes sale el martes. No mandamos café tostado hace dos semanas por vaciar almacén.",
+   "<b>Península:</b> 24–48 h laborables desde la salida. <b>Baleares:</b> 48–72 h. <b>Canarias, Ceuta y Melilla:</b> 3–5 días, y el paquete pasa aduana; los posibles impuestos de importación corren por cuenta del destinatario porque no los cobramos nosotros. <b>Resto de la UE:</b> 3–6 días.",
+   "El envío peninsular es <b>gratuito a partir de 35 €</b>; por debajo son 3,90 €. Si el paquete se retrasa más de cinco días laborables sobre el plazo, escríbanos: reclamamos nosotros al transportista y le mandamos otro sin esperar a que se resuelva la reclamación."]},
+  {t:"4. Devoluciones y desistimiento", p:[
+   "<b>Derecho de desistimiento.</b> Dispone de catorce días naturales desde que recibe el pedido para desistir sin dar explicaciones, conforme a la normativa europea de consumo. Basta con escribirnos. El reembolso se hace por el mismo medio de pago en un máximo de catorce días desde que recibimos la mercancía.",
+   "<b>La excepción, y por qué existe.</b> El café es un producto alimenticio precintado: una bolsa <b>abierta</b> no puede devolverse por razones de higiene, igual que ocurre en cualquier tienda de alimentación. Las bolsas cerradas y en buen estado sí, incluidas las que forman parte de una suscripción.",
+   "<b>Lo que hacemos además de lo que dice la ley.</b> Si abre una bolsa y el café no le gusta, se lo cambiamos por otro sin devolver nada y sin discutirlo. No es una obligación legal, es que nos interesa más entender por qué falló la recomendación que quedarnos doce euros.",
+   "<b>Producto defectuoso.</b> Si llega roto, mal precintado o con la fecha de tueste equivocada, mándenos una foto y le reponemos el pedido completo. No le pedimos que devuelva nada ni que pague el envío."]},
+  {t:"5. Suscripciones", p:[
+   "La suscripción <b>no tiene permanencia</b>. Se puede pausar, cambiar la frecuencia, cambiar el café o cancelar desde un enlace que va en cada correo de envío. No hay que llamar, ni escribir pidiéndolo, ni pasar por un formulario de retención.",
+   "El cargo se hace el día antes de cada envío, no por adelantado ni por meses acumulados. Si pausa, no se cobra nada hasta que la reactive. Si cancela, el envío ya cobrado se manda igualmente.",
+   "Le avisamos por correo <b>cuarenta y ocho horas antes</b> de cada cargo, con el importe y el café que va a salir, para que le dé tiempo a cambiarlo o saltárselo. Un precio de suscripción sólo sube al renovar y avisando con un envío de antelación."]},
+  {t:"6. Protección de datos", p:[
+   "<b>Responsable:</b> BUNN Tostadores, S.L. <b>Finalidad:</b> gestionar su pedido o suscripción, y mandarle el boletín si se ha apuntado. <b>Base legal:</b> la ejecución del contrato de compra, y su consentimiento para el boletín. <b>Conservación:</b> los datos de pedido se guardan seis años por obligación fiscal; el boletín, hasta que se dé de baja.",
+   "<b>Datos de pago.</b> No los vemos ni los guardamos. La pasarela de pago los trata directamente y nosotros sólo recibimos el resultado de la operación y los cuatro últimos dígitos de la tarjeta, para poder identificar un cargo si usted nos pregunta por él.",
+   "<b>Boletín.</b> Cada correo lleva un enlace de baja que funciona a la primera y sin pedir contraseña. No usamos píxeles de seguimiento en los correos: no sabemos si los ha abierto, y no nos hace falta.",
+   "Puede ejercer acceso, rectificación, supresión, limitación, portabilidad y oposición escribiendo a <b>datos@bunn.example</b>. Contestamos en menos de un mes. Si no queda conforme, puede reclamar ante la Agencia Española de Protección de Datos."]},
+  {t:"7. Alérgenos y conservación", p:[
+   "El café tostado no contiene alérgenos de declaración obligatoria. Se tuesta y se envasa en unas instalaciones donde <b>sólo se manipula café</b>: no compartimos línea con frutos secos, leche, cereales ni cacao.",
+   "El grano se conserva mejor en su bolsa con válvula, cerrada, a temperatura ambiente y lejos de la luz. La fecha impresa es la de <b>tueste</b>, no una caducidad: el café no se estropea, pierde aroma. La ventana recomendada son de tres a ocho semanas desde esa fecha.",
+   "La bolsa lleva película de aluminio con válvula desgasificadora y no es reciclable en el contenedor de envases en todos los municipios. Estamos probando un monomaterial reciclable; cuando funcione sin perder la barrera de oxígeno, lo diremos aquí."]},
+  {t:"8. Accesibilidad", p:[
+   "El sitio se ha construido buscando cumplir las pautas WCAG 2.2 en nivel AA: navegación completa con teclado, foco visible, contraste suficiente, texto alternativo en las imágenes y respeto de la preferencia de movimiento reducido.",
+   "En la carta, la información no depende del color: el tono del recuadro sugiere el cuerpo del café, pero ese mismo dato aparece escrito y en la escala de barras junto a cada ficha. Las existencias van en texto, no en un semáforo.",
+   "Si algo no le funciona con lector de pantalla o con teclado, escríbanos a <b>hola@bunn.example</b> contando qué pasó y con qué navegador. Lo tratamos como una incidencia."]}
+ ],
+ buscaPh:"Buscar un café", avisoBase:"Envío gratuito a partir de 35 € · Tostamos lunes y jueves",
  avisoFalta:"Le faltan {x} para el envío gratuito", avisoYa:"Envío gratuito conseguido",
  bolTitulo:"Le avisamos cuando llega un lote nuevo",
  bolTexto:"Un correo cada tres o cuatro semanas, sólo cuando entra café. Ni ofertas ni cuenta atrás.",
@@ -1380,7 +1492,55 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB", buscaPh:"Search a coffee", avisoBase:"Free shipping over €35 · We roast Mondays and Thursdays",
+ _dir:"ltr", _lang:"en", _loc:"en-GB",
+ nLegal:"Legal", tLegal:"Legal — BUNN", leH1:"Terms of sale, data and cookies.",
+ leEntrada:"What happens when you buy: what you pay, when it ships, what you can return and what we do with your data.",
+ leMaqueta:"Notice: this is a demonstration mock-up. The texts follow the structure of real terms of sale, but the company is invented and no order is processed.",
+ leActualizado:"Updated September 2026",
+ ckTitulo:"Cookies", ckMin:"Essential only", ckTodo:"Accept all",
+ ckMas:"Preferences", ckGuardar:"Save my choice", ckPrefs:"Cookie preferences",
+ ckTexto:"We only use our own cookies. The essential ones store your language and your basket in your browser. Measurement ones are optional and stay off until you say otherwise.",
+ ckCats:[
+  {n:"Essential", d:"They store your language and what is in your basket. Without them the basket empties when you change page. They live in your browser and are sent nowhere."},
+  {n:"Measurement", d:"They count visits in aggregate so we know which coffees get looked at and which do not. They profile nobody. Off by default."},
+  {n:"Preferences", d:"They remember the process filter you left set and the subscription calculator settings."}
+ ],
+ legal:[
+  {t:"1. Who we are", p:[
+   "<b>BUNN Tostadores, S.L.</b>, Carrer de la Indústria 42, unit 3, 08025 Barcelona (Spain). Email: hola@bunn.example. Phone: +34 931 000 000. Registered in the Barcelona Companies Register.",
+   "We sell coffee we roast ourselves. We do not resell coffee roasted by others and we do not white-label for anyone. Everything that leaves here was roasted in our drum and carries the date it was done."]},
+  {t:"2. Prices and orders", p:[
+   "All prices are shown <b>including VAT</b> and in euros. The rate applicable to roasted coffee in Spain is the reduced one. Shipping costs, where they apply, appear before you confirm and are never added afterwards.",
+   "An order is not closed until you receive the confirmation email with an order number. If a coffee sells out between you putting it in the basket and confirming, we tell you and you choose: wait for the next roast, swap it or cancel at no cost.",
+   "<b>Pricing errors.</b> If a manifestly wrong price appears through a fault — a twelve-kilo sack at nine euros — we are not obliged to supply at that price. We tell you, explain what happened, and you decide whether to buy at the correct price or cancel. We do not charge first and argue later."]},
+  {t:"3. Shipping and timescales", p:[
+   "We roast on <b>Mondays and Thursdays</b> and orders leave the day after the roast. An order placed on Tuesday leaves on Friday; one placed on Friday leaves on Tuesday. We do not send coffee roasted a fortnight ago to clear the warehouse.",
+   "<b>Mainland Spain:</b> 24–48 working hours from dispatch. <b>Balearics:</b> 48–72 h. <b>Canary Islands, Ceuta and Melilla:</b> 3–5 days, and the parcel clears customs; any import duties are payable by the recipient because we do not collect them. <b>Rest of the EU:</b> 3–6 days.",
+   "Mainland shipping is <b>free over €35</b>; below that it is €3.90. If a parcel is more than five working days late, write to us: we claim against the carrier ourselves and send you another without waiting for the claim to be settled."]},
+  {t:"4. Returns and withdrawal", p:[
+   "<b>Right of withdrawal.</b> You have fourteen calendar days from receiving the order to withdraw without giving reasons, under European consumer law. An email is enough. The refund goes back to the same payment method within fourteen days of us receiving the goods.",
+   "<b>The exception, and why it exists.</b> Coffee is a sealed food product: an <b>opened</b> bag cannot be returned for hygiene reasons, as in any food shop. Sealed bags in good condition can, including those forming part of a subscription.",
+   "<b>What we do beyond what the law says.</b> If you open a bag and do not like the coffee, we swap it for another with nothing returned and no argument. It is not a legal obligation; we simply care more about understanding why the recommendation missed than about keeping twelve euros.",
+   "<b>Faulty goods.</b> If it arrives broken, badly sealed or with the wrong roast date, send us a photo and we replace the whole order. We do not ask you to return anything or to pay postage."]},
+  {t:"5. Subscriptions", p:[
+   "A subscription has <b>no lock-in</b>. You can pause it, change the frequency, change the coffee or cancel from a link in every dispatch email. No phone call, no email asking, no retention form.",
+   "The charge is made the day before each dispatch, not in advance and not in accumulated months. If you pause, nothing is charged until you restart it. If you cancel, a dispatch already charged is still sent.",
+   "We email you <b>forty-eight hours before</b> each charge with the amount and the coffee that is going out, so there is time to change or skip it. A subscription price only rises at renewal and with one dispatch of notice."]},
+  {t:"6. Data protection", p:[
+   "<b>Controller:</b> BUNN Tostadores, S.L. <b>Purpose:</b> to manage your order or subscription, and to send the newsletter if you signed up. <b>Legal basis:</b> performance of the purchase contract, and your consent for the newsletter. <b>Retention:</b> order data is kept for six years under tax obligations; newsletter data until you unsubscribe.",
+   "<b>Payment data.</b> We neither see nor store it. The payment gateway handles it directly and we only receive the result of the transaction and the last four digits of the card, so we can identify a charge if you ask about it.",
+   "<b>Newsletter.</b> Every email carries an unsubscribe link that works first time and asks for no password. We use no tracking pixels in emails: we do not know whether you opened them, and we do not need to.",
+   "You can exercise access, rectification, erasure, restriction, portability and objection by writing to <b>datos@bunn.example</b>. We answer within one month. If you are not satisfied, you may complain to the Spanish Data Protection Agency."]},
+  {t:"7. Allergens and storage", p:[
+   "Roasted coffee contains no allergens subject to mandatory declaration. It is roasted and packed in premises where <b>only coffee is handled</b>: we share no line with nuts, milk, cereals or cocoa.",
+   "Beans keep best in their valved bag, closed, at room temperature and away from light. The printed date is the <b>roast</b> date, not an expiry: coffee does not spoil, it loses aroma. The recommended window is three to eight weeks from that date.",
+   "The bag uses an aluminium film with a degassing valve and is not recyclable in the packaging bin in every municipality. We are testing a recyclable mono-material; when it works without losing the oxygen barrier, we will say so here."]},
+  {t:"8. Accessibility", p:[
+   "The site was built aiming to meet WCAG 2.2 at level AA: full keyboard navigation, visible focus, sufficient contrast, alternative text on images, and respect for the reduced-motion preference.",
+   "In the shop, information does not depend on colour: the tone of the tile suggests the coffee's body, but the same value appears written out and on the bar scale beside each card. Stock is given as text, not as a traffic light.",
+   "If something does not work with a screen reader or a keyboard, write to <b>hola@bunn.example</b> saying what happened and in which browser. We treat it as an incident."]}
+ ],
+ buscaPh:"Search a coffee", avisoBase:"Free shipping over €35 · We roast Mondays and Thursdays",
  avisoFalta:"{x} to go for free shipping", avisoYa:"Free shipping unlocked",
  bolTitulo:"We tell you when a new lot lands",
  bolTexto:"One email every three or four weeks, only when coffee arrives. No offers, no countdowns.",
@@ -1761,7 +1921,55 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", buscaPh:"ابحث عن بنّ", avisoBase:"شحن مجاني فوق ٣٥ € · نحمّص الاثنين والخميس",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
+ nLegal:"قانوني", tLegal:"قانوني — بُنّ", leH1:"شروط البيع والبيانات وملفات الارتباط.",
+ leEntrada:"ما يحدث حين تشتري: كم تدفع، ومتى يخرج الطلب، وماذا يمكنك إرجاعه، وماذا نفعل ببياناتك.",
+ leMaqueta:"تنبيه: هذه نسخة عرض توضيحية. تتبع النصوص بنية شروط بيع حقيقية، لكن الشركة متخيَّلة ولا يُعالَج أي طلب.",
+ leActualizado:"محدَّث في أيلول ٢٠٢٦",
+ ckTitulo:"ملفات الارتباط", ckMin:"الضرورية فقط", ckTodo:"قبول الكل",
+ ckMas:"التفضيلات", ckGuardar:"احفظ اختياري", ckPrefs:"تفضيلات ملفات الارتباط",
+ ckTexto:"لا نستخدم إلا ملفات ارتباط خاصة بنا. تحفظ الضرورية لغتك وسلّتك في متصفحك. أما ملفات القياس فاختيارية ومتوقفة حتى تقول غير ذلك.",
+ ckCats:[
+  {n:"الضرورية", d:"تحفظ اللغة وما في سلّتك. وبدونها تفرغ السلّة عند تغيير الصفحة. وهي تعيش في متصفحك ولا تُرسَل إلى أي مكان."},
+  {n:"القياس", d:"تحصي الزيارات إجمالًا لنعرف أي أنواع البنّ يُنظَر إليها وأيها لا. ولا تُنشئ ملفًّا عن أحد. ومتوقفة افتراضيًّا."},
+  {n:"التفضيلات", d:"تتذكّر مرشّح المعالجة الذي تركته وإعدادات حاسبة الاشتراك."}
+ ],
+ legal:[
+  {t:"١. من نحن", p:[
+   "<b>بُنّ للتحميص ذ.م.م.</b>، شارع الصناعة ٤٢، وحدة ٣، ٠٨٠٢٥ برشلونة (إسبانيا). البريد: hola@bunn.example. الهاتف: ‎+34 931 000 000‎. مقيّدة في السجل التجاري ببرشلونة.",
+   "نبيع بنًّا نحمّصه بأنفسنا. ولا نعيد بيع بنٍّ حمّصه غيرنا ولا ننتج بعلامة بيضاء لأحد. وكل ما يخرج من هنا حُمّص في أسطوانتنا ويحمل مطبوعًا تاريخ تحميصه."]},
+  {t:"٢. الأسعار والطلبات", p:[
+   "تُعرض جميع الأسعار <b>شاملةً ضريبة القيمة المضافة</b> وباليورو. والنسبة المطبَّقة على البنّ المحمَّص في إسبانيا هي المخفَّضة. أما مصاريف الشحن، إن وُجدت، فتظهر قبل التأكيد ولا تُضاف بعده أبدًا.",
+   "لا يُعدّ الطلب مغلقًا حتى تصلك رسالة التأكيد برقم الطلب. وإن نفد بنٌّ بين وضعه في السلّة والتأكيد، أخبرناك واخترت: الانتظار للتحميص التالي، أو التبديل، أو الإلغاء بلا تكلفة.",
+   "<b>أخطاء التسعير.</b> إن ظهر سعر خاطئ ظهورًا بيّنًا بسبب خلل — كيس اثني عشر كيلوغرامًا بتسعة يورو — فلسنا ملزَمين بالتوريد بذلك السعر. نُخبرك ونشرح ما جرى وتقرّر أنت الشراء بالسعر الصحيح أو الإلغاء. ولا نحصّل أولًا ثم نتجادل."]},
+  {t:"٣. الشحن والمُدد", p:[
+   "نحمّص يومي <b>الاثنين والخميس</b> وتخرج الطلبات في اليوم التالي للتحميص. فالطلب يوم الثلاثاء يخرج الجمعة؛ والطلب يوم الجمعة يخرج الثلاثاء. ولا نرسل بنًّا حُمّص قبل أسبوعين لتفريغ المستودع.",
+   "<b>شبه الجزيرة:</b> ٢٤–٤٨ ساعة عمل من الخروج. <b>البليار:</b> ٤٨–٧٢ ساعة. <b>الكناري وسبتة ومليلية:</b> ٣–٥ أيام، ويمرّ الطرد بالجمارك؛ ورسوم الاستيراد المحتملة على المرسَل إليه لأننا لا نحصّلها. <b>بقية الاتحاد الأوروبي:</b> ٣–٦ أيام.",
+   "الشحن داخل شبه الجزيرة <b>مجاني فوق ٣٥ €</b>؛ وتحتها ٣٫٩٠ €. وإن تأخر الطرد أكثر من خمسة أيام عمل عن المهلة فاكتب إلينا: نطالب نحن شركة الشحن ونرسل إليك بديلًا دون انتظار حسم المطالبة."]},
+  {t:"٤. الإرجاع وحق العدول", p:[
+   "<b>حق العدول.</b> لك أربعة عشر يومًا تقويميًّا من استلام الطلب للعدول دون إبداء أسباب، وفقًا لقانون المستهلك الأوروبي. وتكفي رسالة. ويُردّ المبلغ بالوسيلة نفسها خلال أربعة عشر يومًا من استلامنا البضاعة.",
+   "<b>الاستثناء، ولماذا هو موجود.</b> البنّ منتج غذائي مختوم: فالكيس <b>المفتوح</b> لا يُردّ لأسباب صحية، كما في أي متجر أغذية. أما الأكياس المغلقة السليمة فتُردّ، بما فيها ما كان ضمن اشتراك.",
+   "<b>ما نفعله زيادةً على ما يقوله القانون.</b> إن فتحت كيسًا ولم يعجبك البنّ، بدّلناه بغيره دون إرجاع شيء ودون جدال. وليس التزامًا قانونيًّا، بل يعنينا فهم سبب فشل التوصية أكثر من الاحتفاظ باثني عشر يورو.",
+   "<b>المنتج المعيب.</b> إن وصل مكسورًا أو سيّئ الختم أو بتاريخ تحميص خاطئ، فأرسل صورة ونعيد الطلب كاملًا. ولا نطلب منك إرجاع شيء ولا دفع الشحن."]},
+  {t:"٥. الاشتراكات", p:[
+   "الاشتراك <b>بلا مدة إلزامية</b>. ويمكن إيقافه أو تغيير وتيرته أو تغيير البنّ أو إلغاؤه من رابط في كل رسالة إرسال. بلا اتصال، وبلا رسالة طلب، وبلا نموذج استبقاء.",
+   "ويُخصم المبلغ في اليوم السابق لكل إرسالية، لا مقدَّمًا ولا بأشهر متراكمة. فإن أوقفت، لم يُخصم شيء حتى تعيد التفعيل. وإن ألغيت، أُرسلت الإرسالية المخصومة أصلًا.",
+   "ونُخبرك بالبريد <b>قبل ثمانٍ وأربعين ساعة</b> من كل خصم، بالمبلغ وبالبنّ الذي سيخرج، ليتّسع الوقت لتغييره أو تخطّيه. ولا يرتفع سعر الاشتراك إلا عند التجديد وبإشعار إرسالية واحدة."]},
+  {t:"٦. حماية البيانات", p:[
+   "<b>المسؤول:</b> بُنّ للتحميص ذ.م.م. <b>الغرض:</b> إدارة طلبك أو اشتراكك، وإرسال النشرة إن سجّلت فيها. <b>الأساس القانوني:</b> تنفيذ عقد الشراء، وموافقتك على النشرة. <b>مدة الحفظ:</b> تُحفَظ بيانات الطلب ست سنوات بموجب التزامات ضريبية؛ وبيانات النشرة حتى تُلغي اشتراكك.",
+   "<b>بيانات الدفع.</b> لا نراها ولا نحفظها. فبوابة الدفع تعالجها مباشرةً ولا نتلقّى إلا نتيجة العملية وآخر أربعة أرقام من البطاقة، كي نستطيع تحديد خصمٍ إن سألت عنه.",
+   "<b>النشرة.</b> كل رسالة تحمل رابط إلغاء يعمل من أول مرة ولا يطلب كلمة سر. ولا نستعمل بكسلات تتبّع في الرسائل: فلا نعرف إن فتحتها، ولا نحتاج إلى ذلك.",
+   "ويمكنك ممارسة حقوق الاطلاع والتصحيح والمحو والتقييد وقابلية النقل والاعتراض بالكتابة إلى <b>datos@bunn.example</b>. ونردّ خلال أقل من شهر. وإن لم تقتنع فلك الشكوى إلى الوكالة الإسبانية لحماية البيانات."]},
+  {t:"٧. مسبّبات الحساسية والحفظ", p:[
+   "لا يحتوي البنّ المحمَّص على مسبّبات حساسية واجبة الإعلان. ويُحمَّص ويُعبَّأ في منشأة <b>لا يُتعامَل فيها إلا مع البنّ</b>: فلا نشارك خطًّا مع المكسّرات أو الحليب أو الحبوب أو الكاكاو.",
+   "ويُحفَظ الحبّ خيرًا في كيسه ذي الصمّام، مغلقًا، بحرارة الغرفة وبعيدًا عن الضوء. والتاريخ المطبوع هو تاريخ <b>التحميص</b>، لا انتهاء صلاحية: فالبنّ لا يفسد بل يفقد رائحته. والنافذة الموصى بها من ثلاثة إلى ثمانية أسابيع من ذلك التاريخ.",
+   "والكيس من رقاقة ألمنيوم بصمّام تفريغ، وهو غير قابل لإعادة التدوير في حاوية العبوات في كل البلديات. ونجرّب حاليًّا مادةً أحاديةً قابلة للتدوير؛ ومتى نجحت دون فقد حاجز الأكسجين قلناها هنا."]},
+  {t:"٨. سهولة الوصول", p:[
+   "بُني الموقع سعيًا إلى استيفاء إرشادات WCAG 2.2 عند المستوى AA: تصفّح كامل بلوحة المفاتيح، وتركيز مرئي، وتباين كافٍ، ونص بديل للصور، واحترام تفضيل تقليل الحركة.",
+   "وفي المتجر لا تعتمد المعلومة على اللون: فلون المربّع يوحي بقوام البنّ، لكن القيمة نفسها مكتوبة وعلى سلّم الأعمدة بجوار كل بطاقة. والمخزون مكتوب نصًّا لا بإشارة ضوئية.",
+   "وإن لم يعمل شيء مع قارئ شاشة أو لوحة مفاتيح، فاكتب إلى <b>hola@bunn.example</b> واصفًا ما حدث وبأي متصفح. ونعامله بلاغًا."]}
+ ],
+ buscaPh:"ابحث عن بنّ", avisoBase:"شحن مجاني فوق ٣٥ € · نحمّص الاثنين والخميس",
  avisoFalta:"يتبقّى {x} للشحن المجاني", avisoYa:"حصلت على الشحن المجاني",
  bolTitulo:"نُخبرك حين تصل دفعة جديدة",
  bolTexto:"رسالة كل ثلاثة أو أربعة أسابيع، وفقط حين يصل البنّ. لا عروض ولا عدّ تنازلي.",
@@ -2461,9 +2669,9 @@ var INDICE = {
   contacto:[["ap-preguntas","nPreguntas"],["ap-contacto","nContacto"]]
 };
 
-var RUTAS = ["inicio","cafes","tueste","preparar","comprar","contacto"];
+var RUTAS = ["inicio","cafes","tueste","preparar","comprar","contacto","legal"];
 var TITULOS = {inicio:"tInicio",cafes:"tCafes",tueste:"tTueste",
-  preparar:"tPreparar",comprar:"tComprar",contacto:"tContacto"};
+  preparar:"tPreparar",comprar:"tComprar",contacto:"tContacto",legal:"tLegal"};
 var idioma = "es", tuSel = 0, ctSel = 0;
 
 function loc(){ return T[idioma]._loc; }
@@ -2708,7 +2916,7 @@ function pintarListas(){
     return '<div class="cel dato"><div class="v">'+esc(c.v)+'</div><div class="u">'+esc(c.u)+'</div></div>'; });
 
   pintarTienda(); pintarEstante(); pintarCesta(); pintarConfig();
-  pintarAviso(); pintarPieTienda();
+  pintarAviso(); pintarPieTienda(); pintarCookies(); pintarLegal();
   celdas("suPlanes", t.planes, function(p){
     return '<div class="cel"><span class="sub">'+esc(p.f)+'</span><h3>'+esc(p.n)+'</h3><p>'+esc(p.d)+'</p><div class="precio">'+esc(p.p)+'</div></div>'; });
   var sv = document.getElementById("suVentajas");
@@ -2756,6 +2964,55 @@ function anadir(id, delta){
   if (n <= 0) delete cesta[id];
   else cesta[id] = Math.min(n, art.stock);
   guardarCesta(); pintarTienda(); pintarEstante(); pintarCesta(); pintarAviso();
+}
+
+/* ── Cookies ──────────────────────────────────────────────────────
+   El consentimiento va versionado: si cambian las categorías hay que
+   volver a preguntar, no dar por bueno lo de antes. */
+var CK_VERSION = 1;
+var CK_CATS = ["necesarias","medicion","preferencias"];
+var ck = null;
+try { ck = JSON.parse(localStorage.getItem("bunn_ck") || "null"); } catch(e){ ck = null; }
+if (ck && ck.v !== CK_VERSION) ck = null;
+
+function ckGuarda(elegidas){
+  ck = {v:CK_VERSION, e:elegidas, f:new Date().toISOString().slice(0,10)};
+  try { localStorage.setItem("bunn_ck", JSON.stringify(ck)); } catch(e){}
+  document.getElementById("ck").hidden = true;
+}
+function ckAbrir(){
+  var c = document.getElementById("ck");
+  c.hidden = false;
+  document.getElementById("ckPref").hidden = false;
+  c.scrollIntoView({block:"end"});
+}
+function pintarCookies(){
+  var caja = document.getElementById("ck");
+  if (!caja) return;
+  var t = T[idioma];
+  caja.hidden = !!ck;
+  document.getElementById("ckLista").innerHTML = CK_CATS.map(function(c,i){
+    var fijo = i === 0, marcada = fijo || (ck && ck.e.indexOf(c) >= 0);
+    return '<label class="ck-fila"><input type="checkbox" value="'+c+'"'
+      + (marcada ? " checked" : "") + (fijo ? " disabled" : "") + '>'
+      + '<span><b>'+esc(t.ckCats[i].n)+'</b><span>'+esc(t.ckCats[i].d)+'</span></span></label>';
+  }).join("");
+}
+
+function pintarLegal(){
+  var t = T[idioma], lb = document.getElementById("leBloques");
+  if (lb) lb.innerHTML = t.legal.map(function(b,i){
+    return '<section class="legal-b" id="ap-le'+i+'">'
+      + '<p class="fecha">'+esc(t.leActualizado)+'</p><h2>'+esc(b.t)+'</h2>'
+      + b.p.map(function(x){ return '<p>'+x+'</p>'; }).join("") + '</section>';
+  }).join("");
+  var pl = document.getElementById("pieLegal");
+  if (pl){
+    pl.innerHTML = t.legal.map(function(b,i){
+      return '<a href="#/legal" data-ir="ap-le'+i+'">'+esc(b.t.replace(/^[0-9٠-٩]+\.\s*/, ""))+'</a>';
+    }).join("") + '<button type="button" id="ckReabrir">'+esc(t.ckPrefs)+'</button>';
+    document.getElementById("ckReabrir").addEventListener("click", ckAbrir);
+  }
 }
 
 function pintarConfig(){
@@ -2968,10 +3225,11 @@ function aplicar(codigo){
   for (i=0;i<b.length;i++) b[i].setAttribute("aria-pressed", String(b[i].dataset.lang===codigo));
   document.title = t[TITULOS[ruta()]] || t.tInicio;
   var ac = document.getElementById("acuse"); if (ac){ ac.textContent=""; ac.classList.remove("mal"); }
+  INDICE.legal = t.legal.map(function(b,i){ return ["ap-le"+i, null, b.t]; });
   Object.keys(INDICE).forEach(function(r){
     var e = document.getElementById("ix-"+r); if (!e) return;
     e.innerHTML = INDICE[r].map(function(x){
-      return '<a href="#/'+r+'" data-ir="'+x[0]+'">'+esc(t[x[1]])+'</a>';
+      return '<a href="#/'+r+'" data-ir="'+x[0]+'">'+esc(x[2] || t[x[1]])+'</a>';
     }).join("");
   });
   pintarListas(); pintarTueste(); pintarCata(); pintarOrigenes(); grano(); pintarNuevas();
@@ -3004,6 +3262,19 @@ document.addEventListener("click", function(ev){
     var alto = cab ? cab.getBoundingClientRect().height : 0;
     window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - alto - 12);
   }, 60);
+});
+document.getElementById("ckMin").addEventListener("click", function(){ ckGuarda(["necesarias"]); });
+document.getElementById("ckTodo").addEventListener("click", function(){ ckGuarda(CK_CATS.slice()); });
+document.getElementById("ckMas").addEventListener("click", function(){
+  var pr = document.getElementById("ckPref"); pr.hidden = !pr.hidden;
+  this.setAttribute("aria-expanded", String(!pr.hidden));
+});
+document.getElementById("ckGuardar").addEventListener("click", function(){
+  var marcadas = ["necesarias"];
+  Array.prototype.forEach.call(document.querySelectorAll("#ckLista input:not([disabled])"), function(i){
+    if (i.checked) marcadas.push(i.value);
+  });
+  ckGuarda(marcadas);
 });
 document.getElementById("busca").addEventListener("input", function(){
   busqueda = this.value.trim().toLowerCase();
