@@ -247,6 +247,52 @@ img{max-width:100%;}
 .ejem div{display:grid;grid-template-columns:repeat(12,1fr);font-size:.66rem;color:var(--t3);}
 .ejem span{text-align:center;}
 
+/* ── Piezas de página larga ──────────────────────────────────────── */
+.filas{border-top:1px solid var(--l);}
+.fila{display:grid;grid-template-columns:3.5rem 1fr;gap:1.2rem;padding-block:1.5rem;border-bottom:1px solid var(--l2);}
+@media(min-width:900px){.fila{grid-template-columns:3.5rem 15rem 1fr;}}
+.fila .i{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ocre);padding-top:.45rem;}
+html[dir="rtl"] .fila .i{letter-spacing:0;text-transform:none;font-size:.88rem;}
+.fila h3{font-family:var(--disp);font-size:1.35rem;font-weight:400;}
+html[dir="rtl"] .fila h3{font-weight:700;font-size:1.2rem;}
+.fila .d{color:var(--t2);}
+
+.cinta{background:var(--ocre);color:#17130f;padding:2.2rem;display:grid;gap:1.2rem;align-items:center;}
+@media(min-width:760px){.cinta{grid-template-columns:1fr auto;gap:2.5rem;}}
+.cinta h3{font-family:var(--disp);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:400;color:#17130f;max-width:24ch;}
+html[dir="rtl"] .cinta h3{font-weight:700;}
+.cinta p{color:rgba(23,19,15,.72);margin:.5rem 0 0;font-size:.95rem;}
+.cinta .btn{border-color:#17130f;color:#17130f;white-space:nowrap;}
+.cinta .btn:hover{background:#17130f;color:var(--ocre);}
+
+.despues{counter-reset:d;list-style:none;margin:1.2rem 0 0;padding:0;}
+.despues li{counter-increment:d;display:grid;grid-template-columns:2rem 1fr;gap:1rem;
+  padding-block:1rem;border-bottom:1px solid var(--l2);}
+.despues li::before{content:counter(d);font-family:var(--disp);color:var(--ocre);font-size:1.1rem;}
+html[dir="rtl"] .despues li::before{content:counter(d,arabic-indic);font-family:var(--c);font-weight:700;}
+.despues b{display:block;font-weight:600;font-size:.98rem;margin-bottom:.2rem;}
+.despues span{font-size:.9rem;color:var(--t2);}
+
+.cont-rej{display:grid;gap:2.5rem;}
+@media(min-width:900px){.cont-rej{grid-template-columns:1.4fr 1fr;gap:4rem;}}
+.dir{border:1px solid var(--l);padding:1.5rem;margin-bottom:1.5rem;}
+.dir b{font-family:var(--disp);font-size:1.4rem;font-weight:400;display:block;margin-bottom:.6rem;}
+html[dir="rtl"] .dir b{font-weight:700;font-size:1.2rem;}
+.dir address{font-style:normal;color:var(--t2);font-size:.94rem;line-height:1.7;}
+.dir .tel{display:inline-block;margin-top:.8rem;color:var(--ocre);text-decoration:none;font-size:.92rem;}
+.equipo-c{border-top:1px solid var(--l);}
+.equipo-c div{display:grid;grid-template-columns:1fr auto;gap:1rem;padding-block:1rem;
+  border-bottom:1px solid var(--l2);align-items:center;}
+.equipo-c b{font-weight:600;font-size:.96rem;display:block;}
+.equipo-c span{font-size:.86rem;color:var(--t3);display:block;}
+.equipo-c a{font-size:.86rem;color:var(--ocre);text-decoration:none;white-space:nowrap;}
+
+.indice-pag{display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;padding-block:1.1rem;
+  border-block:1px solid var(--l);margin-bottom:2.5rem;font-size:.8rem;letter-spacing:.06em;}
+html[dir="rtl"] .indice-pag{letter-spacing:0;font-size:.95rem;}
+.indice-pag a{color:var(--t2);text-decoration:none;}
+.indice-pag a:hover{color:var(--ocre);}
+
 .faq{border-top:1px solid var(--l);}
 .faq summary{cursor:pointer;padding-block:1.2rem;font-family:var(--disp);font-size:1.3rem;
   list-style:none;display:flex;gap:1rem;align-items:baseline;}
@@ -291,22 +337,12 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
       <span data-t="marca">BUNN</span>
     </a>
     <nav class="b" data-t-attr="aria-label:ariaMenu" aria-label="Secciones">
-      <a href="#/inicio"      data-t="nInicio">Inicio</a>
-      <a href="#/cafes"       data-t="nCafes">Cafés</a>
-      <a href="#/origenes"    data-t="nOrigenes">Orígenes</a>
-      <a href="#/tueste"      data-t="nTueste">Tueste</a>
-      <a href="#/cata"        data-t="nCata">Cata</a>
-      <a href="#/suscripcion" data-t="nSuscripcion">Suscripción</a>
-      <a href="#/hosteleria"  data-t="nHosteleria">Hostelería</a>
-      <a href="#/elige"        data-t="nElige">Elige tu café</a>
-      <a href="#/receta"       data-t="nReceta">Receta</a>
-      <a href="#/matriz"       data-t="nMatriz">Qué va con qué</a>
-      <a href="#/comparar"     data-t="nComparar">Comparar</a>
-      <a href="#/trazabilidad" data-t="nTraza">Trazabilidad</a>
-      <a href="#/cronometro"   data-t="nCrono">Cronómetro</a>
-      <a href="#/metodo"      data-t="nMetodo">Preparación</a>
-      <a href="#/preguntas"   data-t="nPreguntas">Preguntas</a>
-      <a href="#/contacto"    data-t="nContacto">Contacto</a>
+      <a href="#/inicio"   data-t="nInicio">Inicio</a>
+      <a href="#/cafes"    data-t="nCafes">Los cafés</a>
+      <a href="#/tueste"   data-t="nTueste">El tueste</a>
+      <a href="#/preparar" data-t="nPreparar">Preparar</a>
+      <a href="#/comprar"  data-t="nComprar">Comprar</a>
+      <a href="#/contacto" data-t="nContacto">Contacto</a>
     </nav>
     <div class="idi" role="group" data-t-attr="aria-label:ariaIdioma" aria-label="Idioma">
       <button type="button" data-lang="es" aria-pressed="true">ES</button>
@@ -318,7 +354,7 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 
 <main>
 
-<section data-ruta="inicio">
+<section data-ruta="inicio" id="ap-inicio">
   <div class="marco hero">
     <div>
       <p class="eti" data-t="iEti">Tostador de especialidad · desde 2019</p>
@@ -344,12 +380,13 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
   </div>
 </section>
 
-<section data-ruta="cafes">
+<section data-ruta="cafes" id="ap-cafes">
   <div class="marco bl">
     <p class="eti" data-t="nCafes">Cafés</p>
     <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="caH1">Seis cafés, y ninguno por rellenar la carta.</h1>
     <p class="entrada" data-t="caEntrada">Cambian con la cosecha. Cuando un lote se acaba, se acaba: no lo sustituimos por otro parecido y con el mismo nombre.</p>
   </div>
+  <div class="marco"><nav class="indice-pag" id="ix-cafes" data-t-attr="aria-label:ariaEnPagina" aria-label="En esta página"></nav></div>
   <div class="marco">
     <img class="banda-foto" src="img/grano-tostado.jpg" width="1400" height="533"
          data-t-attr="alt:altCafes" alt="Primer plano de grano de café recién tostado">
@@ -358,10 +395,10 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
   </div>
 </section>
 
-<section data-ruta="origenes">
-  <div class="marco bl">
+<section data-ruta="cafes" id="ap-origenes">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
     <p class="eti" data-t="nOrigenes">Orígenes</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="orH1">El café fresco no existe todo el año en todas partes.</h1>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="orH1">El café fresco no existe todo el año en todas partes.</h2>
     <p class="entrada" data-t="orEntrada">Cada origen se cosecha en su ventana. Por eso una carta honesta cambia con el calendario y no ofrece lo mismo en enero que en agosto.</p>
   </div>
   <div class="marco">
@@ -373,29 +410,34 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <details class="faq" style="margin-top:1.4rem"><summary data-t="verTabla">Ver los orígenes en tabla</summary><div id="orTabla"></div></details>
     <p class="metodo" data-t="orNota">Ventanas de cosecha habituales, no fechas exactas: se mueven cada año con la lluvia. Colombia y Kenia aparecen dos veces porque tienen una cosecha principal y una secundaria.</p>
   </div>
+  <div class="marco bl">
+    <p class="eti" data-t="orComprarEti">Cómo compramos</p>
+    <div id="orComprar" style="max-width:64ch;margin-top:1rem"></div>
+  </div>
+  <div class="marco" style="padding-bottom:clamp(2.75rem,6vw,5rem)">
+    <p class="eti" data-t="orPrecioEti">A dónde va el dinero de una bolsa de 250 g</p>
+    <div class="rej r4" id="orPrecio" style="margin-top:1rem"></div>
+    <p class="metodo" data-t="orPrecioNota">Reparto medio de una bolsa de 12,50 €, con el café verde a precio de contrato directo. El porcentaje que llega al productor varía con el origen y con el año; el resto de partidas son bastante estables.</p>
+  </div>
 </section>
 
-<section data-ruta="tueste">
-  <div class="marco bl">
-    <p class="eti" data-t="nTueste">Tueste</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="tuH1">Once minutos que deciden a qué sabe.</h1>
-    <p class="entrada" data-t="tuEntrada">Un tueste no es «claro» o «oscuro»: es una curva de temperatura en el tiempo. Estas son las tres que usamos, y la diferencia entre ellas se nota en la taza.</p>
+<section data-ruta="cafes" id="ap-trazabilidad">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
+    <p class="eti" data-t="nTraza">Trazabilidad</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="trH1">Un lote, desde la finca hasta su taza.</h2>
+    <p class="entrada" data-t="trEntrada">Este es el recorrido completo del lote de Huila que hay ahora en la carta. Ocho pasos y siete meses.</p>
   </div>
   <div class="marco">
-    <svg class="grano" id="grano" viewBox="0 0 480 340" role="img" style="max-width:26rem;margin-bottom:2rem"
-         data-t-attr="aria-label:granoAlt" aria-label="Ilustración del proceso de tueste"></svg>
-    <div class="mandos" id="tuMandos" role="group" data-t-attr="aria-label:tuAria" aria-label="Perfil de tueste"></div>
-    <div class="leyenda" id="tuLeyenda"></div>
-    <div class="grafica"><svg id="tuGrafica" role="img" data-t-attr="aria-label:tuGrafAlt" aria-label="Curva de temperatura del tueste"></svg></div>
-    <p class="hallazgo" id="tuHallazgo"></p>
-    <p class="metodo" data-t="tuNota">Curvas de referencia de nuestro tambor de 12 kg. El punto de giro es el mínimo tras cargar el grano frío; el primer crack es cuando el grano revienta y empieza a expandirse. La temperatura de salida y los minutos posteriores al crack son lo que más cambia el resultado.</p>
+    <ol class="linea" id="trLinea"></ol>
+    <p class="hallazgo" id="trHallazgo"></p>
+    <p class="metodo" data-t="trNota">Fechas de un lote de ejemplo con la estructura real de nuestra trazabilidad. En la bolsa que le llega figuran el productor, la altitud y el número de lote, y con ellos se puede reconstruir esta misma línea.</p>
   </div>
 </section>
 
-<section data-ruta="cata">
-  <div class="marco bl">
+<section data-ruta="cafes" id="ap-cata">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
     <p class="eti" data-t="nCata">Cata</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="ctH1">Seis ejes para decir lo que una etiqueta no dice.</h1>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="ctH1">Seis ejes para decir lo que una etiqueta no dice.</h2>
     <p class="entrada" data-t="ctEntrada">«Notas de chocolate» no le sirve de nada si lo que usted quiere saber es si va a estar ácido. Esto sí.</p>
   </div>
   <div class="marco">
@@ -407,41 +449,80 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <details class="faq" style="margin-top:1.4rem"><summary data-t="verTabla">Ver los valores en tabla</summary><div id="ctTabla"></div></details>
     <p class="metodo" data-t="ctNota">Puntuaciones de 0 a 10 de nuestra mesa de cata, con tres catadores y a ciegas. Es una valoración nuestra, no una norma: otro tostador puntuaría distinto el mismo lote.</p>
   </div>
-</section>
-
-<section data-ruta="suscripcion">
   <div class="marco bl">
-    <p class="eti" data-t="nSuscripcion">Suscripción</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="suH1">Café recién tostado, sin tener que acordarse.</h1>
-    <p class="entrada" data-t="suEntrada">Elija cada cuánto y cuánto. Se puede pausar, cambiar o cancelar desde un enlace del propio correo, sin llamar a nadie.</p>
+    <p class="eti" data-t="ctEjesEti">Qué mide cada eje</p>
+    <div class="filas" id="ctEjes"></div>
   </div>
-  <div class="marco"><div class="rej r3" id="suPlanes"></div>
-    <div style="margin-top:2rem"><ul class="lista" id="suVentajas"></ul></div>
-    <p class="metodo" data-t="suNota">Precios por envío. El envío peninsular es gratuito a partir de dos bolsas. Sin permanencia y sin penalización por cancelar.</p>
+  <div class="marco" style="padding-bottom:clamp(2.75rem,6vw,5rem)">
+    <p class="eti" data-t="ctComoEti">Cómo catamos</p>
+    <div id="ctComo" style="max-width:64ch;margin-top:1rem"></div>
   </div>
 </section>
 
-<section data-ruta="hosteleria">
-  <div class="marco bl">
-    <p class="eti" data-t="nHosteleria">Hostelería</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="hoH1">Un buen café mal extraído sigue siendo un mal café.</h1>
-    <p class="entrada" data-t="hoEntrada">Por eso con la hostelería no vendemos sólo grano: montamos la máquina, ajustamos el molino y formamos al equipo. Y volvemos.</p>
+<section data-ruta="cafes" id="ap-comparar">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
+    <p class="eti" data-t="nComparar">Comparar</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="cmH1">Dos cafés, uno enfrente del otro.</h2>
+    <p class="entrada" data-t="cmEntrada">La barra crece hacia el lado del café que más tiene de cada cosa. Sirve para decidir entre dos, que es la duda de verdad.</p>
   </div>
   <div class="marco">
-    <img class="banda-foto" src="img/barista.jpg" width="1400" height="533"
-         data-t-attr="alt:altHosteleria" alt="Barista prensando el café en el portafiltros">
-    <div class="rej r3" id="hoServicios"></div>
-    <div style="margin-top:2rem" class="rej r4" id="hoDatos"></div>
-    <div class="acc"><a class="btn sol" href="#/contacto" data-t="bPedirVisita">Pedir una visita</a></div>
+    <div class="cmp-sel">
+      <div><label for="cmA" data-t="cmLA">Café A</label><select id="cmA"></select></div>
+      <div><label for="cmB" data-t="cmLB">Café B</label><select id="cmB"></select></div>
+    </div>
+    <div id="cmFilas"></div>
+    <p class="hallazgo" id="cmHallazgo"></p>
+    <p class="metodo" data-t="cmNota">Mismos seis ejes que la mesa de cata, de 0 a 10. Dos cafés pueden tener la misma puntuación total y no parecerse en nada: por eso se compara eje por eje y no con una nota global.</p>
   </div>
 </section>
 
-<section data-ruta="metodo">
+<section data-ruta="tueste" id="ap-tueste">
+  <div class="marco bl">
+    <p class="eti" data-t="nTueste">Tueste</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="tuH1">Once minutos que deciden a qué sabe.</h1>
+    <p class="entrada" data-t="tuEntrada">Un tueste no es «claro» o «oscuro»: es una curva de temperatura en el tiempo. Estas son las tres que usamos, y la diferencia entre ellas se nota en la taza.</p>
+  </div>
+  <div class="marco"><nav class="indice-pag" id="ix-tueste" data-t-attr="aria-label:ariaEnPagina" aria-label="En esta página"></nav></div>
+  <div class="marco">
+    <svg class="grano" id="grano" viewBox="0 0 480 340" role="img" style="max-width:26rem;margin-bottom:2rem"
+         data-t-attr="aria-label:granoAlt" aria-label="Ilustración del proceso de tueste"></svg>
+    <div class="mandos" id="tuMandos" role="group" data-t-attr="aria-label:tuAria" aria-label="Perfil de tueste"></div>
+    <div class="leyenda" id="tuLeyenda"></div>
+    <div class="grafica"><svg id="tuGrafica" role="img" data-t-attr="aria-label:tuGrafAlt" aria-label="Curva de temperatura del tueste"></svg></div>
+    <p class="hallazgo" id="tuHallazgo"></p>
+    <p class="metodo" data-t="tuNota">Curvas de referencia de nuestro tambor de 12 kg. El punto de giro es el mínimo tras cargar el grano frío; el primer crack es cuando el grano revienta y empieza a expandirse. La temperatura de salida y los minutos posteriores al crack son lo que más cambia el resultado.</p>
+  </div>
+  <div class="marco bl">
+    <p class="eti" data-t="tuFasesEti">Qué ocurre dentro del grano, minuto a minuto</p>
+    <div class="filas" id="tuFases"></div>
+  </div>
+  <div class="marco" style="padding-bottom:clamp(2.75rem,6vw,5rem)">
+    <p class="eti" data-t="tuDefectosEti">Tres defectos que se ven en la curva</p>
+    <div class="rej r3" id="tuDefectos" style="margin-top:1rem"></div>
+  </div>
+</section>
+
+<section data-ruta="tueste" id="ap-matriz">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
+    <p class="eti" data-t="nMatriz">Qué va con qué</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="maH1">No todo café vale para todo método.</h2>
+    <p class="entrada" data-t="maEntrada">Cuanto más oscura la celda, mejor funciona esa combinación. Es nuestra valoración, no una verdad revelada.</p>
+  </div>
+  <div class="marco">
+    <div class="matriz"><table id="maTabla"></table></div>
+    <div class="escala" id="maEscala"></div>
+    <p class="hallazgo" id="maHallazgo"></p>
+    <p class="metodo" data-t="maNota">Puntuación de 0 a 5 de nuestra barra, probando cada café en cada método con la receta de la página anterior. Un 2 no significa que esté malo: significa que ese café da más de sí en otro sitio.</p>
+  </div>
+</section>
+
+<section data-ruta="preparar" id="ap-metodo">
   <div class="marco bl">
     <p class="eti" data-t="nMetodo">Preparación</p>
     <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="meH1">Las proporciones que usamos nosotros.</h1>
     <p class="entrada" data-t="meEntrada">No hay una receta única, pero sí un punto de partida decente para cada método. Ajuste desde aquí, no desde cero.</p>
   </div>
+  <div class="marco"><nav class="indice-pag" id="ix-preparar" data-t-attr="aria-label:ariaEnPagina" aria-label="En esta página"></nav></div>
   <div class="marco"><div class="rej r3" id="meMetodos"></div>
     <div style="margin-top:2.5rem">
       <p class="eti" data-t="credEti">Créditos de las imágenes</p>
@@ -452,21 +533,132 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
   </div>
 </section>
 
-<section data-ruta="preguntas">
+<section data-ruta="preparar" id="ap-receta">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
+    <p class="eti" data-t="nReceta">Receta</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="reH1">Cambie el agua y el café se ajusta solo.</h2>
+    <p class="entrada" data-t="reEntrada">Escriba en cualquiera de los dos campos: el otro se recalcula manteniendo la proporción del método.</p>
+  </div>
+  <div class="marco calc">
+    <div>
+      <div style="margin-bottom:1.4rem"><label for="rcMet" data-t="rcLMet">Método</label><select id="rcMet"></select></div>
+      <div class="calc-par">
+        <div><label for="rcCafe" data-t="rcLCafe">Café (g)</label><input id="rcCafe" type="number" min="5" max="500" step="1"></div>
+        <div class="eq">:</div>
+        <div><label for="rcAgua" data-t="rcLAgua">Agua (ml)</label><input id="rcAgua" type="number" min="30" max="5000" step="5"></div>
+      </div>
+      <div class="escalas" id="rcEscalas"></div>
+      <p class="metodo" data-t="rcNota">Las proporciones son las que usamos en la barra. Si le sale amargo, muela más grueso antes de tocar la receta; si le sale ácido y aguado, más fino. El molido cambia más el resultado que un gramo arriba o abajo.</p>
+    </div>
+    <div class="calc-res">
+      <div class="calc-ratio" id="rcRatio"></div>
+      <p style="font-size:.85rem;color:var(--t3);margin:.4rem 0 1.3rem" data-t="rcRatioTxt">Proporción café : agua</p>
+      <div id="rcLineas"></div>
+      <p class="hallazgo" id="rcHallazgo" style="margin-top:1.3rem"></p>
+    </div>
+  </div>
+</section>
+
+<section data-ruta="preparar" id="ap-cronometro">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
+    <p class="eti" data-t="nCrono">Cronómetro</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="crH1">Le vamos diciendo qué toca.</h2>
+    <p class="entrada" data-t="crEntrada">Elija el método, dele a empezar y deje el móvil apoyado. Va avanzando solo y le dice cuánta agua lleva echada.</p>
+  </div>
+  <div class="marco crono">
+    <div>
+      <div style="margin-bottom:1.4rem"><label for="crMet" data-t="rcLMet">Método</label><select id="crMet"></select></div>
+      <div class="crono-reloj">
+        <div class="crono-t" id="crT">0:00</div>
+        <div class="crono-fase" id="crFase"></div>
+        <div class="crono-agua" id="crAgua"></div>
+        <div class="crono-bot">
+          <button class="btn sol" id="crPlay" type="button" data-t="crEmpezar">Empezar</button>
+          <button class="btn" id="crReset" type="button" data-t="crReiniciar">Reiniciar</button>
+        </div>
+      </div>
+      <p class="metodo" data-t="crNota">Los tiempos son los de nuestra receta. Si su molino muele distinto al nuestro, ajuste el molido antes que el cronómetro.</p>
+    </div>
+    <div>
+      <ol class="crono-pasos" id="crPasos"></ol>
+    </div>
+  </div>
+</section>
+
+<section data-ruta="preparar" id="ap-elige">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
+    <p class="eti" data-t="nElige">Elige tu café</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="elH1">Cuatro preguntas y le decimos cuál.</h2>
+    <p class="entrada" data-t="elEntrada">Ninguna de ellas es sobre notas de cata. Son sobre cómo bebe usted el café, que es lo que de verdad decide.</p>
+  </div>
+  <div class="marco">
+    <div class="pasos-barra" id="elBarra" aria-hidden="true"></div>
+    <div class="wz" id="elWz"></div>
+  </div>
+</section>
+
+<section data-ruta="comprar" id="ap-suscripcion">
+  <div class="marco bl">
+    <p class="eti" data-t="nSuscripcion">Suscripción</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="suH1">Café recién tostado, sin tener que acordarse.</h1>
+    <p class="entrada" data-t="suEntrada">Elija cada cuánto y cuánto. Se puede pausar, cambiar o cancelar desde un enlace del propio correo, sin llamar a nadie.</p>
+  </div>
+  <div class="marco"><nav class="indice-pag" id="ix-comprar" data-t-attr="aria-label:ariaEnPagina" aria-label="En esta página"></nav></div>
+  <div class="marco"><div class="rej r3" id="suPlanes"></div>
+    <div style="margin-top:2rem"><ul class="lista" id="suVentajas"></ul></div>
+    <p class="metodo" data-t="suNota">Precios por envío. El envío peninsular es gratuito a partir de dos bolsas. Sin permanencia y sin penalización por cancelar.</p>
+  </div>
+</section>
+
+<section data-ruta="comprar" id="ap-hosteleria">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
+    <p class="eti" data-t="nHosteleria">Hostelería</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="hoH1">Un buen café mal extraído sigue siendo un mal café.</h2>
+    <p class="entrada" data-t="hoEntrada">Por eso con la hostelería no vendemos sólo grano: montamos la máquina, ajustamos el molino y formamos al equipo. Y volvemos.</p>
+  </div>
+  <div class="marco">
+    <img class="banda-foto" src="img/barista.jpg" width="1400" height="533"
+         data-t-attr="alt:altHosteleria" alt="Barista prensando el café en el portafiltros">
+    <div class="rej r3" id="hoServicios"></div>
+    <div style="margin-top:2rem" class="rej r4" id="hoDatos"></div>
+    <div class="acc"><a class="btn sol" href="#/contacto" data-t="bPedirVisita">Pedir una visita</a></div>
+  </div>
+  <div class="marco bl">
+    <p class="eti" data-t="hoErroresEti">Los cinco fallos que vemos en casi todas las barras</p>
+    <div class="filas" id="hoErrores"></div>
+  </div>
+  <div class="marco bl" style="padding-top:0">
+    <p class="eti" data-t="hoCuentasEti">Las cuentas de una barra</p>
+    <div id="hoCuentas" style="max-width:64ch;margin-top:1rem"></div>
+  </div>
+  <div class="marco" style="padding-bottom:clamp(2.75rem,6vw,5rem)">
+    <div class="cinta">
+      <div>
+        <h3 data-t="ctaHosH">La primera visita y el ajuste del molino no se cobran.</h3>
+        <p data-t="ctaHosP">Vamos, medimos lo que sale de su máquina y le decimos qué cambiaríamos. Aunque después compre el café a otro.</p>
+      </div>
+      <a class="btn" href="#/contacto" data-t="bPedirVisita">Pedir una visita</a>
+    </div>
+  </div>
+</section>
+
+<section data-ruta="contacto" id="ap-preguntas">
   <div class="marco bl">
     <p class="eti" data-t="nPreguntas">Preguntas</p>
     <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="pgH1">Lo que más nos preguntan.</h1>
   </div>
+  <div class="marco"><nav class="indice-pag" id="ix-contacto" data-t-attr="aria-label:ariaEnPagina" aria-label="En esta página"></nav></div>
   <div class="marco" id="pgLista"></div>
 </section>
 
-<section data-ruta="contacto">
-  <div class="marco bl">
+<section data-ruta="contacto" id="ap-contacto">
+  <div class="marco bl" style="padding-top:clamp(2rem,4vw,3.5rem)">
     <p class="eti" data-t="nContacto">Contacto</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="coH1">Escríbanos y le decimos qué café le pega.</h1>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="coH1">Escríbanos y le decimos qué café le pega.</h2>
     <p class="entrada" data-t="coEntrada">Si nos cuenta cómo lo prepara y qué le gusta beber, le recomendamos uno concreto en vez de mandarle la carta entera.</p>
   </div>
-  <div class="marco">
+  <div class="marco cont-rej" style="padding-bottom:clamp(2.75rem,6vw,5rem)">
+    <div>
     <form id="f" novalidate>
       <div class="par">
         <div><label for="nom" data-t="lNombre">Nombre</label><input id="nom" autocomplete="name"></div>
@@ -497,127 +689,49 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
       </div>
       <p class="aviso" data-t="coAviso">Sus datos se usan sólo para responderle. No se ceden a nadie.</p>
     </form>
-  </div>
-</section>
-
-
-<section data-ruta="elige">
-  <div class="marco bl">
-    <p class="eti" data-t="nElige">Elige tu café</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="elH1">Cuatro preguntas y le decimos cuál.</h1>
-    <p class="entrada" data-t="elEntrada">Ninguna de ellas es sobre notas de cata. Son sobre cómo bebe usted el café, que es lo que de verdad decide.</p>
-  </div>
-  <div class="marco">
-    <div class="pasos-barra" id="elBarra" aria-hidden="true"></div>
-    <div class="wz" id="elWz"></div>
-  </div>
-</section>
-
-<section data-ruta="receta">
-  <div class="marco bl">
-    <p class="eti" data-t="nReceta">Receta</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="reH1">Cambie el agua y el café se ajusta solo.</h1>
-    <p class="entrada" data-t="reEntrada">Escriba en cualquiera de los dos campos: el otro se recalcula manteniendo la proporción del método.</p>
-  </div>
-  <div class="marco calc">
-    <div>
-      <div style="margin-bottom:1.4rem"><label for="rcMet" data-t="rcLMet">Método</label><select id="rcMet"></select></div>
-      <div class="calc-par">
-        <div><label for="rcCafe" data-t="rcLCafe">Café (g)</label><input id="rcCafe" type="number" min="5" max="500" step="1"></div>
-        <div class="eq">:</div>
-        <div><label for="rcAgua" data-t="rcLAgua">Agua (ml)</label><input id="rcAgua" type="number" min="30" max="5000" step="5"></div>
-      </div>
-      <div class="escalas" id="rcEscalas"></div>
-      <p class="metodo" data-t="rcNota">Las proporciones son las que usamos en la barra. Si le sale amargo, muela más grueso antes de tocar la receta; si le sale ácido y aguado, más fino. El molido cambia más el resultado que un gramo arriba o abajo.</p>
+    <div style="margin-top:2.5rem">
+      <p class="eti" data-t="coDespuesEti">Qué pasa después</p>
+      <ol class="despues" id="coDespues"></ol>
     </div>
-    <div class="calc-res">
-      <div class="calc-ratio" id="rcRatio"></div>
-      <p style="font-size:.85rem;color:var(--t3);margin:.4rem 0 1.3rem" data-t="rcRatioTxt">Proporción café : agua</p>
-      <div id="rcLineas"></div>
-      <p class="hallazgo" id="rcHallazgo" style="margin-top:1.3rem"></p>
     </div>
+    <aside>
+      <p class="eti" data-t="coTostaderoEti">El tostadero</p>
+      <div id="coDirs"></div>
+      <p class="eti" data-t="coEquipoEti">Quién le contesta</p>
+      <div class="equipo-c" id="coEquipo"></div>
+      <p class="metodo" data-t="coHorario">El tostadero abre de martes a sábado de 9:00 a 14:00. Puede venir sin cita a comprar grano o a probar lo que haya en la barra; para ver un tueste en marcha avise antes, porque no tostamos todos los días.</p>
+    </aside>
   </div>
 </section>
 
-<section data-ruta="matriz">
-  <div class="marco bl">
-    <p class="eti" data-t="nMatriz">Qué va con qué</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="maH1">No todo café vale para todo método.</h1>
-    <p class="entrada" data-t="maEntrada">Cuanto más oscura la celda, mejor funciona esa combinación. Es nuestra valoración, no una verdad revelada.</p>
-  </div>
-  <div class="marco">
-    <div class="matriz"><table id="maTabla"></table></div>
-    <div class="escala" id="maEscala"></div>
-    <p class="hallazgo" id="maHallazgo"></p>
-    <p class="metodo" data-t="maNota">Puntuación de 0 a 5 de nuestra barra, probando cada café en cada método con la receta de la página anterior. Un 2 no significa que esté malo: significa que ese café da más de sí en otro sitio.</p>
-  </div>
-</section>
 
-<section data-ruta="comparar">
-  <div class="marco bl">
-    <p class="eti" data-t="nComparar">Comparar</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="cmH1">Dos cafés, uno enfrente del otro.</h1>
-    <p class="entrada" data-t="cmEntrada">La barra crece hacia el lado del café que más tiene de cada cosa. Sirve para decidir entre dos, que es la duda de verdad.</p>
-  </div>
-  <div class="marco">
-    <div class="cmp-sel">
-      <div><label for="cmA" data-t="cmLA">Café A</label><select id="cmA"></select></div>
-      <div><label for="cmB" data-t="cmLB">Café B</label><select id="cmB"></select></div>
-    </div>
-    <div id="cmFilas"></div>
-    <p class="hallazgo" id="cmHallazgo"></p>
-    <p class="metodo" data-t="cmNota">Mismos seis ejes que la mesa de cata, de 0 a 10. Dos cafés pueden tener la misma puntuación total y no parecerse en nada: por eso se compara eje por eje y no con una nota global.</p>
-  </div>
-</section>
 
-<section data-ruta="trazabilidad">
-  <div class="marco bl">
-    <p class="eti" data-t="nTraza">Trazabilidad</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="trH1">Un lote, desde la finca hasta su taza.</h1>
-    <p class="entrada" data-t="trEntrada">Este es el recorrido completo del lote de Huila que hay ahora en la carta. Ocho pasos y siete meses.</p>
-  </div>
-  <div class="marco">
-    <ol class="linea" id="trLinea"></ol>
-    <p class="hallazgo" id="trHallazgo"></p>
-    <p class="metodo" data-t="trNota">Fechas de un lote de ejemplo con la estructura real de nuestra trazabilidad. En la bolsa que le llega figuran el productor, la altitud y el número de lote, y con ellos se puede reconstruir esta misma línea.</p>
-  </div>
-</section>
 
-<section data-ruta="cronometro">
-  <div class="marco bl">
-    <p class="eti" data-t="nCrono">Cronómetro</p>
-    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="crH1">Le vamos diciendo qué toca.</h1>
-    <p class="entrada" data-t="crEntrada">Elija el método, dele a empezar y deje el móvil apoyado. Va avanzando solo y le dice cuánta agua lleva echada.</p>
-  </div>
-  <div class="marco crono">
-    <div>
-      <div style="margin-bottom:1.4rem"><label for="crMet" data-t="rcLMet">Método</label><select id="crMet"></select></div>
-      <div class="crono-reloj">
-        <div class="crono-t" id="crT">0:00</div>
-        <div class="crono-fase" id="crFase"></div>
-        <div class="crono-agua" id="crAgua"></div>
-        <div class="crono-bot">
-          <button class="btn sol" id="crPlay" type="button" data-t="crEmpezar">Empezar</button>
-          <button class="btn" id="crReset" type="button" data-t="crReiniciar">Reiniciar</button>
-        </div>
-      </div>
-      <p class="metodo" data-t="crNota">Los tiempos son los de nuestra receta. Si su molino muele distinto al nuestro, ajuste el molido antes que el cronómetro.</p>
-    </div>
-    <div>
-      <ol class="crono-pasos" id="crPasos"></ol>
-    </div>
-  </div>
-</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </main>
 
 <footer class="b">
   <div class="marco pie">
     <span data-t="marca">BUNN</span>
-    <nav>
-      <a href="#/cafes" data-t="nCafes">Cafés</a>
-      <a href="#/origenes" data-t="nOrigenes">Orígenes</a>
-      <a href="#/suscripcion" data-t="nSuscripcion">Suscripción</a>
+    <nav data-t-attr="aria-label:ariaMenu" aria-label="Secciones">
+      <a href="#/inicio"   data-t="nInicio">Inicio</a>
+      <a href="#/cafes"    data-t="nCafes">Los cafés</a>
+      <a href="#/tueste"   data-t="nTueste">El tueste</a>
+      <a href="#/preparar" data-t="nPreparar">Preparar</a>
+      <a href="#/comprar"  data-t="nComprar">Comprar</a>
       <a href="#/contacto" data-t="nContacto">Contacto</a>
     </nav>
     <span class="fin"><span data-t="pieAviso">Maqueta de demostración</span> · <span class="ltr">© 2026</span></span>
@@ -627,7 +741,88 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES",
+ _dir:"ltr", _lang:"es", _loc:"es-ES", nPreparar:"Preparar", nComprar:"Comprar", ariaEnPagina:"En esta página",
+ tPreparar:"Preparar — BUNN", tComprar:"Comprar — BUNN",
+
+ coDespuesEti:"Qué pasa después", coTostaderoEti:"El tostadero", coEquipoEti:"Quién le contesta",
+ coHorario:"El tostadero abre de martes a sábado de 9:00 a 14:00. Puede venir sin cita a comprar grano o a probar lo que haya en la barra; para ver un tueste en marcha avise antes, porque no tostamos todos los días.",
+ coDirs:[
+  {n:"Tostadero y tienda", d:"Carrer de la Indústria 42, nave 3<br>08025 Barcelona<br>España", t:"+34 931 000 000"}
+ ],
+ coEquipo:[
+  {n:"Pedidos y suscripciones", r:"Cambios, pausas y envíos", m:"pedidos@bunn.example"},
+  {n:"Hostelería", r:"Visitas, formación y ajuste de molino", m:"barras@bunn.example"},
+  {n:"Compra de verde", r:"Productores y muestras", m:"verde@bunn.example"}
+ ],
+ despues:[
+  {t:"Le contestamos en 24 horas", d:"Y si nos ha dicho cómo lo prepara, le contestamos con un café concreto y una receta de partida, no con la carta entera."},
+  {t:"Le mandamos una muestra si duda", d:"Cien gramos del que le hemos recomendado, con portes pagados. Sale más barato que discutir por correo qué es «acidez cítrica»."},
+  {t:"Tostamos el lunes y el jueves", d:"Su pedido sale del tostadero como mucho cuarenta y ocho horas después de tostado. La fecha va impresa en la bolsa, no una fecha de consumo preferente a seis meses."},
+  {t:"Si no le gusta, lo cambiamos", d:"Sin devolver la bolsa ni justificar nada. Nos dice qué no le encajó y le mandamos otro. Nos interesa más entender el fallo que recuperar doce euros."}
+ ],
+
+ hoErroresEti:"Los cinco fallos que vemos en casi todas las barras",
+ hoErrores:[
+  {i:"Molino", t:"Molinillo de hace quince años con las muelas gastadas", d:"Unas muelas gastadas no muelen: aplastan. El resultado es una distribución de partícula irregular que hace imposible una extracción pareja, por buen café y buena máquina que haya detrás. Se cambian por unos ochenta euros y se nota más que cambiar de proveedor de grano. Es lo primero que miramos al entrar en una barra."},
+  {i:"Dosis", t:"Nadie pesa nada", d:"Ojo al portafiltro, golpe de molino y para dentro. Entre el primer café de la mañana y el de las once hay tres gramos de diferencia, y tres gramos sobre dieciocho son un café distinto. Una báscula de barra cuesta treinta euros y es la inversión con mejor retorno de toda la cafetería."},
+  {i:"Agua", t:"Agua de red sin tratar en zona de agua dura", d:"El noventa y ocho por ciento de un espresso es agua. Con más de doscientos de dureza, la máquina se llena de cal, la resistencia tarda más en recuperar y el café sale plano y salino. Un descalcificador bien dimensionado alarga la vida de la máquina y cambia la taza el mismo día en que se instala."},
+  {i:"Leche", t:"Se quema la leche y se echa la culpa al café", d:"Por encima de sesenta y cinco grados la lactosa deja de aportar dulzor y aparece el sabor a hervido. Muchos capuchinos que saben amargos no llevan un café amargo: llevan leche quemada. Es lo que más rápido se corrige en una formación, y lo que más agradece el cliente de barra."},
+  {i:"Rotación", t:"Un saco de doce kilos abierto tres semanas", d:"El café molido pierde aroma en minutos, y el grano en bolsa abierta, en días. Si la barra hace cuatro kilos a la semana, no puede comprar de doce en doce por precio: le sale más caro en café tirado y en clientes que no repiten. Ajustamos el formato al consumo real, aunque nos compre menos kilos de golpe."}
+ ],
+ hoCuentasEti:"Las cuentas de una barra",
+ hoCuentas:[
+  "Un kilo de café da unos ciento cuarenta espressos de dieciocho gramos. A veintidós euros el kilo, eso son quince céntimos de café por taza. La diferencia entre un café corriente a catorce euros el kilo y uno bueno a veintidós son seis céntimos por taza: menos de lo que cuesta el azucarillo y la servilleta.",
+  "Ese es el argumento que damos a las barras que dudan, y no es un argumento de vendedor: es la cuenta real. Lo caro de una cafetería no es el café, son el alquiler y las nóminas. El café es la única partida donde subir un escalón de calidad cuesta céntimos y se nota en la taza desde el primer día.",
+  "Lo que sí cuesta dinero es tirar café. Una barra que muele mal y no pesa tira entre el ocho y el doce por ciento del grano en cafés rechazados y en purgas del molino. Ahí es donde de verdad se va el margen, y es lo que arreglamos en la primera visita."
+ ],
+ ctaHosH:"La primera visita y el ajuste del molino no se cobran.",
+ ctaHosP:"Vamos, medimos lo que sale de su máquina y le decimos qué cambiaríamos. Aunque después compre el café a otro.",
+
+ orComprarEti:"Cómo compramos",
+ orComprar:[
+  "Compramos de dos maneras. La mayor parte, a través de importadores que trabajan con relaciones largas y publican lo que pagan en finca; el resto, directamente a tres productores con los que llevamos años y a los que visitamos cuando podemos. No decimos «comercio directo» en la etiqueta porque en la mayoría de los lotes sería mentira.",
+  "Lo que sí hacemos siempre es preguntar el precio pagado en finca y no comprar por debajo del doble del precio de bolsa de Nueva York. En 2024 y 2025 eso ha significado pagar entre 4,20 y 6,80 dólares por libra de café verde, cuando la bolsa se movía entre 1,80 y 3,40. No es caridad: por debajo de cierto precio no hay café bueno, porque no hay quien recolecte grano a grano.",
+  "Compramos cantidades pequeñas y muchas veces al año. Es peor negocio que llenar un contenedor una vez, pero es la única forma de que lo que hay en la estantería en marzo no sea la cosecha del año anterior. Cuando un origen se nos acaba, se acaba: preferimos quedarnos sin él a venderlo pasado."
+ ],
+ orPrecioEti:"A dónde va el dinero de una bolsa de 250 g",
+ orPrecio:[
+  {v:"38 %", u:"Café verde y transporte"},
+  {v:"22 %", u:"Tueste, envasado y merma"},
+  {v:"18 %", u:"Bolsa, etiqueta y envío"},
+  {v:"22 %", u:"Estructura y margen"}
+ ],
+ orPrecioNota:"Reparto medio de una bolsa de 12,50 €, con el café verde a precio de contrato directo. El porcentaje que llega al productor varía con el origen y con el año; el resto de partidas son bastante estables.",
+
+ tuFasesEti:"Qué ocurre dentro del grano, minuto a minuto",
+ tuFases:[
+  {i:"0–1:30", t:"Carga y punto de giro", d:"El grano entra a temperatura ambiente en un tambor a doscientos grados y le roba calor de golpe. La temperatura del tambor cae en picado hasta un mínimo —el punto de giro— y a partir de ahí vuelve a subir. Cuanto más bajo y más tarde llega ese mínimo, menos energía tiene el tueste para lo que viene después."},
+  {i:"1:30–5:00", t:"Secado", d:"El grano verde lleva entre un diez y un doce por ciento de agua y hay que quitársela antes de poder tostar nada. Es la fase más aburrida y la que más se descuida. Si se corre, el grano llega al crack con humedad dentro y se tuesta por fuera antes que por dentro: el resultado es un café que huele a tostado y sabe a verde."},
+  {i:"5:00–8:30", t:"Maillard y caramelización", d:"Aquí se fabrica casi todo el sabor. Los azúcares y los aminoácidos reaccionan y aparecen los compuestos que luego llamamos «chocolate», «fruto seco» o «caramelo». Es la fase que alargamos en el perfil de espresso, porque es la que da cuerpo y dulzor, y la que acortamos en filtro para dejar sitio a la acidez."},
+  {i:"8:30–11:00", t:"Primer crack y desarrollo", d:"El grano revienta con un chasquido audible, se expande y pierde su forma. A partir de ese momento cada quince segundos cuentan: el mismo café sacado a ciento noventa y ocho o a doscientos cuatro grados son dos cafés distintos. El tiempo entre el crack y la descarga, dividido por el total, es lo que en el oficio se llama tiempo de desarrollo."}
+ ],
+ tuDefectosEti:"Tres defectos que se ven en la curva",
+ tuDefectos:[
+  {t:"Tueste ahogado", p:"La curva se aplana o baja después del crack porque falta gas. El grano se queda dentro del tambor perdiendo aroma sin terminar de desarrollarse. En la taza sale un café apagado, con papel y cartón, que mucha gente confunde con «suave»."},
+  {t:"Corrida al crack", p:"Se sube el gas para llegar antes al crack y se recorta el secado. El exterior del grano se tuesta más que el interior. Sabe a tostado por fuera y a hierba por dentro, y la acidez sale áspera en vez de cítrica."},
+  {t:"Descarga tardía", p:"Dos minutos de más después del crack y el café pierde todo lo que lo hacía distinto: la acidez desaparece, el origen se borra y sólo queda amargor de tostado. Es el defecto más común en el café industrial, porque además tapa la mala materia prima."}
+ ],
+
+ ctEjesEti:"Qué mide cada eje",
+ ctEjes:[
+  {i:"Acidez", t:"Acidez", d:"No es acidez de estómago ni café pasado. Es la sensación viva y brillante que hace que un café despierte la boca, como la de una manzana o un cítrico. Los cafés de altura la tienen alta; los de zonas bajas, baja. Ni una cosa ni la otra es mejor: depende de si lo va a beber solo o con leche."},
+  {i:"Cuerpo", t:"Cuerpo", d:"El peso del café en la boca, no su intensidad de sabor. Un Yirgacheffe puede tener un sabor enorme y un cuerpo ligero como el té; un Sumatra puede saber a poco y llenar la boca. Si lo va a mezclar con leche, el cuerpo importa más que el aroma: es lo único que sobrevive."},
+  {i:"Dulzor", t:"Dulzor", d:"Sin azúcar añadido. Es el dulce natural de los azúcares del grano bien desarrollados en el tueste. Es el eje más difícil de conseguir y el que más separa un café bueno de uno correcto. Un café que necesita azúcar suele ser un café con poco dulzor propio."},
+  {i:"Aroma", t:"Aroma", d:"Lo que llega por la nariz antes y durante el sorbo. Es lo primero que se pierde: en café molido, en cuestión de minutos. Por eso puntuamos el aroma de la taza recién servida y no el de la bolsa, que es un aroma que el cliente no llega a beber."},
+  {i:"Amargor", t:"Amargor", d:"Algo de amargor es necesario y equilibra el dulzor; mucho tapa todo lo demás. Casi siempre viene del tueste y no del grano. Un amargor alto en nuestra tabla no es un suspenso: en un café para leche, un poco de amargor es justo lo que hace que se note por debajo."},
+  {i:"Retrogusto", t:"Retrogusto", d:"Lo que queda en la boca treinta segundos después de tragar, y si es agradable o no. Es el eje que mejor distingue un café excepcional de uno bueno, y el que peor se aprecia bebiendo deprisa. Un café notable que se apaga en cinco segundos puntúa bajo aquí."}
+ ],
+ ctComoEti:"Cómo catamos",
+ ctComo:[
+  "Catamos a ciegas, tres personas, con el protocolo de mesa de siempre: doce gramos de café molido grueso en un vaso de doscientos mililitros, agua a noventa y tres grados, cuatro minutos de infusión, se rompe la costra, se retira la espuma y se prueba a cuchara mientras se enfría.",
+  "Se prueba tres veces: muy caliente, templado y frío. La mayoría de los defectos aparecen cuando el café se enfría, que es justo cuando casi nadie lo prueba. Un café que sigue estando bueno a temperatura ambiente es casi siempre un café bien tostado.",
+  "Puntuamos cada eje de cero a diez por separado y sólo después comparamos las tres hojas. Si hay más de dos puntos de diferencia entre catadores en un mismo eje, se repite la cata con lotes nuevos. Pasa más de lo que nos gustaría admitir."
+ ],
+
  uMl:"ml",
  nElige:"Elige tu café", nReceta:"Receta", nMatriz:"Qué va con qué",
  nComparar:"Comparar", nTraza:"Trazabilidad", nCrono:"Cronómetro",
@@ -860,7 +1055,88 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB",
+ _dir:"ltr", _lang:"en", _loc:"en-GB", nPreparar:"Brewing", nComprar:"Buy", ariaEnPagina:"On this page",
+ tPreparar:"Brewing — BUNN", tComprar:"Buy — BUNN",
+
+ coDespuesEti:"What happens next", coTostaderoEti:"The roastery", coEquipoEti:"Who answers you",
+ coHorario:"The roastery is open Tuesday to Saturday, 9:00 to 14:00. Drop in without an appointment to buy beans or taste whatever is on the bar; to watch a roast in progress let us know first, because we do not roast every day.",
+ coDirs:[
+  {n:"Roastery and shop", d:"Carrer de la Indústria 42, unit 3<br>08025 Barcelona<br>Spain", t:"+34 931 000 000"}
+ ],
+ coEquipo:[
+  {n:"Orders and subscriptions", r:"Changes, pauses and shipping", m:"pedidos@bunn.example"},
+  {n:"Hospitality", r:"Visits, training and grinder setup", m:"barras@bunn.example"},
+  {n:"Green buying", r:"Producers and samples", m:"verde@bunn.example"}
+ ],
+ despues:[
+  {t:"We reply within 24 hours", d:"And if you told us how you brew, we reply with one specific coffee and a starting recipe, not with the whole list."},
+  {t:"We send a sample if you are unsure", d:"A hundred grams of what we recommended, postage paid. Cheaper than arguing by email about what \u201ccitric acidity\u201d means."},
+  {t:"We roast on Mondays and Thursdays", d:"Your order leaves the roastery at most forty-eight hours after roasting. The date is printed on the bag, not a best-before six months out."},
+  {t:"If you do not like it, we swap it", d:"No returning the bag, no justification. Tell us what did not fit and we send another. Understanding the miss is worth more to us than twelve euros."}
+ ],
+
+ hoErroresEti:"The five faults we see on almost every bar",
+ hoErrores:[
+  {i:"Grinder", t:"A fifteen-year-old grinder with worn burrs", d:"Worn burrs do not grind: they crush. The result is an uneven particle distribution that makes an even extraction impossible, however good the coffee and the machine behind it. Replacing them costs about eighty euros and does more than changing bean supplier. It is the first thing we look at when we walk into a bar."},
+  {i:"Dose", t:"Nobody weighs anything", d:"A glance at the basket, a burst from the grinder, and in it goes. Between the first coffee of the morning and the eleven o'clock one there are three grams of difference, and three grams on eighteen is a different coffee. A bar scale costs thirty euros and is the best-returning investment in the whole café."},
+  {i:"Water", t:"Untreated mains water in a hard-water area", d:"Ninety-eight per cent of an espresso is water. Above two hundred of hardness the machine scales up, the element takes longer to recover and the coffee comes out flat and saline. A properly sized softener extends the machine's life and changes the cup the same day it is fitted."},
+  {i:"Milk", t:"The milk gets scorched and the coffee gets the blame", d:"Above sixty-five degrees lactose stops contributing sweetness and the boiled note appears. Many cappuccinos that taste bitter are not carrying a bitter coffee: they are carrying scorched milk. It is the fastest fix in a training session and the one bar customers notice most."},
+  {i:"Rotation", t:"A twelve-kilo sack open for three weeks", d:"Ground coffee loses aroma in minutes, and beans in an open bag in days. A bar doing four kilos a week cannot buy in twelves for the price: it costs more in wasted coffee and in customers who do not come back. We match the format to real consumption, even if it means selling you fewer kilos at a time."}
+ ],
+ hoCuentasEti:"The arithmetic of a bar",
+ hoCuentas:[
+  "A kilo of coffee gives about a hundred and forty eighteen-gram espressos. At twenty-two euros a kilo that is fifteen cents of coffee per cup. The difference between an ordinary coffee at fourteen euros a kilo and a good one at twenty-two is six cents a cup: less than the sugar sachet and the napkin.",
+  "That is the argument we give bars that hesitate, and it is not a salesman's argument: it is the actual arithmetic. What is expensive about a café is not the coffee, it is the rent and the payroll. Coffee is the only line where moving up a quality step costs cents and shows in the cup from day one.",
+  "What does cost money is throwing coffee away. A bar that grinds badly and does not weigh throws away between eight and twelve per cent of its beans in rejected shots and grinder purges. That is where the margin actually goes, and it is what we fix on the first visit."
+ ],
+ ctaHosH:"The first visit and the grinder setup are free.",
+ ctaHosP:"We come, measure what your machine is putting out and tell you what we would change. Even if you then buy the coffee elsewhere.",
+
+ orComprarEti:"How we buy",
+ orComprar:[
+  "We buy two ways. Most of it through importers who work on long relationships and publish what they pay at farm gate; the rest directly from three producers we have worked with for years and visit when we can. We do not put \u201cdirect trade\u201d on the label because on most lots it would be a lie.",
+  "What we always do is ask the price paid at the farm and refuse to buy below twice the New York exchange price. In 2024 and 2025 that has meant paying between 4.20 and 6.80 dollars a pound of green coffee, while the exchange moved between 1.80 and 3.40. It is not charity: below a certain price there is no good coffee, because nobody picks cherry by cherry for it.",
+  "We buy small quantities many times a year. It is worse business than filling a container once, but it is the only way that what sits on the shelf in March is not last year's harvest. When an origin runs out, it runs out: we would rather be without it than sell it past its best."
+ ],
+ orPrecioEti:"Where the money in a 250 g bag goes",
+ orPrecio:[
+  {v:"38 %", u:"Green coffee and freight"},
+  {v:"22 %", u:"Roasting, packing and loss"},
+  {v:"18 %", u:"Bag, label and shipping"},
+  {v:"22 %", u:"Overheads and margin"}
+ ],
+ orPrecioNota:"Average split of a €12.50 bag, with green coffee at direct-contract price. The share reaching the producer varies by origin and by year; the rest of the lines are fairly stable.",
+
+ tuFasesEti:"What happens inside the bean, minute by minute",
+ tuFases:[
+  {i:"0–1:30", t:"Charge and turning point", d:"The beans go in at room temperature to a drum at two hundred degrees and steal heat from it all at once. The drum temperature falls sharply to a minimum — the turning point — and climbs again from there. The lower and later that minimum lands, the less energy the roast has for everything that follows."},
+  {i:"1:30–5:00", t:"Drying", d:"Green coffee holds ten to twelve per cent water and it has to come out before anything can be roasted. It is the dullest phase and the most neglected. Rush it and the bean reaches the crack with moisture inside and roasts from the outside in: the result smells roasted and tastes green."},
+  {i:"5:00–8:30", t:"Maillard and caramelisation", d:"This is where almost all the flavour is made. Sugars and amino acids react and the compounds we later call \u201cchocolate\u201d, \u201cnut\u201d or \u201ccaramel\u201d appear. It is the phase we stretch on the espresso profile, because it gives body and sweetness, and shorten on filter to leave room for acidity."},
+  {i:"8:30–11:00", t:"First crack and development", d:"The bean bursts with an audible snap, expands and loses its shape. From that moment every fifteen seconds counts: the same coffee dropped at a hundred and ninety-eight or at two hundred and four degrees is two different coffees. The time between crack and drop, divided by the total, is what the trade calls development time."}
+ ],
+ tuDefectosEti:"Three faults you can see in the curve",
+ tuDefectos:[
+  {t:"Stalled roast", p:"The curve flattens or falls after the crack because there is not enough gas. The bean sits in the drum losing aroma without finishing its development. In the cup it comes out dull, papery and cardboard-like, which many people mistake for \u201csmooth\u201d."},
+  {t:"Racing to the crack", p:"Gas is turned up to reach the crack sooner and the drying is cut short. The outside of the bean roasts more than the inside. It tastes roasted outside and grassy inside, and the acidity comes out harsh rather than citric."},
+  {t:"Late drop", p:"Two minutes too many after the crack and the coffee loses everything that made it distinctive: the acidity goes, the origin is erased and only roast bitterness is left. It is the commonest fault in industrial coffee, because it also hides poor raw material."}
+ ],
+
+ ctEjesEti:"What each axis measures",
+ ctEjes:[
+  {i:"Acidity", t:"Acidity", d:"Not heartburn, and not stale coffee. It is the lively, bright sensation that makes a coffee wake the mouth up, like an apple or a citrus fruit. High-grown coffees have plenty; low-altitude ones have little. Neither is better: it depends on whether you drink it black or with milk."},
+  {i:"Body", t:"Body", d:"The weight of the coffee in the mouth, not its flavour intensity. A Yirgacheffe can have enormous flavour and a body as light as tea; a Sumatra can taste of little and fill the mouth. If you are going to add milk, body matters more than aroma: it is the only thing that survives."},
+  {i:"Sweetness", t:"Sweetness", d:"With no sugar added. It is the natural sweetness of the bean's sugars properly developed in the roast. It is the hardest axis to achieve and the one that most separates a good coffee from a correct one. A coffee that needs sugar usually has little sweetness of its own."},
+  {i:"Aroma", t:"Aroma", d:"What reaches you through the nose before and during the sip. It is the first thing lost: in ground coffee, within minutes. That is why we score the aroma of the freshly poured cup and not that of the bag, which is an aroma the customer never gets to drink."},
+  {i:"Bitterness", t:"Bitterness", d:"Some bitterness is necessary and balances the sweetness; a lot buries everything else. It almost always comes from the roast, not the bean. A high bitterness score in our table is not a fail: in a coffee for milk, a little bitterness is exactly what lets it show through."},
+  {i:"Aftertaste", t:"Aftertaste", d:"What stays in the mouth thirty seconds after swallowing, and whether it is pleasant. It is the axis that best separates an exceptional coffee from a good one, and the one hardest to notice when drinking fast. A remarkable coffee that fades in five seconds scores low here."}
+ ],
+ ctComoEti:"How we cup",
+ ctComo:[
+  "We cup blind, three people, on the usual table protocol: twelve grams of coarsely ground coffee in a two-hundred-millilitre glass, water at ninety-three degrees, four minutes of steeping, break the crust, skim the foam and taste by spoon as it cools.",
+  "We taste three times: very hot, warm and cold. Most faults show up as the coffee cools, which is exactly when almost nobody tastes it. A coffee that is still good at room temperature is nearly always a well-roasted coffee.",
+  "We score each axis from zero to ten separately and only then compare the three sheets. If two cuppers differ by more than two points on the same axis, the cupping is repeated with fresh lots. It happens more often than we would like to admit."
+ ],
+
  uMl:"ml",
  nElige:"Find your coffee", nReceta:"Recipe", nMatriz:"What suits what",
  nComparar:"Compare", nTraza:"Traceability", nCrono:"Timer",
@@ -1093,7 +1369,88 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", nPreparar:"التحضير", nComprar:"الشراء", ariaEnPagina:"في هذه الصفحة",
+ tPreparar:"التحضير — بُنّ", tComprar:"الشراء — بُنّ",
+
+ coDespuesEti:"ماذا يحدث بعد ذلك", coTostaderoEti:"المحمصة", coEquipoEti:"من يردّ عليك",
+ coHorario:"تفتح المحمصة من الثلاثاء إلى السبت، من التاسعة إلى الثانية. ويمكنك الحضور بلا موعد لشراء البنّ أو تذوّق ما على الطاولة؛ أما لمشاهدة تحميص جارٍ فأخبرنا مسبقًا، لأننا لا نحمّص كل يوم.",
+ coDirs:[
+  {n:"المحمصة والمتجر", d:"شارع الصناعة ٤٢، وحدة ٣<br>٠٨٠٢٥ برشلونة<br>إسبانيا", t:"+34 931 000 000"}
+ ],
+ coEquipo:[
+  {n:"الطلبات والاشتراكات", r:"التعديلات والإيقاف والشحن", m:"pedidos@bunn.example"},
+  {n:"قطاع المقاهي", r:"الزيارات والتدريب وضبط المطحنة", m:"barras@bunn.example"},
+  {n:"شراء البنّ الأخضر", r:"المزارعون والعيّنات", m:"verde@bunn.example"}
+ ],
+ despues:[
+  {t:"نردّ خلال ٢٤ ساعة", d:"وإن أخبرتنا كيف تُحضّره، رددنا عليك ببنٍّ بعينه ووصفة بداية، لا بالقائمة كلها."},
+  {t:"نرسل عيّنة إن ترددت", d:"مئة غرام مما أوصينا به، بأجرة بريد مدفوعة. وهو أرخص من الجدال بالبريد حول معنى «حموضة حمضية»."},
+  {t:"نحمّص يومي الاثنين والخميس", d:"يخرج طلبك من المحمصة بعد التحميص بثمانٍ وأربعين ساعة على الأكثر. والتاريخ مطبوع على الكيس، لا تاريخ صلاحية بعد ستة أشهر."},
+  {t:"إن لم يعجبك، بدّلناه", d:"دون إعادة الكيس ودون تبرير. تقول لنا ما الذي لم يناسبك فنرسل غيره. فهْم الخطأ يعنينا أكثر من استرجاع اثني عشر يورو."}
+ ],
+
+ hoErroresEti:"الأخطاء الخمسة التي نراها في كل طاولة تقريبًا",
+ hoErrores:[
+  {i:"المطحنة", t:"مطحنة عمرها خمس عشرة سنة بأقراص بالية", d:"الأقراص البالية لا تطحن: بل تسحق. والنتيجة توزيع حبيبي غير منتظم يستحيل معه استخلاص متجانس، مهما كان البنّ والآلة خلفه جيدين. واستبدالها يكلّف نحو ثمانين يورو ويُحدث أثرًا أكبر من تغيير المورّد. وهو أول ما ننظر إليه حين ندخل مقهى."},
+  {i:"الجرعة", t:"لا أحد يزن شيئًا", d:"نظرة إلى الفلتر، ودفقة من المطحنة، وإلى الداخل. وبين قهوة الصباح الأولى وقهوة الحادية عشرة ثلاثة غرامات فرق، وثلاثة غرامات من ثمانية عشر تعني قهوة أخرى. وميزان الطاولة يكلّف ثلاثين يورو، وهو أعلى استثمار مردودًا في المقهى كله."},
+  {i:"الماء", t:"ماء شبكة غير معالَج في منطقة ماء عسر", d:"ثمانية وتسعون بالمئة من الإسبريسو ماء. وفوق درجة عسر مئتين تمتلئ الآلة بالكلس، ويتأخر السخّان في الاستعادة، وتخرج القهوة مسطّحة ومالحة. ومُلطِّف ماء بمقاس صحيح يُطيل عمر الآلة ويغيّر الفنجان في يوم تركيبه نفسه."},
+  {i:"الحليب", t:"يُحرق الحليب ويُلام البنّ", d:"فوق خمس وستين درجة يكفّ اللاكتوز عن إعطاء الحلاوة ويظهر طعم الغليان. وكثير من الكابتشينو الذي يبدو مرًّا لا يحمل بنًّا مرًّا: بل حليبًا محروقًا. وهو أسرع ما يُصحَّح في التدريب، وأكثر ما يلحظه زبون الطاولة."},
+  {i:"الدوران", t:"كيس بارتفاع اثني عشر كيلو مفتوح منذ ثلاثة أسابيع", d:"البنّ المطحون يفقد رائحته في دقائق، والحبّ في كيس مفتوح في أيام. والمقهى الذي يستهلك أربعة كيلوغرامات أسبوعيًا لا يمكنه الشراء بالاثني عشر طلبًا للسعر: فيخسر أكثر في بنّ مهدور وزبائن لا يعودون. ونحن نُلائم الحجم مع الاستهلاك الحقيقي، وإن اشترى منا كيلوغرامات أقل في المرة."}
+ ],
+ hoCuentasEti:"حساب المقهى",
+ hoCuentas:[
+  "الكيلوغرام الواحد يعطي نحو مئة وأربعين فنجان إسبريسو بثمانية عشر غرامًا. وبسعر اثنين وعشرين يورو للكيلو يكون ذلك خمسة عشر سنتًا من البنّ لكل فنجان. والفرق بين بنٍّ عادي بأربعة عشر يورو للكيلو وبنٍّ جيد باثنين وعشرين هو ستة سنتات للفنجان: أقل من كلفة السكر والمنديل.",
+  "هذه هي الحجة التي نقدّمها للمقاهي المترددة، وليست حجة بائع: بل هي الحساب الحقيقي. فالغالي في المقهى ليس البنّ، بل الإيجار والرواتب. والبنّ هو البند الوحيد الذي يكلّف فيه الارتقاء درجةً سنتاتٍ ويظهر أثره في الفنجان من اليوم الأول.",
+  "أما ما يكلّف فعلًا فهو رمي البنّ. فالمقهى الذي يطحن رديئًا ولا يزن يرمي بين ثمانية واثني عشر بالمئة من حبّه في فناجين مرفوضة وتنظيف للمطحنة. وهناك يذهب الهامش حقًّا، وهو ما نصلحه في الزيارة الأولى."
+ ],
+ ctaHosH:"الزيارة الأولى وضبط المطحنة بلا مقابل.",
+ ctaHosP:"نأتي، ونقيس ما تُخرجه آلتك، ونقول لك ما الذي كنا سنغيّره. حتى لو اشتريت البنّ بعدها من غيرنا.",
+
+ orComprarEti:"كيف نشتري",
+ orComprar:[
+  "نشتري بطريقتين. معظمه عبر مستوردين يعملون بعلاقات طويلة ويُعلنون ما يدفعونه عند المزرعة؛ وبقيته مباشرةً من ثلاثة مزارعين نتعامل معهم منذ سنوات ونزورهم متى استطعنا. ولا نكتب «تجارة مباشرة» على الملصق لأنها في أغلب الدفعات ستكون كذبًا.",
+  "أما ما نفعله دائمًا فهو السؤال عن السعر المدفوع في المزرعة، ورفض الشراء دون ضِعف سعر بورصة نيويورك. وقد عنى ذلك في ٢٠٢٤ و٢٠٢٥ دفع ما بين ٤٫٢٠ و٦٫٨٠ دولارات لرطل البنّ الأخضر، بينما كانت البورصة تتحرك بين ١٫٨٠ و٣٫٤٠. وليس هذا إحسانًا: فدون سعر معيّن لا يوجد بنّ جيد، لأنه لا أحد يقطف حبّةً حبّةً بذلك السعر.",
+  "نشتري كميات صغيرة مرات كثيرة في السنة. وهي تجارة أسوأ من ملء حاوية مرة واحدة، لكنها السبيل الوحيد إلى ألا يكون ما على الرف في آذار محصول العام الماضي. وحين ينفد أصلٌ ما، ينفد: ونفضّل أن نبقى بلا بنٍّ على أن نبيعه بعد فوات أوانه."
+ ],
+ orPrecioEti:"أين يذهب ثمن كيس ٢٥٠ غرامًا",
+ orPrecio:[
+  {v:"٣٨٪", u:"البنّ الأخضر والشحن"},
+  {v:"٢٢٪", u:"التحميص والتعبئة والهدر"},
+  {v:"١٨٪", u:"الكيس والملصق والإرسال"},
+  {v:"٢٢٪", u:"المصاريف العامة والهامش"}
+ ],
+ orPrecioNota:"توزيع وسطي لكيس بـ١٢٫٥٠ يورو، بسعر بنٍّ أخضر بعقد مباشر. والنسبة التي تصل إلى المزارع تتفاوت بحسب الأصل والسنة؛ أما بقية البنود فمستقرة إلى حد بعيد.",
+
+ tuFasesEti:"ما يجري داخل الحبّة، دقيقةً بدقيقة",
+ tuFases:[
+  {i:"٠–١:٣٠", t:"التحميل ونقطة الانعطاف", d:"يدخل الحبّ بحرارة الغرفة إلى أسطوانة عند مئتي درجة فيسلبها الحرارة دفعةً واحدة. فتهبط حرارة الأسطوانة هبوطًا حادًّا إلى حدٍّ أدنى — نقطة الانعطاف — ثم تعاود الصعود. وكلما كان ذلك الحدّ أخفض وأمتأخّر، قلّت الطاقة المتاحة للتحميص فيما يلي."},
+  {i:"١:٣٠–٥:٠٠", t:"التجفيف", d:"يحمل البنّ الأخضر بين عشرة واثني عشر بالمئة ماءً، ولا بد من إخراجه قبل تحميص أي شيء. وهي أملّ المراحل وأكثرها إهمالًا. فإن استُعجلت بلغت الحبّة الطقطقة وفيها رطوبة، فتُحمَّص من الخارج قبل الداخل: والنتيجة بنّ تفوح منه رائحة التحميص ويُذاق نيئًا."},
+  {i:"٥:٠٠–٨:٣٠", t:"ميّار والكرملة", d:"هنا يُصنع أغلب الطعم. تتفاعل السكريات والأحماض الأمينية فتظهر المركبات التي نسميها بعدها «شوكولاتة» أو «مكسّرات» أو «كراميل». وهي المرحلة التي نُطيلها في نمط الإسبريسو لأنها تعطي القوام والحلاوة، ونقصّرها في نمط الفلتر لإفساح المجال للحموضة."},
+  {i:"٨:٣٠–١١:٠٠", t:"الطقطقة الأولى والتطوير", d:"تنفجر الحبّة بطقطقة مسموعة، وتتمدّد، وتفقد شكلها. ومن تلك اللحظة تُحسب كل خمس عشرة ثانية: فالبنّ نفسه إن أُخرج عند مئة وثمانٍ وتسعين أو عند مئتين وأربع درجات صار بنّين مختلفين. والزمن بين الطقطقة والإخراج، مقسومًا على المجموع، هو ما تسميه المهنة زمن التطوير."}
+ ],
+ tuDefectosEti:"ثلاثة عيوب تُرى في المنحنى",
+ tuDefectos:[
+  {t:"تحميص متوقّف", p:"يستوي المنحنى أو يهبط بعد الطقطقة لنقص الغاز. فتبقى الحبّة داخل الأسطوانة تفقد رائحتها دون أن تُكمل تطوّرها. وتخرج في الفنجان باهتة، بطعم ورق وكرتون، يخلطه كثيرون بـ«النعومة»."},
+  {t:"سباق إلى الطقطقة", p:"يُرفع الغاز للوصول إلى الطقطقة أبكر فيُقتطع التجفيف. فيُحمَّص خارج الحبّة أكثر من داخلها. فتُذاق محمّصة من الخارج وعشبية من الداخل، وتخرج الحموضة خشنة بدل أن تكون حمضية."},
+  {t:"إخراج متأخر", p:"دقيقتان زائدتان بعد الطقطقة يفقد بها البنّ كل ما ميّزه: تختفي الحموضة، ويُمحى الأصل، ولا تبقى إلا مرارة التحميص. وهو أشيع عيوب البنّ الصناعي، لأنه يُخفي أيضًا رداءة المادة الخام."}
+ ],
+
+ ctEjesEti:"ما الذي يقيسه كل محور",
+ ctEjes:[
+  {i:"الحموضة", t:"الحموضة", d:"ليست حموضة المعدة ولا بنًّا فاسدًا. بل هي الإحساس الحيّ اللامع الذي يُوقظ الفم، كالذي في التفاح أو الحمضيات. فبنّ المرتفعات يحمل منها كثيرًا، وبنّ المناطق المنخفضة قليلًا. ولا أحدهما أفضل: بل يتوقف على شربك له سادةً أو بالحليب."},
+  {i:"القوام", t:"القوام", d:"ثقل البنّ في الفم، لا شدّة طعمه. فقد يكون ليرغاتشيفي هائل الطعم خفيف القوام كالشاي؛ وقد يكون سومطرة قليل الطعم يملأ الفم. وإن كنت ستخلطه بالحليب فالقوام أهم من الرائحة: فهو وحده ما ينجو."},
+  {i:"الحلاوة", t:"الحلاوة", d:"دون سكر مضاف. وهي حلاوة سكريات الحبّة الطبيعية حين تُطوَّر جيدًا في التحميص. وهي أصعب المحاور تحقيقًا وأكثرها فصلًا بين بنٍّ جيد وبنٍّ مقبول. والبنّ الذي يحتاج سكرًا غالبًا ما يكون قليل الحلاوة الذاتية."},
+  {i:"الرائحة", t:"الرائحة", d:"ما يصلك عبر الأنف قبل الرشفة وأثناءها. وهي أول ما يُفقد: في البنّ المطحون خلال دقائق. ولهذا نُقيّم رائحة الفنجان المصبوب لتوّه لا رائحة الكيس، فتلك رائحة لا يصل الزبون إلى شربها."},
+  {i:"المرارة", t:"المرارة", d:"شيء من المرارة ضروري ويوازن الحلاوة؛ وكثيرها يدفن ما عداه. وهي تأتي من التحميص غالبًا لا من الحبّة. ومرارة عالية في جدولنا ليست رسوبًا: ففي بنٍّ مُعدٍّ للحليب، قليل من المرارة هو بالضبط ما يجعله يظهر من تحته."},
+  {i:"ما بعد المذاق", t:"ما بعد المذاق", d:"ما يبقى في الفم بعد البلع بثلاثين ثانية، وهل هو مستساغ. وهو المحور الذي يفصل أفضل ما يكون بين بنٍّ استثنائي وبنٍّ جيد، وأصعبها إدراكًا عند الشرب السريع. فالبنّ اللافت الذي ينطفئ في خمس ثوانٍ يأخذ هنا درجة منخفضة."}
+ ],
+ ctComoEti:"كيف نتذوّق",
+ ctComo:[
+  "نتذوّق على العمياء، ثلاثة أشخاص، بالبروتوكول المعتاد للطاولة: اثنا عشر غرامًا من بنٍّ مطحون خشنًا في كأس سعة مئتي مليلتر، وماء عند ثلاث وتسعين درجة، وأربع دقائق نقعًا، ثم تُكسر القشرة وتُرفع الرغوة ويُذاق بالملعقة وهو يبرد.",
+  "ونتذوّق ثلاث مرات: ساخنًا جدًّا، ثم فاترًا، ثم باردًا. فأغلب العيوب تظهر حين يبرد البنّ، وهو بالضبط حين لا يتذوّقه أحد تقريبًا. والبنّ الذي يظل طيبًا في حرارة الغرفة هو في الغالب بنّ محمَّص جيدًا.",
+  "ونضع لكل محور درجة من صفر إلى عشرة على حدة، ولا نقارن الأوراق الثلاث إلا بعد ذلك. فإن تجاوز الفرق بين متذوّقَين نقطتين في محور واحد، أُعيد التذوّق بدفعات جديدة. ويحدث هذا أكثر مما نودّ الاعتراف به."
+ ],
+
  uMl:"مل",
  nElige:"اختر قهوتك", nReceta:"الوصفة", nMatriz:"ما يناسب ماذا",
  nComparar:"مقارنة", nTraza:"التتبّع", nCrono:"المؤقّت",
@@ -1606,12 +1963,18 @@ function pintarNuevas(){
   pintarElige(); pintarReceta(); pintarMatriz(); pintarComparar(); pintarTraza(); pintarCrono();
 }
 
-var RUTAS = ["inicio","cafes","origenes","elige","receta","matriz","comparar",
-             "tueste","cata","trazabilidad","cronometro","suscripcion","hosteleria","metodo","preguntas","contacto"];
-var TITULOS = {inicio:"tInicio",cafes:"tCafes",origenes:"tOrigenes",tueste:"tTueste",cata:"tCata",
-  suscripcion:"tSuscripcion",hosteleria:"tHosteleria",metodo:"tMetodo",preguntas:"tPreguntas",contacto:"tContacto",
-  elige:"tElige",receta:"tReceta",matriz:"tMatriz",comparar:"tComparar",
-  trazabilidad:"tTraza",cronometro:"tCrono"};
+var INDICE = {
+  cafes:[["ap-cafes","nCafes"],["ap-origenes","nOrigenes"],["ap-trazabilidad","nTraza"],
+         ["ap-cata","nCata"],["ap-comparar","nComparar"]],
+  tueste:[["ap-tueste","nTueste"],["ap-matriz","nMatriz"]],
+  preparar:[["ap-metodo","nMetodo"],["ap-receta","nReceta"],["ap-cronometro","nCrono"],["ap-elige","nElige"]],
+  comprar:[["ap-suscripcion","nSuscripcion"],["ap-hosteleria","nHosteleria"]],
+  contacto:[["ap-preguntas","nPreguntas"],["ap-contacto","nContacto"]]
+};
+
+var RUTAS = ["inicio","cafes","tueste","preparar","comprar","contacto"];
+var TITULOS = {inicio:"tInicio",cafes:"tCafes",tueste:"tTueste",
+  preparar:"tPreparar",comprar:"tComprar",contacto:"tContacto"};
 var idioma = "es", tuSel = 0, ctSel = 0;
 
 function loc(){ return T[idioma]._loc; }
@@ -1811,6 +2174,32 @@ function pintarListas(){
   var t = T[idioma];
   function celdas(id, arr, fn){ var e = document.getElementById(id); if (e) e.innerHTML = arr.map(fn).join(""); }
 
+  celdas("coDirs", t.coDirs, function(o){
+    return '<div class="dir"><b>'+esc(o.n)+'</b><address>'+o.d+'</address>'
+      + '<a class="tel" href="tel:'+o.t.replace(/\s/g,"")+'" dir="ltr">'+esc(o.t)+'</a></div>'; });
+  celdas("coEquipo", t.coEquipo, function(e){
+    return '<div><div><b>'+esc(e.n)+'</b><span>'+esc(e.r)+'</span></div>'
+      + '<a href="mailto:'+e.m+'" dir="ltr">'+esc(e.m)+'</a></div>'; });
+  celdas("coDespues", t.despues, function(d){
+    return '<li><div><b>'+esc(d.t)+'</b><span>'+esc(d.d)+'</span></div></li>'; });
+
+  function filas(id, arr){ celdas(id, arr, function(f){
+    return '<div class="fila"><div class="i">'+esc(f.i)+'</div><div><h3>'+esc(f.t)+'</h3></div>'
+      + '<div class="d"><p>'+esc(f.d)+'</p></div></div>'; }); }
+  function parrafos(id, arr){ celdas(id, arr, function(x){
+    return '<p style="margin-bottom:1rem;color:var(--t2)">'+esc(x)+'</p>'; }); }
+
+  filas("hoErrores", t.hoErrores);
+  parrafos("hoCuentas", t.hoCuentas);
+  parrafos("orComprar", t.orComprar);
+  celdas("orPrecio", t.orPrecio, function(x){
+    return '<div class="cel dato"><div class="v">'+esc(x.v)+'</div><div class="u">'+esc(x.u)+'</div></div>'; });
+  filas("tuFases", t.tuFases);
+  celdas("tuDefectos", t.tuDefectos, function(d){
+    return '<div class="cel"><h3 style="font-size:1.25rem">'+esc(d.t)+'</h3><p>'+esc(d.p)+'</p></div>'; });
+  filas("ctEjes", t.ctEjes);
+  parrafos("ctComo", t.ctComo);
+
   celdas("iCifras", t.cifras, function(c){
     return '<div class="cel dato"><div class="v">'+esc(c.v)+'</div><div class="u">'+esc(c.u)+'</div></div>'; });
   celdas("iCafes", t.cafes.slice(0,3), function(c){
@@ -1855,6 +2244,12 @@ function aplicar(codigo){
   for (i=0;i<b.length;i++) b[i].setAttribute("aria-pressed", String(b[i].dataset.lang===codigo));
   document.title = t[TITULOS[ruta()]] || t.tInicio;
   var ac = document.getElementById("acuse"); if (ac){ ac.textContent=""; ac.classList.remove("mal"); }
+  Object.keys(INDICE).forEach(function(r){
+    var e = document.getElementById("ix-"+r); if (!e) return;
+    e.innerHTML = INDICE[r].map(function(x){
+      return '<a href="#/'+r+'" data-ir="'+x[0]+'">'+esc(t[x[1]])+'</a>';
+    }).join("");
+  });
   pintarListas(); pintarTueste(); pintarCata(); pintarOrigenes(); grano(); pintarNuevas();
   try{ localStorage.setItem("bunn_lang", codigo); }catch(e){}
 }
@@ -1873,6 +2268,19 @@ function enrutar(){
 
 var bs = document.querySelectorAll(".idi button");
 for (var z=0; z<bs.length; z++) bs[z].addEventListener("click", function(){ aplicar(this.dataset.lang); });
+/* Los enlaces con data-ir cambian de página y además bajan a su apartado */
+document.addEventListener("click", function(ev){
+  var a = ev.target.closest && ev.target.closest("[data-ir]");
+  if (!a) return;
+  var destino = a.getAttribute("data-ir");
+  setTimeout(function(){
+    var el = document.getElementById(destino);
+    if (!el) return;
+    var cab = document.querySelector("header");
+    var alto = cab ? cab.getBoundingClientRect().height : 0;
+    window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - alto - 12);
+  }, 60);
+});
 window.addEventListener("hashchange", enrutar);
 
 document.getElementById("f").addEventListener("submit", function(e){
