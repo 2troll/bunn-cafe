@@ -378,6 +378,24 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <div class="rej r3" id="iCafes"></div>
     <div class="acc"><a class="btn" href="#/cafes" data-t="bVerTodos">Ver la carta entera</a></div>
   </div>
+  <div class="marco bl raya">
+    <p class="eti" data-t="iPorQueEti">Tres decisiones que nos cuestan dinero</p>
+    <div class="filas" id="iPorQue"></div>
+  </div>
+  <div class="marco bl raya">
+    <p class="eti" data-t="iNoEti">Lo que no vamos a hacer</p>
+    <ul class="lista" id="iNo"></ul>
+    <p class="metodo" data-t="iNoNota">Ninguna de estas cosas es ilegal ni infrecuente: casi todo el sector las hace. Simplemente hemos decidido que no, y preferimos decirlo antes de que lo pregunte.</p>
+  </div>
+  <div class="marco" style="padding-bottom:clamp(2.75rem,6vw,5rem)">
+    <div class="cinta">
+      <div>
+        <h3 data-t="ctaIniH">¿No sabe cuál pedir? Cuéntenos cómo lo prepara.</h3>
+        <p data-t="ctaIniP">Le recomendamos uno concreto y una receta de partida. Y si duda, le mandamos cien gramos con portes pagados.</p>
+      </div>
+      <a class="btn" href="#/contacto" data-t="bEscribir">Escribirnos</a>
+    </div>
+  </div>
 </section>
 
 <section data-ruta="cafes" id="ap-cafes">
@@ -741,7 +759,24 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES", nPreparar:"Preparar", nComprar:"Comprar", ariaEnPagina:"En esta página",
+ _dir:"ltr", _lang:"es", _loc:"es-ES", iPorQueEti:"Tres decisiones que nos cuestan dinero", iNoEti:"Lo que no vamos a hacer",
+ iNoNota:"Ninguna de estas cosas es ilegal ni infrecuente: casi todo el sector las hace. Simplemente hemos decidido que no, y preferimos decirlo antes de que lo pregunte.",
+ ctaIniH:"¿No sabe cuál pedir? Cuéntenos cómo lo prepara.",
+ ctaIniP:"Le recomendamos uno concreto y una receta de partida. Y si duda, le mandamos cien gramos con portes pagados.",
+ bEscribir:"Escribirnos",
+ iPorQue:[
+  {i:"Tandas de 12 kg", t:"Tostamos dos veces por semana, no una vez al mes", d:"Es menos eficiente y nos obliga a encender el tambor con la mitad de la carga que aguanta. A cambio, ningún pedido sale del tostadero con más de cuarenta y ocho horas, y podemos parar de tostar un lote a mitad de temporada si deja de estar a la altura."},
+  {i:"Fecha de tueste", t:"En la bolsa va el día en que se tostó, no una caducidad a seis meses", d:"La caducidad legal permite poner un año. Nosotros ponemos la fecha real y una ventana recomendada de tres a ocho semanas. Es la información que de verdad le sirve, y la que hace evidente cuándo una bolsa de supermercado lleva medio año en la estantería."},
+  {i:"Se acaba y ya", t:"Cuando un lote se termina, desaparece de la carta", d:"Lo cómodo sería sustituirlo por otro parecido y dejar el mismo nombre en la web, que es lo que hace casi todo el mundo con los llamados «blends de la casa». Preferimos tener seis referencias y que cambien, aunque eso signifique explicarle cada dos meses que su café favorito ya no está."}
+ ],
+ iNo:[
+  "Mezclas sin origen declarado: si en la etiqueta no cabe la finca, es que no la sabemos",
+  "Descafeinado con disolventes químicos; sólo trabajamos el de agua, aunque cueste más",
+  "Vender café molido con más de una semana desde el tueste",
+  "Suscripciones con permanencia o con penalización por pausar",
+  "Vender maquinaria o molinos: no cobramos comisión de ninguna marca"
+ ],
+ nPreparar:"Preparar", nComprar:"Comprar", ariaEnPagina:"En esta página",
  tPreparar:"Preparar — BUNN", tComprar:"Comprar — BUNN",
 
  coDespuesEti:"Qué pasa después", coTostaderoEti:"El tostadero", coEquipoEti:"Quién le contesta",
@@ -1055,7 +1090,24 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB", nPreparar:"Brewing", nComprar:"Buy", ariaEnPagina:"On this page",
+ _dir:"ltr", _lang:"en", _loc:"en-GB", iPorQueEti:"Three decisions that cost us money", iNoEti:"What we will not do",
+ iNoNota:"None of these things is illegal or unusual: most of the trade does them. We have simply decided not to, and we would rather say so before you ask.",
+ ctaIniH:"Not sure which to order? Tell us how you brew it.",
+ ctaIniP:"We will recommend one specific coffee and a starting recipe. And if you are unsure, we send a hundred grams postage paid.",
+ bEscribir:"Write to us",
+ iPorQue:[
+  {i:"12 kg batches", t:"We roast twice a week, not once a month", d:"It is less efficient and means firing the drum at half the load it can take. In exchange, no order leaves the roastery more than forty-eight hours old, and we can stop roasting a lot mid-season if it stops being good enough."},
+  {i:"Roast date", t:"The bag carries the day it was roasted, not a six-month best-before", d:"The legal shelf life allows a full year. We print the actual date and a recommended window of three to eight weeks. It is the information that actually helps you, and the one that makes it obvious when a supermarket bag has been on the shelf for half a year."},
+  {i:"Gone is gone", t:"When a lot runs out, it comes off the list", d:"The convenient thing would be to replace it with something similar and keep the same name on the site, which is what almost everyone does with so-called house blends. We would rather carry six coffees that change, even if that means explaining every couple of months that your favourite is no longer there."}
+ ],
+ iNo:[
+  "Blends with no declared origin: if the farm does not fit on the label, we do not know it",
+  "Decaf processed with chemical solvents; we only work with water process, though it costs more",
+  "Selling ground coffee more than a week past roasting",
+  "Subscriptions with lock-in or a penalty for pausing",
+  "Selling machines or grinders: we take commission from no brand"
+ ],
+ nPreparar:"Brewing", nComprar:"Buy", ariaEnPagina:"On this page",
  tPreparar:"Brewing — BUNN", tComprar:"Buy — BUNN",
 
  coDespuesEti:"What happens next", coTostaderoEti:"The roastery", coEquipoEti:"Who answers you",
@@ -1369,7 +1421,24 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", nPreparar:"التحضير", nComprar:"الشراء", ariaEnPagina:"في هذه الصفحة",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", iPorQueEti:"ثلاثة قرارات تكلّفنا مالًا", iNoEti:"ما لن نفعله",
+ iNoNota:"لا شيء من هذا مخالفًا للقانون ولا نادرًا: فأغلب القطاع يفعله. لكننا قررنا ألّا نفعله، ونفضّل قول ذلك قبل أن تسأل.",
+ ctaIniH:"لا تدري أيَّها تطلب؟ أخبرنا كيف تُحضّره.",
+ ctaIniP:"نوصي لك ببنٍّ بعينه ووصفة بداية. وإن ترددت أرسلنا مئة غرام بأجرة بريد مدفوعة.",
+ bEscribir:"راسِلنا",
+ iPorQue:[
+  {i:"دفعات ١٢ كغ", t:"نحمّص مرتين في الأسبوع، لا مرةً في الشهر", d:"وهو أقل كفاءة ويُلزمنا بتشغيل الأسطوانة بنصف حمولتها. وفي المقابل لا يخرج طلب من المحمصة وقد مضى عليه أكثر من ثمانٍ وأربعين ساعة، ونستطيع وقف تحميص دفعة في منتصف الموسم إن لم تعد على المستوى."},
+  {i:"تاريخ التحميص", t:"على الكيس يوم التحميص، لا صلاحية بعد ستة أشهر", d:"القانون يسمح بوضع سنة كاملة. أما نحن فنضع التاريخ الحقيقي ونافذةً موصى بها من ثلاثة إلى ثمانية أسابيع. وهي المعلومة التي تنفعك فعلًا، والتي تُظهر بجلاء متى بقي كيس السوبرماركت على الرف نصف سنة."},
+  {i:"ينفد فينتهي", t:"حين تنفد دفعة، تختفي من القائمة", d:"الأسهل أن نستبدلها بشبيهة ونُبقي الاسم نفسه على الموقع، وهو ما يفعله الجميع تقريبًا بما يسمّى «خلطات البيت». ونحن نفضّل ست أصناف تتغيّر، وإن عنى ذلك أن نشرح لك كل شهرين أن بنّك المفضّل لم يعد موجودًا."}
+ ],
+ iNo:[
+  "خلطات بلا أصل معلن: فإن لم تتّسع المزرعة على الملصق فمعناه أننا لا نعرفها",
+  "منزوع الكافيين بمذيبات كيميائية؛ ولا نتعامل إلا مع المعالَج بالماء، وإن كلّف أكثر",
+  "بيع بنٍّ مطحون مضى على تحميصه أكثر من أسبوع",
+  "اشتراكات بمدة إلزامية أو بغرامة على الإيقاف",
+  "بيع الآلات أو المطاحن: ولا نتقاضى عمولة من أي علامة"
+ ],
+ nPreparar:"التحضير", nComprar:"الشراء", ariaEnPagina:"في هذه الصفحة",
  tPreparar:"التحضير — بُنّ", tComprar:"الشراء — بُنّ",
 
  coDespuesEti:"ماذا يحدث بعد ذلك", coTostaderoEti:"المحمصة", coEquipoEti:"من يردّ عليك",
@@ -2189,6 +2258,8 @@ function pintarListas(){
   function parrafos(id, arr){ celdas(id, arr, function(x){
     return '<p style="margin-bottom:1rem;color:var(--t2)">'+esc(x)+'</p>'; }); }
 
+  filas("iPorQue", t.iPorQue);
+  celdas("iNo", t.iNo, function(x){ return '<li>'+esc(x)+'</li>'; });
   filas("hoErrores", t.hoErrores);
   parrafos("hoCuentas", t.hoCuentas);
   parrafos("orComprar", t.orComprar);
