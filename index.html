@@ -100,6 +100,28 @@ nav.b a[aria-current="page"]{color:var(--t);border-bottom-color:var(--ocre);}
 .idi button:hover{color:var(--t);}
 @media(max-width:980px){.barra{gap:.6rem 1rem}.idi{margin-inline-start:auto}nav.b{order:3;width:100%;margin-inline-start:0}}
 
+/* ── Menú de móvil ─────────────────────────────────────────────────
+   A 380 px la barra se partía en tres filas y ocupaba 167 px de alto, un
+   cuarto de la pantalla. Debajo del corte se pliega en un panel. */
+.menu-b{display:none;background:none;border:1px solid var(--l);cursor:pointer;
+  width:2.6rem;height:2.6rem;padding:0;flex-direction:column;gap:4px;
+  align-items:center;justify-content:center;flex-shrink:0;margin-inline-start:auto;}
+.menu-b span{display:block;width:1.05rem;height:1.5px;background:var(--t);transition:transform .2s ease,opacity .2s ease;}
+.menu-b[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+.menu-b[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.menu-b[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+.menu-velo{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:55;}
+@media(max-width:880px){
+  .menu-b{display:flex;}
+  nav.b{position:fixed;inset-block:0;inset-inline-end:0;width:min(320px,88vw);z-index:58;
+    background:var(--f2);border-inline-start:1px solid var(--l);
+    flex-direction:column;gap:0;padding:5rem 1.4rem 2rem;overflow-y:auto;align-items:stretch;}
+  nav.b[hidden]{display:none !important;}
+  nav.b a{padding-block:.95rem;border-bottom:1px solid var(--l);font-size:1rem;
+    color:var(--t2);white-space:normal;}
+  nav.b a[aria-current="page"]{color:var(--ocre);}
+}
+
 [data-ruta]{display:none;} [data-ruta].on{display:block;animation:ap .4s ease both;}
 @keyframes ap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
@@ -562,6 +584,11 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
       <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="7" ry="9.5" fill="currentColor"/><path d="M12 3c-2 3-2 15 0 18" stroke="var(--f)" stroke-width="1.6" fill="none"/></svg>
       <span data-t="marca">BUNN</span>
     </a>
+    <button type="button" class="menu-b" id="menuB" aria-expanded="false" aria-controls="menuP"
+            data-t-attr="aria-label:menuAria">
+      <span></span><span></span><span></span>
+    </button>
+
     <nav class="b" data-t-attr="aria-label:ariaMenu" aria-label="Secciones">
       <a href="#/inicio"   data-t="nInicio">Inicio</a>
       <a href="#/cafes"    data-t="nCafes">Los cafés</a>
@@ -1138,7 +1165,8 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES", metaBase:"Tostador de café de especialidad. Grano trazable, tostado en tandas pequeñas y enviado en 48 horas.",
+ _dir:"ltr", _lang:"es", _loc:"es-ES", menuAria:"Abrir el menú",
+ metaBase:"Tostador de café de especialidad. Grano trazable, tostado en tandas pequeñas y enviado en 48 horas.",
  nMapa:"Mapa del sitio", nEmpleo:"Empleo", tMapa:"Mapa del sitio — BUNN", tEmpleo:"Empleo — BUNN",
  tErr:"Página no encontrada — BUNN", pieEmpresaEti:"La casa",
  errEti:"Error 404", errH1:"Esa página no existe.",
@@ -1619,7 +1647,8 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB", metaBase:"Specialty coffee roaster. Traceable beans, roasted in small batches and shipped within 48 hours.",
+ _dir:"ltr", _lang:"en", _loc:"en-GB", menuAria:"Open the menu",
+ metaBase:"Specialty coffee roaster. Traceable beans, roasted in small batches and shipped within 48 hours.",
  nMapa:"Sitemap", nEmpleo:"Jobs", tMapa:"Sitemap — BUNN", tEmpleo:"Jobs — BUNN",
  tErr:"Page not found — BUNN", pieEmpresaEti:"The company",
  errEti:"Error 404", errH1:"That page does not exist.",
@@ -2100,7 +2129,8 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", metaBase:"محمصة بنّ متخصصة. حبّ قابل للتتبّع، محمَّص بدفعات صغيرة ومُرسَل خلال ٤٨ ساعة.",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", menuAria:"افتح القائمة",
+ metaBase:"محمصة بنّ متخصصة. حبّ قابل للتتبّع، محمَّص بدفعات صغيرة ومُرسَل خلال ٤٨ ساعة.",
  nMapa:"خريطة الموقع", nEmpleo:"وظائف", tMapa:"خريطة الموقع — بُنّ", tEmpleo:"وظائف — بُنّ",
  tErr:"الصفحة غير موجودة — بُنّ", pieEmpresaEti:"الدار",
  errEti:"خطأ ٤٠٤", errH1:"هذه الصفحة غير موجودة.",
@@ -3317,6 +3347,31 @@ function textoEntrada(r){
   var t = sec ? sec.textContent.trim() : "";
   return t.length > 155 ? t.slice(0, 152).replace(/\s+\S*$/, "") + "…" : t;
 }
+/* El panel sólo se oculta con [hidden] por debajo del corte: por encima
+   la navegación es una barra normal y no debe desaparecer nunca. */
+var CORTE_MENU = window.matchMedia("(max-width: 880px)");
+function menuAbrir(abrir){
+  var nav = document.querySelector("nav.b"), bt = document.getElementById("menuB");
+  if (!nav || !bt) return;
+  if (!CORTE_MENU.matches) { nav.hidden = false; return; }
+  nav.hidden = !abrir;
+  bt.setAttribute("aria-expanded", String(abrir));
+  var velo = document.getElementById("menuVelo");
+  if (abrir && !velo){
+    velo = document.createElement("div");
+    velo.className = "menu-velo"; velo.id = "menuVelo";
+    velo.addEventListener("click", function(){ menuAbrir(false); });
+    document.body.appendChild(velo);
+  } else if (!abrir && velo) velo.remove();
+  if (abrir) nav.querySelector("a").focus(); else bt.focus();
+}
+function menuAjustar(){
+  var nav = document.querySelector("nav.b");
+  if (!nav) return;
+  if (CORTE_MENU.matches){ if (!document.getElementById("menuVelo")) nav.hidden = true; }
+  else { nav.hidden = false; menuAbrir(false); }
+}
+
 function pintarMeta(){
   var t = T[idioma], r = ruta();
   var titulo = t[TITULOS[r]] || t.tInicio;
@@ -3635,6 +3690,15 @@ document.getElementById("cestaIr").addEventListener("click", function(){
   this.disabled = true;
   cesta = {}; guardarCesta(); pintarTienda(); pintarCesta();
 });
+document.getElementById("menuB").addEventListener("click", function(){
+  menuAbrir(this.getAttribute("aria-expanded") !== "true");
+});
+document.querySelector("nav.b").addEventListener("click", function(e){
+  if (e.target.tagName === "A") menuAbrir(false);
+});
+document.addEventListener("keydown", function(e){ if (e.key === "Escape") menuAbrir(false); });
+CORTE_MENU.addEventListener("change", menuAjustar);
+menuAjustar();
 window.addEventListener("hashchange", enrutar);
 
 document.getElementById("f").addEventListener("submit", function(e){
