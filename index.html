@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BUNN — Tostador de café de especialidad</title>
 <meta name="description" content="Tostador de café de especialidad. Origen trazable, tueste propio y entrega a los pocos días de tostar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317130f'/%3E%3Cellipse cx='16' cy='16' rx='7' ry='10' fill='%23d08a3f'/%3E%3Cpath d='M16 6c-3 4-3 16 0 20' stroke='%2317130f' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317130f'/%3E%3Cellipse cx='16' cy='16' rx='7' ry='10' fill='%23d08a3f'/%3E%3Cpath d='M16 6c-3 4-3 16 0 20' stroke='%2317130f' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#17130f" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17130f" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://2troll.github.io/bunn-cafe/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BUNN">
+<meta property="og:url" content="https://2troll.github.io/bunn-cafe/">
+<meta property="og:title" id="ogT" content="">
+<meta property="og:description" id="ogD" content="">
+<meta property="og:locale" id="ogL" content="es_ES">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" id="twT" content="">
+<meta name="twitter:description" id="twD" content="">
+<script type="application/ld+json" id="datos"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@300;400;500;600&family=Almarai:wght@300;400;700&display=swap">
@@ -1123,7 +1138,8 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES", nMapa:"Mapa del sitio", nEmpleo:"Empleo", tMapa:"Mapa del sitio — BUNN", tEmpleo:"Empleo — BUNN",
+ _dir:"ltr", _lang:"es", _loc:"es-ES", metaBase:"Tostador de café de especialidad. Grano trazable, tostado en tandas pequeñas y enviado en 48 horas.",
+ nMapa:"Mapa del sitio", nEmpleo:"Empleo", tMapa:"Mapa del sitio — BUNN", tEmpleo:"Empleo — BUNN",
  tErr:"Página no encontrada — BUNN", pieEmpresaEti:"La casa",
  errEti:"Error 404", errH1:"Esa página no existe.",
  errEntrada:"O la dirección está mal escrita, o la teníamos y la hemos movido. Si el enlace venía de aquí, es culpa nuestra.",
@@ -1603,7 +1619,8 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB", nMapa:"Sitemap", nEmpleo:"Jobs", tMapa:"Sitemap — BUNN", tEmpleo:"Jobs — BUNN",
+ _dir:"ltr", _lang:"en", _loc:"en-GB", metaBase:"Specialty coffee roaster. Traceable beans, roasted in small batches and shipped within 48 hours.",
+ nMapa:"Sitemap", nEmpleo:"Jobs", tMapa:"Sitemap — BUNN", tEmpleo:"Jobs — BUNN",
  tErr:"Page not found — BUNN", pieEmpresaEti:"The company",
  errEti:"Error 404", errH1:"That page does not exist.",
  errEntrada:"Either the address is mistyped, or we had it and moved it. If the link came from here, it is our fault.",
@@ -2083,7 +2100,8 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", nMapa:"خريطة الموقع", nEmpleo:"وظائف", tMapa:"خريطة الموقع — بُنّ", tEmpleo:"وظائف — بُنّ",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", metaBase:"محمصة بنّ متخصصة. حبّ قابل للتتبّع، محمَّص بدفعات صغيرة ومُرسَل خلال ٤٨ ساعة.",
+ nMapa:"خريطة الموقع", nEmpleo:"وظائف", tMapa:"خريطة الموقع — بُنّ", tEmpleo:"وظائف — بُنّ",
  tErr:"الصفحة غير موجودة — بُنّ", pieEmpresaEti:"الدار",
  errEti:"خطأ ٤٠٤", errH1:"هذه الصفحة غير موجودة.",
  errEntrada:"إما أن العنوان مكتوب خطأً، وإما أنها كانت لدينا فنقلناها. وإن كان الرابط من هنا فهو ذنبنا.",
@@ -3130,7 +3148,7 @@ function pintarListas(){
     return '<div class="cel dato"><div class="v">'+esc(c.v)+'</div><div class="u">'+esc(c.u)+'</div></div>'; });
 
   pintarTienda(); pintarEstante(); pintarCesta(); pintarConfig();
-  pintarAviso(); pintarPieTienda(); pintarCookies(); pintarLegal(); pintarPaginasBase();
+  pintarAviso(); pintarPieTienda(); pintarCookies(); pintarLegal(); pintarPaginasBase(); pintarMeta();
   celdas("suPlanes", t.planes, function(p){
     return '<div class="cel"><span class="sub">'+esc(p.f)+'</span><h3>'+esc(p.n)+'</h3><p>'+esc(p.d)+'</p><div class="precio">'+esc(p.p)+'</div></div>'; });
   var sv = document.getElementById("suVentajas");
@@ -3247,6 +3265,71 @@ function pintarPaginasBase(){
   if (ec) ec.innerHTML = t.emComo.map(function(x){
     return '<li><div><b>'+esc(x.t)+'</b><span>'+esc(x.d)+'</span></div></li>';
   }).join("");
+}
+
+function grafoDatos(){
+  var t = T[idioma];
+  return {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":["Organization","Store"], "@id":"https://2troll.github.io/bunn-cafe/#org",
+       "name":"BUNN Tostadores", "url":"https://2troll.github.io/bunn-cafe/",
+       "email":"hola@bunn.example", "telephone":"+34931000000",
+       "currenciesAccepted":"EUR", "paymentAccepted":PAGOS.join(", "),
+       "inLanguage":["es","en","ar"],
+       "disclaimer":"Maqueta de demostración: empresa ficticia, no se tramita ningún pedido.",
+       "address":{"@type":"PostalAddress","streetAddress":"Carrer de la Indústria 42, nave 3",
+         "postalCode":"08025","addressLocality":"Barcelona","addressCountry":"ES"},
+       "openingHours":"Tu-Sa 09:00-14:00"},
+      {"@type":"WebSite","@id":"https://2troll.github.io/bunn-cafe/#web",
+       "url":"https://2troll.github.io/bunn-cafe/","name":"BUNN",
+       "inLanguage":t._lang,"publisher":{"@id":"https://2troll.github.io/bunn-cafe/#org"}},
+      {"@type":"ItemList","@id":"https://2troll.github.io/bunn-cafe/#carta",
+       "name":t.nCafes,
+       "itemListElement":CATALOGO.map(function(c,i){
+         var d = t.cafes[i];
+         return {"@type":"ListItem","position":i+1,
+           "item":{"@type":"Product","name":d.n,"description":d.d,
+             "category":t.procesos[c.proc],
+             "additionalProperty":[
+               {"@type":"PropertyValue","name":t.ejeCuerpo,"value":c.cuerpo,"maxValue":5},
+               {"@type":"PropertyValue","name":t.ejeAcidez,"value":c.acidez,"maxValue":5}],
+             "offers":{"@type":"Offer","price":c.precio.toFixed(2),"priceCurrency":"EUR",
+               "availability": c.stock > 0
+                 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+               "seller":{"@id":"https://2troll.github.io/bunn-cafe/#org"}}}};
+       })},
+      {"@type":"FAQPage","@id":"https://2troll.github.io/bunn-cafe/#faq",
+       "mainEntity":t.preguntas.map(function(p){
+         return {"@type":"Question","name":p.q,
+                 "acceptedAnswer":{"@type":"Answer","text":p.a}}; })}
+    ]
+  };
+}
+
+
+/* ── Metadatos y datos estructurados ───────────────────────────────
+   La descripción de cada página sale de su propia entradilla, y el JSON-LD
+   de los mismos datos que pinta el sitio. Así no hay una copia paralela
+   que se quede vieja cuando se cambia un texto. */
+function textoEntrada(r){
+  var sec = document.querySelector('[data-ruta="'+r+'"] .entrada');
+  var t = sec ? sec.textContent.trim() : "";
+  return t.length > 155 ? t.slice(0, 152).replace(/\s+\S*$/, "") + "…" : t;
+}
+function pintarMeta(){
+  var t = T[idioma], r = ruta();
+  var titulo = t[TITULOS[r]] || t.tInicio;
+  var desc = textoEntrada(r) || t.metaBase;
+  function pon(id, v){ var e = document.getElementById(id); if (e) e.setAttribute("content", v); }
+  var md = document.querySelector('meta[name="description"]');
+  if (md) md.setAttribute("content", desc);
+  pon("ogT", titulo); pon("twT", titulo);
+  pon("ogD", desc);   pon("twD", desc);
+  pon("ogL", t._lang === "ar" ? "ar_AR" : t._lang === "en" ? "en_GB" : "es_ES");
+
+  var datos = document.getElementById("datos");
+  if (datos) datos.textContent = JSON.stringify(grafoDatos(), null, 0);
 }
 
 function pintarLegal(){
@@ -3496,6 +3579,7 @@ function enrutar(){
   }
   document.title = T[idioma][TITULOS[r]] || T[idioma].tInicio;
   window.scrollTo(0,0);
+  pintarMeta();
 }
 
 var bs = document.querySelectorAll(".idi button");
