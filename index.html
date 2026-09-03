@@ -326,7 +326,7 @@ html[dir="rtl"] .pie-bol-t{font-weight:700;font-size:1.4rem;}
 .bol-f input:focus{outline:none;border-color:var(--ocre);}
 .bol-ok{width:100%;font-size:.8rem;color:var(--verde);margin:0;min-height:1.1em;}
 .pie-rej{display:grid;gap:2rem;padding-block:clamp(2rem,4vw,3rem);}
-@media(min-width:760px){.pie-rej{grid-template-columns:repeat(4,1fr);gap:2.5rem;}}
+@media(min-width:760px){.pie-rej{grid-template-columns:repeat(5,1fr);gap:2rem;}}
 .pie-t{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin:0 0 1rem;}
 html[dir="rtl"] .pie-t{letter-spacing:0;text-transform:none;font-size:.85rem;}
 .pie-col nav{display:grid;gap:.55rem;}
@@ -455,6 +455,20 @@ html[dir="rtl"] .cfg-total b{font-weight:700;font-size:1.5rem;}
 .mol .gran s{background:var(--ocre);border-radius:50%;text-decoration:none;display:block;}
 .mol p{font-size:.88rem;color:var(--t2);margin:0;max-width:none;}
 .mol .tacto{font-size:.78rem;color:var(--t3);}
+
+.err-ruta{font-size:.86rem;color:var(--t3);margin-top:1.2rem;}
+.err-ruta code{background:var(--sup);border:1px solid var(--l);padding:.15rem .5rem;
+  color:var(--ocre);direction:ltr;display:inline-block;font-family:ui-monospace,monospace;}
+.mapa-rej{display:grid;gap:2rem;}
+@media(min-width:760px){.mapa-rej{grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:2.5rem;}}
+.mapa-col h2{font-family:var(--disp);font-size:1.3rem;font-weight:400;margin-bottom:.9rem;
+  padding-bottom:.6rem;border-bottom:1px solid var(--l);}
+html[dir="rtl"] .mapa-col h2{font-weight:700;font-size:1.15rem;}
+.mapa-col nav{display:grid;gap:.5rem;}
+.mapa-col a{color:var(--t2);text-decoration:none;font-size:.9rem;}
+.mapa-col a:hover{color:var(--ocre);}
+.mapa-col .sola{color:var(--t3);font-size:.82rem;}
+.puesto-b{font-size:.8rem;color:var(--ocre);display:block;margin-top:.4rem;}
 
 /* ── Cookies y legal ──────────────────────────────────────────────── */
 .ck{position:fixed;inset-inline:0;bottom:0;z-index:100;background:var(--f2);
@@ -981,6 +995,47 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 
 
 
+<section data-ruta="err" id="ap-err">
+  <div class="marco bl">
+    <p class="eti" data-t="errEti">Error 404</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="errH1">Esa página no existe.</h1>
+    <p class="entrada" data-t="errEntrada">O la dirección está mal escrita, o la teníamos y la hemos movido. Si el enlace venía de aquí, es culpa nuestra.</p>
+    <p class="err-ruta"><span data-t="errPedida">Ha pedido:</span> <code id="errRuta"></code></p>
+    <div class="acc">
+      <a class="btn sol" href="#/cafes" data-t="bVerCafes">Ver los cafés</a>
+      <a class="btn" href="#/mapa" data-t="nMapa">Mapa del sitio</a>
+      <a class="btn" href="#/contacto" data-t="errAvisar">Avisarnos del enlace roto</a>
+    </div>
+  </div>
+</section>
+
+<section data-ruta="mapa" id="ap-mapa">
+  <div class="marco bl">
+    <p class="eti" data-t="nMapa">Mapa del sitio</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:16ch" data-t="mpH1">Todo lo que hay, en una página.</h1>
+    <p class="entrada" data-t="mpEntrada">Generado del propio índice del sitio: si se añade un apartado, aparece aquí solo. No hay una lista escrita a mano que se quede vieja.</p>
+  </div>
+  <div class="marco" style="padding-bottom:clamp(2.75rem,6vw,5rem)">
+    <div class="mapa-rej" id="mapaSitio"></div>
+  </div>
+</section>
+
+<section data-ruta="empleo" id="ap-empleo">
+  <div class="marco bl">
+    <p class="eti" data-t="nEmpleo">Empleo</p>
+    <h1 style="font-size:clamp(2rem,4.6vw,3.4rem);max-width:18ch" data-t="emH1">Siete personas, y el sueldo puesto en el anuncio.</h1>
+    <p class="entrada" data-t="emEntrada">En hostelería y en tueste se anuncia mucho «según valía». Aquí va la banda, y no se negocia a la baja después de la entrevista.</p>
+  </div>
+  <div class="marco">
+    <div class="filas" id="emPuestos"></div>
+  </div>
+  <div class="marco bl" style="padding-top:2rem">
+    <p class="eti" data-t="emComoEti">Cómo es el proceso</p>
+    <ol class="despues" id="emComo"></ol>
+    <p class="metodo" data-t="emNota">Maqueta de demostración: las ofertas son de ejemplo y no hay proceso de selección abierto.</p>
+  </div>
+</section>
+
 <section data-ruta="legal" id="ap-legal">
   <div class="marco bl">
     <p class="eti" data-t="nLegal">Legal</p>
@@ -1047,6 +1102,11 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
     <div class="pie-col"><p class="pie-t" data-t="pieTienda">Tienda</p><nav id="pieTienda"></nav></div>
     <div class="pie-col"><p class="pie-t" data-t="pieAprender">Aprender</p><nav id="pieAprender"></nav></div>
     <div class="pie-col"><p class="pie-t" data-t="pieAyuda">Ayuda</p><nav id="pieAyuda"></nav></div>
+    <div class="pie-col"><p class="pie-t" data-t="pieEmpresaEti">La casa</p><nav>
+      <a href="#/empleo" data-t="nEmpleo">Empleo</a>
+      <a href="#/mapa" data-t="nMapa">Mapa del sitio</a>
+      <a href="#/legal" data-t="nLegal">Legal</a>
+    </nav></div>
     <div class="pie-col">
       <p class="pie-t" data-t="piePago">Formas de pago</p>
       <div class="pagos" id="pagos"></div>
@@ -1063,7 +1123,34 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 <script>
 var T = {
 es:{
- _dir:"ltr", _lang:"es", _loc:"es-ES",
+ _dir:"ltr", _lang:"es", _loc:"es-ES", nMapa:"Mapa del sitio", nEmpleo:"Empleo", tMapa:"Mapa del sitio — BUNN", tEmpleo:"Empleo — BUNN",
+ tErr:"Página no encontrada — BUNN", pieEmpresaEti:"La casa",
+ errEti:"Error 404", errH1:"Esa página no existe.",
+ errEntrada:"O la dirección está mal escrita, o la teníamos y la hemos movido. Si el enlace venía de aquí, es culpa nuestra.",
+ errPedida:"Ha pedido:", errAvisar:"Avisarnos del enlace roto",
+ mpH1:"Todo lo que hay, en una página.",
+ mpEntrada:"Generado del propio índice del sitio: si se añade un apartado, aparece aquí solo. No hay una lista escrita a mano que se quede vieja.",
+ mapaSinApartados:"Página única, sin apartados.",
+ emH1:"Siete personas, y el sueldo puesto en el anuncio.",
+ emEntrada:"En hostelería y en tueste se anuncia mucho «según valía». Aquí va la banda, y no se negocia a la baja después de la entrevista.",
+ emComoEti:"Cómo es el proceso", emNota:"Maqueta de demostración: las ofertas son de ejemplo y no hay proceso de selección abierto.",
+ puestos:[
+  {i:"Tostadero", t:"Tostador/a", b:"26.000–30.000 € brutos · jornada completa",
+   d:"Tandas de doce kilos, dos días de tueste por semana y control de perfiles. Se pide haber tostado en tambor, no en máquina automática, y saber leer una curva. El resto de la semana es cata, control de lotes y recepción de verde. Turno de mañana fijo: no hay noches ni fines de semana."},
+  {i:"Barra y tienda", t:"Barista de tienda", b:"22.000–25.000 € brutos · jornada completa",
+   d:"Atender la barra del tostadero de martes a sábado por la mañana. Se paga por catorce pagas y las horas extra se abonan, no se compensan «cuando haya menos lío». Formación en extracción y en cata pagada dentro de horario, dos horas a la semana."},
+  {i:"Hostelería", t:"Técnico/a de hostelería", b:"28.000–34.000 € brutos + coche · jornada completa",
+   d:"Visitas a barras, ajuste de molino, formación de equipos y seguimiento. Es un puesto comercial y técnico a la vez: se necesita saber sacar un espresso decente y también saber decirle a un dueño que su problema es el molino y no el café. Sin comisión por volumen, para no empujar formatos que no le convienen a la barra."},
+  {i:"Almacén", t:"Preparación de pedidos", b:"20.000–22.000 € brutos · 30 h semanales",
+   d:"Preparar y etiquetar los envíos de martes y viernes. Media jornada real de seis horas, no una de ocho pagada a media. Se puede combinar con estudios y los horarios se cierran con dos semanas de antelación."}
+ ],
+ emComo:[
+  {t:"Leemos todo y contestamos a todo el mundo", d:"Aunque sea que no. No usamos filtros automáticos que descartan currículos por palabras clave."},
+  {t:"Una conversación de una hora", d:"Preguntamos por lo que ha hecho de verdad. No mandamos pruebas técnicas gratis que casualmente se parecen a trabajo nuestro pendiente."},
+  {t:"Media jornada en el tostadero, pagada", d:"Para que vea cómo se trabaja aquí antes de decidir. Se paga aunque después no siga el proceso."},
+  {t:"Respuesta en una semana, con el motivo", d:"Si no encaja, decimos por qué en dos líneas. Un «hemos seguido con otro perfil» no le sirve a nadie."}
+ ],
+
  nLegal:"Legal", tLegal:"Legal — BUNN", leH1:"Condiciones de venta, datos y cookies.",
  leEntrada:"Lo que pasa cuando compra: qué precio paga, cuándo sale, qué puede devolver y qué hacemos con sus datos.",
  leMaqueta:"Aviso: esto es una maqueta de demostración. Los textos siguen la estructura de unas condiciones de venta reales, pero la sociedad es inventada y no se tramita ningún pedido.",
@@ -1109,7 +1196,31 @@ es:{
   {t:"8. Accesibilidad", p:[
    "El sitio se ha construido buscando cumplir las pautas WCAG 2.2 en nivel AA: navegación completa con teclado, foco visible, contraste suficiente, texto alternativo en las imágenes y respeto de la preferencia de movimiento reducido.",
    "En la carta, la información no depende del color: el tono del recuadro sugiere el cuerpo del café, pero ese mismo dato aparece escrito y en la escala de barras junto a cada ficha. Las existencias van en texto, no en un semáforo.",
-   "Si algo no le funciona con lector de pantalla o con teclado, escríbanos a <b>hola@bunn.example</b> contando qué pasó y con qué navegador. Lo tratamos como una incidencia."]}
+   "Si algo no le funciona con lector de pantalla o con teclado, escríbanos a <b>hola@bunn.example</b> contando qué pasó y con qué navegador. Lo tratamos como una incidencia."]},
+  {t:"9. Términos de uso del sitio", p:[
+   "Puede leer, imprimir y compartir el contenido libremente, incluidas las guías de preparación, citando la fuente. Lo que no puede es copiarlo entero en otro sitio como propio ni usar nuestras calculadoras dentro de otra web sin permiso escrito.",
+   "Textos y código son nuestros. Las fotografías proceden de Wikimedia Commons con licencia libre, atribuidas a su autor en los créditos; su licencia es la que diga Commons. Las tipografías vienen de Google Fonts bajo licencia SIL Open Font.",
+   "<b>Precios y disponibilidad.</b> Lo publicado en la tienda es una invitación a comprar, no una oferta cerrada: el contrato existe cuando le llega la confirmación. Si un lote se agota entre medias, se lo decimos y elige.",
+   "<b>Disponibilidad del sitio.</b> No garantizamos que esté en pie el cien por cien del tiempo. Si se cae, se arregla; no hay indemnización por no poder pedir una tarde."]},
+  {t:"10. Ley aplicable y resolución de conflictos", p:[
+   "La relación se rige por la <b>legislación española</b> y por la normativa europea de consumo cuando usted compra como particular. Si es consumidor, puede acudir a los juzgados de su domicilio, y ninguna condición nuestra puede quitarle ese derecho.",
+   "<b>Plataforma europea de litigios en línea.</b> La Comisión Europea mantiene una plataforma de resolución de litigios en línea a la que todo comercio electrónico de la UE debe remitir. Puede usarla si no llegamos a un acuerdo, y estamos adheridos al <b>arbitraje de consumo</b>: un laudo nos obliga aunque no nos guste.",
+   "<b>Antes de nada, escríbanos.</b> A reclamaciones@bunn.example. Contestamos por escrito en menos de quince días diciendo qué vamos a hacer. La mayoría de los problemas de una tienda de café se arreglan mandando otra bolsa, no con un abogado.",
+   "<b>Nulidad parcial.</b> Si un tribunal anula una de estas cláusulas, el resto sigue en vigor."]},
+  {t:"11. Venta a hostelería y mayorista", p:[
+   "Las condiciones de hostelería son <b>distintas de las de particular</b> y se firman aparte. Pedido mínimo de seis kilos, precio por escalones según consumo mensual real, y revisión cada seis meses: si su consumo baja, el precio no sube de golpe, se avisa con un mes.",
+   "<b>Pago:</b> primer pedido por adelantado; a partir del segundo, a treinta días con domiciliación. No trabajamos a sesenta ni a noventa días: una empresa de siete personas no puede financiar a nadie, y decirlo por delante evita el problema de después.",
+   "<b>Sin exclusividad de zona y sin depósito de máquina.</b> No cedemos máquinas a cambio de compra mínima, que es la práctica habitual del sector y la que ata a una barra durante años. Si quiere una máquina, le decimos cuál comprar y no cobramos comisión de ninguna marca.",
+   "<b>Formación y visitas incluidas:</b> primera visita, ajuste de molino y formación inicial del equipo. Después, una visita de seguimiento al trimestre. Si cambia de proveedor, la formación ya recibida es suya: no pedimos que nos la devuelvan ni cobramos nada por ella."]},
+  {t:"12. Origen, precio pagado y lo que no certificamos", p:[
+   "Publicamos el precio pagado por libra de café verde de cada lote y el nombre del productor o de la cooperativa cuando tenemos permiso para darlo. Cuando no lo tenemos, decimos que no lo tenemos, en vez de escribir «relación directa» y dejarlo ahí.",
+   "<b>No tenemos sello de comercio justo ni ecológico</b>, y conviene saber por qué: certificar un lote cuesta dinero que sale del precio, y para volúmenes pequeños como los nuestros el coste por kilo es alto. Preferimos pagar más en finca y publicar la cifra a pagar una certificación y publicar un logotipo.",
+   "Eso significa que <b>tiene que fiarse de nuestra palabra</b>, y es justo decirlo. Un sello lo verifica un tercero; nuestro dato no. Si eso le importa —y es razonable que le importe—, hay tostadores certificados y se lo diremos sin problema.",
+   "Lo que sí hacemos: no comprar por debajo del doble del precio de bolsa de Nueva York, y publicar cada año qué se pagó por cada origen. Está en la página de trazabilidad, con el año y el lote."]},
+  {t:"13. Seguridad y pagos", p:[
+   "El sitio se sirve por HTTPS. <b>No vemos ni guardamos datos de tarjeta:</b> los trata la pasarela de pago directamente y nosotros sólo recibimos el resultado y los cuatro últimos dígitos, para poder identificar un cargo si nos pregunta por él.",
+   "En esta maqueta no hay pasarela, ni cesta que salga del navegador, ni pedido que llegue a ninguna parte. La cesta se guarda en su propio dispositivo con almacenamiento local: si borra los datos del sitio, desaparece.",
+   "<b>Si encuentra una vulnerabilidad</b>, escriba a <b>seguridad@bunn.example</b> con lo que ha encontrado y cómo reproducirlo. Contestamos en setenta y dos horas y no denunciamos a quien informa de buena fe. Le pedimos que no acceda a datos de terceros más allá de lo imprescindible y que no lo publique hasta que esté corregido o pasen noventa días."]}
  ],
  buscaPh:"Buscar un café", avisoBase:"Envío gratuito a partir de 35 € · Tostamos lunes y jueves",
  avisoFalta:"Le faltan {x} para el envío gratuito", avisoYa:"Envío gratuito conseguido",
@@ -1492,7 +1603,34 @@ es:{
 },
 
 en:{
- _dir:"ltr", _lang:"en", _loc:"en-GB",
+ _dir:"ltr", _lang:"en", _loc:"en-GB", nMapa:"Sitemap", nEmpleo:"Jobs", tMapa:"Sitemap — BUNN", tEmpleo:"Jobs — BUNN",
+ tErr:"Page not found — BUNN", pieEmpresaEti:"The company",
+ errEti:"Error 404", errH1:"That page does not exist.",
+ errEntrada:"Either the address is mistyped, or we had it and moved it. If the link came from here, it is our fault.",
+ errPedida:"You asked for:", errAvisar:"Report the broken link",
+ mpH1:"Everything there is, on one page.",
+ mpEntrada:"Generated from the site's own index: if a section is added, it appears here by itself. There is no hand-written list to go stale.",
+ mapaSinApartados:"Single page, no sections.",
+ emH1:"Seven people, and the salary in the advert.",
+ emEntrada:"In hospitality and roasting, adverts love saying \u201cdepending on experience\u201d. Here the band is stated, and it is not negotiated down after the interview.",
+ emComoEti:"How the process works", emNota:"Demonstration mock-up: the vacancies are examples and no recruitment process is open.",
+ puestos:[
+  {i:"Roastery", t:"Roaster", b:"€26,000–30,000 gross · full time",
+   d:"Twelve-kilo batches, two roast days a week and profile control. Drum roasting experience is required, not automatic-machine experience, along with the ability to read a curve. The rest of the week is cupping, lot control and green intake. Fixed morning shift: no nights and no weekends."},
+  {i:"Shop", t:"Shop barista", b:"€22,000–25,000 gross · full time",
+   d:"Running the roastery bar Tuesday to Saturday mornings. Paid over fourteen instalments and overtime is paid, not offset \u201cwhen it is quieter\u201d. Extraction and cupping training paid within working hours, two hours a week."},
+  {i:"Wholesale", t:"Hospitality technician", b:"€28,000–34,000 gross + vehicle · full time",
+   d:"Bar visits, grinder setup, team training and follow-up. It is a commercial and a technical role at once: you need to pull a decent espresso and also to tell an owner their problem is the grinder, not the coffee. No volume commission, so nobody pushes formats that do not suit the bar."},
+  {i:"Warehouse", t:"Order picking", b:"€20,000–22,000 gross · 30 h a week",
+   d:"Preparing and labelling the Tuesday and Friday dispatches. A genuine six-hour part-time day, not an eight-hour one paid as half. It can be combined with studying, and rotas are fixed two weeks ahead."}
+ ],
+ emComo:[
+  {t:"We read everything and everyone gets an answer", d:"Even if it is a no. We do not use automatic filters that discard CVs on keywords."},
+  {t:"A one-hour conversation", d:"We ask about what you have actually done. We do not send free technical tests that happen to resemble work of ours that is pending."},
+  {t:"Half a day at the roastery, paid", d:"So you can see how we work before deciding. It is paid even if you do not continue afterwards."},
+  {t:"An answer within a week, with the reason", d:"If it is not a fit, we say why in two lines. \u201cWe went with another profile\u201d helps nobody."}
+ ],
+
  nLegal:"Legal", tLegal:"Legal — BUNN", leH1:"Terms of sale, data and cookies.",
  leEntrada:"What happens when you buy: what you pay, when it ships, what you can return and what we do with your data.",
  leMaqueta:"Notice: this is a demonstration mock-up. The texts follow the structure of real terms of sale, but the company is invented and no order is processed.",
@@ -1538,7 +1676,31 @@ en:{
   {t:"8. Accessibility", p:[
    "The site was built aiming to meet WCAG 2.2 at level AA: full keyboard navigation, visible focus, sufficient contrast, alternative text on images, and respect for the reduced-motion preference.",
    "In the shop, information does not depend on colour: the tone of the tile suggests the coffee's body, but the same value appears written out and on the bar scale beside each card. Stock is given as text, not as a traffic light.",
-   "If something does not work with a screen reader or a keyboard, write to <b>hola@bunn.example</b> saying what happened and in which browser. We treat it as an incident."]}
+   "If something does not work with a screen reader or a keyboard, write to <b>hola@bunn.example</b> saying what happened and in which browser. We treat it as an incident."]},
+  {t:"9. Website terms of use", p:[
+   "You may read, print and share the content freely, brewing guides included, with attribution. What you may not do is copy it wholesale onto another site as your own, or embed our calculators in another website without written permission.",
+   "Texts and code are ours. The photographs come from Wikimedia Commons under free licences, attributed to their author in the credits; their licence is whatever Commons says. Typefaces come from Google Fonts under the SIL Open Font Licence.",
+   "<b>Prices and availability.</b> What is published in the shop is an invitation to buy, not a binding offer: the contract exists once you receive the confirmation. If a lot sells out in between, we tell you and you choose.",
+   "<b>Site availability.</b> We do not guarantee it is up one hundred per cent of the time. If it goes down, it gets fixed; there is no compensation for not being able to order one afternoon."]},
+  {t:"10. Governing law and dispute resolution", p:[
+   "The relationship is governed by <b>Spanish law</b> and by EU consumer law when you buy as a private individual. If you are a consumer, you may go to the courts where you live, and no condition of ours can take that right away.",
+   "<b>European online dispute resolution platform.</b> The European Commission maintains an online dispute resolution platform that every EU e-commerce site must point to. You can use it if we cannot agree, and we are signed up to <b>consumer arbitration</b>: an award binds us whether we like it or not.",
+   "<b>First of all, write to us.</b> At reclamaciones@bunn.example. We answer in writing within fifteen days saying what we will do. Most problems at a coffee shop are solved by sending another bag, not by a lawyer.",
+   "<b>Partial invalidity.</b> If a court voids one of these clauses, the rest remains in force."]},
+  {t:"11. Wholesale and hospitality sales", p:[
+   "Hospitality terms are <b>different from consumer terms</b> and are signed separately. Minimum order six kilos, tiered pricing on actual monthly consumption, reviewed every six months: if your consumption drops, the price does not jump — you get a month's notice.",
+   "<b>Payment:</b> first order in advance; from the second, thirty days by direct debit. We do not work at sixty or ninety days: a seven-person company cannot finance anyone, and saying so up front avoids the problem later.",
+   "<b>No territory exclusivity and no machine loans.</b> We do not place machines in exchange for a minimum purchase, which is the sector's usual practice and the one that ties a bar down for years. If you want a machine, we tell you which to buy and we take commission from no brand.",
+   "<b>Training and visits included:</b> first visit, grinder setup and initial team training. After that, one follow-up visit per quarter. If you change supplier, the training you received is yours: we do not ask for it back and we do not charge for it."]},
+  {t:"12. Origin, price paid, and what we do not certify", p:[
+   "We publish the price paid per pound of green coffee for each lot and the name of the producer or cooperative when we have permission to give it. When we do not, we say we do not, instead of writing \u201cdirect relationship\u201d and leaving it there.",
+   "<b>We hold no fair trade or organic certification</b>, and it is worth knowing why: certifying a lot costs money that comes out of the price, and for small volumes like ours the cost per kilo is high. We would rather pay more at the farm and publish the figure than pay for a certification and publish a logo.",
+   "That means <b>you have to take our word for it</b>, and it is only fair to say so. A certification is verified by a third party; our figure is not. If that matters to you — and it reasonably might — there are certified roasters and we will happily say so.",
+   "What we do commit to: never buying below twice the New York exchange price, and publishing each year what was paid for each origin. It is on the traceability page, with the year and the lot."]},
+  {t:"13. Security and payments", p:[
+   "The site is served over HTTPS. <b>We neither see nor store card data:</b> the payment gateway handles it directly and we only receive the result and the last four digits, so we can identify a charge if you ask about it.",
+   "In this mock-up there is no gateway, no basket that leaves the browser and no order that reaches anywhere. The basket is stored on your own device in local storage: clear the site data and it is gone.",
+   "<b>If you find a vulnerability</b>, write to <b>seguridad@bunn.example</b> with what you found and how to reproduce it. We answer within seventy-two hours and we do not report anyone acting in good faith. We ask that you do not access third-party data beyond what is strictly needed, and that you do not publish it until it is fixed or ninety days have passed."]}
  ],
  buscaPh:"Search a coffee", avisoBase:"Free shipping over €35 · We roast Mondays and Thursdays",
  avisoFalta:"{x} to go for free shipping", avisoYa:"Free shipping unlocked",
@@ -1921,7 +2083,34 @@ en:{
 },
 
 ar:{
- _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab",
+ _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", nMapa:"خريطة الموقع", nEmpleo:"وظائف", tMapa:"خريطة الموقع — بُنّ", tEmpleo:"وظائف — بُنّ",
+ tErr:"الصفحة غير موجودة — بُنّ", pieEmpresaEti:"الدار",
+ errEti:"خطأ ٤٠٤", errH1:"هذه الصفحة غير موجودة.",
+ errEntrada:"إما أن العنوان مكتوب خطأً، وإما أنها كانت لدينا فنقلناها. وإن كان الرابط من هنا فهو ذنبنا.",
+ errPedida:"طلبت:", errAvisar:"أبلغنا بالرابط المكسور",
+ mpH1:"كل ما في الموقع، في صفحة واحدة.",
+ mpEntrada:"مولَّدة من فهرس الموقع نفسه: فإن أُضيف قسم ظهر هنا وحده. ولا توجد قائمة مكتوبة يدويًّا تتقادم.",
+ mapaSinApartados:"صفحة واحدة، بلا أقسام.",
+ emH1:"سبعة أشخاص، والراتب مكتوب في الإعلان.",
+ emEntrada:"في المقاهي والتحميص تكثر عبارة «حسب الخبرة» في الإعلانات. أما هنا فالنطاق مكتوب، ولا يُخفَّض بالتفاوض بعد المقابلة.",
+ emComoEti:"كيف تجري العملية", emNota:"نسخة عرض توضيحية: الوظائف أمثلة ولا توجد عملية توظيف مفتوحة.",
+ puestos:[
+  {i:"المحمصة", t:"محمِّص/ة", b:"٢٦٬٠٠٠–٣٠٬٠٠٠ € إجمالًا · دوام كامل",
+   d:"دفعات اثني عشر كيلوغرامًا، ويوما تحميص أسبوعيًا، وضبط الأنماط. تُشترط خبرة التحميص بالأسطوانة لا بالآلة الأوتوماتيكية، والقدرة على قراءة المنحنى. وبقية الأسبوع تذوّق ومراقبة دفعات واستلام بنٍّ أخضر. مناوبة صباحية ثابتة: بلا ليالٍ ولا عطلات نهاية أسبوع."},
+  {i:"المتجر", t:"باريستا المتجر", b:"٢٢٬٠٠٠–٢٥٬٠٠٠ € إجمالًا · دوام كامل",
+   d:"إدارة طاولة المحمصة من الثلاثاء إلى السبت صباحًا. الراتب على أربع عشرة دفعة، والساعات الإضافية تُدفَع ولا تُعوَّض «حين يقلّ الزحام». وتدريب على الاستخلاص والتذوّق مدفوع ضمن الدوام، ساعتان أسبوعيًا."},
+  {i:"الجملة", t:"فني/ة قطاع المقاهي", b:"٢٨٬٠٠٠–٣٤٬٠٠٠ € إجمالًا + سيارة · دوام كامل",
+   d:"زيارات للمقاهي، وضبط المطاحن، وتدريب الفرق، والمتابعة. وهو دور تجاري وفني معًا: تحتاج أن تُخرج إسبريسو محترمًا، وأن تقول لصاحب المقهى إن مشكلته المطحنة لا البنّ. وبلا عمولة على الحجم، كي لا يُدفَع أحد نحو أحجام لا تناسب المقهى."},
+  {i:"المستودع", t:"تجهيز الطلبات", b:"٢٠٬٠٠٠–٢٢٬٠٠٠ € إجمالًا · ٣٠ ساعة أسبوعيًا",
+   d:"تجهيز إرساليات الثلاثاء والجمعة ووسمها. دوام جزئي حقيقي من ست ساعات، لا ثماني ساعات بأجر نصف. ويمكن الجمع بينه وبين الدراسة، وتُغلَق الجداول قبل أسبوعين."}
+ ],
+ emComo:[
+  {t:"نقرأ كل شيء ونردّ على الجميع", d:"ولو كان الردّ لا. ولا نستخدم مرشّحات آلية تستبعد السير الذاتية بكلمات مفتاحية."},
+  {t:"محادثة ساعة واحدة", d:"نسأل عمّا أنجزته فعلًا. ولا نرسل اختبارات تقنية مجانية تشبه مصادفةً عملًا معلَّقًا لدينا."},
+  {t:"نصف يوم في المحمصة، مدفوع", d:"لترى كيف يُعمَل هنا قبل أن تقرّر. ويُدفَع ولو لم تُكمل بعدها."},
+  {t:"ردّ خلال أسبوع، مع السبب", d:"فإن لم تناسب قلنا لماذا في سطرين. أما «اخترنا ملفًّا آخر» فلا تفيد أحدًا."}
+ ],
+
  nLegal:"قانوني", tLegal:"قانوني — بُنّ", leH1:"شروط البيع والبيانات وملفات الارتباط.",
  leEntrada:"ما يحدث حين تشتري: كم تدفع، ومتى يخرج الطلب، وماذا يمكنك إرجاعه، وماذا نفعل ببياناتك.",
  leMaqueta:"تنبيه: هذه نسخة عرض توضيحية. تتبع النصوص بنية شروط بيع حقيقية، لكن الشركة متخيَّلة ولا يُعالَج أي طلب.",
@@ -1967,7 +2156,31 @@ ar:{
   {t:"٨. سهولة الوصول", p:[
    "بُني الموقع سعيًا إلى استيفاء إرشادات WCAG 2.2 عند المستوى AA: تصفّح كامل بلوحة المفاتيح، وتركيز مرئي، وتباين كافٍ، ونص بديل للصور، واحترام تفضيل تقليل الحركة.",
    "وفي المتجر لا تعتمد المعلومة على اللون: فلون المربّع يوحي بقوام البنّ، لكن القيمة نفسها مكتوبة وعلى سلّم الأعمدة بجوار كل بطاقة. والمخزون مكتوب نصًّا لا بإشارة ضوئية.",
-   "وإن لم يعمل شيء مع قارئ شاشة أو لوحة مفاتيح، فاكتب إلى <b>hola@bunn.example</b> واصفًا ما حدث وبأي متصفح. ونعامله بلاغًا."]}
+   "وإن لم يعمل شيء مع قارئ شاشة أو لوحة مفاتيح، فاكتب إلى <b>hola@bunn.example</b> واصفًا ما حدث وبأي متصفح. ونعامله بلاغًا."]},
+  {t:"٩. شروط استخدام الموقع", p:[
+   "يمكنك قراءة المحتوى وطباعته ومشاركته بحرّية، بما فيه أدلة التحضير، مع ذكر المصدر. أما ما لا يجوز فنسخه كاملًا في موقع آخر كأنه ملكك، أو تضمين حاسباتنا في موقع آخر دون إذن مكتوب.",
+   "النصوص والشيفرة ملكنا. والصور من ويكيميديا كومنز بتراخيص حرّة، منسوبةً إلى مؤلفيها في الاعتمادات؛ وترخيصها ما تقوله كومنز. والخطوط من غوغل فونتس بترخيص SIL المفتوح.",
+   "<b>الأسعار والتوافر.</b> ما يُنشَر في المتجر دعوة للشراء لا عرضًا ملزِمًا: فالعقد يقوم حين تصلك رسالة التأكيد. وإن نفدت دفعة في الأثناء أخبرناك واخترت.",
+   "<b>توافر الموقع.</b> لا نضمن بقاءه عاملًا مئة بالمئة من الوقت. فإن تعطّل أُصلح؛ ولا تعويض عن تعذّر الطلب بعد ظهر يوم."]},
+  {t:"١٠. القانون الواجب التطبيق وحل النزاعات", p:[
+   "تخضع العلاقة <b>للقانون الإسباني</b> ولقانون المستهلك الأوروبي حين تشتري بصفتك فردًا. وإن كنت مستهلكًا فلك اللجوء إلى محاكم محل إقامتك، ولا يمكن لأي شرط لدينا أن يسلبك هذا الحق.",
+   "<b>المنصة الأوروبية لتسوية المنازعات عبر الإنترنت.</b> تُدير المفوضية الأوروبية منصةً لتسوية المنازعات عبر الإنترنت يجب على كل متجر إلكتروني في الاتحاد الإحالة إليها. ويمكنك استعمالها إن لم نتفق، ونحن منضمّون إلى <b>التحكيم الاستهلاكي</b>: فالقرار يُلزمنا شئنا أم أبينا.",
+   "<b>وقبل كل شيء، اكتب إلينا.</b> على reclamaciones@bunn.example. نردّ كتابةً خلال أقل من خمسة عشر يومًا بما سنفعله. فأغلب مشكلات متجر بنٍّ تُحلّ بإرسال كيس آخر، لا بمحامٍ.",
+   "<b>البطلان الجزئي.</b> إن أبطلت محكمة أحد هذه الشروط، بقي الباقي نافذًا."]},
+  {t:"١١. البيع للمقاهي والجملة", p:[
+   "شروط المقاهي <b>مختلفة عن شروط الأفراد</b> وتُوقَّع منفصلةً. الحد الأدنى للطلب ستة كيلوغرامات، وسعر متدرّج بحسب الاستهلاك الشهري الفعلي، ومراجعة كل ستة أشهر: فإن انخفض استهلاكك لم يقفز السعر، بل يُخطَر قبل شهر.",
+   "<b>الدفع:</b> الطلب الأول مقدَّمًا؛ ومن الثاني بثلاثين يومًا باقتطاع بنكي. ولا نعمل بستين ولا بتسعين يومًا: فشركة من سبعة أشخاص لا تستطيع تمويل أحد، وقول ذلك سلفًا يتجنّب المشكلة لاحقًا.",
+   "<b>بلا حصرية جغرافية وبلا إيداع آلة.</b> لا نضع آلات مقابل حد أدنى من الشراء، وهي الممارسة الشائعة في القطاع وهي التي تربط المقهى سنين. فإن أردت آلة قلنا لك أيّها تشتري ولا نتقاضى عمولة من أي علامة.",
+   "<b>التدريب والزيارات مشمولة:</b> الزيارة الأولى وضبط المطحنة والتدريب الأولي للفريق. ثم زيارة متابعة كل ربع سنة. وإن غيّرت المورّد فالتدريب الذي تلقّيته لك: لا نطلب ردّه ولا نتقاضى عليه شيئًا."]},
+  {t:"١٢. الأصل والسعر المدفوع وما لا نشهد به", p:[
+   "ننشر السعر المدفوع لرطل البنّ الأخضر لكل دفعة، واسم المزارع أو التعاونية متى كان لدينا إذن بذكره. وحين لا يكون، قلنا إنه ليس لدينا، بدل كتابة «علاقة مباشرة» وترك الأمر عند هذا الحد.",
+   "<b>ليس لدينا شهادة تجارة عادلة ولا عضوية</b>، ويجدر معرفة السبب: فاعتماد دفعة يكلّف مالًا يخرج من السعر، وللأحجام الصغيرة مثل أحجامنا تكون الكلفة لكل كيلوغرام مرتفعة. ونفضّل الدفع أكثر في المزرعة ونشر الرقم على دفع ثمن شهادة ونشر شعار.",
+   "ومعنى ذلك أن <b>عليك أن تثق بكلمتنا</b>، ومن الإنصاف قول ذلك. فالشهادة يتحقق منها طرف ثالث؛ أما رقمنا فلا. وإن كان ذلك يهمّك — ومن المعقول أن يهمّك — فثمة محمّصون معتمَدون وسنقولها لك بلا حرج.",
+   "أما ما نلتزم به فهو: ألّا نشتري دون ضِعف سعر بورصة نيويورك، وأن ننشر كل سنة ما دُفع لكل أصل. وهو في صفحة التتبّع، بالسنة والدفعة."]},
+  {t:"١٣. الأمن والمدفوعات", p:[
+   "يُقدَّم الموقع عبر HTTPS. <b>ولا نرى بيانات البطاقة ولا نحفظها:</b> فبوابة الدفع تعالجها مباشرةً ولا نتلقّى إلا النتيجة وآخر أربعة أرقام، كي نستطيع تحديد خصمٍ إن سألت عنه.",
+   "وفي هذه النسخة لا توجد بوابة، ولا سلّة تغادر المتصفح، ولا طلب يصل إلى أي جهة. فالسلّة محفوظة على جهازك بالتخزين المحلي: فإن مسحت بيانات الموقع اختفت.",
+   "<b>وإن وجدت ثغرة</b>، فاكتب إلى <b>seguridad@bunn.example</b> بما وجدت وكيفية تكراره. نردّ خلال اثنتين وسبعين ساعة ولا نُبلّغ عن مَن يتصرّف بحسن نية. ونطلب ألّا تصل إلى بيانات الغير أكثر مما يلزم، وألّا تنشرها حتى تُصحَّح أو تمرّ تسعون يومًا."]}
  ],
  buscaPh:"ابحث عن بنّ", avisoBase:"شحن مجاني فوق ٣٥ € · نحمّص الاثنين والخميس",
  avisoFalta:"يتبقّى {x} للشحن المجاني", avisoYa:"حصلت على الشحن المجاني",
@@ -2669,9 +2882,10 @@ var INDICE = {
   contacto:[["ap-preguntas","nPreguntas"],["ap-contacto","nContacto"]]
 };
 
-var RUTAS = ["inicio","cafes","tueste","preparar","comprar","contacto","legal"];
+var RUTAS = ["inicio","cafes","tueste","preparar","comprar","contacto","legal","mapa","empleo","err"];
 var TITULOS = {inicio:"tInicio",cafes:"tCafes",tueste:"tTueste",
-  preparar:"tPreparar",comprar:"tComprar",contacto:"tContacto",legal:"tLegal"};
+  preparar:"tPreparar",comprar:"tComprar",contacto:"tContacto",legal:"tLegal",
+  mapa:"tMapa",empleo:"tEmpleo",err:"tErr"};
 var idioma = "es", tuSel = 0, ctSel = 0;
 
 function loc(){ return T[idioma]._loc; }
@@ -2916,7 +3130,7 @@ function pintarListas(){
     return '<div class="cel dato"><div class="v">'+esc(c.v)+'</div><div class="u">'+esc(c.u)+'</div></div>'; });
 
   pintarTienda(); pintarEstante(); pintarCesta(); pintarConfig();
-  pintarAviso(); pintarPieTienda(); pintarCookies(); pintarLegal();
+  pintarAviso(); pintarPieTienda(); pintarCookies(); pintarLegal(); pintarPaginasBase();
   celdas("suPlanes", t.planes, function(p){
     return '<div class="cel"><span class="sub">'+esc(p.f)+'</span><h3>'+esc(p.n)+'</h3><p>'+esc(p.d)+'</p><div class="precio">'+esc(p.p)+'</div></div>'; });
   var sv = document.getElementById("suVentajas");
@@ -2935,7 +3149,15 @@ function pintarListas(){
     return '<details class="faq"><summary>'+esc(p.q)+'</summary><p>'+esc(p.a)+'</p></details>'; });
 }
 
-function ruta(){ var r=(location.hash||"").replace(/^#\/?/,""); return RUTAS.indexOf(r)>=0?r:"inicio"; }
+var rutaPedida = "";
+function ruta(){
+  var r = (location.hash||"").replace(/^#\/?/,"");
+  if (!r) return "inicio";
+  if (RUTAS.indexOf(r) >= 0) return r;
+  /* Antes caía a inicio en silencio y parecía que el enlace funcionaba */
+  rutaPedida = r;
+  return "err";
+}
 
 /* ── Tienda ────────────────────────────────────────────────────────
    El tono del recuadro va con el cuerpo del café, de más claro a más
@@ -2996,6 +3218,34 @@ function pintarCookies(){
     return '<label class="ck-fila"><input type="checkbox" value="'+c+'"'
       + (marcada ? " checked" : "") + (fijo ? " disabled" : "") + '>'
       + '<span><b>'+esc(t.ckCats[i].n)+'</b><span>'+esc(t.ckCats[i].d)+'</span></span></label>';
+  }).join("");
+}
+
+function pintarPaginasBase(){
+  var t = T[idioma];
+  var er = document.getElementById("errRuta");
+  if (er) er.textContent = "#/" + (rutaPedida || "");
+
+  var ms = document.getElementById("mapaSitio");
+  if (ms) ms.innerHTML = RUTAS.filter(function(r){ return r !== "err"; }).map(function(r){
+    var hijos = INDICE[r];
+    return '<div class="mapa-col"><h2><a href="#/'+r+'">'+esc(t[TITULOS[r]].split("—")[0].trim())+'</a></h2>'
+      + (hijos
+         ? '<nav>' + hijos.map(function(x){
+             return '<a href="#/'+r+'" data-ir="'+x[0]+'">'+esc(x[2] || t[x[1]])+'</a>'; }).join("") + '</nav>'
+         : '<p class="sola">'+esc(t.mapaSinApartados)+'</p>')
+      + '</div>';
+  }).join("");
+
+  var ep = document.getElementById("emPuestos");
+  if (ep) ep.innerHTML = t.puestos.map(function(x){
+    return '<div class="fila"><div class="i">'+esc(x.i)+'</div>'
+      + '<div><h3>'+esc(x.t)+'</h3><span class="puesto-b">'+esc(x.b)+'</span></div>'
+      + '<div class="d"><p>'+esc(x.d)+'</p></div></div>';
+  }).join("");
+  var ec = document.getElementById("emComo");
+  if (ec) ec.innerHTML = t.emComo.map(function(x){
+    return '<li><div><b>'+esc(x.t)+'</b><span>'+esc(x.d)+'</span></div></li>';
   }).join("");
 }
 
