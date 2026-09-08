@@ -1,6 +1,6 @@
 # BUNN — Tostador de café de especialidad
 
-Sitio de **dieciséis páginas** en español, inglés y árabe con RTL real, para una
+Sitio de **nueve páginas largas** en español, inglés y árabe con RTL real, para una
 tostadora de café de especialidad.
 
 **Ver online:** https://2troll.github.io/bunn-cafe/
@@ -10,12 +10,19 @@ tostadora de café de especialidad.
 el color del grano tostado, el acento es el ocre del tueste y el verde
 secundario es el color del grano crudo, antes de pasar por el tambor.
 
-## Las dieciséis páginas
+## Las nueve páginas
 
-`Inicio` · `Cafés` · `Orígenes` · **`Elige tu café`** · **`Receta`** ·
-**`Qué va con qué`** · **`Comparar`** · `Tueste` · `Cata` ·
-**`Trazabilidad`** · **`Cronómetro`** · `Suscripción` · `Hostelería` ·
-`Preparación` · `Preguntas` · `Contacto`
+`Inicio` · `Cafés` · `Tueste` · `Preparar` · `Comprar` · `Contacto` · `Legal` · `Mapa del sitio` · `Empleo`
+
+Nueve rutas que agrupan **dieciséis apartados** de contenido, más el 404, el
+mapa del sitio, empleo y los textos legales. Cada página larga lleva su
+índice arriba y salta al apartado. Es deliberado: un menú de dieciséis
+entradas donde cada una lleva a cuatro párrafos se lee como una revista,
+no como una empresa.
+
+## Los dieciséis apartados
+
+`Inicio` · `Cafés` · `Orígenes` · **`Trazabilidad`** · `Cata` · **`Comparar`** · `Tueste` · **`Qué va con qué`** · `Preparación` · **`Receta`** · **`Cronómetro`** · **`Elige tu café`** · `Suscripción` · `Hostelería` · `Preguntas` · `Contacto`
 
 Las seis en negrita son nuevas, y ninguna repite el formato de otra ni el de
 los otros sitios:
@@ -52,7 +59,7 @@ de traducir tablas a mano.
 
 ## Detalles de traducción
 
-- 112 claves × 3 idiomas, paridad exacta; 13 estructuras paralelas.
+- 317 claves × 3 idiomas, paridad exacta; 13 estructuras paralelas.
 - **Concordancia de número**, que es donde se cae casi todo el mundo:
   `un origen` / `4 orígenes`; en árabe `منشأ واحد` (1), `منشأين` (2),
   `٤ مناشئ` (3–10) y `١٢ منشأً` (11+). En inglés la frase se reformuló para
@@ -80,14 +87,15 @@ publica aunque sea legal.
 ## Comprobado
 
 ```
-181 claves × 3 idiomas    paridad ✔ · 0 sin traducir
-16 rutas × 3 idiomas      0 fugas de idioma
-16 enlaces del menú       los 16 navegan
-desborde horizontal       0 px en las 16 rutas
-cronómetro                corre, pausa y reinicia
-3 perfiles de tueste      curva + 3 marcas cada uno
-3 cafés en el radar       6 ejes · tabla 6×4
-calendario                11 bandas · 6 pistas · alineadas en LTR y RTL
+317 claves × 3 idiomas  paridad ✔ · 0 sin traducir
+9 rutas × 3 idiomas     0 fugas de idioma
+6 enlaces del menú      los 6 navegan
+desborde horizontal     0 px en las 9 rutas
+cronómetro              corre, pausa y reinicia
+3 perfiles de tueste    curva + 3 marcas cada uno
+3 cafés en el radar     6 ejes · tabla 6×4
+calendario              11 bandas · 6 pistas · alineadas en LTR y RTL
+peso transferido        96 kB comprimido, el sitio entero
 ```
 
 ---
