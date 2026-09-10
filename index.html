@@ -582,14 +582,13 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
    unidades. Se parece a la contraportada de un saco, no a un datasheet.
    ══════════════════════════════════════════════════════════════════ */
 #iCifras{
-  width:100vw;margin-inline-start:50%;transform:translateX(-50%);
+  width:100%;  /* antes 100vw: ver kit-tablero */
   background:var(--hondo,#241a12);color:var(--claro,#f2e9dd);
   padding:clamp(2.6rem,6vw,4.4rem) clamp(1.4rem,6vw,4rem);
   display:grid;gap:clamp(1.8rem,4vw,3rem);
   grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));
   margin-block:2.4rem 1.4rem;
 }
-html[dir="rtl"] #iCifras{transform:translateX(50%);}
 #iCifras .v,#iCifras .dato .v,#iCifras b{
   font-family:var(--disp);font-weight:400;
   font-size:clamp(2.9rem,6.6vw,5rem);line-height:.94;letter-spacing:-.02em;
@@ -602,31 +601,222 @@ html[lang="ar"] #iCifras .v{letter-spacing:0;font-size:clamp(2.4rem,5.4vw,4.2rem
   max-width:26ch;opacity:.92;
 }
 #iCifras .cel,#iCifras > div{background:none;padding:0;border:0;}
+/* ══ kit-tablero: principio ══ */
+/* ══════════════════════════════════════════════════════════════════
+   KIT TABLERO — armazón de aplicación, rejilla de doce y paneles
+   ------------------------------------------------------------------
+   Se copia entero dentro de la hoja de estilos del sitio, entre las dos
+   marcas `kit-tablero`. No trae colores propios: usa las variables que
+   ya define cada sitio, con alternativa por si alguna falta.
+
+     --fondo   fondo de la página        --texto    texto principal
+     --fondo-2 fondo de panel            --texto-2  texto secundario
+     --sup     superficie elevada        --texto-3  texto tenue
+     --linea   línea de separación       --acento   color de marca
+     --hondo / --hondo-texto / --hondo-linea   franja oscura
+
+   Todo el reflejo en árabe sale de propiedades lógicas. Las excepciones
+   van marcadas una a una.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Puente de variables ───────────────────────────────────────────
+   El kit no impone paleta: toma la del sitio, sea cual sea el nombre que
+   use, y sólo pone un último recurso para que nada quede sin color. */
+:root{
+  /* Tres vocabularios conviven en la carpeta: `--fondo/--texto` (MARSA),
+     `--fondo/--tinta` (NAHAR) y `--f/--t` (BUNN, ATLAS). Se prueban en ese
+     orden y sólo al final entra un color fijo, para que ningún sitio herede
+     una paleta que no es la suya. Si un sitio quiere mandar, redefine
+     cualquiera de estas variables después del kit. */
+  --kit-fondo:var(--fondo,var(--f,#eef0ef));
+  --kit-panel:var(--fondo-2,var(--f2,#e4e8e7));
+  --kit-sup:var(--sup,var(--kit-panel));
+  --kit-linea:var(--linea,var(--l,rgba(20,24,27,.14)));
+  --kit-texto:var(--texto,var(--tinta,var(--t,#14181b)));
+  --kit-texto-2:var(--texto-2,var(--tinta-2,var(--t2,#525a5e)));
+  --kit-texto-3:var(--texto-3,var(--tinta-3,var(--t3,#858c8f)));
+  --kit-acento:var(--acento,var(--ocre,var(--verde,#0f5f7a)));
+  --kit-hondo:var(--hondo,#101619);
+  --kit-hondo-texto:var(--hondo-texto,#e7ecec);
+  --kit-hondo-linea:var(--hondo-linea,rgba(231,236,236,.18));
+}
+
+
+/* ══════════════════════════════════════════════════════════════════
+   ARMAZÓN DE APLICACIÓN
+   El menú deja de ser una fila de once enlaces apretados y pasa a un
+   raíl lateral fijo, agrupado por bloques. El contenido va AL LADO, no
+   debajo, y en rejilla de doce columnas: los paneles ocupan distinto
+   ancho y se ponen unos junto a otros. Todo en propiedades lógicas, así
+   que en árabe el raíl se va solo a la derecha.
+   ══════════════════════════════════════════════════════════════════ */
+/* Colocación EXPLÍCITA. Confiar en el orden de los hijos no funciona: el
+   velo y el botón salen del flujo y «main» acababa en una columna de ancho
+   cero, con la página entera invisible. Cada pieza dice dónde va. */
+body{display:grid;grid-template-columns:15.5rem minmax(0,1fr);
+  grid-template-rows:1fr auto;min-height:100vh;}
+.app-lateral{grid-column:1;grid-row:1 / -1;}
+.app-panel{grid-column:2;grid-row:1;}
+body > footer{grid-column:2;grid-row:2;}
+
+.app-lateral{
+  position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+  width:15.5rem;padding:1.6rem 1.2rem 1.4rem;
+  background:var(--kit-panel);border-inline-end:1px solid var(--kit-linea);
+  display:flex;flex-direction:column;gap:.2rem;z-index:60;
+}
+.app-lateral .marca{display:block;margin-bottom:1.4rem;font-size:1.15rem;}
+.app-eti{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--kit-texto-3);margin:1.3rem 0 .45rem;}
+html[dir="rtl"] .app-eti{letter-spacing:0;text-transform:none;font-size:.78rem;}
+.app-nav{display:flex;flex-direction:column;gap:.1rem;}
+.app-nav a{display:block;padding:.42rem .6rem;text-align:start;margin:0;border-radius:4px;font-size:.87rem;
+  color:var(--kit-texto-2);text-decoration:none;border:0;
+  border-inline-start:2px solid transparent;}
+.app-nav a:hover{background:var(--kit-fondo);color:var(--kit-texto);}
+.app-nav a[aria-current="page"]{background:var(--kit-fondo);color:var(--kit-texto);
+  border-inline-start-color:var(--kit-acento);font-weight:500;}
+.app-lateral .idiomas{margin-top:auto;padding-top:1.4rem;display:flex;gap:.2rem;}
+
+.app-panel{min-width:0;}
+.app-abrir{display:none;position:fixed;top:.8rem;inset-inline-start:.8rem;z-index:80;
+  background:var(--kit-panel);color:var(--kit-texto);border:1px solid var(--kit-linea);
+  border-radius:5px;padding:.5rem .6rem;cursor:pointer;}
+.app-velo{display:none;}
+
+@media(max-width:900px){
+  body{grid-template-columns:minmax(0,1fr);}
+  .app-abrir{display:block;}
+  .app-lateral{position:fixed;inset-block:0;inset-inline-start:0;
+    width:min(80vw,15.5rem);transform:translateX(-100%);transition:transform .22s ease;}
+  .app-panel,body > footer{grid-column:1;}
+  html[dir="rtl"] .app-lateral{transform:translateX(100%);}
+  .app-lateral.abierto{transform:none;}
+  .app-velo{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);
+    opacity:0;pointer-events:none;transition:opacity .22s;z-index:55;}
+  .app-velo.abierto{opacity:1;pointer-events:auto;}
+  main.app-panel{padding-top:3.4rem;}
+}
+
+/* Rejilla de doce columnas: es lo que rompe la columna única. */
+.rej12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:clamp(.9rem,1.6vw,1.4rem);}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}
+.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}
+.c9{grid-column:span 9}.c12{grid-column:span 12}
+@media(max-width:1100px){.c3,.c4,.c5{grid-column:span 6}.c7,.c8,.c9{grid-column:span 12}}
+@media(max-width:640px){.rej12 > *{grid-column:span 12 !important}}
+
+/* Panel: la unidad de la interfaz. Caja de información, no adorno. */
+.panel{background:var(--kit-panel);border:1px solid var(--kit-linea);border-radius:6px;
+  overflow:hidden;display:flex;flex-direction:column;min-width:0;}
+.panel-cab{display:flex;align-items:center;gap:.6rem;justify-content:space-between;
+  padding:.7rem .9rem;border-block-end:1px solid var(--kit-linea);
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--kit-texto-3);}
+html[dir="rtl"] .panel-cab{letter-spacing:0;text-transform:none;font-size:.84rem;}
+.panel-cuerpo{padding:.9rem;flex:1;min-width:0;}
+/* La proporción va en la imagen y no en el marco: si la proporción se pone en
+   el marco, Chrome deja de estirarlo dentro de la fila de la rejilla y la
+   fotografía queda flotando arriba con un hueco gris debajo. */
+/* La proporción se fija con un relleno porcentual y no con `aspect-ratio`.
+   Motivo medido, no de estilo: en una celda de rejilla estirada la altura pasa
+   a ser definida, y entonces `aspect-ratio` calcula el ANCHO a partir de ella
+   y la fotografía se sale de su columna — 362 px en la portada a 1440. El
+   relleno porcentual siempre deriva del ancho, nunca al revés. */
+.panel-foto{padding:0;position:relative;overflow:hidden;}
+.panel-foto::before{content:"";display:block;padding-block-start:75%;}
+.panel-foto.alta::before{padding-block-start:133.33%;}
+.panel-foto.ancha::before{padding-block-start:56.25%;}
+.panel-foto img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block;}
+.panel-foto figcaption{position:absolute;inset-inline:0;bottom:0;padding:.7rem .9rem;
+  background:linear-gradient(to top,rgba(6,12,16,.9),rgba(6,12,16,.55) 60%,transparent);
+  color:#f2efe9;font-size:.8rem;line-height:1.4;}
+.etq{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.15rem .45rem;border-radius:3px;background:var(--kit-acento);
+  color:var(--kit-fondo);white-space:nowrap;}
+html[dir="rtl"] .etq{letter-spacing:0;text-transform:none;font-size:.76rem;}
+.panel .dato-g{font-family:var(--display,var(--disp,inherit));font-size:clamp(1.8rem,3.4vw,2.6rem);
+  line-height:1;font-variant-numeric:tabular-nums;}
+.panel .dato-p{font-size:.82rem;color:var(--kit-texto-2);margin-top:.4rem;line-height:1.45;}
+.panel-cuerpo h3{font-size:1.1rem;margin:0 0 .5rem;line-height:1.2;}
+.panel-cuerpo h3 + p{color:var(--kit-texto-2);font-size:.9rem;margin:0;}
+
+/* Panel de portada: el titular manda, pero sigue siendo un panel del tablero
+   y no una franja aparte a todo lo ancho. */
+.panel.horizonte{padding-block:0;}
+.panel-portada{background:var(--kit-hondo);color:var(--kit-hondo-texto);
+  border-color:var(--kit-hondo-linea);justify-content:center;}
+.panel-portada .rot{color:var(--kit-acento);}
+.panel-portada .entrada{color:var(--kit-hondo-texto);opacity:.85;}
+.panel-portada .panel-cuerpo{padding:clamp(1.2rem,2.6vw,2.2rem);}
+.panel-portada h1{font-size:clamp(1.7rem,3.6vw,2.7rem);line-height:1.12;margin:.5rem 0 .8rem;}
+.panel-portada .entrada{color:var(--kit-texto-2);max-width:46ch;}
+.panel-portada .acciones{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.2rem;}
+/* Los botones dentro del panel oscuro. No se puede dar por buena la clase de
+   ningún sitio —uno los llama `.solido` y otro `.sol`—, así que el kit los
+   repinta por su cuenta: sobre la franja oscura, cualquier botón se ve. */
+.panel-portada .btn,.panel-portada .acc a{
+  background:transparent;color:var(--kit-hondo-texto);
+  border:1px solid var(--kit-hondo-texto);}
+.panel-portada .btn.sol,.panel-portada .btn.solido,.panel-portada .acc a.sol{
+  background:var(--kit-hondo-texto);color:var(--kit-hondo);}
+.panel-portada .btn:hover,.panel-portada .acc a:hover{
+  background:var(--kit-hondo-texto);color:var(--kit-hondo);}
+.panel-portada .btn.sol:hover,.panel-portada .btn.solido:hover,.panel-portada .acc a.sol:hover{
+  background:transparent;color:var(--kit-hondo-texto);}
+/* Y el texto suelto: párrafos, listas y rótulos secundarios. */
+.panel-portada p,.panel-portada li,.panel-portada dd{color:var(--kit-hondo-texto);}
+.panel-portada .metodo,.panel-portada .dato-p{
+  color:color-mix(in srgb,var(--kit-hondo-texto) 66%,transparent);}
+/* Rótulo suelto entre bloques del tablero: sin caja, sólo el letrero. */
+.panel.sin-fondo{background:none;border:0;border-radius:0;}
+.panel.sin-fondo .rot{margin:.6rem 0 0;}
+.tablero{padding-block:clamp(1.2rem,2.4vw,2rem);}
+.tablero .cifras-fuente{font-size:.74rem;color:var(--kit-texto-3);line-height:1.5;margin:0;}
+/* Una tabla ancha no debe empujar la página: se desliza dentro de su panel. */
+.desliza{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.desliza table{min-width:34rem;}
+/* Formulario a dos columnas dentro de su panel: los campos cortos comparten
+   fila y sólo las fechas y el mensaje ocupan el ancho entero. */
+.rej-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem 1rem;}
+.rej-form .ancho2{grid-column:1 / -1;}
+@media(max-width:640px){.rej-form{grid-template-columns:1fr}}
+/* ══ kit-tablero: final ══ */
+/* La franja oscura de BUNN es su marrón de tueste, no un gris cualquiera. */
+:root{--kit-hondo:#17130f;--kit-hondo-texto:#ede7dd;
+      --kit-hondo-linea:rgba(237,231,221,.16);}
+:root[data-theme="light"]{--kit-hondo:#221c16;--kit-hondo-texto:#f2efe8;}
+
 </style>
 </head>
 <body>
 
 <div class="aviso-top" id="avisoTop" role="status"></div>
 
-<header class="b">
-  <div class="marco barra">
-    <a class="logo" href="#/inicio">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="7" ry="9.5" fill="currentColor"/><path d="M12 3c-2 3-2 15 0 18" stroke="var(--f)" stroke-width="1.6" fill="none"/></svg>
-      <span data-t="marca">BUNN</span>
-    </a>
-    <button type="button" class="menu-b" id="menuB" aria-expanded="false" aria-controls="menuP"
-            data-t-attr="aria-label:menuAria">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="b" data-t-attr="aria-label:ariaMenu" aria-label="Secciones">
-      <a href="#/inicio"   data-t="nInicio">Inicio</a>
-      <a href="#/cafes"    data-t="nCafes">Los cafés</a>
-      <a href="#/tueste"   data-t="nTueste">El tueste</a>
-      <a href="#/preparar" data-t="nPreparar">Preparar</a>
-      <a href="#/comprar"  data-t="nComprar">Comprar</a>
-      <a href="#/contacto" data-t="nContacto">Contacto</a>
-    </nav>
+<!-- ══ kit-tablero: armazón ══ -->
+<button class="app-abrir" id="appAbrir" aria-expanded="false" aria-controls="appLateral" data-t-attr="aria-label:menuAria" aria-label="Menú"><span></span><span></span><span></span></button>
+<aside class="app-lateral" id="appLateral">
+  <a class="marca" href="#/inicio" data-t="marca">BUNN</a>
+  <p class="app-eti" data-t="nlSitio">La tienda</p>
+  <nav class="app-nav">
+    <a href="#/inicio"   data-t="nInicio">Inicio</a>
+    <a href="#/cafes"    data-t="nCafes">Los cafés</a>
+    <a href="#/comprar"  data-t="nComprar">Comprar</a>
+  </nav>
+  <p class="app-eti" data-t="nlHerramientas">Aprender</p>
+  <nav class="app-nav">
+    <a href="#/tueste"   data-t="nTueste">El tueste</a>
+    <a href="#/preparar" data-t="nPreparar">Preparar</a>
+  </nav>
+  <p class="app-eti" data-t="nlContacto">Casa</p>
+  <nav class="app-nav">
+    <a href="#/contacto" data-t="nContacto">Contacto</a>
+    <a href="#/legal" data-t="nLegal"></a>
+    <a href="#/mapa" data-t="nMapa"></a>
+    <a href="#/empleo" data-t="nEmpleo"></a>
+  </nav>
+  <div class="app-aparatos">
     <form class="busca" id="buscaF" role="search">
       <svg viewBox="0 0 24 24" aria-hidden="true" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8">
         <circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
@@ -638,56 +828,84 @@ html[lang="ar"] #iCifras .v{letter-spacing:0;font-size:clamp(2.4rem,5.4vw,4.2rem
         <path d="M4 7h16l-1.3 11.2a2 2 0 0 1-2 1.8H7.3a2 2 0 0 1-2-1.8L4 7Z"/><path d="M8.5 7V5.5a3.5 3.5 0 0 1 7 0V7"/></svg>
       <span data-t="cestaEti">Cesta</span><b id="cestaN">0</b>
     </button>
-    <div class="idi" role="group" data-t-attr="aria-label:ariaIdioma" aria-label="Idioma">
+  </div>
+  <div class="idi idiomas" role="group" data-t-attr="aria-label:ariaIdioma" aria-label="Idioma">
       <button type="button" data-lang="es" aria-pressed="true">ES</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
       <button type="button" data-lang="ar" aria-pressed="false" lang="ar">ع</button>
     </div>
-  </div>
-</header>
-
-<main>
+</aside>
+<div class="app-velo" id="appVelo"></div>
+<!-- ══ kit-tablero: fin del armazón ══ -->
+<main class="app-panel">
 
 <section data-ruta="inicio" id="ap-inicio">
-  <div class="marco hero">
-    <div>
-      <p class="eti" data-t="iEti">Tostador de especialidad · desde 2019</p>
-      <h1 data-t="iH1">El café no se estropea en la cafetera. Se estropea antes.</h1>
-      <p class="entrada" data-t="iEntrada">Compramos grano trazable hasta la finca, lo tostamos en tandas pequeñas y lo mandamos entre tres y siete días después del tueste. Ni antes, porque necesita reposar, ni mucho después.</p>
-      <div class="acc">
-        <a class="btn sol" href="#/cafes" data-t="bVerCafes">Ver los cafés</a>
-        <a class="btn" href="#/tueste" data-t="bVerTueste">Cómo tostamos</a>
+  <div class="marco tablero">
+    <div class="rej12">
+      <div class="panel c7 panel-portada horizonte">
+        <div class="panel-cuerpo">
+          <p class="eti" data-t="iEti">Tostador de especialidad · desde 2019</p>
+          <h1 data-t="iH1">El café no se estropea en la cafetera. Se estropea antes.</h1>
+          <p class="entrada" data-t="iEntrada"></p>
+          <div class="acc acciones">
+            <a class="btn sol" href="#/cafes" data-t="bVerCafes">Ver los cafés</a>
+            <a class="btn" href="#/tueste" data-t="bVerTueste">Cómo tostamos</a>
+          </div>
+        </div>
       </div>
-    </div>
-    <img class="foto" src="img/tambor-tueste.jpg" width="1400" height="933"
-         data-t-attr="alt:altPortada" alt="Tambor de tueste en funcionamiento en una tostadora">
-  </div>
-  <div class="marco bl raya">
-    <p class="eti" data-t="iCifrasEti">Cómo trabajamos</p>
-    <div class="rej r4" id="iCifras"></div>
-    <p class="metodo" data-t="iCifrasNota">Trazable hasta la finca significa que sabemos el nombre del productor, la altitud y el lote. Si no lo sabemos, no lo compramos.</p>
-  </div>
-  <div class="marco bl raya">
-    <p class="eti" data-t="iEstanteEti">Lo que menos queda</p>
-    <div class="tienda" id="iCafes"></div>
-    <div class="acc"><a class="btn" href="#/cafes" data-t="bVerTodos">Ver la carta entera</a></div>
-  </div>
-  <div class="marco bl raya">
-    <p class="eti" data-t="iPorQueEti">Tres decisiones que nos cuestan dinero</p>
-    <div class="filas" id="iPorQue"></div>
-  </div>
-  <div class="marco bl raya">
-    <p class="eti" data-t="iNoEti">Lo que no vamos a hacer</p>
-    <ul class="lista" id="iNo"></ul>
-    <p class="metodo" data-t="iNoNota">Ninguna de estas cosas es ilegal ni infrecuente: casi todo el sector las hace. Simplemente hemos decidido que no, y preferimos decirlo antes de que lo pregunte.</p>
-  </div>
-  <div class="marco" style="padding-bottom:clamp(2.75rem,6vw,5rem)">
-    <div class="cinta">
-      <div>
-        <h3 data-t="ctaIniH">¿No sabe cuál pedir? Cuéntenos cómo lo prepara.</h3>
-        <p data-t="ctaIniP">Le recomendamos uno concreto y una receta de partida. Y si duda, le mandamos cien gramos con portes pagados.</p>
+      <figure class="panel c5 panel-foto ancha">
+        <img src="img/tambor-tueste.jpg" loading="eager" decoding="async"
+             data-t-attr="alt:altPortada" alt="Tambor de tueste en funcionamiento en una tostadora">
+        <figcaption data-t="fpTambor"></figcaption>
+      </figure>
+
+      <div class="c12">
+        <p class="eti" data-t="iCifrasEti">Cómo trabajamos</p>
+        <div class="rej r4" id="iCifras"></div>
+        <p class="metodo" data-t="iCifrasNota"></p>
       </div>
-      <a class="btn" href="#/contacto" data-t="bEscribir">Escribirnos</a>
+
+      <div class="panel c12">
+        <div class="panel-cab"><span data-t="iEstanteEti">Lo que menos queda</span><span class="etq" data-t="etqStock">Existencias</span></div>
+        <div class="panel-cuerpo">
+          <div class="tienda" id="iCafes"></div>
+          <div class="acciones"><a class="btn" href="#/cafes" data-t="bVerTodos">Ver la carta entera</a></div>
+        </div>
+      </div>
+      <div class="panel c7">
+        <div class="panel-cab"><span data-t="iPorQueEti">Tres decisiones que nos cuestan dinero</span></div>
+        <div class="panel-cuerpo"><div class="filas" id="iPorQue"></div></div>
+      </div>
+      <div class="panel c5">
+        <div class="panel-cab"><span data-t="iNoEti">Lo que no vamos a hacer</span></div>
+        <div class="panel-cuerpo">
+          <ul class="lista" id="iNo"></ul>
+          <p class="metodo" data-t="iNoNota"></p>
+        </div>
+      </div>
+
+      <figure class="panel c4 panel-foto">
+        <img src="img/grano-verde.jpg" loading="lazy" decoding="async"
+             data-t-attr="alt:altVerde" alt="Café verde sin tostar">
+        <figcaption data-t="fpVerde"></figcaption>
+      </figure>
+      <figure class="panel c4 panel-foto">
+        <img src="img/grano-tostado.jpg" loading="lazy" decoding="async"
+             data-t-attr="alt:altTostado" alt="Café recién tostado enfriándose">
+        <figcaption data-t="fpTostado"></figcaption>
+      </figure>
+      <figure class="panel c4 panel-foto">
+        <img src="img/barista.jpg" loading="lazy" decoding="async"
+             data-t-attr="alt:altBarista" alt="Preparación de café en filtro">
+        <figcaption data-t="fpBarista"></figcaption>
+      </figure>
+      <div class="panel c12 panel-portada horizonte">
+        <div class="panel-cuerpo">
+          <h3 data-t="ctaIniH">¿No sabe cuál pedir? Cuéntenos cómo lo prepara.</h3>
+          <p data-t="ctaIniP"></p>
+          <div class="acciones"><a class="btn" href="#/contacto" data-t="bEscribir">Escribirnos</a></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1199,6 +1417,7 @@ es:{
  _dir:"ltr", _lang:"es", _loc:"es-ES", menuAria:"Abrir el menú",
  metaBase:"Tostador de café de especialidad. Grano trazable, tostado en tandas pequeñas y enviado en 48 horas.",
  nMapa:"Mapa del sitio", nEmpleo:"Empleo", tMapa:"Mapa del sitio — BUNN", tEmpleo:"Empleo — BUNN",
+ nlSitio:"La tienda", nlHerramientas:"Aprender", nlContacto:"Casa",
  tErr:"Página no encontrada — BUNN", pieEmpresaEti:"La casa",
  errEti:"Error 404", errH1:"Esa página no existe.",
  errEntrada:"O la dirección está mal escrita, o la teníamos y la hemos movido. Si el enlace venía de aquí, es culpa nuestra.",
@@ -1514,6 +1733,14 @@ es:{
  },
 
  altPortada:"Tambor de tueste en funcionamiento en una tostadora",
+ altVerde:"Granos de café verde, aún sin tostar",
+ altTostado:"Café recién tostado enfriándose en la bandeja",
+ altBarista:"Preparación de café en filtro, vertido lento",
+ fpTambor:"El tambor. La tanda son doce kilos y no hay forma de acelerarlo.",
+ fpVerde:"Verde, antes de nada. El defecto que traiga el grano no lo arregla ningún tueste.",
+ fpTostado:"Recién tostado. De aquí a su casa, entre tres y siete días.",
+ fpBarista:"Filtro. La receta va en la bolsa, y es un punto de partida, no un dogma.",
+ etqStock:"Existencias",
  altOrigenes:"Grano de café verde saliendo de un saco de yute",
  altHosteleria:"Barista prensando el café en el portafiltros",
  altCafes:"Primer plano de grano de café recién tostado",
@@ -1681,6 +1908,7 @@ en:{
  _dir:"ltr", _lang:"en", _loc:"en-GB", menuAria:"Open the menu",
  metaBase:"Specialty coffee roaster. Traceable beans, roasted in small batches and shipped within 48 hours.",
  nMapa:"Sitemap", nEmpleo:"Jobs", tMapa:"Sitemap — BUNN", tEmpleo:"Jobs — BUNN",
+ nlSitio:"The shop", nlHerramientas:"Learn", nlContacto:"The house",
  tErr:"Page not found — BUNN", pieEmpresaEti:"The company",
  errEti:"Error 404", errH1:"That page does not exist.",
  errEntrada:"Either the address is mistyped, or we had it and moved it. If the link came from here, it is our fault.",
@@ -1996,6 +2224,14 @@ en:{
  },
 
  altPortada:"A roasting drum running in a coffee roastery",
+ altVerde:"Green coffee beans, still unroasted",
+ altTostado:"Freshly roasted coffee cooling in the tray",
+ altBarista:"Pour-over coffee being brewed",
+ fpTambor:"The drum. A batch is twelve kilos and there is no way to hurry it.",
+ fpVerde:"Green, before anything else. No roast fixes a defect the bean already had.",
+ fpTostado:"Just roasted. From here to your house, three to seven days.",
+ fpBarista:"Filter. The recipe is on the bag, and it is a starting point, not a dogma.",
+ etqStock:"In stock",
  altOrigenes:"Green coffee beans spilling from a jute sack",
  altHosteleria:"A barista tamping coffee into the portafilter",
  altCafes:"Close-up of freshly roasted coffee beans",
@@ -2163,6 +2399,7 @@ ar:{
  _dir:"rtl", _lang:"ar", _loc:"ar-u-nu-arab", menuAria:"افتح القائمة",
  metaBase:"محمصة بنّ متخصصة. حبّ قابل للتتبّع، محمَّص بدفعات صغيرة ومُرسَل خلال ٤٨ ساعة.",
  nMapa:"خريطة الموقع", nEmpleo:"وظائف", tMapa:"خريطة الموقع — بُنّ", tEmpleo:"وظائف — بُنّ",
+ nlSitio:"المتجر", nlHerramientas:"تعلّم", nlContacto:"الدار",
  tErr:"الصفحة غير موجودة — بُنّ", pieEmpresaEti:"الدار",
  errEti:"خطأ ٤٠٤", errH1:"هذه الصفحة غير موجودة.",
  errEntrada:"إما أن العنوان مكتوب خطأً، وإما أنها كانت لدينا فنقلناها. وإن كان الرابط من هنا فهو ذنبنا.",
@@ -2478,6 +2715,14 @@ ar:{
  },
 
  altPortada:"أسطوانة تحميص تعمل داخل محمصة قهوة",
+ altVerde:"حبوب بنّ خضراء لم تُحمَّص بعد",
+ altTostado:"بنّ حديث التحميص يبرد في الصينية",
+ altBarista:"تحضير القهوة بالتقطير البطيء",
+ fpTambor:"الأسطوانة. الدفعة اثنا عشر كيلوغرامًا، ولا سبيل إلى استعجالها.",
+ fpVerde:"خضراء، قبل كل شيء. لا تحميص يصلح عيبًا في الحبّة أصلًا.",
+ fpTostado:"حديث التحميص. من هنا إلى بيتك في ثلاثة إلى سبعة أيام.",
+ fpBarista:"بالتقطير. الوصفة على الكيس، وهي نقطة بداية لا قاعدة مقدّسة.",
+ etqStock:"المتوفّر",
  altOrigenes:"حبّ بنّ أخضر ينسكب من كيس من الخيش",
  altHosteleria:"باريستا يكبس القهوة في حامل الفلتر",
  altCafes:"لقطة قريبة لحبّ بنّ طازج التحميص",
@@ -3721,12 +3966,6 @@ document.getElementById("cestaIr").addEventListener("click", function(){
   this.disabled = true;
   cesta = {}; guardarCesta(); pintarTienda(); pintarCesta();
 });
-document.getElementById("menuB").addEventListener("click", function(){
-  menuAbrir(this.getAttribute("aria-expanded") !== "true");
-});
-document.querySelector("nav.b").addEventListener("click", function(e){
-  if (e.target.tagName === "A") menuAbrir(false);
-});
 document.addEventListener("keydown", function(e){ if (e.key === "Escape") menuAbrir(false); });
 CORTE_MENU.addEventListener("change", menuAjustar);
 menuAjustar();
@@ -3772,6 +4011,31 @@ document.getElementById("f").addEventListener("submit", function(e){
   var g=null; try{ g=localStorage.getItem("bunn_lang"); }catch(e){}
   if (!g||!T[g]){ var l=(navigator.language||"es").slice(0,2).toLowerCase(); g=T[l]?l:"es"; }
   aplicar(g); enrutar();
+})();
+
+/* ══ kit-tablero: el raíl en pantallas estrechas ══ */
+(function(){
+  var bot = document.getElementById("appAbrir"),
+      lat = document.getElementById("appLateral"),
+      velo = document.getElementById("appVelo");
+  if (!bot || !lat || !velo) return;
+  function poner(si){
+    lat.classList.toggle("abierto", si);
+    velo.classList.toggle("abierto", si);
+    bot.setAttribute("aria-expanded", si ? "true" : "false");
+  }
+  bot.addEventListener("click", function(){
+    poner(bot.getAttribute("aria-expanded") !== "true");
+  });
+  velo.addEventListener("click", function(){ poner(false); });
+  /* Al navegar se cierra solo: si no, en el móvil el raíl tapa lo que
+     acabas de pedir. */
+  lat.addEventListener("click", function(e){
+    if (e.target.closest("a[href^='#']")) poner(false);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape") poner(false);
+  });
 })();
 </script>
 </body>
