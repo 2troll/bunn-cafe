@@ -22,7 +22,7 @@
 <script type="application/ld+json" id="datos"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@300;400;500;600&family=Almarai:wght@300;400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Petrona:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Markazi+Text:wght@400;500;600&display=swap">
 <style>
 /* ══════════════════════════════════════════════════════════════════
    BUNN — بُنّ, que es la palabra árabe para el grano de café y la raíz
@@ -39,8 +39,10 @@
   --ocre:#d08a3f; --verde:#7fa055;
   --l:rgba(237,231,221,.15); --l2:rgba(237,231,221,.07);
   --s1:#3f88c4; --s2:#c47f32; --s3:#20a086;
+  /* Todo serif: el titular de alto contraste y el texto de lectura. Ninguna
+     grotesca, que es lo que hacía que se pareciera a los otros dos. */
   --disp:"Instrument Serif",Georgia,serif;
-  --c:"Figtree",system-ui,sans-serif;
+  --c:"Petrona",Georgia,"Times New Roman",serif;
   --marco:min(1240px,100% - 2.75rem);
 }
 :root[data-theme="light"]{
@@ -59,7 +61,7 @@
 }}
 /* Almarai sustituye a Instrument Serif y a Figtree: es una de las pocas
    árabes que aguanta bien tanto un titular grande como texto corrido. */
-html[dir="rtl"]{ --disp:"Almarai",sans-serif; --c:"Almarai",sans-serif; }
+html[dir="rtl"]{ --disp:"Markazi Text",serif; --c:"Markazi Text",serif; }
 
 *,*::before,*::after{box-sizing:border-box;}
 /* Un display explícito gana al [hidden] de la hoja del navegador: hay que
@@ -783,6 +785,37 @@ html[dir="rtl"] .etq{letter-spacing:0;text-transform:none;font-size:.76rem;}
 .rej-form .ancho2{grid-column:1 / -1;}
 @media(max-width:640px){.rej-form{grid-template-columns:1fr}}
 /* ══ kit-tablero: final ══ */
+
+/* ══════════════════════════════════════════════════════════════════
+   LA VOZ DE BUNN — carta impresa
+   Esquinas generosas, ningún filete y un relieve mínimo, como una ficha
+   de papel sobre la mesa. Los rótulos van en cursiva y en caja baja: en
+   versalitas espaciadas se leían como una etiqueta de almacén.
+   ══════════════════════════════════════════════════════════════════ */
+.panel{border:0;border-radius:14px;
+  box-shadow:0 1px 2px rgba(23,19,15,.06),0 8px 24px -18px rgba(23,19,15,.5);}
+:root[data-theme="dark"] .panel,
+:root:not([data-theme="light"]) .panel{box-shadow:none;}
+.panel-cab{border-block-end:0;padding-block:.9rem .2rem;
+  font-family:var(--disp);font-style:italic;font-size:1.08rem;
+  letter-spacing:0;text-transform:none;color:var(--kit-texto-2);}
+html[dir="rtl"] .panel-cab{font-style:normal;font-size:1.2rem;}
+.etq{border-radius:999px;font-family:var(--c);font-size:.72rem;
+  letter-spacing:.02em;text-transform:none;padding:.2rem .7rem;}
+html[dir="rtl"] .etq{font-size:.84rem;}
+.panel-foto{border-radius:14px;}
+.panel-cuerpo h3{font-family:var(--disp);font-weight:400;font-size:1.35rem;}
+.panel .dato-p{font-size:.9rem;}
+/* Petrona es de lectura: pide algo más de cuerpo e interlínea que una sans */
+body{font-size:clamp(15.5px,1.06vw,17.5px);line-height:1.7;}
+html[dir="rtl"] body{line-height:2.05;}
+/* El raíl, con la misma voz */
+.app-lateral .marca{font-family:var(--disp);letter-spacing:.06em;}
+.app-nav a{font-family:var(--c);font-size:.98rem;border-radius:999px;padding-inline:.9rem;}
+.app-eti{font-family:var(--disp);font-style:italic;text-transform:none;
+  letter-spacing:0;font-size:.88rem;}
+html[dir="rtl"] .app-eti{font-style:normal;}
+
 /* La franja oscura de BUNN es su marrón de tueste, no un gris cualquiera. */
 :root{--kit-hondo:#17130f;--kit-hondo-texto:#ede7dd;
       --kit-hondo-linea:rgba(237,231,221,.16);}
