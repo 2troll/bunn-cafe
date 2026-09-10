@@ -572,6 +572,36 @@ footer.b{border-top:1px solid var(--l);padding-block:2rem 2.6rem;font-size:.8rem
 .pie nav{display:flex;gap:1.2rem;flex-wrap:wrap;} .pie a{text-decoration:none;}
 .pie a:hover{color:var(--ocre);} .pie .fin{margin-inline-start:auto;}
 .ltr{direction:ltr;unicode-bidi:isolate;display:inline-block;}
+
+/* ══════════════════════════════════════════════════════════════════
+   EL LIBRO DEL TUESTE
+   Romper el ritmo de la portada, pero en el idioma de un tostador: no
+   una ficha técnica con retícula, sino una banda del color del grano
+   tostado con las cifras en la serifa del rótulo. Sin filetes entre
+   celdas —el aire separa— y con el acento ocre reservado a las
+   unidades. Se parece a la contraportada de un saco, no a un datasheet.
+   ══════════════════════════════════════════════════════════════════ */
+#iCifras{
+  width:100vw;margin-inline-start:50%;transform:translateX(-50%);
+  background:var(--hondo,#241a12);color:var(--claro,#f2e9dd);
+  padding:clamp(2.6rem,6vw,4.4rem) clamp(1.4rem,6vw,4rem);
+  display:grid;gap:clamp(1.8rem,4vw,3rem);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));
+  margin-block:2.4rem 1.4rem;
+}
+html[dir="rtl"] #iCifras{transform:translateX(50%);}
+#iCifras .v,#iCifras .dato .v,#iCifras b{
+  font-family:var(--disp);font-weight:400;
+  font-size:clamp(2.9rem,6.6vw,5rem);line-height:.94;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;color:inherit;
+}
+html[lang="ar"] #iCifras .v{letter-spacing:0;font-size:clamp(2.4rem,5.4vw,4.2rem);}
+#iCifras .u,#iCifras .dato .u,#iCifras span{
+  color:var(--ocre,#d08a3f);text-transform:none;letter-spacing:.02em;
+  font-family:var(--cuerpo);font-size:.92rem;line-height:1.5;margin-top:.7rem;
+  max-width:26ch;opacity:.92;
+}
+#iCifras .cel,#iCifras > div{background:none;padding:0;border:0;}
 </style>
 </head>
 <body>
